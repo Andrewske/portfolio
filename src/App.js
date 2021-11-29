@@ -1,24 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import './App.scss';
+import './fonts/style.css';
+import './slideTransition.scss';
+
+import { Fragment } from 'react';
+import Landing from './components/Landing';
+import Template from './components/Template';
+import { Routes, Route } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 function App() {
+  // const currentKey = location.pathname.split('/')[1];
+  // const timeout = { enter: 1000, exit: 1000 };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Landing />
+    // <Fragment>
+    //   <TransitionGroup component='div' className='App'>
+    //     <CSSTransition
+    //       key={currentKey}
+    //       timeout={timeout}
+    //       classNames='pageSlider'
+    //       mountOnEnter={true}
+    //       unmountOnExit={true}
+    //     >
+    //       <div className='left'>
+    //         <Routes location={location}>
+    //           <Route
+    //             path='/1'
+    //             exact
+    //             component={() => <Template number='1' color='green' />}
+    //           />
+    //           <Route
+    //             path='/2'
+    //             exact
+    //             component={() => <Template number='1' color='green' />}
+    //           />
+    //           <Route
+    //             path='/3'
+    //             exact
+    //             component={() => <Template number='1' color='green' />}
+    //           />
+    //         </Routes>
+    //       </div>
+    //     </CSSTransition>
+    //   </TransitionGroup>
+    // </Fragment>
   );
 }
 

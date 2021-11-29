@@ -1,0 +1,121 @@
+$timeout: 0.5s;
+
+.left {
+  &.pageSlider-enter,
+  &.pageSlider-appear {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  &.pageSlider-enter-active,
+  &.pageSlider-appear-active {
+    transform: translateX(0%);
+    opacity: 1;
+    transition: all $timeout ease-in-out;
+  }
+
+  &.pageSlider-enter-done,
+  &.pageSlider-appear-done {
+    opacity: 1;
+    z-index: 100;
+  }
+
+  &.pageSlider-exit {
+    opacity: 1;
+  }
+
+  &.pageSlider-exit-active {
+    transform: translateX(100%);
+    transition: all $timeout ease-in-out;
+    opacity: 1;
+  }
+}
+
+.right {
+  &.pageSlider-enter,
+  &.pageSlider-appear {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  &.pageSlider-enter-active,
+  &.pageSlider-appear-active {
+    transform: translateX(0%);
+    opacity: 1;
+    transition: all $timeout ease-in-out;
+  }
+
+  &.pageSlider-enter-done,
+  &.pageSlider-appear-done {
+    opacity: 1;
+    z-index: 100;
+  }
+
+  &.pageSlider-exit {
+    opacity: 1;
+  }
+
+  &.pageSlider-exit-active {
+    transform: translateX(-100%);
+    transition: all $timeout ease-in-out;
+    opacity: 1;
+  }
+}
+
+.up {
+  &.pageSlider-enter,
+  &.pageSlider-appear {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  &.pageSlider-enter-active,
+  &.pageSlider-appear-active {
+    transform: translateY(0%);
+    opacity: 1;
+    transition: all $timeout ease-in-out;
+  }
+
+  &.pageSlider-enter-done,
+  &.pageSlider-appear-done {
+    z-index: 100;
+    opacity: 1;
+  }
+
+  &.pageSlider-exit {
+    opacity: 1;
+  }
+
+  &.pageSlider-exit-active {
+    transform: translateY(100%);
+    transition: all $timeout ease-in-out;
+    opacity: 1;
+  }
+}
+
+.down {
+  &.pageSlider-enter,
+  &.pageSlider-appear {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+  &.pageSlider-enter-active,
+  &.pageSlider-appear-active {
+    transform: translateY(0%);
+    opacity: 1;
+    transition: all $timeout ease-in-out;
+  }
+
+  &.pageSlider-enter-done,
+  &.pageSlider-appear-done {
+    z-index: 100;
+    opacity: 1;
+  }
+
+  &.pageSlider-exit {
+    opacity: 1;
+  }
+
+  &.pageSlider-exit-active {
+    transform: translateY(-100%);
+    transition: all $timeout ease-in-out;
+    opacity: 1;
+  }
+}

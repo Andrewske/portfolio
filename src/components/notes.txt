@@ -1,0 +1,10 @@
+
+Side {
+    Start 80%;
+    End: 65%
+}
+
+Bottom {
+    Start 65% 
+}
+
