@@ -21,7 +21,7 @@ const Template = ({
         }`}
         onKeyDown={handleKeyDown}
       >
-        <header className='center'>{children}</header>
+        <div className='center'>{children}</div>
       </section>
     </CSSTransition>
   );

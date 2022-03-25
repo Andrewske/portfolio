@@ -5,7 +5,9 @@ $red: #ff0022;
 $orange: #f18f01;
 $blue: #048ba8;
 $purple: #731dd8;
+$github: #171515;
 
+$black-5: rgba(25, 20, 20, 0.5);
 $black-9: rgba(25, 20, 20, 0.9);
 
 $purple-6: rgba(115, 29, 216, 0.6);
@@ -16,6 +18,18 @@ $typewriter-speed: 1.5s;
 
 html {
   height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
@@ -31,6 +45,14 @@ h2,
 h3 {
   padding: 0;
   margin: 0;
+}
+
+p {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: calc(2rem + 1vw);
 }
 
 .purple {
@@ -60,7 +82,7 @@ h3 {
 }
 
 .container {
-  max-width: 100vw;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: absolute;
@@ -84,6 +106,42 @@ h3 {
   &.col {
     flex-direction: column;
   }
+}
+
+.btn {
+  height: 35px;
+  width: 100px;
+  border: 1px solid;
+  border-radius: 5px;
+  mix-blend-mode: difference;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
+
+  i {
+    display: inline-block;
+    margin-top: 2px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .neon {
@@ -192,6 +250,29 @@ h3 {
   left: auto;
   color: $blue;
   transform-origin: right center;
+}
+
+.profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 2rem;
+}
+
+.welcome-intro {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+
+  .heading {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .welcome-text {
+    width: calc(min(90%, 600px));
+  }
 }
 
 .welcome-info {
@@ -392,5 +473,218 @@ h3 {
   }
   50% {
     border-color: $orange;
+  }
+}
+
+.project-card-grid {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+
+  width: 95%; //calc(min(95%, 70rem));
+  height: 90vh;
+}
+
+@media (min-width: 50em) {
+  .project-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  border-radius: 5px;
+  //position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  transform: perspective(1000px);
+  transition: all 0.5s ease-in-out;
+  height: 100%;
+
+  &:hover .project-card-flip {
+    transform: rotatex(180deg) translate3d(0, 0, 0);
+    box-shadow: 8px -10px 15px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .project-card-flip {
+    width: 100%;
+    height: 100%;
+    transition: all 1s ease-in-out;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .project-card-front,
+  .project-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    z-index: 10;
+  }
+
+  .project-card-front {
+    transform: rotateX(0deg);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .project-card-back {
+    transform: rotateX(180deg);
+    background: $black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .text {
+      width: 90%;
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+
+    .buttons {
+      width: 90%;
+      position: absolute;
+      bottom: 5px;
+
+      .btn {
+        transition: all 0.5s ease-in-out;
+        &:hover {
+          background: $white !important;
+          color: $black !important;
+        }
+      }
+    }
+  }
+
+  .project-card-flag {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: max-content;
+    padding: 5px;
+    background: $black-5;
+    border-radius: 0px 0px 5px 0px;
+
+    p {
+      color: transparent;
+      font-size: calc(0.75rem + 0.75vw) !important;
+      font-weight: 600;
+      transform: translateZ(0);
+      //animation: rgb 6s linear infinite; (Too much CPU usage, maybe find a way to do animation without modifying background)
+      background: linear-gradient(
+          45deg,
+          #ff0000 0%,
+          #ff9a00 10%,
+          #d0de21 20%,
+          #4fdc4a 30%,
+          #3fdad8 40%,
+          #2fc9e2 50%,
+          #1c7fee 60%,
+          #5f15f2 70%,
+          #ba0cf8 80%,
+          #fb07d9 90%,
+          #ff0000 100%
+        )
+        repeat 0% 0% / 300% 100%;
+      background-clip: text;
+    }
+  }
+}
+
+.rgb::after {
+  content: '';
+  background: linear-gradient(
+      45deg,
+      #ff0000 0%,
+      #ff9a00 10%,
+      #d0de21 20%,
+      #4fdc4a 30%,
+      #3fdad8 40%,
+      #2fc9e2 50%,
+      #1c7fee 60%,
+      #5f15f2 70%,
+      #ba0cf8 80%,
+      #fb07d9 90%,
+      #ff0000 100%
+    )
+    repeat 0% 0% / 300% 100%;
+  position: absolute;
+  inset: -3px;
+  border-radius: 5px;
+  filter: blur(4px);
+  transform: translateZ(0); /*or z-index */
+  //animation: rgb 6s linear infinite;
+  z-index: 9;
+}
+
+@keyframes rgb {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.project-container {
+  @extend .flex-center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-shadow: 0 0 0 1rem $black;
+  padding: 1rem;
+
+  h1 {
+    padding: 2rem;
+  }
+
+  .feature {
+    //@extend .flex-center;
+    flex-direction: column;
+    height: 3rem;
+    width: calc(max(90%, 350px));
+    margin: 0 auto;
+    border: 2px solid $white;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+
+    .header {
+      line-height: 3rem;
+      @extend .flex-center;
+    }
+
+    .details {
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+
+      img {
+        border-radius: 0.5rem;
+        max-width: 100%;
+        object-fit: contain;
+        margin: 0 auto;
+      }
+
+      p {
+        padding: 0.5rem;
+      }
+    }
+
+    &.active {
+      height: 500px;
+    }
   }
 }

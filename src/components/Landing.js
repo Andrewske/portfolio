@@ -4,6 +4,8 @@ import Template from './Template';
 import Welcome from './home/Welcome';
 import AboutSite from './home/AboutSite';
 import About from './about/About';
+import Projects from './projects/Projects';
+import Masakali from './projects/Masakali';
 import Arrows from './Arrows';
 import { handleTouchStart, handleTouchEnd } from '../utils/handleTouch';
 import { handleKeyDown } from '../utils/handleKeyDown';
@@ -22,12 +24,13 @@ const Landing = () => {
 
   const handleClick = (type) => {
     // Type is a direction string e.g. 'left'
+    console.log(type);
     setDirection(type);
     pageChange({ type, current, setCurrent, pageOrder });
   };
 
   return (
-    <div
+    <section
       onKeyDown={(e) => handleKeyDown({ e, handleClick })}
       tabIndex='-1'
       onTouchStart={(e) => handleTouchStart({ e, setTouchPosition })}
@@ -57,12 +60,20 @@ const Landing = () => {
       />
       <Template children={5} active={current === 5} direction={direction} />
       <Template children={6} active={current === 6} direction={direction} />
-      <Template children={7} active={current === 7} direction={direction} />
-      <Template children={8} active={current === 8} direction={direction} />
+      <Template
+        children={<Projects />}
+        active={current === 7}
+        direction={direction}
+      />
+      <Template
+        children={<Masakali />}
+        active={current === 8}
+        direction={direction}
+      />
       <Template children={9} active={current === 9} direction={direction} />
       <Template children={10} active={current === 10} direction={direction} />
       {/* <About /> */}
-    </div>
+    </section>
   );
 };
 
