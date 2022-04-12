@@ -4,10 +4,13 @@ import kevin_banff from '../../img/kevin_banff.jpg';
 const Welcome = () => {
   return (
     <div className='center'>
-      <img src={kevin_banff} alt='Kevin in Banff' className='profile-img' />
-      <div className='welcome-intro'>
+      <div className='welcome-container'>
+        <img src={kevin_banff} alt='Kevin in Banff' className='profile-img' />
+      </div>
+
+      <div className='welcome-container'>
         <span className='heading'>Kevin Andrews,</span>
-        <span className='neon yellow'>Web Developer</span>
+        <span className='neon lg yellow'>Web Developer</span>
         <p className='welcome-text'>
           I am a Web Developer based in Seattle, Washington. I graduated with a
           degree in Business Marketing. After working in marketing for a few

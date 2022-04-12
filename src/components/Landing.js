@@ -38,7 +38,7 @@ const Landing = () => {
         handleTouchEnd({ e, touchPosition, setTouchPosition, handleClick })
       }
     >
-      {isDesktop && <Arrows handleClick={handleClick} />}
+      {/* {isDesktop && <Arrows handleClick={handleClick} />} */}
 
       {/* Home Screens */}
       <Template
