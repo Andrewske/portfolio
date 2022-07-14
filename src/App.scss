@@ -1,4 +1,7 @@
-$black: #191414;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;300;400;500&display=swap');
+
+$black: rgba(0, 0, 0, 255);
+//$black: #191414;
 $green: #1db954;
 $white: #ffffff;
 $red: #ff0022;
@@ -15,6 +18,31 @@ $blue-6: rgba(4, 139, 168, 0.6);
 
 $arrow-size: 1em;
 $typewriter-speed: 1.5s;
+
+$border-radius: 1rem;
+
+:root {
+  --rainbow-1: 'rgb(231, 29, 67)';
+  --rainbow-2: 'rgb(255, 0, 0)';
+  --rainbow-3: 'rgb(255, 55, 0)';
+  --rainbow-4: 'rgb(255, 110, 0)';
+  --rainbow-5: 'rgb(255,165,0)';
+  --rainbow-6: 'rgb(255,195,0)';
+  --rainbow-7: 'rgb(255,225,0)';
+  --rainbow-8: 'rgb(255,255,0)';
+  --rainbow-9: 'rgb(170,213,0)';
+  --rainbow-10: 'rgb(85,170,0)';
+  --rainbow-11: 'rgb(0,128,0)';
+  --rainbow-12: 'rgb(0,85,0)';
+  --rainbow-13: 'rgb(0,43,170)';
+  --rainbow-14: 'rgb(0,0,255)';
+  --rainbow-15: 'rgb(25,0,213)';
+  --rainbow-16: 'rgb(50,0,172)';
+  --rainbow-17: 'rgb(75,0,130)';
+  --rainbow-18: 'rgb(129,43,166)';
+  --rainbow-19: 'rgb(184,87,202)';
+  --rainbow-20: 'rgb(208,58,135)';
+}
 
 html {
   height: 100%;
@@ -36,7 +64,8 @@ body {
   background: $black;
   color: $white;
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 
 p,
@@ -53,6 +82,18 @@ p {
 
 h1 {
   font-size: calc(2rem + 1vw);
+}
+
+h2 {
+  font-size: calc(1.5rem + 1vw);
+  font-family: 'Roboto Mono';
+  font-weight: 400;
+}
+
+h3 {
+  font-size: calc(1.5rem + 1vw);
+  font-family: 'Roboto Mono';
+  font-weight: 300;
 }
 
 .purple {
@@ -83,16 +124,20 @@ h1 {
 
 .container {
   width: 100vw;
-  height: 100vh;
+  //min-height: 100vh;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: flex;
+  position: relative;
+  padding: 50px 0px;
 
   &.no-opacity {
     opacity: 0;
+  }
+
+  &.center-col {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -151,7 +196,9 @@ h1 {
   letter-spacing: 0.25rem;
 
   &.lg {
-    font-size: calc(3rem + 6vw) !important;
+    font-size: calc(3rem + 5vw) !important;
+    margin: 1rem;
+    text-transform: uppercase;
   }
 
   &.blue {
@@ -264,19 +311,247 @@ h1 {
   margin: 2rem;
 }
 
+.sidebar-container {
+  height: 100%;
+  width: 20vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: $black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  .sidebar-item {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+
+    p {
+      font-size: 1.25rem;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      background: $green;
+      position: absolute;
+      right: 0;
+      height: 90%;
+      width: 1rem;
+      transition: all 0.5s ease-in-out;
+      z-index: 1;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+.bg-image {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
 .welcome-container {
   display: flex;
   flex-direction: column;
-  min-width: 350px;
-  margin: 2rem;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  //margin-left: 20vw;
 
-  .heading {
-    font-size: 2rem;
-    font-weight: bold;
+  .bg-image {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
   }
 
-  .welcome-text {
-    width: calc(min(90%, 600px));
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 100%;
+
+    .waviy {
+      flex-basis: 100%;
+      text-align: center;
+      position: relative;
+    }
+    .waviy span {
+      position: relative;
+      display: inline-block;
+      font-size: 2rem;
+      text-transform: uppercase;
+      animation: flip 6s infinite;
+      animation-delay: calc(0.46s * var(--i));
+      color: var(--color);
+      font-weight: bold;
+      letter-spacing: 0.5rem;
+    }
+
+    @keyframes flip {
+      0%,
+      50% {
+        transform: rotateY(360deg);
+      }
+    }
+
+    .heading {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .jobs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .card {
+        width: 250px;
+        min-width: 250px;
+        color: white !important;
+        border: 1px solid;
+        border-radius: $border-radius;
+        margin: 1rem;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+
+        &.green {
+          border-color: $green;
+          box-shadow: 0 0 10px 0 $green;
+        }
+
+        &.blue {
+          border-color: $blue;
+          box-shadow: 0 0 10px 0 $blue;
+        }
+
+        &.red {
+          border-color: $red;
+          box-shadow: 0 0 10px 0 $red;
+        }
+
+        .title {
+          font-size: 1rem;
+          border-bottom: 1px solid;
+          border-color: inherit;
+          width: 100%;
+          text-align: center;
+          padding: 0.5rem;
+          top: 0;
+        }
+
+        .details {
+          padding: 0.5rem;
+          width: 100%;
+          height: 0;
+          opacity: 0;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.5s ease-in-out;
+
+          &.active {
+            height: 150px;
+            opacity: 1;
+          }
+
+          .icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            i {
+              font-size: calc(1rem + 1vw);
+              margin: 0.5rem;
+              background-color: rgba(255, 255, 255, 1);
+              padding: 0.5rem;
+              border-radius: 25%;
+            }
+          }
+        }
+
+        // &:hover {
+        //   transform: scale(1.1);
+        // }
+      }
+    }
+  }
+}
+.experience-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-top: 2rem;
+
+  .experience-items-col {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    flex: 1;
+
+    h3 {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 0.5rem;
+    }
+
+    .experience-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      margin: 0.5rem auto;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 0.5rem;
+      width: max-content;
+
+      i {
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        margin-right: 1rem;
+        position: relative;
+
+        &:hover {
+          &:after {
+            position: absolute;
+            content: attr(data-hover);
+            font-size: 1rem;
+            padding: 0.25rem;
+            color: white;
+            width: max-content;
+            top: -0.5rem;
+            left: calc(100% + 1rem);
+            //background: rgba(255, 255, 255, 1);
+            text-transform: capitalize;
+            font-family: 'Roboto', sans-serif;
+          }
+        }
+      }
+
+      .experience-item-year {
+        height: 5px;
+        width: 35px;
+        background: $green;
+        margin: 0.1rem;
+      }
+    }
   }
 }
 
@@ -488,6 +763,31 @@ h1 {
   }
 }
 
+.scroll-animation {
+  position: absolute;
+  max-width: 100vw !important;
+  left: 100vw;
+  white-space: nowrap;
+  text-transform: uppercase;
+  animation: scrolling 5s linear infinite !important;
+
+  &.two {
+    animation-delay: 2.5s !important;
+  }
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-125vw);
+  }
+  100% {
+    transform: translateX(-250vw);
+  }
+}
+
 @keyframes typing {
   0% {
     width: 0;
@@ -536,6 +836,8 @@ h1 {
   transform: perspective(1000px);
   transition: all 0.5s ease-in-out;
   height: 100%;
+  -webkit-transform: translateZ(1px);
+  -webkit-backface-visibility: hidden;
 
   &:hover .project-card-flip {
     transform: rotatex(180deg) translate3d(0, 0, 0);
@@ -564,7 +866,10 @@ h1 {
     height: 100%;
     transform-style: preserve-3d;
     transform: perspective(1000px);
-    z-index: 10;
+    z-index: 1000;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: translateZ(1px);
+    -webkit-backface-visibility: hidden;
   }
 
   .project-card-front {
@@ -590,9 +895,13 @@ h1 {
       width: 90%;
       position: absolute;
       bottom: 5px;
+      -webkit-transform: translateZ(1px);
+      -webkit-backface-visibility: hidden;
 
       .btn {
         transition: all 0.5s ease-in-out;
+        z-index: 1002;
+
         &:hover {
           background: $white !important;
           color: $black !important;

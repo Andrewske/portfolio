@@ -8,7 +8,7 @@ const Projects = () => {
   return (
     <div className='container center col'>
       <header>
-        <h1>Projects</h1>
+        <h2>Projects</h2>
       </header>
       <div className='project-card-grid'>
         <div className='project-card'>
@@ -26,7 +26,8 @@ const Projects = () => {
                 <p>
                   Music Minion is a personal project I build to improve my
                   learning in React. This site uses the spotify API to provide
-                  new features that I wish spotify had.
+                  features for finding new music and analyzing playlists using
+                  track data.
                 </p>
               </span>
               <span className='flex-evenly buttons'>

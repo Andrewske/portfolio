@@ -5,6 +5,7 @@ import './slideTransition.scss';
 
 import { Fragment } from 'react';
 import Landing from './components/Landing';
+import Sidebar from './components/Sidebar';
 import Template from './components/Template';
 import { Routes, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -14,7 +15,11 @@ function App() {
   // const timeout = { enter: 1000, exit: 1000 };
 
   return (
-    <Landing />
+    <Fragment>
+      {/* <Sidebar /> */}
+      <Landing />
+    </Fragment>
+
     // <Fragment>
     //   <TransitionGroup component='div' className='App'>
     //     <CSSTransition

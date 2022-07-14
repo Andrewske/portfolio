@@ -1,10 +1,22 @@
-@font-face {
+/* @font-face {
   font-family: 'icomoon';
   src: url('./icomoon.eot?ybxi7c');
   src: url('./icomoon.eot?ybxi7c#iefix') format('embedded-opentype'),
     url('./icomoon.ttf?ybxi7c') format('truetype'),
     url('./icomoon.woff?ybxi7c') format('woff'),
     url('./icomoon.svg?ybxi7c#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+} */
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('./icomoon.eot?4ibn8t');
+  src: url('./icomoon.eot?4ibn8t#iefix') format('embedded-opentype'),
+    url('./icomoon.ttf?4ibn8t') format('truetype'),
+    url('./icomoon.woff?4ibn8t') format('woff'),
+    url('./icomoon.svg?4ibn8t#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,29 +38,120 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-github:before {
+.icon-more-horizontal:before {
+  content: '\e915';
+}
+.icon-chevron-right:before {
+  content: '\e916';
+}
+.icon-chevron-left:before {
+  content: '\e917';
+}
+.icon-chevron-down:before {
+  content: '\e918';
+}
+.icon-chevron-up:before {
+  content: '\e919';
+}
+.icon-pandas_mark .path1:before {
+  content: '\e900';
+  color: rgb(19, 7, 84);
+}
+.icon-pandas_mark .path2:before {
+  content: '\e901';
+  margin-left: -0.75em;
+  color: rgb(19, 7, 84);
+}
+.icon-pandas_mark .path3:before {
+  content: '\e902';
+  margin-left: -0.75em;
+  color: rgb(255, 202, 0);
+}
+.icon-pandas_mark .path4:before {
+  content: '\e903';
+  margin-left: -0.75em;
+  color: rgb(19, 7, 84);
+}
+.icon-pandas_mark .path5:before {
   content: '\e904';
+  margin-left: -0.75em;
+  color: rgb(19, 7, 84);
+}
+.icon-pandas_mark .path6:before {
+  content: '\e905';
+  margin-left: -0.75em;
+  color: rgb(19, 7, 84);
+}
+.icon-pandas_mark .path7:before {
+  content: '\e906';
+  margin-left: -0.75em;
+  color: rgb(231, 4, 136);
+}
+.icon-pandas_mark .path8:before {
+  content: '\e907';
+  margin-left: -0.75em;
+  color: rgb(19, 7, 84);
+}
+.icon-spotify:before {
+  content: '\e91a';
+  color: #1ed760;
 }
 .icon-soundcloud:before {
-  content: '\e905';
+  content: '\e91b';
   color: #f30;
 }
-.icon-cheveron-up:before {
-  content: '\e900';
+.icon-github:before {
+  content: '\e91c';
 }
-.icon-cheveron-right:before {
-  content: '\e901';
+.icon-python:before {
+  content: '\e914';
+  color: #3776ab;
 }
-.icon-cheveron-left:before {
-  content: '\e902';
+.icon-redux:before {
+  content: '\e908';
+  color: #764abc;
 }
-.icon-cheveron-down:before {
-  content: '\e903';
+.icon-css3:before {
+  content: '\e909';
+  color: #1572b6;
 }
-.icon-earth:before {
-  content: '\e9ca';
+.icon-html5:before {
+  content: '\e90a';
+  color: #e34f26;
 }
-
-.icon-navigation-more:before {
-  content: '\e906';
+.icon-react:before {
+  content: '\e90b';
+  color: #61dafb;
+}
+.icon-mongodb:before {
+  content: '\e90c';
+  color: #47a248;
+}
+.icon-postgresql:before {
+  content: '\e90d';
+  color: #336791;
+}
+.icon-mysql:before {
+  content: '\e90e';
+  color: #4479a1;
+}
+.icon-pinterest:before {
+  content: '\e90f';
+  color: #bd081c;
+}
+.icon-facebook:before {
+  content: '\e910';
+  color: #1877f2;
+}
+.icon-bing:before {
+  content: '\e911';
+  color: #008373;
+}
+.icon-googleanalytics:before {
+  content: '\e912';
+  color: #ffc107;
+}
+.icon-googleads:before {
+  content: '\e913';
+  color: #4285f4;
 }
