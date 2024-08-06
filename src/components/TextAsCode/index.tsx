@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import Row from '../Row';
 import Container from '../Container';

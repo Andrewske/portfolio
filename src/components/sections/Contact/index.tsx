@@ -1,18 +1,19 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Row from '~/components/Row';
 import Container from '~/components/Container';
 import SocialLinks from '~/components/SocialLinks';
 
 const Contact = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     e.preventDefault();
     if (!form.current) return;
-
     emailjs
       .sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '',
@@ -25,18 +26,19 @@ const Contact = () => {
       .then(
         () => {
           console.log('SUCCESS!');
+          if (form.current) form.current.reset();
         },
         (error) => {
           console.log('FAILED...', error.text);
         }
-      );
+      )
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <Row
-      id="contact"
-      className="h-dvh"
-    >
+    <Row id="contact">
       <Container>
         <div className="flex flex-col gap-4 m-auto md:min-w-[500px] ">
           <h2 className="text-center font-bold text-comment w-full">
@@ -66,8 +68,11 @@ const Contact = () => {
             />
             <input
               type="submit"
-              value="Send"
-              className="bg-common px-4 py-2 text-2xl rounded-lg border-2 border-black "
+              value={isLoading ? 'Sending...' : 'Send'}
+              className={`${
+                isLoading ? 'bg-black text-white' : 'bg-common text-black'
+              } px-4 py-2 text-2xl rounded-lg border-2 border-black`}
+              disabled={isLoading}
             />
           </form>
           <SocialLinks center={true} />

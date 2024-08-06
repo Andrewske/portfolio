@@ -19,7 +19,7 @@ const Section = ({ children, title }: PropsWithChildren<{ title: string }>) => {
 
 const ZohoTwilio = () => {
   return (
-    <Row id="admin-dashboard">
+    <Row id="zoho-twilio">
       <Container>
         <div className="flex flex-col gap-8">
           <h2 className="text-center font-bold text-comment">

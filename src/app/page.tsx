@@ -15,10 +15,12 @@ import Contact from '~/components/sections/Contact';
 import ZohoTwilio from '~/components/sections/projects/ZohoTwilio';
 import SocialLinks from '~/components/SocialLinks';
 import TextLink from '~/components/TextLink';
+import MasakaliRetreat from '~/components/sections/projects/Masakali';
+import ScrollToTop from '~/components/ScrollToTop';
 
 const Home: NextPage = () => {
   return (
-    <>
+    <div className="relative">
       <div className="flex flex-col justify-center items-center font-roboto font-bold w-full ">
         <section
           id="banner"
@@ -59,12 +61,10 @@ const Home: NextPage = () => {
         alt="Bonanza Logo"
         id="bonanza"
       />
-      <Projects>
-        <AdminDashboard />
-        <ZohoTwilio />
-      </Projects>
+      <Projects />
       <Contact />
-    </>
+      <ScrollToTop />
+    </div>
   );
 };
 

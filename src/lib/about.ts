@@ -34,10 +34,20 @@ export const aboutKevin = [
     text: [
       [`about = `, 'text-default'],
       [
-        `${`I began learning HTML and CSS in 2017 while working as a Marketing Project Manager out of a desire to build landing pages.`}
-           ${'I quickly felt limited and found Javascript as the solution to set me free. In 2020, I decided to pursue web development'}
-           ${'and learned React. I have been building projects and continuing my education since.'}`,
+        `I began learning HTML and CSS in 2017 while working as a Marketing Project Manager`,
         'text-common',
+      ],
+      [
+        ` out of a desire to build landing pages. I quickly felt limited and found Javascript as the solution to set me free.`,
+        'text-default',
+      ],
+      [
+        ` In 2020, I decided to pursue web development and learned React.`,
+        'text-common',
+      ],
+      [
+        ` I have been building projects and continuing my education since.`,
+        'text-default',
       ],
     ],
   },
@@ -54,10 +64,19 @@ export const aboutKevin = [
     text: [
       [`about = `, 'text-default'],
       [
-        `${`In 2017, while working as a Marketing Project Manager, I often felt limited by not having all the data I needed. `}
-           ${'This led me to learn SQL to query the Bonanza database and then Python to analyze and manipulate that data. '}
-           ${'I developed a strong interest in data analysis and have since been working on various projects, using my skills'}
-           ${'to extract valuable insights from data and continuously advancing my education.'}`,
+        `In 2017, while working as a Marketing Project Manager, I often felt limited by not having all the data I needed.`,
+        'text-default',
+      ],
+      [
+        'This led me to learn SQL to query the Bonanza database and then Python to analyze and manipulate that data. ',
+        'text-common',
+      ],
+      [
+        `I developed a strong interest in data analysis and have since been working on various projects, using my skills`,
+        'text-default',
+      ],
+      [
+        ` to extract valuable insights from data and continuously advancing my education.`,
         'text-common',
       ],
     ],

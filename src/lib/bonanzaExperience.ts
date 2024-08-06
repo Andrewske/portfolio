@@ -84,7 +84,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Use Python to create visualizations and conduct analysis"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],
@@ -94,7 +94,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Identify patterns, use insights to educate and advise stakeholders"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],
@@ -164,7 +164,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Carried out regular research into market trends, customer behavior, and sales"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],
@@ -224,7 +224,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Solve buyer support inquiries through email and live chat"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],
@@ -234,7 +234,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Find and report bugs and potential website improvements"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],
@@ -244,7 +244,7 @@ export const bonanzaExperience = [
     text: [
       [
         `"Handle tough conversations through customer experience phone calls"`,
-        'text-common',
+        'text-default',
       ],
       [`,`, 'text-default'],
     ],

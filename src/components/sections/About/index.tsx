@@ -1,5 +1,5 @@
 import { aboutKevin } from '~/lib/about';
-import TextAsCode from '../TextAsCode';
+import TextAsCode from '~/components/TextAsCode';
 
 const About = () => {
   return (
