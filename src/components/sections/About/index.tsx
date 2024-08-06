@@ -1,6 +1,6 @@
 import { aboutKevin } from '~/lib/about';
 import TextAsCode from '~/components/TextAsCode';
-import kevinImage from '~/../public/images/me-profile.png';
+import kevinImage from '~/../public/images/kevin-profile-image.png';
 
 const About = () => {
   return (

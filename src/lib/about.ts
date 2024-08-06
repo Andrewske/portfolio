@@ -1,6 +1,6 @@
 export const aboutKevin = [
   {
-    className: 'indent-0 text-3xl',
+    className: 'indent-0 text-3xl pb-2',
     text: [[`// About Kevin`, 'text-comment']],
   },
   {

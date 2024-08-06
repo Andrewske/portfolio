@@ -26,7 +26,7 @@ const TextAsCode = ({ data, image, alt, id }: TextAsCodeDataType) => {
               height={iconSize}
               width={iconSize}
               alt={alt}
-              className="hidden w-24 object-contain md:flex flex-col justify-center items-center text-center"
+              className="hidden min-w-24 object-contain md:flex flex-col justify-center items-center text-center"
             />
           </div>
         )}

@@ -1,6 +1,6 @@
 export const education = [
   {
-    className: 'indent-0 text-3xl',
+    className: 'indent-0 text-3xl pb-2',
     text: [[`// Education`, 'text-comment']],
   },
   {
