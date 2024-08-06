@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import Row from '~/components/Row';
 import Container from '~/components/Container';
+import SocialLinks from '~/components/SocialLinks';
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -35,7 +36,9 @@ const Contact = () => {
     <Row id="contact">
       <Container>
         <div className="flex flex-col gap-4 m-auto md:min-w-[500px]">
-          <h2 className="text-center font-bold text-comment">Contact Me</h2>
+          <h2 className="text-center font-bold text-comment w-full">
+            Contact Me
+          </h2>
           <form
             ref={form}
             onSubmit={sendEmail}
@@ -64,6 +67,7 @@ const Contact = () => {
               className="bg-common px-4 py-2 text-2xl rounded-lg border-2 border-black "
             />
           </form>
+          <SocialLinks center={true} />
         </div>
       </Container>
     </Row>

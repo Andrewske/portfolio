@@ -20,6 +20,15 @@ const Projects = ({ children }: PropsWithChildren) => {
                 <p className="text-center">(Data Analysis & Web Development)</p>
               </span>
             </Link>
+            <Link
+              href="#zoho-twilio"
+              className="hover:text-keyword "
+            >
+              <span>
+                <h3>Zoho CRM & Twilio SMS Integration</h3>
+                <p className="text-center">(Web Development)</p>
+              </span>
+            </Link>
           </div>
         </Container>
       </Row>

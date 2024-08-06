@@ -1,6 +1,4 @@
-import { type NextPage, Metadata } from 'next';
-
-import Link from 'next/link';
+import { type NextPage } from 'next';
 
 import About from '~/components/sections/About';
 import School from '~/components/sections/School';
@@ -14,10 +12,9 @@ import masakaliIcon from '~/../public/images/masakali-logo-sm.png';
 import Projects from '~/components/sections/projects';
 import AdminDashboard from '~/components/sections/projects/AdminDashboard';
 import Contact from '~/components/sections/Contact';
-
-// export const metaData: Metadata = {
-//   title: "Kevin Andrews Portfolio"
-// }
+import ZohoTwilio from '~/components/sections/projects/ZohoTwilio';
+import SocialLinks from '~/components/SocialLinks';
+import TextLink from '~/components/TextLink';
 
 const Home: NextPage = () => {
   return (
@@ -45,6 +42,7 @@ const Home: NextPage = () => {
           <TextLink href="#contact">
             <h2>CONTACT</h2>
           </TextLink>
+          <SocialLinks />
         </section>
       </div>
       <About />
@@ -63,6 +61,7 @@ const Home: NextPage = () => {
       />
       <Projects>
         <AdminDashboard />
+        <ZohoTwilio />
       </Projects>
       <Contact />
     </>
@@ -70,20 +69,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-const TextLink = ({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) => {
-  return (
-    <Link
-      href={href}
-      className="cursor-pointer transition-all ease-in-out duration-300 transform hover:scale-105 hover:text-comment"
-    >
-      {children}
-    </Link>
-  );
-};

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import '~/styles/icomoon.css';
 
 import { JetBrains_Mono, Roboto_Mono } from 'next/font/google';
 

@@ -69,7 +69,7 @@ const AdminDashboard = () => {
             </p>
           </Section>
           <Section title="Development Timeline">
-            <ul className="ml-8 list-disc">
+            <ul>
               <li>
                 <strong className="text-declaration">Start Date:</strong>{' '}
                 September 2023
@@ -77,14 +77,14 @@ const AdminDashboard = () => {
             </ul>
           </Section>
           <Section title="Key Features">
-            <ul className="ml-8 list-disc">
+            <ul>
               <li>Multiple dashboards for the Bonanza team</li>
               <li>Consumer-facing dashboard for Vercado (in progress)</li>
               <li>Real-time data visualization and user experience design</li>
             </ul>
           </Section>
           <Section title="Technologies Used">
-            <ul className="ml-8 list-disc">
+            <ul>
               <li>
                 <strong className="text-declaration">Backend:</strong> Python,
                 MySQL, PostgreSQL, Pandas, Polars, AWS
@@ -100,7 +100,7 @@ const AdminDashboard = () => {
               <li>
                 <strong className="text-declaration">Data Query Speed:</strong>
               </li>
-              <ul className="ml-8 list-disc">
+              <ul>
                 <li>
                   <strong className="text-declaration">Challenge:</strong> Slow
                   data queries from a large dataset dating back to 2008 using
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
                 <li>
                   <strong className="text-declaration">Solution:</strong>
                 </li>
-                <ul className="ml-8 list-disc">
+                <ul>
                   <li>
                     <span className="text-common">
                       Optimized queries and data processing to reduce execution
