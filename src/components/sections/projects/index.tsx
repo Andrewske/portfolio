@@ -22,7 +22,7 @@ const Project = ({
       {githubLink && (
         <div className="absolute top-0 right-0 text-3xl py-8 z-50 ">
           <Link
-            href={link}
+            href={githubLink}
             className="flex hover:text-comment"
           >
             <div className="h-9 flex flex-col justify-center items-center pr-4">
