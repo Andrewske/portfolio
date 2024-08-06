@@ -55,7 +55,7 @@ const AdminDashboard = () => {
   return (
     <Row id="admin-dashboard">
       <Container>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 ">
           <h2 className="text-center font-bold text-comment">
             Bonanza Admin & Vercado Customer Dashboard
           </h2>

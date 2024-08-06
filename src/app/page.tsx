@@ -17,6 +17,7 @@ import SocialLinks from '~/components/SocialLinks';
 import TextLink from '~/components/TextLink';
 import MasakaliRetreat from '~/components/sections/projects/Masakali';
 import ScrollToTop from '~/components/ScrollToTop';
+import Education from '~/components/sections/Education';
 
 const Home: NextPage = () => {
   return (
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
         </section>
       </div>
       <About />
-      <School />
+      <Education />
       <TextAsCode
         data={masakaliExperience}
         image={masakaliIcon}

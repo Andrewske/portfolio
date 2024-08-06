@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrains.variable} ${roboto.variable}`}
     >
-      <body className="max-w-screen relative">{children}</body>
+      <body className="max-w-screen relative ">{children}</body>
     </html>
   );
 }

@@ -8,7 +8,7 @@ const BackToHome = ({
   githubLink?: string;
 }) => {
   return (
-    <div className="flex justify-between items-center w-full fixed top-0 left-0 text-3xl px-4 md:px-8 py-2 md:py-4 bg-black z-50 border-b border-1 border-comment">
+    <div className="flex justify-between items-center w-full fixed top-0 left-0 text-3xl px-4 md:px-8 py-2 md:py-4  bg-gray-800 dark:bg-black z-50 border-b border-1 border-comment">
       <Link
         href={`/#projects`}
         className="flex hover:text-comment"

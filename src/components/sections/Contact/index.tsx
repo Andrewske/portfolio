@@ -70,7 +70,7 @@ const Contact = () => {
               type="submit"
               value={isLoading ? 'Sending...' : 'Send'}
               className={`${
-                isLoading ? 'bg-black text-white' : 'bg-common text-black'
+                isLoading ? 'bg-black ' : 'bg-common text-black'
               } px-4 py-2 text-2xl rounded-lg border-2 border-black`}
               disabled={isLoading}
             />

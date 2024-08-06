@@ -2,7 +2,7 @@ import TextLink from '../TextLink';
 
 const SocialLinks = ({ center = false }: { center?: boolean }) => {
   return (
-    <div className={`flex gap-4 py-4 ${center ? 'justify-center' : ''}`}>
+    <div className={`flex gap-4 py-4 ${center ? 'justify-center' : ''} `}>
       <TextLink
         href="https://github.com/andrewske"
         target="_blank"

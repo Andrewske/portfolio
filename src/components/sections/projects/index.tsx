@@ -18,9 +18,9 @@ const Project = ({
   githubLink?: string;
 }) => {
   return (
-    <div className="flex flex-col text-left w-4/6 border-2 border-comment rounded-lg p-4 md:p-8 gap-4 bg-black relative">
+    <div className="flex flex-col text-left w-4/6 border-2 border-comment rounded-lg p-4 md:p-8 gap-4 bg-white dark:bg-black relative">
       {githubLink && (
-        <div className="absolute top-0 right-0 text-3xl py-8 bg-black z-50 ">
+        <div className="absolute top-0 right-0 text-3xl py-8 z-50 ">
           <Link
             href={link}
             className="flex hover:text-comment"
@@ -44,7 +44,7 @@ const Project = ({
       <p>{tech}</p>
       <Link
         href={link}
-        className="m-auto text-common hover:text-black text-xl border border-comment rounded-lg px-4 py-2 hover:bg-comment w-max"
+        className="m-auto text-common hover:text-black text-xl border border-comment rounded-lg px-4 py-2 hover:bg-comment w-max bg-slate-800 dark:bg-black"
       >
         View Project
       </Link>

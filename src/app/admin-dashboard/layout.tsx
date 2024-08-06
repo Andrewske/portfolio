@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-w-screen relative">
+    <div className="max-w-screen relative text-white">
       <BackToHome />
       <div className="mt-16">{children}</div>
     </div>
