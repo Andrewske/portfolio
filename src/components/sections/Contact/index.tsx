@@ -33,9 +33,12 @@ const Contact = () => {
   };
 
   return (
-    <Row id="contact">
+    <Row
+      id="contact"
+      className="h-dvh"
+    >
       <Container>
-        <div className="flex flex-col gap-4 m-auto md:min-w-[500px]">
+        <div className="flex flex-col gap-4 m-auto md:min-w-[500px] ">
           <h2 className="text-center font-bold text-comment w-full">
             Contact Me
           </h2>

@@ -3,6 +3,7 @@ import './globals.css';
 import '~/styles/icomoon.css';
 
 import { JetBrains_Mono, Roboto_Mono } from 'next/font/google';
+import ScrollToTop from '~/components/ScrollToTop';
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
@@ -32,7 +33,10 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrains.variable} ${roboto.variable}`}
     >
-      <body className="max-w-screen">{children}</body>
+      <body className="max-w-screen relative">
+        {children}
+        <ScrollToTop />
+      </body>
     </html>
   );
 }
