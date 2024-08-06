@@ -1,6 +1,6 @@
 export const masakaliExperience = [
   {
-    className: 'indent-0',
+    className: 'indent-0 text-3xl',
     text: [[`// Experience at Masakali Retreat`, 'text-comment']],
   },
   {

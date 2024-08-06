@@ -9,9 +9,11 @@ import TextAsCode from '~/components/TextAsCode';
 import { bonanzaExperience } from '../lib/bonanzaExperience';
 import bonzIcon from '~/../public/images/bonz_green_square@2x.png';
 import { masakaliExperience } from '../lib/masakaliExperience';
+import { aboutKevin } from '~/lib/about';
 import masakaliIcon from '~/../public/images/masakali-logo-sm.png';
 import Projects from '~/components/sections/projects';
 import AdminDashboard from '~/components/sections/projects/AdminDashboard';
+import Contact from '~/components/sections/Contact';
 
 // export const metaData: Metadata = {
 //   title: "Kevin Andrews Portfolio"
@@ -62,6 +64,7 @@ const Home: NextPage = () => {
       <Projects>
         <AdminDashboard />
       </Projects>
+      <Contact />
     </>
   );
 };

@@ -1,6 +1,6 @@
 export const bonanzaExperience = [
   {
-    className: 'indent-0',
+    className: 'indent-0 text-3xl',
     text: [[`// Experience at Bonanza`, 'text-comment']],
   },
   {

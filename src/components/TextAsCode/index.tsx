@@ -10,8 +10,8 @@ interface TextAsCodeDataType {
     className: string;
     text: string[][];
   }[];
-  image: StaticImageData;
-  alt: string;
+  image?: StaticImageData;
+  alt?: string;
   id: string;
 }
 
@@ -19,15 +19,17 @@ const TextAsCode = ({ data, image, alt, id }: TextAsCodeDataType) => {
   return (
     <Row id={id}>
       <Container>
-        <div>
-          <Image
-            src={image}
-            height={iconSize}
-            width={iconSize}
-            alt={alt}
-            className="w-24 object-contain md:flex flex-col justify-center items-center text-center"
-          />
-        </div>
+        {image && alt && (
+          <div>
+            <Image
+              src={image}
+              height={iconSize}
+              width={iconSize}
+              alt={alt}
+              className="w-24 object-contain md:flex flex-col justify-center items-center text-center"
+            />
+          </div>
+        )}
         <div className="flex flex-col">
           {data.map(({ className, text }, dataIndex) => (
             <div
@@ -37,7 +39,7 @@ const TextAsCode = ({ data, image, alt, id }: TextAsCodeDataType) => {
               {text.map(([string, type], textIndex) => (
                 <span
                   key={'piece-' + textIndex}
-                  className={type}
+                  className={`${type} leading-6`}
                 >
                   {string}
                 </span>

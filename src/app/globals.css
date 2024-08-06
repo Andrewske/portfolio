@@ -41,10 +41,17 @@ h1 {
   margin: 0;
 }
 h2 {
-  font-size: max(2rem, 4vw);
+  font-size: max(2rem, 2vw);
   margin: 0;
 }
 h3 {
-  font-size: max(1rem, 2vw);
+  font-size: max(1rem, 1vw);
   margin: 0;
+}
+
+ul,
+ol {
+  list-style-type: disc;
+  margin-left: 2rem;
+  line-height: 2rem;
 }

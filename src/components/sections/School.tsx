@@ -23,7 +23,7 @@ const School = () => {
             className=".indent-4"
             style={{ marginLeft: '2rem' }}
           >
-            <p>{textColor('// Education', 'text-comment')}</p>
+            <p>{textColor('// Education', 'text-comment text-3xl')}</p>
             <p>
               {textColor('const', 'text-keyword')}
               {' BS = '}
