@@ -3,13 +3,13 @@ import './globals.css';
 
 import { JetBrains_Mono, Roboto_Mono } from 'next/font/google';
 
-export const jetbrains = JetBrains_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-jetbrains',
 });
 
-export const roboto = Roboto_Mono({
+const roboto = Roboto_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto',
