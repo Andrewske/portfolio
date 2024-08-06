@@ -42,6 +42,10 @@ const config = {
           'text-indent': '0rem',
           'margin-left': '0rem',
         },
+        '.indent-1-2': {
+          'text-indent': '-0.25rem',
+          'margin-left': '.75rem',
+        },
         '.indent-1': {
           'text-indent': '-0.5rem',
           'margin-left': '1.5rem',

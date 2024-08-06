@@ -10,7 +10,7 @@ const School = () => {
   return (
     <Row id="school">
       <Container>
-        <span className="icon">
+        <span className="icon hidden md:flex">
           <Image
             src={universityIcon}
             height={iconSize}
@@ -19,10 +19,7 @@ const School = () => {
           />
         </span>
         <span className="flex-center">
-          <div
-            className=".indent-4"
-            style={{ marginLeft: '2rem' }}
-          >
+          <div className="">
             <p>{textColor('// Education', 'text-comment text-3xl')}</p>
             <p>
               {textColor('const', 'text-keyword')}

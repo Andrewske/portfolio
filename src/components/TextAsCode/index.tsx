@@ -26,7 +26,7 @@ const TextAsCode = ({ data, image, alt, id }: TextAsCodeDataType) => {
               height={iconSize}
               width={iconSize}
               alt={alt}
-              className="w-24 object-contain md:flex flex-col justify-center items-center text-center"
+              className="hidden w-24 object-contain md:flex flex-col justify-center items-center text-center"
             />
           </div>
         )}
@@ -39,7 +39,7 @@ const TextAsCode = ({ data, image, alt, id }: TextAsCodeDataType) => {
               {text.map(([string, type], textIndex) => (
                 <span
                   key={'piece-' + textIndex}
-                  className={`${type} leading-6`}
+                  className={`${type}`}
                 >
                   {string}
                 </span>

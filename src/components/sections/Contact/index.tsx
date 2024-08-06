@@ -45,17 +45,17 @@ const Contact = () => {
             <input
               type="text"
               name="user_name"
-              className="text-xl px-4 py-2 rounded-lg border-2 border-black"
+              className="text-lg md:text-xl px-4 py-2 rounded-lg border-2 border-black"
             />
             <label className="text-keyword text-2xl">Email</label>
             <input
               type="email"
               name="user_email"
-              className="text-xl px-4 py-2 rounded-lg border-2 border-black"
+              className="text-lg md:text-xl px-4 py-2 rounded-lg border-2 border-black"
             />
             <label className="text-keyword text-2xl">Message</label>
             <textarea
-              className="text-xl px-4 py-2 rounded-lg border-2 border-black h-48"
+              className="text-lg md:text-xl px-4 py-2 rounded-lg border-2 border-black h-48"
               name="message"
             />
             <input

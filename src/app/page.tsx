@@ -22,13 +22,13 @@ import Contact from '~/components/sections/Contact';
 const Home: NextPage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center font-roboto font-bold">
+      <div className="flex flex-col justify-center items-center font-roboto font-bold w-full ">
         <section
           id="banner"
-          className="w-full max-w-[65vw] h-dvh flex flex-col justify-center  container p-1 md:p-4"
+          className="max-w-[75vw] h-dvh flex flex-col justify-center "
         >
           <TextLink href="#about">
-            <h1>
+            <h1 className="whitespace-normal">
               Hi I&apos;m <br />
               Kevin Andrews
             </h1>

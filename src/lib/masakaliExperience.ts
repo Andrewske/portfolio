@@ -12,7 +12,7 @@ export const masakaliExperience = [
     ],
   },
   {
-    className: 'indent-1',
+    className: 'indent-1-2 md:indent-1',
     text: [
       [`if`, 'text-keyword'],
       [`(companyName === `, 'text-default'],
@@ -21,42 +21,42 @@ export const masakaliExperience = [
     ],
   },
   {
-    className: 'indent-2',
+    className: 'indent-1 md:indent-2',
     text: [
       [`switch `, 'text-keyword'],
       [`(jobTitle) {`, 'text-default'],
     ],
   },
   {
-    className: 'indent-3',
+    className: 'indent-2 md:indent-3',
     text: [
       [`case `, 'text-keyword'],
       [`"Co-Founder & Web Developer":`, 'text-default'],
     ],
   },
   {
-    className: 'indent-4',
+    className: 'indent-3 md:indent-4',
     text: [
       [`return `, 'text-keyword'],
       [`{`, 'text-default'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [
       [`startDate: `, 'text-default'],
       [`"2020-06-01",`, 'text-common'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [
       [`endDate: `, 'text-default'],
       [`null,`, 'text-declaration'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [[`duties: [`, 'text-default']],
   },
   {
@@ -81,44 +81,44 @@ export const masakaliExperience = [
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [[`],`, 'text-default']],
   },
   {
-    className: 'indent-4',
+    className: 'indent-3 md:indent-4',
     text: [[`};`, 'text-default']],
   },
 
   {
-    className: 'indent-3',
+    className: 'indent-2 md:indent-3',
     text: [
       [`default`, 'text-keyword'],
       [`:`, 'text-default'],
     ],
   },
   {
-    className: 'indent-4',
+    className: 'indent-3 md:indent-4',
     text: [
       [`return `, 'text-keyword'],
       [`{`, 'text-default'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [
       [`startDate: `, 'text-default'],
       [`"2020-06-01",`, 'text-common'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [
       [`endDate: `, 'text-default'],
       [`null,`, 'text-declaration'],
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [[`jobTitles: [`, 'text-default']],
   },
   {
@@ -129,11 +129,11 @@ export const masakaliExperience = [
     ],
   },
   {
-    className: 'indent-5',
+    className: 'indent-4 md:indent-5',
     text: [[`],`, 'text-default']],
   },
   {
-    className: 'indent-4',
+    className: 'indent-3 md:indent-4',
     text: [[`};`, 'text-default']],
   },
 ];
