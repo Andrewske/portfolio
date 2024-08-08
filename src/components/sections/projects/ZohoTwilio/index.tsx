@@ -225,13 +225,33 @@ const ZohoTwilio = () => {
             </ul>
           </Section>
           <Section title="User Feedback">
-            <p className="italic text-common">
-              &quot;The integration has significantly streamlined our
-              communication process. The ability to manage text messages
-              directly within Zoho CRM and having automated follow-ups has
-              improved our engagement with leads and customers.&quot; - Fred
-              Astaire Dance Studio
-            </p>
+            <span className="flex flex-col gap-4 max-w-[700px] ml-7 ">
+              <p className="italic ">
+                &quot;As the owner of 12 Fred Astaire Dance Studios, I, Philip
+                Gutierrez, was fortunate to have Kevin Andrews join our team to
+                develop a custom integration between our Twilio SMS account and
+                Zoho CRM. Our existing applications weren’t meeting our studio’s
+                needs, and Kevin was an incredible asset in solving this
+                challenge.
+              </p>
+              <p className="italic ">
+                Kevin built an app that seamlessly integrated our systems,
+                enabling automated workflows, assigning users to appropriate
+                leads, and providing us with the flexibility to communicate with
+                leads directly within the CRM. He was not only technically
+                proficient but also extremely timely and adaptable, working
+                closely with us to ensure the solution was tailored to our
+                specific requirements.
+              </p>
+              <p className="italic ">
+                Thanks to Kevin’s expertise, we now have a powerful tool that
+                enhances our lead management process, makingcommunication more
+                efficient and effective. We highly recommendKevin for any
+                project requiring a custom solution and appreciate his
+                exceptional work on this integration.&quot;
+              </p>
+              <p className="italic text-common">- Philip Gutierrez</p>
+            </span>
           </Section>
         </div>
       </Container>
