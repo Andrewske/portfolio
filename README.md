@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kevin Andrews Portfolio
 
-## Getting Started
+A modern portfolio website showcasing my expertise in web development and data analysis.
 
-First, run the development server:
+## 🚀 Live Site
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visit the portfolio at https://www.kevinandrews.info
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💼 Featured Projects
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Bonanza & Vercado Dashboards
+Comprehensive dashboards featuring real-time data visualization, secure access control, and multi-API integration. Built with Python, PostgreSQL, React, TypeScript, and AWS.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Masakali Retreat Website  
+Dynamic booking system for a Bali retreat center with Smoobu API integration for real-time availability and pricing. Features secure checkout and currency conversion. Built with Next.js, PostgreSQL, and Xendit API.
 
-## Learn More
+### Zoho CRM & Twilio SMS Integration
+Custom SMS communication system within Zoho CRM for Fred Astaire Dance Studio. Includes automated messaging, chat-like interface, and Zoho Analytics integration. Built with Next.js, Prisma, and Twilio API.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technical Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: Tailwind CSS
+- **Backend**: Node.js, Express, Python
+- **Databases**: PostgreSQL, MongoDB
+- **Cloud**: AWS, Vercel
+- **APIs**: Twilio, Zoho, Smoobu, Xendit
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📫 Contact
 
-## Deploy on Vercel
+Feel free to reach out through the contact form on the website or connect with me on social media.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The portfolio features a developer-themed design with syntax highlighting color schemes and monospace typography using JetBrains Mono and Roboto Mono fonts.
