@@ -57,21 +57,21 @@ const Redesign: NextPage = () => {
                   <div>
                     <span className="text-blue-300">name</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">"Kevin Andrews"</span>
+                    <span className="text-yellow-300">&quot;Kevin Andrews&quot;</span>
                     <span className="text-white">,</span>
                   </div>
                   
                   <div>
                     <span className="text-blue-300">role</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">"Full-Stack Developer & AI Engineer"</span>
+                    <span className="text-yellow-300">&quot;Full-Stack Developer & AI Engineer&quot;</span>
                     <span className="text-white">,</span>
                   </div>
                   
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">"{typedText}"</span>
+                    <span className="text-yellow-300">&quot;{typedText}&quot;</span>
                     <span className="animate-pulse">|</span>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ const Redesign: NextPage = () => {
             <div className="border border-cyan-500/30 rounded-lg p-6 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-cyan-400 text-lg font-bold flex items-center gap-2">
-                  <span className="text-gray-500">//</span> Featured Project
+                  <span className="text-gray-500">{'//'}</span> Featured Project
                 </h2>
                 <span className="text-xs text-green-400 border border-green-400/30 px-2 py-1 rounded">PRODUCTION</span>
               </div>
@@ -385,7 +385,7 @@ const Redesign: NextPage = () => {
           <div className="grid md:grid-cols-4 gap-6">
             <div className="space-y-4">
               <h3 className="text-cyan-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">//</span> AI/ML
+                <span className="text-gray-500">{'//'}</span> AI/ML
               </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
@@ -409,7 +409,7 @@ const Redesign: NextPage = () => {
 
             <div className="space-y-4">
               <h3 className="text-yellow-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">//</span> Backend
+                <span className="text-gray-500">{'//'}</span> Backend
               </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
@@ -433,7 +433,7 @@ const Redesign: NextPage = () => {
 
             <div className="space-y-4">
               <h3 className="text-purple-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">//</span> Frontend
+                <span className="text-gray-500">{'//'}</span> Frontend
               </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
@@ -457,7 +457,7 @@ const Redesign: NextPage = () => {
 
             <div className="space-y-4">
               <h3 className="text-blue-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">//</span> DevOps
+                <span className="text-gray-500">{'//'}</span> DevOps
               </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">

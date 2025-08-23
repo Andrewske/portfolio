@@ -1,6 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 Theme Variables */
+@theme {
+  /* Custom syntax highlighting colors */
+  --color-keyword: #3b82f6;
+  --color-common: #facc15;
+  --color-comment: #16a34a;
+  --color-declaration: #a855f7;
+  --color-default: #e5e7eb;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -32,10 +40,49 @@ body {
   overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Modern Tailwind v4 Custom Utilities */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility indent-0 {
+  text-indent: 0rem;
+  margin-left: 0rem;
+}
+
+@utility indent-1-2 {
+  text-indent: -0.25rem;
+  margin-left: 0.75rem;
+}
+
+@utility indent-1 {
+  text-indent: -0.5rem;
+  margin-left: 1.5rem;
+}
+
+@utility indent-2 {
+  text-indent: -1rem;
+  margin-left: 3rem;
+}
+
+@utility indent-3 {
+  text-indent: -1.5rem;
+  margin-left: 4.5rem;
+}
+
+@utility indent-4 {
+  text-indent: -2rem;
+  margin-left: 6rem;
+}
+
+@utility indent-5 {
+  text-indent: -2.5rem;
+  margin-left: 7.5rem;
+}
+
+@utility indent-6 {
+  text-indent: -3rem;
+  margin-left: 9rem;
 }
 
 h1 {

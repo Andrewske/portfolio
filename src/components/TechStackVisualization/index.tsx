@@ -344,7 +344,7 @@ const TechStackVisualization = () => {
       simulation.stop();
     };
 
-  }, [selectedNode]);
+  }, [selectedNode, nodes, links]);
 
   const getNodeInfo = (nodeId: string) => {
     const node = nodes.find(n => n.id === nodeId);
