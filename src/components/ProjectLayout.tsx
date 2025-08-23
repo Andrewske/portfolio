@@ -3,9 +3,9 @@ import { type ProjectLayoutProps } from '~/lib/types';
 
 export default function ProjectLayout({ children, githubLink }: ProjectLayoutProps) {
   return (
-    <div className="max-w-screen relative text-white">
+    <div className="min-h-screen bg-black text-gray-200 font-mono">
       <BackToHome githubLink={githubLink} />
-      <div className="mt-16">{children}</div>
+      <div className="pt-20">{children}</div>
     </div>
   );
 }
