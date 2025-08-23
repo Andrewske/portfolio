@@ -1,26 +1,14 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { type NextPage } from 'next';
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import TechStackVisualization from '~/components/TechStackVisualization';
+import TypingAnimation from '~/components/TypingAnimation';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardHeader } from '~/components/ui/card';
+import { Badge } from '~/components/ui/badge';
+import { Separator } from '~/components/ui/separator';
+import { Progress } from '~/components/ui/progress';
 
 const Home: NextPage = () => {
-  const [typedText, setTypedText] = useState('');
-  const fullText = "Building production AI systems that solve real problems";
-  
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 50);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
@@ -71,8 +59,7 @@ const Home: NextPage = () => {
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;{typedText}&quot;</span>
-                    <span className="animate-pulse">|</span>
+                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building production AI systems that solve real problems" />&quot;</span>
                   </div>
                 </div>
                 
@@ -84,60 +71,75 @@ const Home: NextPage = () => {
               
               {/* Quick Links */}
               <div className="flex gap-6 mt-8 pt-6 border-t border-gray-800">
-                <a href="https://github.com/Andrewske" className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors">
-                  <span className="text-cyan-400">$</span> github
-                </a>
-                <a href="https://linkedin.com" className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors">
-                  <span className="text-cyan-400">$</span> linkedin
-                </a>
-                <a href="#contact" className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors">
-                  <span className="text-cyan-400">$</span> contact
-                </a>
+                <Button variant="terminalGhost" asChild>
+                  <a href="https://github.com/Andrewske" className="flex items-center gap-2">
+                    <span className="text-cyan-400">$</span> github
+                  </a>
+                </Button>
+                <Button variant="terminalGhost" asChild>
+                  <a href="https://linkedin.com" className="flex items-center gap-2">
+                    <span className="text-cyan-400">$</span> linkedin
+                  </a>
+                </Button>
+                <Button variant="terminalGhost" asChild>
+                  <a href="#contact-section" className="flex items-center gap-2">
+                    <span className="text-cyan-400">$</span> contact
+                  </a>
+                </Button>
               </div>
             </div>
 
             {/* Featured Project Preview */}
-            <div className="border border-cyan-500/30 rounded-lg p-6 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 backdrop-blur-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-cyan-400 text-lg font-bold flex items-center gap-2">
-                  <span className="text-gray-500">{'//'}</span> Featured Project
-                </h2>
-                <span className="text-xs text-green-400 border border-green-400/30 px-2 py-1 rounded">PRODUCTION</span>
-              </div>
-              
-              <h3 className="text-2xl font-bold text-white mb-2">Knowledge Graph MCP System</h3>
-              <p className="text-gray-400 mb-4">AI memory system for persistent context</p>
-              
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                  <div className="text-2xl font-bold text-yellow-400">85s</div>
-                  <div className="text-xs text-gray-500">Processing Time</div>
+            <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 backdrop-blur-sm">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-cyan-400 text-lg font-bold flex items-center gap-2">
+                    <span className="text-gray-500">{'//'}</span> Featured Project
+                  </h2>
+                  <Badge variant="statusProduction">PRODUCTION</Badge>
                 </div>
-                <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                  <div className="text-2xl font-bold text-green-400">$0.00002</div>
-                  <div className="text-xs text-gray-500">Cost per Operation</div>
-                </div>
-                <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                  <div className="text-2xl font-bold text-blue-400">100%</div>
-                  <div className="text-xs text-gray-500">Uptime</div>
-                </div>
-              </div>
+                <h3 className="text-2xl font-bold text-white">Knowledge Graph MCP System</h3>
+                <p className="text-gray-400">AI memory system for persistent context</p>
+              </CardHeader>
               
-              <div className="flex gap-4">
-                <a href="#knowledge-graph" className="px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded text-cyan-400 hover:bg-cyan-500/30 transition-all">
-                  View Details →
-                </a>
-                <a href="https://github.com" className="px-4 py-2 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-gray-500 transition-all">
-                  GitHub
-                </a>
-              </div>
-            </div>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
+                    <div className="text-2xl font-bold text-yellow-400">85s</div>
+                    <div className="text-xs text-gray-500">Processing Time</div>
+                  </div>
+                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
+                    <div className="text-2xl font-bold text-green-400">$0.00002</div>
+                    <div className="text-xs text-gray-500">Cost per Operation</div>
+                  </div>
+                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
+                    <div className="text-2xl font-bold text-blue-400">100%</div>
+                    <div className="text-xs text-gray-500">Uptime</div>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <Button variant="terminal" asChild>
+                    <a href="#knowledge-graph">
+                      View Details →
+                    </a>
+                  </Button>
+                  <Button variant="terminalOutline" asChild>
+                    <a href="https://github.com">
+                      GitHub
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
+      <Separator className="my-0" />
+
       {/* Projects Section */}
-      <section className="py-20 px-6 border-t border-gray-900">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">
@@ -167,7 +169,7 @@ const Home: NextPage = () => {
                       </h3>
                       <p className="text-gray-400">Internal tools platform serving entire operations team</p>
                     </div>
-                    <span className="text-xs text-green-400 border border-green-400/30 px-2 py-1 rounded">LIVE</span>
+                    <Badge variant="statusLive">LIVE</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
@@ -190,20 +192,24 @@ const Home: NextPage = () => {
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">React</span>
-                    <span className="text-xs px-2 py-1 bg-yellow-500/10 text-yellow-400 rounded">Python</span>
-                    <span className="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">PostgreSQL</span>
-                    <span className="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">TypeScript</span>
-                    <span className="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded">AWS</span>
+                    <Badge variant="techReact">React</Badge>
+                    <Badge variant="techPython">Python</Badge>
+                    <Badge variant="techDatabase">PostgreSQL</Badge>
+                    <Badge variant="techTypeScript">TypeScript</Badge>
+                    <Badge variant="techCloud">AWS</Badge>
                   </div>
                   
                   <div className="flex gap-3">
-                    <Link href="/admin-dashboard" className="text-sm text-cyan-400 hover:text-cyan-300">
-                      View Project →
-                    </Link>
-                    <a href="https://github.com" className="text-sm text-gray-500 hover:text-gray-300">
-                      GitHub
-                    </a>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <Link href="/admin-dashboard">
+                        View Project →
+                      </Link>
+                    </Button>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <a href="https://github.com">
+                        GitHub
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -229,7 +235,7 @@ const Home: NextPage = () => {
                       </h3>
                       <p className="text-gray-400">Full-stack payment processing with Stripe for Bali retreat center</p>
                     </div>
-                    <span className="text-xs text-green-400 border border-green-400/30 px-2 py-1 rounded">PRODUCTION</span>
+                    <Badge variant="statusProduction">PRODUCTION</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
@@ -252,20 +258,24 @@ const Home: NextPage = () => {
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Next.js</span>
-                    <span className="text-xs px-2 py-1 bg-yellow-500/10 text-yellow-400 rounded">Stripe</span>
-                    <span className="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">PostgreSQL</span>
-                    <span className="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">Prisma</span>
-                    <span className="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded">Xendit API</span>
+                    <Badge variant="techReact">Next.js</Badge>
+                    <Badge variant="techPython">Stripe</Badge>
+                    <Badge variant="techDatabase">PostgreSQL</Badge>
+                    <Badge variant="techTypeScript">Prisma</Badge>
+                    <Badge variant="techCloud">Xendit API</Badge>
                   </div>
                   
                   <div className="flex gap-3">
-                    <Link href="/masakali" className="text-sm text-cyan-400 hover:text-cyan-300">
-                      View Project →
-                    </Link>
-                    <a href="https://github.com/Andrewske/masakali-t3" className="text-sm text-gray-500 hover:text-gray-300">
-                      GitHub
-                    </a>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <Link href="/masakali">
+                        View Project →
+                      </Link>
+                    </Button>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <a href="https://github.com/Andrewske/masakali-t3">
+                        GitHub
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -291,7 +301,7 @@ const Home: NextPage = () => {
                       </h3>
                       <p className="text-gray-400">Automated SMS workflow system for dance studio CRM</p>
                     </div>
-                    <span className="text-xs text-green-400 border border-green-400/30 px-2 py-1 rounded">PRODUCTION</span>
+                    <Badge variant="statusProduction">PRODUCTION</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
@@ -314,20 +324,24 @@ const Home: NextPage = () => {
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Next.js</span>
-                    <span className="text-xs px-2 py-1 bg-yellow-500/10 text-yellow-400 rounded">Twilio API</span>
-                    <span className="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Zoho API</span>
-                    <span className="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">Prisma</span>
-                    <span className="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded">PostgreSQL</span>
+                    <Badge variant="techReact">Next.js</Badge>
+                    <Badge variant="techCloud">Twilio API</Badge>
+                    <Badge variant="techCloud">Zoho API</Badge>
+                    <Badge variant="techTypeScript">Prisma</Badge>
+                    <Badge variant="techDatabase">PostgreSQL</Badge>
                   </div>
                   
                   <div className="flex gap-3">
-                    <Link href="/zoho-twilio" className="text-sm text-cyan-400 hover:text-cyan-300">
-                      View Project →
-                    </Link>
-                    <a href="https://github.com/Andrewske/zoho_twilio_integration_t3" className="text-sm text-gray-500 hover:text-gray-300">
-                      GitHub
-                    </a>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <Link href="/zoho-twilio">
+                        View Project →
+                      </Link>
+                    </Button>
+                    <Button variant="terminalGhost" size="sm" asChild>
+                      <a href="https://github.com/Andrewske/zoho_twilio_integration_t3">
+                        GitHub
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -353,14 +367,14 @@ const Home: NextPage = () => {
                       </h3>
                       <p className="text-gray-400">Next-generation AI workflow orchestration for knowledge management</p>
                     </div>
-                    <span className="text-xs text-yellow-400 border border-yellow-400/30 px-2 py-1 rounded">IN DEVELOPMENT</span>
+                    <Badge variant="statusDevelopment">IN DEVELOPMENT</Badge>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">LLMs</span>
-                    <span className="text-xs px-2 py-1 bg-yellow-500/10 text-yellow-400 rounded">Agent Orchestration</span>
-                    <span className="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Knowledge Graphs</span>
-                    <span className="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">MCP Protocol</span>
+                    <Badge variant="techReact">LLMs</Badge>
+                    <Badge variant="techPython">Agent Orchestration</Badge>
+                    <Badge variant="techDatabase">Knowledge Graphs</Badge>
+                    <Badge variant="techTypeScript">MCP Protocol</Badge>
                   </div>
                   
                   <div className="text-sm text-gray-500">
@@ -373,8 +387,10 @@ const Home: NextPage = () => {
         </div>
       </section>
 
+      <Separator className="my-0" />
+
       {/* Skills Section */}
-      <section className="py-20 px-6 border-t border-gray-900">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">
@@ -387,22 +403,22 @@ const Home: NextPage = () => {
               <h3 className="text-cyan-400 font-bold flex items-center gap-2">
                 <span className="text-gray-500">{'//'}</span> AI/ML
               </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+              <div className="space-y-3 text-sm">
+                <div className="space-y-1">
                   <span>LLMs & Prompt Engineering</span>
+                  <Progress value={80} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>MCP Protocol</span>
+                  <Progress value={60} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Knowledge Graphs</span>
+                  <Progress value={70} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Agent Orchestration</span>
+                  <Progress value={75} className="h-2" />
                 </div>
               </div>
             </div>
@@ -411,22 +427,22 @@ const Home: NextPage = () => {
               <h3 className="text-yellow-400 font-bold flex items-center gap-2">
                 <span className="text-gray-500">{'//'}</span> Backend
               </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+              <div className="space-y-3 text-sm">
+                <div className="space-y-1">
                   <span>Python & FastAPI</span>
+                  <Progress value={90} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Node.js & Express</span>
+                  <Progress value={85} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>PostgreSQL & MongoDB</span>
+                  <Progress value={80} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Prisma ORM</span>
+                  <Progress value={75} className="h-2" />
                 </div>
               </div>
             </div>
@@ -435,22 +451,22 @@ const Home: NextPage = () => {
               <h3 className="text-purple-400 font-bold flex items-center gap-2">
                 <span className="text-gray-500">{'//'}</span> Frontend
               </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+              <div className="space-y-3 text-sm">
+                <div className="space-y-1">
                   <span>React & Next.js</span>
+                  <Progress value={90} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>TypeScript</span>
+                  <Progress value={85} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Tailwind CSS</span>
+                  <Progress value={90} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Performance Optimization</span>
+                  <Progress value={75} className="h-2" />
                 </div>
               </div>
             </div>
@@ -459,22 +475,22 @@ const Home: NextPage = () => {
               <h3 className="text-blue-400 font-bold flex items-center gap-2">
                 <span className="text-gray-500">{'//'}</span> DevOps
               </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+              <div className="space-y-3 text-sm">
+                <div className="space-y-1">
                   <span>AWS & Cloud Services</span>
+                  <Progress value={80} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Docker & Containers</span>
+                  <Progress value={70} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>CI/CD Pipelines</span>
+                  <Progress value={75} className="h-2" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span>
+                <div className="space-y-1">
                   <span>Vercel Deployment</span>
+                  <Progress value={85} className="h-2" />
                 </div>
               </div>
             </div>
@@ -482,15 +498,19 @@ const Home: NextPage = () => {
         </div>
       </section>
 
+      <Separator className="my-0" />
+
       {/* Tech Stack Visualization */}
-      <section className="py-20 px-6 border-t border-gray-900">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <TechStackVisualization />
         </div>
       </section>
 
+      <Separator className="my-0" />
+
       {/* About Section */}
-      <section className="py-20 px-6 border-t border-gray-900">
+      <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">
@@ -525,8 +545,10 @@ const Home: NextPage = () => {
         </div>
       </section>
 
+      <Separator className="my-0" />
+
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 border-t border-gray-900">
+      <section id="contact-section" className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-8">
             <span className="text-green-400">$</span> contact --init
@@ -537,18 +559,16 @@ const Home: NextPage = () => {
           </p>
           
           <div className="flex justify-center gap-6">
-            <a 
-              href="mailto:kevin@example.com" 
-              className="px-6 py-3 bg-cyan-500/20 border border-cyan-500/50 rounded text-cyan-400 hover:bg-cyan-500/30 transition-all"
-            >
-              Send Email
-            </a>
-            <a 
-              href="https://github.com/Andrewske" 
-              className="px-6 py-3 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-gray-500 transition-all"
-            >
-              GitHub Profile
-            </a>
+            <Button variant="terminal" size="lg" asChild>
+              <a href="mailto:kevin@example.com">
+                Send Email
+              </a>
+            </Button>
+            <Button variant="terminalOutline" size="lg" asChild>
+              <a href="https://github.com/Andrewske">
+                GitHub Profile
+              </a>
+            </Button>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '~/components/ui/tooltip';
 
 interface Node {
   id: string;
@@ -392,7 +393,8 @@ const TechStackVisualization = () => {
   const selectedNodeInfo = selectedNode ? getNodeInfo(selectedNode) : null;
 
   return (
-    <div className="w-full">
+    <TooltipProvider>
+      <div className="w-full">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-white mb-2">
           <span className="text-green-400">$</span> visualize tech-stack --interactive
@@ -511,7 +513,8 @@ const TechStackVisualization = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </TooltipProvider>
   );
 };
 
