@@ -1,10 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { type RowProps } from '~/lib/types';
 
-const Row = ({
-  children,
-  id,
-  className,
-}: PropsWithChildren & { id: string; className?: string }) => {
+const Row = ({ children, id, className }: RowProps) => {
   return (
     <section
       className={`w-full mt-4 rounded-lg p-2 md:p-8 flex flex-wrap flex-col gap-8 items-center justify-center font-jetbrains ${className}`}

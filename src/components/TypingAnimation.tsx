@@ -1,11 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-interface TypingAnimationProps {
-  text: string;
-  speed?: number;
-}
+import { type TypingAnimationProps } from '~/lib/types';
 
 const TypingAnimation = ({ text, speed = 50 }: TypingAnimationProps) => {
   const [typedText, setTypedText] = useState('');

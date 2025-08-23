@@ -1,4 +1,4 @@
-import BackToHome from '~/components/BackToHome';
+import ProjectLayout from '~/components/ProjectLayout';
 
 export default function RootLayout({
   children,
@@ -6,9 +6,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-w-screen relative text-white">
-      <BackToHome />
-      <div className="mt-16">{children}</div>
-    </div>
+    <ProjectLayout>
+      {children}
+    </ProjectLayout>
   );
 }

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import { Badge } from '~/components/ui/badge';
 import { Separator } from '~/components/ui/separator';
 import { Progress } from '~/components/ui/progress';
+import { skillsData } from '~/lib/skills';
 
 const Home: NextPage = () => {
 
@@ -399,101 +400,21 @@ const Home: NextPage = () => {
           </div>
 
           <div className="grid md:grid-cols-4 gap-6">
-            <div className="space-y-4">
-              <h3 className="text-cyan-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">{'//'}</span> AI/ML
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="space-y-1">
-                  <span>LLMs & Prompt Engineering</span>
-                  <Progress value={80} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>MCP Protocol</span>
-                  <Progress value={60} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Knowledge Graphs</span>
-                  <Progress value={70} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Agent Orchestration</span>
-                  <Progress value={75} className="h-2" />
+            {skillsData.map((category) => (
+              <div key={category.title} className="space-y-4">
+                <h3 className={`${category.color} font-bold flex items-center gap-2`}>
+                  <span className="text-gray-500">{'//'}</span> {category.title}
+                </h3>
+                <div className="space-y-3 text-sm">
+                  {category.skills.map((skill) => (
+                    <div key={skill.name} className="space-y-1">
+                      <span>{skill.name}</span>
+                      <Progress value={skill.experience} className="h-2" />
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-yellow-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">{'//'}</span> Backend
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="space-y-1">
-                  <span>Python & FastAPI</span>
-                  <Progress value={90} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Node.js & Express</span>
-                  <Progress value={85} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>PostgreSQL & MongoDB</span>
-                  <Progress value={80} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Prisma ORM</span>
-                  <Progress value={75} className="h-2" />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-purple-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">{'//'}</span> Frontend
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="space-y-1">
-                  <span>React & Next.js</span>
-                  <Progress value={90} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>TypeScript</span>
-                  <Progress value={85} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Tailwind CSS</span>
-                  <Progress value={90} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Performance Optimization</span>
-                  <Progress value={75} className="h-2" />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-blue-400 font-bold flex items-center gap-2">
-                <span className="text-gray-500">{'//'}</span> DevOps
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="space-y-1">
-                  <span>AWS & Cloud Services</span>
-                  <Progress value={80} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Docker & Containers</span>
-                  <Progress value={70} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>CI/CD Pipelines</span>
-                  <Progress value={75} className="h-2" />
-                </div>
-                <div className="space-y-1">
-                  <span>Vercel Deployment</span>
-                  <Progress value={85} className="h-2" />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

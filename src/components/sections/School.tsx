@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import universityIcon from '~/../public/images/icons8-university-50.png';
-import { textColor } from '~/utils/textColor';
-import Row from '../Row';
-import Container from '../Container';
+import Row from '~/components/Row';
+import Container from '~/components/Container';
 
 const iconSize = 75;
 
@@ -20,29 +19,29 @@ const School = () => {
         </span>
         <span className="flex-center">
           <div className="">
-            <p>{textColor('// Education', 'text-comment text-3xl')}</p>
+            <p><span className="text-comment text-3xl">{'//'} Education</span></p>
             <p>
-              {textColor('const', 'text-keyword')}
+              <span className="text-keyword">const</span>
               {' BS = '}
-              {textColor('Business Administration', 'text-common')}
+              <span className="text-common">Business Administration</span>
               {';'}
             </p>
             <p>
-              {textColor('const', 'text-keyword')}
+              <span className="text-keyword">const</span>
               {' specialization = '}
-              {textColor('Marketing', 'text-common')}
+              <span className="text-common">Marketing</span>
               {';'}
             </p>
             <p>
-              {textColor('const', 'text-keyword')}
+              <span className="text-keyword">const</span>
               {' college = '}
-              {textColor("'Central Washington University'", 'text-common')}
+              <span className="text-common">&apos;Central Washington University&apos;</span>
               {';'}
             </p>
             <p>
-              {textColor('const', 'text-keyword')}
+              <span className="text-keyword">const</span>
               {' graduationYear = '}
-              {textColor('2016', 'text-common')}
+              <span className="text-common">2016</span>
               {';'}
             </p>
           </div>
