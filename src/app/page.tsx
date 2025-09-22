@@ -53,14 +53,14 @@ const Home: NextPage = () => {
                   <div>
                     <span className="text-blue-300">role</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;Full-Stack Developer & AI Engineer&quot;</span>
+                    <span className="text-yellow-300">&quot;Senior Data Analyst & Full-Stack Engineer&quot;</span>
                     <span className="text-white">,</span>
                   </div>
                   
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building production AI systems that solve real problems" />&quot;</span>
+                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building AI systems that enhance productivity for developers and everyday users" />&quot;</span>
                   </div>
                 </div>
                 
@@ -78,7 +78,7 @@ const Home: NextPage = () => {
                   </a>
                 </Button>
                 <Button variant="terminalGhost" asChild>
-                  <a href="https://linkedin.com" className="flex items-center gap-2">
+                  <a href="https://linkedin.com/in/andrewskevin92" className="flex items-center gap-2">
                     <span className="text-cyan-400">$</span> linkedin
                   </a>
                 </Button>
@@ -99,23 +99,23 @@ const Home: NextPage = () => {
                   </h2>
                   <Badge variant="statusProduction">PRODUCTION</Badge>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Knowledge Graph MCP System</h3>
-                <p className="text-gray-400">AI memory system for persistent context</p>
+                <h3 className="text-2xl font-bold text-white">Knowledge Graph MCP Server</h3>
+                <p className="text-gray-400">Production AI system processing documents into semantic knowledge graphs</p>
               </CardHeader>
               
               <CardContent>
                 <div className="grid grid-cols-3 gap-4 mb-6">
                   <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                    <div className="text-2xl font-bold text-yellow-400">85s</div>
-                    <div className="text-xs text-gray-500">Processing Time</div>
+                    <div className="text-2xl font-bold text-yellow-400">530</div>
+                    <div className="text-xs text-gray-500">Embeddings/Doc</div>
                   </div>
                   <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
                     <div className="text-2xl font-bold text-green-400">$0.00002</div>
-                    <div className="text-xs text-gray-500">Cost per Operation</div>
+                    <div className="text-xs text-gray-500">Cost per Document</div>
                   </div>
                   <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                    <div className="text-2xl font-bold text-blue-400">100%</div>
-                    <div className="text-xs text-gray-500">Uptime</div>
+                    <div className="text-2xl font-bold text-blue-400">85s</div>
+                    <div className="text-xs text-gray-500">Processing Time</div>
                   </div>
                 </div>
                 
@@ -126,7 +126,7 @@ const Home: NextPage = () => {
                     </a>
                   </Button>
                   <Button variant="terminalOutline" asChild>
-                    <a href="https://github.com">
+                    <a href="https://github.com/Andrewske/kg-memory-mcp">
                       GitHub
                     </a>
                   </Button>
@@ -166,37 +166,37 @@ const Home: NextPage = () => {
                     <div>
                       <h3 className="text-xl font-bold text-white mb-1">
                         <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">AdminDashboard</span>:
+                        <span className="text-yellow-300">AnalyticsPlatform</span>:
                       </h3>
-                      <p className="text-gray-400">Internal tools platform serving entire operations team</p>
+                      <p className="text-gray-400">Full-stack analytics platform processing 160M+ order records</p>
                     </div>
                     <Badge variant="statusLive">LIVE</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">50+</div>
-                      <div className="text-xs text-gray-500">Active Users</div>
+                      <div className="text-lg font-bold text-cyan-400">160M+</div>
+                      <div className="text-xs text-gray-500">Records</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">10k+</div>
-                      <div className="text-xs text-gray-500">Requests/Day</div>
+                      <div className="text-lg font-bold text-yellow-400">50%</div>
+                      <div className="text-xs text-gray-500">Query Speedup</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">99.9%</div>
-                      <div className="text-xs text-gray-500">Uptime</div>
+                      <div className="text-lg font-bold text-green-400">13</div>
+                      <div className="text-xs text-gray-500">Internal Views</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">-4hrs</div>
-                      <div className="text-xs text-gray-500">Time Saved/Week</div>
+                      <div className="text-lg font-bold text-purple-400">5min</div>
+                      <div className="text-xs text-gray-500">Query Time</div>
                     </div>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge variant="techReact">React</Badge>
-                    <Badge variant="techPython">Python</Badge>
-                    <Badge variant="techDatabase">PostgreSQL</Badge>
                     <Badge variant="techTypeScript">TypeScript</Badge>
+                    <Badge variant="techPython">Polars</Badge>
+                    <Badge variant="techDatabase">MySQL 5.7</Badge>
                     <Badge variant="techCloud">AWS</Badge>
                   </div>
                   
@@ -232,38 +232,38 @@ const Home: NextPage = () => {
                     <div>
                       <h3 className="text-xl font-bold text-white mb-1">
                         <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">MasakaliPaymentSystem</span>:
+                        <span className="text-yellow-300">MasakaliBookingPlatform</span>:
                       </h3>
-                      <p className="text-gray-400">Full-stack payment processing with Stripe for Bali retreat center</p>
+                      <p className="text-gray-400">Production booking platform with real-time inventory sync</p>
                     </div>
                     <Badge variant="statusProduction">PRODUCTION</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">$50k+</div>
-                      <div className="text-xs text-gray-500">Processed</div>
+                      <div className="text-lg font-bold text-cyan-400">$30k+</div>
+                      <div className="text-xs text-gray-500">Revenue</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">100%</div>
-                      <div className="text-xs text-gray-500">Success Rate</div>
+                      <div className="text-lg font-bold text-yellow-400">0</div>
+                      <div className="text-xs text-gray-500">Double Bookings</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">Live</div>
-                      <div className="text-xs text-gray-500">Availability</div>
+                      <div className="text-lg font-bold text-green-400">Instant</div>
+                      <div className="text-xs text-gray-500">Sync Updates</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">3</div>
-                      <div className="text-xs text-gray-500">API Integrations</div>
+                      <div className="text-lg font-bold text-purple-400">5</div>
+                      <div className="text-xs text-gray-500">Listings</div>
                     </div>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge variant="techReact">Next.js</Badge>
-                    <Badge variant="techPython">Stripe</Badge>
+                    <Badge variant="techPython">Xendit</Badge>
                     <Badge variant="techDatabase">PostgreSQL</Badge>
-                    <Badge variant="techTypeScript">Prisma</Badge>
-                    <Badge variant="techCloud">Xendit API</Badge>
+                    <Badge variant="techTypeScript">Redux</Badge>
+                    <Badge variant="techCloud">Smoobu API</Badge>
                   </div>
                   
                   <div className="flex gap-3">
@@ -300,27 +300,27 @@ const Home: NextPage = () => {
                         <span className="text-purple-400">class</span>{' '}
                         <span className="text-yellow-300">ZohoTwilioIntegration</span>:
                       </h3>
-                      <p className="text-gray-400">Automated SMS workflow system for dance studio CRM</p>
+                      <p className="text-gray-400">Production SMS system enabling 12 studios to engage 9,000+ leads</p>
                     </div>
                     <Badge variant="statusProduction">PRODUCTION</Badge>
                   </div>
                   
                   <div className="grid grid-cols-4 gap-4 mb-4">
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">5k+</div>
-                      <div className="text-xs text-gray-500">Messages/Month</div>
+                      <div className="text-lg font-bold text-cyan-400">43k+</div>
+                      <div className="text-xs text-gray-500">Total Messages</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">95%</div>
-                      <div className="text-xs text-gray-500">Automation Rate</div>
+                      <div className="text-lg font-bold text-yellow-400">9k+</div>
+                      <div className="text-xs text-gray-500">Leads Engaged</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">2</div>
-                      <div className="text-xs text-gray-500">API Systems</div>
+                      <div className="text-lg font-bold text-green-400">12</div>
+                      <div className="text-xs text-gray-500">Active Studios</div>
                     </div>
                     <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">24/7</div>
-                      <div className="text-xs text-gray-500">Availability</div>
+                      <div className="text-lg font-bold text-purple-400">4wks</div>
+                      <div className="text-xs text-gray-500">Ship Time</div>
                     </div>
                   </div>
                   
@@ -348,8 +348,8 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            {/* Project 4: Multi-Agent Note System (Coming Soon) */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden opacity-75">
+            {/* Project 4: AI Product Title Optimizer */}
+            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
               <div className="flex">
                 <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
                   <span>1</span>
@@ -364,22 +364,99 @@ const Home: NextPage = () => {
                     <div>
                       <h3 className="text-xl font-bold text-white mb-1">
                         <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">MultiAgentNoteSystem</span>:
+                        <span className="text-yellow-300">AIProductOptimizer</span>:
                       </h3>
-                      <p className="text-gray-400">Next-generation AI workflow orchestration for knowledge management</p>
+                      <p className="text-gray-400">Batch processing system using GPT-4o-mini for e-commerce optimization</p>
                     </div>
-                    <Badge variant="statusDevelopment">IN DEVELOPMENT</Badge>
+                    <Badge variant="statusProduction">PRODUCTION</Badge>
                   </div>
-                  
+
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-cyan-400">4.5k</div>
+                      <div className="text-xs text-gray-500">Listings/30min</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-yellow-400">$0.00003</div>
+                      <div className="text-xs text-gray-500">Cost/Item</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-green-400">Linear</div>
+                      <div className="text-xs text-gray-500">Scaling</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-purple-400">30min</div>
+                      <div className="text-xs text-gray-500">Batch Time</div>
+                    </div>
+                  </div>
+
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techReact">LLMs</Badge>
-                    <Badge variant="techPython">Agent Orchestration</Badge>
-                    <Badge variant="techDatabase">Knowledge Graphs</Badge>
+                    <Badge variant="techPython">Python</Badge>
+                    <Badge variant="techCloud">OpenAI API</Badge>
+                    <Badge variant="techTypeScript">Batch Processing</Badge>
+                    <Badge variant="techDatabase">PostgreSQL</Badge>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Button variant="terminalGhost" size="sm" disabled>
+                      Internal Tool
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Project 5: Multi-Agent Personal Management System */}
+            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
+              <div className="flex">
+                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                  <span>6</span>
+                </div>
+                <div className="flex-1 p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">
+                        <span className="text-purple-400">class</span>{' '}
+                        <span className="text-yellow-300">PersonalManagementSystem</span>:
+                      </h3>
+                      <p className="text-gray-400">Custom AI agent ecosystem for multi-project workflows</p>
+                    </div>
+                    <Badge variant="statusLive">ACTIVE</Badge>
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-cyan-400">Career</div>
+                      <div className="text-xs text-gray-500">Coaching Agent</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-yellow-400">Tech</div>
+                      <div className="text-xs text-gray-500">Docs Agent</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-green-400">Project</div>
+                      <div className="text-xs text-gray-500">Management</div>
+                    </div>
+                    <div className="text-center p-2 bg-gray-900/50 rounded">
+                      <div className="text-lg font-bold text-purple-400">MCP</div>
+                      <div className="text-xs text-gray-500">Architecture</div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="techReact">Claude Code</Badge>
+                    <Badge variant="techPython">Prompt Engineering</Badge>
+                    <Badge variant="techDatabase">Knowledge Management</Badge>
                     <Badge variant="techTypeScript">MCP Protocol</Badge>
                   </div>
-                  
+
                   <div className="text-sm text-gray-500">
-                    Architecture planning in progress...
+                    Domain-specific agents with advanced specialization techniques
                   </div>
                 </div>
               </div>
@@ -442,24 +519,25 @@ const Home: NextPage = () => {
           <div className="space-y-6 text-gray-300 leading-relaxed">
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                Self-taught developer shipping production systems for 4+ years. I specialize in building 
-                AI-powered tools and full-stack applications that solve real business problems.
+                Full-stack engineer with 5+ years building production systems. Senior Data Analyst at
+                Bonanza.com, architecting scalable solutions processing 160M+ records and optimizing
+                query performance from 10min → 5min using advanced SQL and Polars techniques.
               </p>
             </div>
-            
+
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                My approach: Build tools when existing ones don&apos;t work. Every project starts with a 
-                real problem that needs solving - whether it&apos;s automating workflows, processing payments, 
-                or creating AI systems for better developer experiences.
+                Specialized in AI integration and cost optimization - built batch processing systems at
+                $0.00003/operation and knowledge graph processors at $0.00002/document. Passionate about
+                creating AI systems that enhance productivity for both developers and everyday users.
               </p>
             </div>
-            
+
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                Currently focused on human-centered AI design and building the next generation of 
-                developer tools. Particularly interested in how AI can augment (not replace) human 
-                creativity and productivity.
+                Track record of rapid prototyping and production deployment: shipped SMS platform for
+                12 studios in 4 weeks, processing 43K+ messages. Currently focused on building the next
+                generation of AI-assisted developer tools.
               </p>
             </div>
           </div>
@@ -481,7 +559,7 @@ const Home: NextPage = () => {
           
           <div className="flex justify-center gap-6">
             <Button variant="terminal" size="lg" asChild>
-              <a href="mailto:kevin@example.com">
+              <a href="mailto:andrewskevin92@gmail.com">
                 Send Email
               </a>
             </Button>
