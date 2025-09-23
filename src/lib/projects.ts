@@ -22,6 +22,12 @@ export interface ProjectMetric {
   color?: 'cyan' | 'yellow' | 'green' | 'purple';
 }
 
+export interface ProjectCodeExample {
+  title: string;
+  code: string;
+  language: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -39,6 +45,10 @@ export interface Project {
   skills: ProjectSkill[];
   safetyAndReliability: string[];
   aiEvaluation?: string;
+  challenges?: string[];
+  solutions?: string[];
+  lessonsLearned?: string[];
+  codeExamples?: ProjectCodeExample[];
   github?: string;
   liveUrl?: string;
   detailPageUrl?: string;
@@ -539,6 +549,10 @@ export const getProjectsByCategory = (category: SkillCategory): Project[] => {
   return projects.filter(project =>
     project.skills.some(skill => skill.category === category)
   );
+};
+
+export const getProjectById = (id: string): Project | undefined => {
+  return projects.find(project => project.id === id);
 };
 
 export const getCategoryVariant = (category: SkillCategory) => {

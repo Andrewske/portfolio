@@ -134,13 +134,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            {project.detailPageUrl && (
-              <Button variant="terminalGhost" size="sm" asChild>
-                <Link href={project.detailPageUrl}>
-                  View Project →
-                </Link>
-              </Button>
-            )}
+            <Button variant="terminalGhost" size="sm" asChild>
+              <Link href={`/project/${project.id}`}>
+                View Project →
+              </Link>
+            </Button>
             {project.github && (
               <Button variant="terminalGhost" size="sm" asChild>
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
@@ -153,11 +151,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                   Live Demo
                 </a>
-              </Button>
-            )}
-            {!project.detailPageUrl && !project.github && !project.liveUrl && (
-              <Button variant="terminalGhost" size="sm" disabled>
-                Internal Tool
               </Button>
             )}
           </div>
