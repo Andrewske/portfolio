@@ -47,8 +47,13 @@
 **Cost Analysis**: $0.00003 to $0.00175 per item, found GPT-5 models too expensive despite 95% accuracy
 **Experimental Approaches**: iterative, async progressive, tool-calling, batch-processing, batch-api, early-async
 **Current Status**: "Actually never found a solution that I really liked. The cost/time was just too much"
-**New Approach**: Working on template-based solution with brand mapping, term extraction, accuracy checking
-**Architecture**: Breaking products into brands, creating term maps, template builder approach
+**Template-Based Architecture Plan**: Four-stage hybrid AI+template approach not yet implemented:
+  - AI feature extraction for structured data parsing (~$0.00005/product)
+  - Template engine ensuring 77-character compliance with deterministic construction
+  - Variation detector for product family grouping (30-50% instant processing through reuse)
+  - Learning system extracting patterns from successful examples
+**Design Philosophy**: "I plan to use AI to parse the data, and I should be able to batch process more titles that all share similarities like brand/category. This will handle the parsing with a low cost. Then I can create a character map with terms and their character count"
+**Target**: 99% cost reduction while maintaining 90%+ accuracy through intelligent batch processing
 
 ### KnowledgeGraphMCP (June 2025 - ongoing)
 **Optimization Strategy**: Cost/speed focus using gpt-4o-mini, parallel calls, reduced input tokens
