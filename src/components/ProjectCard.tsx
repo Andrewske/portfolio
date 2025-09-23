@@ -92,6 +92,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
 
+          {/* AI Evaluation & Performance */}
+          {project.aiEvaluation && (
+            <div className="mb-4">
+              <h4 className="text-purple-400 text-sm font-bold mb-3 flex items-center gap-2">
+                <span className="text-gray-500">{'//'}</span> AI Evaluation & Performance
+              </h4>
+              <div className="p-3 bg-purple-900/10 border-l-2 border-purple-400/50 rounded">
+                <p className="text-xs text-gray-300 leading-relaxed">{project.aiEvaluation}</p>
+              </div>
+            </div>
+          )}
+
           {/* Skills by Category */}
           <div className="mb-4">
             <h4 className="text-cyan-400 text-sm font-bold mb-3 flex items-center gap-2">

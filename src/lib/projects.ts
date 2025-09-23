@@ -37,6 +37,7 @@ export interface Project {
   metrics: ProjectMetric[];
   skills: ProjectSkill[];
   safetyAndReliability: string[];
+  aiEvaluation?: string;
   github?: string;
   liveUrl?: string;
   detailPageUrl?: string;
@@ -329,6 +330,7 @@ export const projects: Project[] = [
       'Manual error management during model optimization',
       'Quality assurance through manual review process'
     ],
+    aiEvaluation: 'Evaluated 6 LLM models across 6 optimization approaches. GPT-5-nano achieved 95% accuracy but at 10x cost penalty ($0.00175/item). Pivoted to hybrid AI+template architecture maintaining accuracy while achieving 99% cost reduction. Systematic testing revealed cost-quality trade-offs: GPT-5 models delivered superior accuracy (up to 100%) but exponentially higher costs ($0.00003-$0.00175/item) and processing times (0.04s-28.23s/item). GPT-4o-mini provided optimal balance (90% accuracy, $0.00014/item, 2.31s/item). Experimental approaches tested: iterative, async progressive, tool-calling, batch-processing, batch-api, early-async. Current development focuses on brand mapping and template-based generation for economic viability at scale.',
     skills: [
       {
         name: 'Python',
@@ -392,6 +394,7 @@ export const projects: Project[] = [
       'Manual review of extraction quality and results',
       'Pipeline failure logging without automatic retries'
     ],
+    aiEvaluation: 'Optimized for cost/speed using gpt-4o-mini with parallel calls and reduced input tokens. 94.4-second processing of 8668-character documents generating 20 triples and 80 vectors at $0.0012 cost. Four-stage pipeline: extraction → concepts → embeddings. Current focus on debugging concept generation stage failure while maintaining sub-$0.002 cost target. Token efficiency: 3643 input, 1182 output tokens per operation. Architecture prioritizes practical deployment cost over experimental model exploration.',
     skills: [
       {
         name: 'TypeScript',
@@ -462,6 +465,7 @@ export const projects: Project[] = [
       'Claude Code built-in conversation history management',
       'Personal project scope with controlled data input'
     ],
+    aiEvaluation: 'Novel Claude Code-powered agent ecosystem using Opus/Sonnet models with persistent file-based context. Specialized agents: Career Coach (Anthropic application prep), Bonanza Project Manager (prioritization), Budget Analyst (CSV transaction analysis), Diet/Meal Planner (ADHD-aware nutrition). Agents maintain domain expertise through continuous context evolution rather than traditional model fine-tuning. Architecture leverages Claude Code\'s built-in context management for cost-effective specialized assistance across personal productivity domains.',
     skills: [
       {
         name: 'Claude Code',
