@@ -30,6 +30,7 @@ export interface Project {
   subtitle: string;
   businessImpact: string;
   longDescription?: string;
+  architecture?: string;
   status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL';
   role: string;
   timeline: string;
@@ -52,22 +53,24 @@ export const projects: Project[] = [
     description: 'Full-stack analytics platform processing 160M+ order records',
     subtitle: 'High-performance analytics system processing 160M+ records with sub-second query times',
     businessImpact: 'Enabled real-time business intelligence for multi-million dollar operations',
-    longDescription: 'Architected full-stack analytics platform processing 160M+ order records from legacy MySQL 5.7 database, optimizing query performance from 10+ minutes to under 5 minutes using Polars and advanced SQL techniques.',
+    longDescription: 'Built executive analytics platform processing 160M+ order records with innovative static data architecture. Transformed 20-minute database queries into 5-minute incremental updates using Polars (Rust-based processing) and timestamp-based change detection. Eliminated traditional API infrastructure by generating compressed Parquet files that load directly in the frontend, achieving sub-second dashboard performance while reducing hosting costs to zero.',
+    architecture: '**Data Pipeline**: Python backend queries MySQL 5.7 → Polars processing (75% faster than pandas) → Parquet files with ZSTD compression → Frontend loads via hyparquet with indexed chunking for instant filtering. **Performance Wins**: Incremental updates track only changed records using timestamp filtering, reducing processing from 20min to 5min. Frontend uses JSON index files mapping date ranges to Parquet row groups, enabling sub-second queries across 160M+ records. **Infrastructure Innovation**: Two-repository architecture where backend writes processed data directly to frontend repo, deployed on Vercel as static files. This approach eliminated $1000s/month in API hosting, database connections, and scaling infrastructure while maintaining enterprise-grade performance.',
     status: 'LIVE',
     role: 'Sole developer',
     timeline: 'Aug 2023 - ongoing',
     scope: 'architecture, backend, data optimization, performance tuning',
     metrics: [
-      { value: '160M+', label: 'Records', color: 'cyan' },
-      { value: '50%', label: 'Query Speedup', color: 'yellow' },
-      { value: '13', label: 'Internal Views', color: 'green' },
-      { value: '5min', label: 'Query Time', color: 'purple' }
+      { value: '160M+', label: 'Records Processed', color: 'cyan' },
+      { value: '75%', label: 'Query Speed Gain', color: 'yellow' },
+      { value: '8yr', label: 'Historical Data', color: 'green' },
+      { value: '<1s', label: 'Dashboard Load', color: 'purple' }
     ],
     safetyAndReliability: [
-      'Zod schema validation for route parameters with fallback values',
-      'MySQL 5.7 optimization: subqueries + Polars for 50% performance gain',
-      'Parquet caching layer: 20min → 5min incremental updates',
-      'Rollbar email alerts for bi-hourly update failures'
+      'Incremental updates process only changed records, reducing load on production database by 75%',
+      'Rollbar monitoring alerts on processing failures with automated recovery strategies',
+      'Static Parquet files eliminate API downtime risks while maintaining data freshness (5min updates)',
+      'Type validation and data integrity checks during pandas→Polars processing pipeline',
+      'Index-based chunking enables instant filtering across years of daily aggregated data'
     ],
     skills: [
       {

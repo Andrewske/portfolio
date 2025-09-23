@@ -7,8 +7,9 @@
 
 ## Communication Preferences
 **Style**: Direct and concise, prefers consultation over assumptions, wants control over decisions
-**Feedback**: Wants progress visibility, appreciates multiple options with trade-offs explained
-**Planning**: Values structured approach with todo tracking, systematic implementation phases
+**Feedback**: Wants progress visibility, appreciates multiple options with trade-offs explained. Values clear, readable documentation that flows naturally for hiring managers
+**Planning**: Values structured approach with todo tracking, systematic implementation phases. Prefers one task at a time with no priority level ("Let's focus on one at a time, no priority level")
+**Documentation Style**: Dislikes repetitive content ("You are kind of repetative about the read only sql"). Wants "easily readable to show most important details to a hiring manager"
 
 ## Work Style & Implementation Approach
 **Planning**: Ask clarifying questions first, systematic approaches, structured implementation phases
@@ -52,6 +53,18 @@
 **Philosophy**: "Context-aware AI agents providing personalized guidance" across life domains
 **Innovation**: File-based agent specialization vs traditional model fine-tuning
 
+### AnalyticsPlatform (Aug 2023 - ongoing) - Architecture Deep Dive
+**Constraint-Driven Engineering**: Read-only MySQL 5.7 forced creative solutions vs traditional approaches
+**Technical Architecture**: Two-repo system: backend (Python) queries DB → processes → saves parquet to frontend repo
+**Query Optimization**: MySQL timeout issues → subqueries + multi-table processing in Python rather than complex SQL. Had to "really understand the indexes available to me and the relationships between each table"
+**Performance Migration**: pandas → Polars for Rust-based performance gains on 160M+ records. "changing things to polars on its own significantly increased speed because polars is written in rust"
+**Incremental Updates**: Timestamp-based filtering with local state tracking enables 20min → 5min bi-hourly updates. "I keep a file with the time I updated most recently and then I filter queried data by that"
+**Static Data Architecture**: Eliminates API hosting costs, connection pooling, scaling infrastructure. "By not having to host a backend api, and just loading the data in the front end from a local repo it was quick and efficient"
+**Frontend Strategy**: Vite + Tanstack Router + hyparquet library with index-based chunking. Frontend has "approximately 8 * 365" records (8 years of daily aggregated data, not 160M raw records)
+**Data Pipeline**: MySQL → Polars processing → ZSTD parquet + JSON index → sub-second frontend filtering
+**Business Impact**: Executive-level BI tracking multi-million dollar operations. 8 years of historical data (2018+)
+**Key Decisions**: Infrastructure cost savings prioritized over real-time updates, suitable for bi-hourly refresh needs. "The data update only happens once every 2 hours, because it takes a lot of server resources and we don't need more frequent updates"
+
 ## Architecture & Safety Philosophy
 **Scale-appropriate safety**: Production systems use robust validation (Smoobu booking prevention, multi-tenant auth), experimental projects use manual review
 
@@ -64,3 +77,5 @@
 **Role Pattern**: "Sole developer" across all projects, 5+ years timeline span
 **Enhancement Goal**: AI evaluation documentation for hiring managers, systematic portfolio enhancement plan
 **Documentation Priority**: Executive summary style showing decision-making and technical judgment
+**Metric Preferences**: Wants meaningful, specific metrics - rejected vague "$MM+ business tracked" as "really means nothing". Prefers concrete technical achievements (8yr historical data, 75% speed gains)
+**Project Information Strategy**: "we will record the information in @src/lib/projects.ts and we can determine what information is the best to show on the homepage vs standalone page"

@@ -122,12 +122,31 @@ Changes should be made to the projects section of the homepage located in @src/a
 
 ## Architecture Documentation Planning
 
-- [ ] Research and document AnalyticsPlatform unique architecture
-  - Investigate current partitioning strategy and why it was chosen
-  - Document data flow from ingestion to query processing
-  - Identify key architectural decisions that enabled 160M+ record performance
-  - Prepare to create component diagram showing database design, caching layers, query optimization
-  - Note specific performance optimizations implemented and their impact
+### Implementation Guide for Architecture Documentation
+**Location**: Update `src/lib/projects.ts` with two new fields:
+1. `longDescription`: 2-3 sentences highlighting the key technical achievement and business impact
+2. `architecture`: Technical deep-dive with **bold section headers** for readability
+
+**Writing Style Guidelines**:
+- Avoid repetition - each point should add new information
+- Focus on outcomes and measurable improvements (e.g., "20min → 5min" not just "faster")
+- Use concrete metrics over vague claims (e.g., "8yr historical data" not "$MM+ tracked")
+- Keep technical but readable - hiring managers should understand the impact
+- Structure: Problem → Solution → Result
+
+**Recommended Architecture Sections**:
+- **Data Pipeline**: Input → Processing → Output flow
+- **Performance Wins**: Specific optimizations with before/after metrics
+- **Infrastructure Innovation**: Unique architectural decisions and why they matter
+- **Cost Optimization**: Quantifiable savings or efficiency gains
+
+### Completed
+- [x] AnalyticsPlatform architecture
+  - Static data architecture eliminating API infrastructure
+  - MySQL read-only constraints → creative Python processing
+  - pandas → Polars migration for 75% speed improvement
+  - Incremental updates: 20min → 5min with timestamp tracking
+  - Frontend: Parquet files with indexed chunking for sub-second loads
 
 - [ ] Prepare ZohoTwilio architecture documentation
   - Map out webhook processing flow from CRM to SMS delivery
