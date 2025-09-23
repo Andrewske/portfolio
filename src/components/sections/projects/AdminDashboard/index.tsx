@@ -12,6 +12,7 @@ import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import { Badge } from '~/components/ui/badge';
 import { Separator } from '~/components/ui/separator';
+import { CodeBlock } from '~/components/ui/CodeBlock';
 import { PropsWithChildren } from 'react';
 import { projects, ProficiencyLevel } from '~/lib/projects';
 
@@ -361,6 +362,27 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Code Examples Section */}
+        {projectData?.codeExamples && projectData.codeExamples.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+              <span className="text-gray-500">{'//'}</span> Key Implementation Examples
+            </h2>
+            <div className="space-y-8">
+              {projectData.codeExamples.map((example, index) => (
+                <CodeBlock
+                  key={index}
+                  code={example.code}
+                  language={example.language}
+                  title={example.title}
+                  impactContext={example.impactContext}
+                  technicalExplanation={example.technicalExplanation}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

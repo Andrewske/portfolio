@@ -102,7 +102,7 @@ export const projects: Project[] = [
     className: 'AnalyticsPlatform',
     description: 'Full-stack analytics platform processing 160M+ order records',
     subtitle: 'High-performance analytics system processing 160M+ records with sub-second query times',
-    businessImpact: 'Enabled real-time business intelligence for multi-million dollar operations',
+    businessImpact: 'Enabled real-time business intelligence for operations processing 2M offers, $143M GMV, 48k sellers since 2020',
     longDescription: 'Built executive analytics platform processing 160M+ order records with innovative static data architecture. Transformed 20-minute database queries into 5-minute incremental updates using Polars (Rust-based processing) and timestamp-based change detection. Eliminated traditional API infrastructure by generating compressed Parquet files that load directly in the frontend, achieving sub-second dashboard performance while reducing hosting costs to zero.',
     architecture: '**Data Pipeline**: Python backend queries MySQL 5.7 → Polars processing (75% faster than pandas) → Parquet files with ZSTD compression → Frontend loads via hyparquet with indexed chunking for instant filtering. **Performance Wins**: Incremental updates track only changed records using timestamp filtering, reducing processing from 20min to 5min. Frontend uses JSON index files mapping date ranges to Parquet row groups, enabling sub-second queries across 160M+ records. **Infrastructure Innovation**: Two-repository architecture where backend writes processed data directly to frontend repo, deployed on Vercel as static files. This approach eliminated $1000s/month in API hosting, database connections, and scaling infrastructure while maintaining enterprise-grade performance.',
     status: 'LIVE',
@@ -110,10 +110,10 @@ export const projects: Project[] = [
     timeline: 'Aug 2023 - ongoing',
     scope: 'architecture, backend, data optimization, performance tuning',
     metrics: [
-      { value: '160M+', label: 'Records Processed', color: 'cyan' },
-      { value: '75%', label: 'Query Speed Gain', color: 'yellow' },
-      { value: '8yr', label: 'Historical Data', color: 'green' },
-      { value: '<1s', label: 'Dashboard Load', color: 'purple' }
+      { value: '2M', label: 'Offers Tracked', color: 'cyan' },
+      { value: '$143M', label: 'GMV Analyzed', color: 'yellow' },
+      { value: '48k+', label: 'Sellers', color: 'green' },
+      { value: '75%', label: 'Speed Gain', color: 'purple' }
     ],
     safetyAndReliability: [
       'Incremental updates process only changed records, reducing load on production database by 75%',
@@ -184,6 +184,65 @@ export const projects: Project[] = [
         usage: 'Created intuitive charts and graphs for complex business metrics'
       }
     ],
+    challenges: [
+      'Legacy Database Performance Crisis & Infrastructure Constraints: Query timeouts, memory issues, and processing bottlenecks with 160M+ records on read-only MySQL 5.7. Unable to create indexes, temporary tables, or use modern SQL features (CTEs) released after 2015, forcing complete query rewrites and creative optimization strategies.',
+      'Frontend Bundle Size & User Experience Crisis: Initial JSON-based architecture created 25MB+ bundle sizes causing poor loading performance and user experience degradation. Required fundamental shift in data format and processing approach while maintaining sub-second dashboard responsiveness.',
+      'Executive Data Access & Business Intelligence Gap: Leadership lacked real-time access to critical business metrics across 2M offers and $143M GMV operations. Manual queries were time-intensive and outdated dashboard required constant interpretation, creating bottlenecks in executive decision-making.'
+    ],
+    solutions: [
+      'Systematic Performance Engineering & Query Optimization: Rewrote every query from ground up using advanced optimization techniques (subqueries, EXISTS clauses, efficient aggregation). Implemented pandas→Polars migration achieving 75% performance gains, developed incremental update system reducing processing from 20min to 5min through timestamp-based change detection.',
+      'Innovative Static Architecture & Bundle Optimization: Designed revolutionary two-repository system bypassing traditional API infrastructure. Implemented Parquet compression with ZSTD, hyparquet client-side processing, and JSON indexing for instant filtering. Achieved 94% bundle size reduction (25MB→1.6MB) while enabling sub-second queries across 160M+ records.',
+      'Executive Dashboard Transformation & Real-Time BI: Built comprehensive analytics platform with 13 internal views providing instant access to business intelligence. Replaced manual query workflows with automated data pipelines, enabling executives to access up-to-date metrics for 48k sellers and millions of items/buyers across 8 years of historical data.'
+    ],
+    lessonsLearned: [
+      'Constraint-Driven Innovation Leads to Superior Solutions: Read-only database limitations forced creative static architecture that not only solved immediate problems but eliminated hosting costs and improved performance beyond traditional approaches. Sometimes constraints drive more innovative solutions than unlimited resources.',
+      'Systematic Optimization Methodology Compounds Results: Breaking down performance problems into measurable components (query optimization, data format, processing pipeline) enabled targeted improvements that compound. 75% query gains + 94% bundle reduction + incremental updates created transformational performance improvement.',
+      'Scale-Appropriate Engineering Over Premature Optimization: Choosing maintainable, cost-effective solutions (static files vs complex API infrastructure) appropriate for the scale and requirements often outperforms sophisticated but unnecessary architectures. Engineering judgment matters more than following standard patterns.'
+    ],
+    codeExamples: [
+      {
+        title: 'Intelligent Incremental Update System with Smart Caching',
+        impactContext: 'This caching system reduced processing time from 20 minutes to 5 minutes by implementing timestamp-based incremental updates with 48-hour lookback windows, eliminating unnecessary full table scans while ensuring data completeness.',
+        code: `# Intelligent Incremental Update System with Smart Caching
+def main(fn, filename, data_types, **kwargs):
+    """
+    Open a parquet file. If the file is older than one hour or force=True, update it first.
+    """
+    force = kwargs.get("force", False)
+    index = index_map.get(filename)
+    update_if_less_than = kwargs.get("update_if_less_than", one_hour_ago)
+
+    try:
+        # Update the file with the given index.
+        if force:
+            update(fn, filename, index, data_types, **kwargs)
+
+        df = open_parquet(path, filename, data_types, **kwargs)
+
+        most_recent_update = min(
+            df["updated_at"].max(), get_most_recent_update(filename)
+        )
+
+        # Update the file if the most recent update is less than one hour ago.
+        if most_recent_update <= update_if_less_than:
+            print("updating", filename, most_recent_update, update_if_less_than)
+            # If it hasn't been updated in the last 48 hours, update it with the earliest time.
+            earliest_time = min(most_recent_update, time_48_hours_ago)
+            update(fn, filename, index, data_types, updated_at=earliest_time, **kwargs)
+            update_most_recent_update(filename)
+    except Exception as e:
+        print(f"{type(e).__name__}: {str(e)}")
+        raise
+
+    return open_parquet(path, filename, data_types, **kwargs)`,
+        language: 'python',
+        technicalExplanation: `**Key Engineering Decisions:**
+• **Smart incremental logic**: Only processes changed records using timestamp filtering
+• **48-hour lookback window**: Catches any missed updates during system downtime
+• **Parquet format efficiency**: Columnar storage enables faster analytical queries
+• **Index mapping optimization**: Pre-computed indices for sub-second filtering`
+      }
+    ],
     detailPageUrl: '/admin-dashboard',
     github: 'https://github.com'
   },
@@ -195,7 +254,7 @@ export const projects: Project[] = [
     subtitle: 'Multi-tenant booking platform eliminating double-bookings and recovering $30k+/month',
     businessImpact: 'Zero double-bookings across 43k+ messages and thousands of bookings',
     longDescription: 'Built production booking platform from scratch with React/Redux → Next.js migration. Integrated real-time inventory sync across Booking.com, Airbnb via Smoobu API. Achieved zero double-bookings through webhook-driven availability updates and intelligent cross-villa blocking logic for shared building configurations.',
-    architecture: '**Real-Time Booking Flow**: External bookings (Booking.com, Airbnb) → Smoobu webhook → Local database sync with automatic cross-villa blocking. When Lakshmi villa (downstairs) books, system automatically blocks Akasha villa (whole building) via Smoobu API, preventing conflicts for shared physical space. **Database Design**: PostgreSQL with foreign key relationships (villa → reservations), unique constraints on (villa_id, date) for availability tracking, and comprehensive audit logging via WebhookLog table for all external booking events. **API Integration Strategy**: Webhook-first architecture replaced polling (3+ seconds → instant updates). Smoobu API validation prevents booking conflicts at source, eliminating need for complex local locking mechanisms. **Scale-Appropriate Engineering**: Simple, reliable architecture optimized for 5-villa operation with manual oversight - demonstrates engineering judgment in choosing maintainable solutions over premature optimization.',
+    architecture: '**Real-Time Booking Flow**: External bookings (Booking.com, Airbnb) → Smoobu webhook → Local database sync with automatic cross-villa blocking. When Lakshmi villa (downstairs) books, system automatically blocks Akasha villa (whole building) via Smoobu API, preventing conflicts for shared physical space. **Database Design**: PostgreSQL with Prisma ORM featuring unique constraints @@unique([villa_id, date]) for availability enforcement, foreign key relationships (villa → reservations), comprehensive audit logging via WebhookLog table storing JSON data for all external booking events, and indexed columns for performance optimization. **Webhook Processing Architecture**: Comprehensive webhook handler processing 5 action types (newReservation, updateReservation, cancelReservation, deleteReservation, updateRates) with intelligent filtering to detect "Masakali Blocked" self-generated reservations. Always returns HTTP 200 status to prevent Twilio retries, implements database-first persistence strategy, and integrates PostHog monitoring for production error tracking. **Payment Integration**: 14-step Xendit payment flow with 3DS authentication, token lifecycle management, modal-based verification, and multi-store state coordination (useCartForm, useXenditStore, useFetchPaymentData) ensuring atomic database operations across booking confirmation pipeline. **Scale-Appropriate Engineering**: Simple, reliable architecture optimized for 5-villa operation with manual oversight - demonstrates engineering judgment in choosing maintainable solutions over premature optimization.',
     status: 'PRODUCTION',
     role: 'Sole developer',
     timeline: 'July 2020 - ongoing',
@@ -266,6 +325,100 @@ export const projects: Project[] = [
         proficiency: 'Proficient',
         category: 'Infrastructure',
         usage: 'Image optimization across multiple CDN providers'
+      }
+    ],
+    challenges: [
+      'Cross-Villa Booking Conflicts & Shared Building Architecture: Akasha villa (entire building) and Lakshmi villa (downstairs only) represent the same physical space, creating complex booking logic where reserving one villa must automatically block the other. Required intelligent cross-villa blocking system to prevent double-bookings of shared physical space while maintaining separate booking channels and pricing strategies.',
+      'Real-Time Inventory Synchronization Across Multiple Platforms: Managing 5 different webhook action types (newReservation, updateReservation, cancelReservation, deleteReservation, updateRates) from external booking platforms (Booking.com, Airbnb) via Smoobu API. Ensuring immediate availability updates across all platforms while handling webhook reliability, duplicate processing, and maintaining data consistency.',
+      'Payment Processing with Limited API Documentation: Integrating Indonesian payment processor Xendit with minimal documentation, requiring reverse-engineering of 14-step payment flow including 3DS authentication, token management, modal-based verification, and complex state coordination between multiple Zustand stores. Built production-ready payment processing without comprehensive vendor support.'
+    ],
+    solutions: [
+      'Intelligent Cross-Villa Blocking System via Smoobu API: Implemented automatic blocking logic where Lakshmi bookings trigger blockVilla() function to create "Masakali Blocked" reservations for Akasha villa via Smoobu API, and vice versa. Database enforces unique constraints on (villa_id, date) pairs, while Smoobu API validation prevents conflicts at source, eliminating need for complex local locking mechanisms.',
+      'Robust Webhook Architecture with Smart Error Handling: Built comprehensive webhook processor handling 5 action types with intelligent filtering to detect self-generated "Masakali Blocked" reservations. Webhook always returns HTTP 200 status (even on partial failures) to prevent Twilio retries, while implementing database-first persistence strategy and PostHog monitoring for production error tracking.',
+      'Reverse-Engineered Payment Flow with State Management: Mapped complete 14-step Xendit payment process through systematic testing and documentation. Implemented multi-store state coordination (useCartForm, useXenditStore, useFetchPaymentData) with proper token lifecycle management, 3DS modal handling, and atomic database operations ensuring payment consistency across booking confirmation pipeline.'
+    ],
+    lessonsLearned: [
+      'Scale-Appropriate Engineering Over Complex Patterns: For 5-villa operations with low traffic, simple manual oversight and reliable webhook processing proved more effective than complex automated systems. Engineering judgment matters more than following enterprise patterns when scale doesn\'t justify complexity.',
+      'Webhook Reliability Through Simple Patterns: Always returning HTTP 200 (regardless of processing success), implementing database-first persistence, and smart filtering to prevent infinite loops created robust real-time integration. Sometimes simple approaches outperform sophisticated error handling for production reliability.',
+      'API Integration Without Documentation: Systematic reverse-engineering through controlled testing, comprehensive state mapping, and building internal documentation proved essential for production integrations with limited vendor support. Building thorough understanding of payment flows enabled confident production deployment.'
+    ],
+    codeExamples: [
+      {
+        title: 'Intelligent Cross-Villa Blocking System',
+        impactContext: 'This blocking system prevents double-bookings of shared physical space by automatically creating API reservations when either Akasha (full building) or Lakshmi (downstairs) is booked, ensuring zero conflicts across 43k+ messages.',
+        code: `// Automatic cross-villa blocking for shared building architecture
+export async function createReservation(smoobuReservation: SmoobuReservation) {
+  const reservationData = parseSmoobuReservation(smoobuReservation);
+  const { villa_id, ...otherReservationData } = reservationData;
+
+  // Create the primary reservation
+  const newReservation = await db.reservation.create({
+    data: {
+      ...otherReservationData,
+      villa: { connect: { id: villa_id } },
+    },
+  });
+
+  const { arrival, departure } = reservationData;
+
+  // Intelligent cross-villa blocking for shared building
+  if (villa_id === lakshmiId) {
+    console.log('Blocking Akasha');
+    await blockVilla(akashaId, arrival, departure);
+  }
+
+  if (villa_id === akashaId) {
+    console.log('Blocking Lakshmi');
+    await blockVilla(lakshmiId, arrival, departure);
+  }
+
+  return newReservation;
+}
+
+// Block villa by creating Smoobu reservation with special guest name
+export async function blockVilla(villaId: number, arrival: string, departure: string) {
+  const data = {
+    arrivalDate: arrival,
+    departureDate: departure,
+    apartmentId: villaId,
+    channelId: channelIds['blocked'],
+    firstName: 'Masakali',
+    lastName: 'Blocked',
+    email: 'N/A',
+  };
+
+  const response = await fetch('https://login.smoobu.com/api/reservations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Api-Key': apiKey,
+      'Cache-Control': 'no-cache',
+    },
+    body: JSON.stringify(data),
+  });
+
+  const { id: smoobu_id } = await response.json();
+
+  // Store blocking reservation locally for audit trail
+  await db.reservation.create({
+    data: {
+      arrival: data.arrivalDate,
+      departure: data.departureDate,
+      smoobu_id,
+      channel_id: channelIds['blocked'],
+      villa: { connect: { id: villaId } },
+      created_at: new Date(),
+    },
+  });
+
+  return smoobu_id;
+}`,
+        language: 'typescript',
+        technicalExplanation: `**Key Engineering Decisions:**
+• **Shared building logic**: Lakshmi (downstairs) + Akasha (full building) = same physical space
+• **API-first blocking**: Creates actual Smoobu reservations rather than local flags
+• **Audit trail maintenance**: All blocking actions stored locally for debugging and analysis
+• **Smart naming convention**: "Masakali Blocked" enables webhook filtering to prevent loops`
       }
     ],
     detailPageUrl: '/masakali',
@@ -642,7 +795,7 @@ export const getSkillsByCategory = (category: SkillCategory): string[] => {
   projects.forEach(project => {
     project.skills
       .filter(skill => skill.category === category)
-      .forEach(skill => skillSet.add(skill.name));
+      .forEach(skill => {skillSet.add(skill.name)});
   });
   return Array.from(skillSet).sort();
 };
