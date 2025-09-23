@@ -1,15 +1,27 @@
+'use client';
+
 import type { NextPage } from 'next';
-import Link from 'next/link';
+import { useState } from 'react';
 import TechStackVisualization from '~/components/TechStackVisualization';
 import TypingAnimation from '~/components/TypingAnimation';
+import ProjectFilter from '~/components/ProjectFilter';
+import ProjectCard from '~/components/ProjectCard';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import { Badge } from '~/components/ui/badge';
 import { Separator } from '~/components/ui/separator';
-import { Progress } from '~/components/ui/progress';
-import { skillsData } from '~/lib/skills';
+import { projects, SkillCategory } from '~/lib/projects';
 
 const Home: NextPage = () => {
+  const [filteredCategories, setFilteredCategories] = useState<SkillCategory[]>([]);
+
+  const displayedProjects = filteredCategories.length === 0
+    ? projects
+    : projects.filter(project =>
+        project.skills.some(skill =>
+          filteredCategories.includes(skill.category)
+        )
+      );
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
@@ -149,348 +161,11 @@ const Home: NextPage = () => {
             <p className="text-gray-500">Production systems built to solve real problems</p>
           </div>
 
+          <ProjectFilter onFilterChange={setFilteredCategories} />
+
           <div className="grid gap-6">
-            {/* Project 1: Admin Dashboard */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
-              <div className="flex">
-                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-                  <span>6</span>
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">AnalyticsPlatform</span>:
-                      </h3>
-                      <p className="text-gray-400">Full-stack analytics platform processing 160M+ order records</p>
-                    </div>
-                    <Badge variant="statusLive">LIVE</Badge>
-                  </div>
-                  
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">160M+</div>
-                      <div className="text-xs text-gray-500">Records</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">50%</div>
-                      <div className="text-xs text-gray-500">Query Speedup</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">13</div>
-                      <div className="text-xs text-gray-500">Internal Views</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">5min</div>
-                      <div className="text-xs text-gray-500">Query Time</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techReact">React</Badge>
-                    <Badge variant="techTypeScript">TypeScript</Badge>
-                    <Badge variant="techPython">Polars</Badge>
-                    <Badge variant="techDatabase">MySQL 5.7</Badge>
-                    <Badge variant="techCloud">AWS</Badge>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <Link href="/admin-dashboard">
-                        View Project →
-                      </Link>
-                    </Button>
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <a href="https://github.com">
-                        GitHub
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 2: Masakali */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
-              <div className="flex">
-                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-                  <span>6</span>
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">MasakaliBookingPlatform</span>:
-                      </h3>
-                      <p className="text-gray-400">Production booking platform with real-time inventory sync</p>
-                    </div>
-                    <Badge variant="statusProduction">PRODUCTION</Badge>
-                  </div>
-                  
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">$30k+</div>
-                      <div className="text-xs text-gray-500">Revenue</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">0</div>
-                      <div className="text-xs text-gray-500">Double Bookings</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">Instant</div>
-                      <div className="text-xs text-gray-500">Sync Updates</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">5</div>
-                      <div className="text-xs text-gray-500">Listings</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techReact">Next.js</Badge>
-                    <Badge variant="techPython">Xendit</Badge>
-                    <Badge variant="techDatabase">PostgreSQL</Badge>
-                    <Badge variant="techTypeScript">Redux</Badge>
-                    <Badge variant="techCloud">Smoobu API</Badge>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <Link href="/masakali">
-                        View Project →
-                      </Link>
-                    </Button>
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <a href="https://github.com/Andrewske/masakali-t3">
-                        GitHub
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 3: Zoho-Twilio */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
-              <div className="flex">
-                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-                  <span>6</span>
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">ZohoTwilioIntegration</span>:
-                      </h3>
-                      <p className="text-gray-400">Production SMS system enabling 12 studios to engage 9,000+ leads</p>
-                    </div>
-                    <Badge variant="statusProduction">PRODUCTION</Badge>
-                  </div>
-                  
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">43k+</div>
-                      <div className="text-xs text-gray-500">Total Messages</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">9k+</div>
-                      <div className="text-xs text-gray-500">Leads Engaged</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">12</div>
-                      <div className="text-xs text-gray-500">Active Studios</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">4wks</div>
-                      <div className="text-xs text-gray-500">Ship Time</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techReact">Next.js</Badge>
-                    <Badge variant="techCloud">Twilio API</Badge>
-                    <Badge variant="techCloud">Zoho API</Badge>
-                    <Badge variant="techTypeScript">Prisma</Badge>
-                    <Badge variant="techDatabase">PostgreSQL</Badge>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <Link href="/zoho-twilio">
-                        View Project →
-                      </Link>
-                    </Button>
-                    <Button variant="terminalGhost" size="sm" asChild>
-                      <a href="https://github.com/Andrewske/zoho_twilio_integration_t3">
-                        GitHub
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 4: AI Product Title Optimizer */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
-              <div className="flex">
-                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-                  <span>6</span>
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">AIProductOptimizer</span>:
-                      </h3>
-                      <p className="text-gray-400">Batch processing system using GPT-4o-mini for e-commerce optimization</p>
-                    </div>
-                    <Badge variant="statusProduction">PRODUCTION</Badge>
-                  </div>
-
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">4.5k</div>
-                      <div className="text-xs text-gray-500">Listings/30min</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">$0.00003</div>
-                      <div className="text-xs text-gray-500">Cost/Item</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">Linear</div>
-                      <div className="text-xs text-gray-500">Scaling</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">30min</div>
-                      <div className="text-xs text-gray-500">Batch Time</div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techPython">Python</Badge>
-                    <Badge variant="techCloud">OpenAI API</Badge>
-                    <Badge variant="techTypeScript">Batch Processing</Badge>
-                    <Badge variant="techDatabase">PostgreSQL</Badge>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <Button variant="terminalGhost" size="sm" disabled>
-                      Internal Tool
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 5: Multi-Agent Personal Management System */}
-            <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
-              <div className="flex">
-                <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-                  <span>6</span>
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        <span className="text-purple-400">class</span>{' '}
-                        <span className="text-yellow-300">PersonalManagementSystem</span>:
-                      </h3>
-                      <p className="text-gray-400">Custom AI agent ecosystem for multi-project workflows</p>
-                    </div>
-                    <Badge variant="statusLive">ACTIVE</Badge>
-                  </div>
-
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-cyan-400">Career</div>
-                      <div className="text-xs text-gray-500">Coaching Agent</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-yellow-400">Tech</div>
-                      <div className="text-xs text-gray-500">Docs Agent</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-green-400">Project</div>
-                      <div className="text-xs text-gray-500">Management</div>
-                    </div>
-                    <div className="text-center p-2 bg-gray-900/50 rounded">
-                      <div className="text-lg font-bold text-purple-400">MCP</div>
-                      <div className="text-xs text-gray-500">Architecture</div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="techReact">Claude Code</Badge>
-                    <Badge variant="techPython">Prompt Engineering</Badge>
-                    <Badge variant="techDatabase">Knowledge Management</Badge>
-                    <Badge variant="techTypeScript">MCP Protocol</Badge>
-                  </div>
-
-                  <div className="text-sm text-gray-500">
-                    Domain-specific agents with advanced specialization techniques
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Separator className="my-0" />
-
-      {/* Skills Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-2">
-              <span className="text-green-400">$</span> cat skills.json
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            {skillsData.map((category) => (
-              <div key={category.title} className="space-y-4">
-                <h3 className={`${category.color} font-bold flex items-center gap-2`}>
-                  <span className="text-gray-500">{'//'}</span> {category.title}
-                </h3>
-                <div className="space-y-3 text-sm">
-                  {category.skills.map((skill) => (
-                    <div key={skill.name} className="space-y-1">
-                      <span>{skill.name}</span>
-                      <Progress value={skill.experience} className="h-2" />
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {displayedProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         </div>

@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import { Badge } from '~/components/ui/badge';
 import { Separator } from '~/components/ui/separator';
 import { PropsWithChildren } from 'react';
+import { projects, ProficiencyLevel } from '~/lib/projects';
 
 const images = [
   {
@@ -56,7 +57,20 @@ const Section = ({ children, title }: PropsWithChildren<{ title: string }>) => {
   );
 };
 
+const getProficiencyVariant = (proficiency: ProficiencyLevel) => {
+  switch (proficiency) {
+    case 'Expert':
+      return 'proficiencyExpert';
+    case 'Proficient':
+      return 'proficiencyProficient';
+    case 'Familiar':
+      return 'proficiencyFamiliar';
+  }
+};
+
 const AdminDashboard = () => {
+  const projectData = projects.find(p => p.id === 'analytics-platform');
+
   return (
     <div className="min-h-screen px-6 py-8">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -149,22 +163,35 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Tech Stack */}
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold text-white">
-            <span className="text-green-400">$</span> cat tech-stack.json
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="techReact">React</Badge>
-            <Badge variant="techTypeScript">TypeScript</Badge>
-            <Badge variant="techPython">Python</Badge>
-            <Badge variant="techDatabase">PostgreSQL</Badge>
-            <Badge variant="techDatabase">MySQL</Badge>
-            <Badge variant="techCloud">AWS</Badge>
-            <Badge variant="techCloud">Pandas</Badge>
-            <Badge variant="techCloud">Polars</Badge>
-          </div>
-        </div>
+        {/* Skills & Technologies */}
+        <Card className="border-green-500/30 bg-gradient-to-r from-green-500/5 to-emerald-500/5 backdrop-blur-sm">
+          <CardHeader className="pb-4">
+            <h2 className="text-green-400 text-lg font-bold flex items-center gap-2">
+              <span className="text-gray-500">{'//'}</span> Skills & Proficiency
+            </h2>
+          </CardHeader>
+
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              {projectData?.skills.map((skill, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <Badge variant={getProficiencyVariant(skill.proficiency)}>
+                      {skill.name}
+                    </Badge>
+                    <span className="text-sm text-gray-500">{skill.proficiency}</span>
+                    <span className="text-xs text-gray-600">({skill.category})</span>
+                  </div>
+                  <p className="text-sm text-gray-400 pl-3">
+                    {skill.usage}
+                  </p>
+                </div>
+              )) || (
+                <div className="col-span-2 text-gray-500">No skills data available</div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
         <Separator className="my-8" />
 

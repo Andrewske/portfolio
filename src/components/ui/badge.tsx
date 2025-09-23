@@ -33,6 +33,26 @@ const badgeVariants = cva(
           "border-transparent bg-purple-500/10 text-purple-400",
         techCloud:
           "border-transparent bg-cyan-500/10 text-cyan-400",
+        proficiencyExpert:
+          "border-transparent bg-green-500/20 text-green-300",
+        proficiencyProficient:
+          "border-transparent bg-yellow-500/20 text-yellow-300",
+        proficiencyFamiliar:
+          "border-blue-400/40 bg-transparent text-blue-400",
+        categoryLanguages:
+          "border-transparent bg-purple-500/15 text-purple-300",
+        categoryFrontend:
+          "border-transparent bg-blue-500/15 text-blue-300",
+        categoryBackend:
+          "border-transparent bg-yellow-500/15 text-yellow-300",
+        categoryAiMl:
+          "border-transparent bg-cyan-500/15 text-cyan-300",
+        categoryData:
+          "border-transparent bg-green-500/15 text-green-300",
+        categoryApis:
+          "border-transparent bg-orange-500/15 text-orange-300",
+        categoryInfrastructure:
+          "border-transparent bg-red-500/15 text-red-300",
       },
     },
     defaultVariants: {
