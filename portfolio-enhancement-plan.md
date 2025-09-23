@@ -148,14 +148,14 @@ Changes should be made to the projects section of the homepage located in @src/a
   - Incremental updates: 20min → 5min with timestamp tracking
   - Frontend: Parquet files with indexed chunking for sub-second loads
 
-- [ ] Prepare ZohoTwilio architecture documentation
+- [x] Prepare ZohoTwilio architecture documentation
   - Map out webhook processing flow from CRM to SMS delivery
   - Document multi-tenant isolation strategy
   - Identify key integration points and data transformations
   - Prepare to create sequence diagram showing real-time message flow
   - Note error handling and retry mechanisms in the architecture
 
-- [ ] Prepare Masakali booking system architecture
+- [x] Prepare Masakali booking system architecture
   - Document booking conflict prevention at the database and application level
   - Map out real-time availability checking logic
   - Identify concurrency handling strategies

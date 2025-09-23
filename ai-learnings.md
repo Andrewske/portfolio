@@ -29,6 +29,19 @@
 
 ## Portfolio Projects - Detailed Context
 
+### ZohoTwilio (Nov 2023 - ongoing)
+**Project Location**: ~/coding/sms-project (separate codebase from portfolio)
+**Security Approach**: Phone number validation for webhook authentication deemed "sufficient for this small project" - practical security choices
+**Architecture Insights**:
+  - Dual-provider SMS system (Twilio + Zoho Voice) with automatic failover
+  - Multi-tenant isolation via Studios table mapping Zoho User IDs to phone numbers
+  - StudioAccount junction table for OAuth token management per studio
+  - Admin phone number override feature for manager flexibility
+  - Database-first persistence strategy before API calls
+  - Webhook returns HTTP 200 on partial failures to prevent Twilio retries
+**Tech Stack**: Next.js, Prisma ORM, PostgreSQL, custom error handling wrapper
+**Implementation Philosophy**: Practical, scale-appropriate solutions rather than over-engineering
+
 ### AIProductOptimizer (July 2025 - ongoing)
 **Real Performance Data**: Tested 6 LLM models (gpt-5, gpt-5-mini, gpt-5-nano, gpt-4.1-nano, gpt-4o-mini, gpt-5-nano-flex)
 **Cost Analysis**: $0.00003 to $0.00175 per item, found GPT-5 models too expensive despite 95% accuracy
@@ -64,6 +77,18 @@
 **Data Pipeline**: MySQL → Polars processing → ZSTD parquet + JSON index → sub-second frontend filtering
 **Business Impact**: Executive-level BI tracking multi-million dollar operations. 8 years of historical data (2018+)
 **Key Decisions**: Infrastructure cost savings prioritized over real-time updates, suitable for bi-hourly refresh needs. "The data update only happens once every 2 hours, because it takes a lot of server resources and we don't need more frequent updates"
+
+### Masakali (July 2020 - ongoing) - Booking Platform Deep Dive
+**Project Location**: ~/coding/masakali-t3 (separate codebase from portfolio)
+**Physical Architecture**: Akasha and Lakshmi are the same building - "Akasha is the whole building, and Lakshmi is just the downstairs, leaving the upstairs open for the owner to use"
+**Booking Conflict Prevention**: "The prevention only comes when creating the booking because smoobu will not allow the double booking and the error would cancel the booking process. The traffic and bookings is low, so I haven't needed anything more"
+**Cross-Villa Blocking Logic**: When Lakshmi books → automatically blocks Akasha (same building). When Akasha books → blocks Lakshmi. Implemented via blockVilla() function calling Smoobu API
+**Database Design**: PostgreSQL with unique constraint on (villa_id, date) in villa_pricing table. Foreign key relationships villa → reservations
+**Webhook Architecture**: Real-time updates from Smoobu for external bookings (Booking.com, Airbnb) → local database sync
+**Error Handling**: "I am notified of the error and usually manually fix and fix the underlying process. But I rarely have any fails in that area so I haven't had to modify in a long time"
+**Payment Flow**: "Payment happens first, so I don't really block double bookings..." - Manual processing for edge cases. User guidance: "I would say don't include anything about this. It's probably not impressive to show it"
+**Tech Stack**: Next.js, Prisma ORM, PostgreSQL, Smoobu API integration, PostHog monitoring
+**Scale Context**: 5 villas, low traffic, manual oversight approach - practical engineering for the scale
 
 ## Architecture & Safety Philosophy
 **Scale-appropriate safety**: Production systems use robust validation (Smoobu booking prevention, multi-tenant auth), experimental projects use manual review
