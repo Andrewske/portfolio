@@ -29,6 +29,9 @@ export interface Project {
   description: string;
   longDescription?: string;
   status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL';
+  role: string;
+  timeline: string;
+  scope: string;
   metrics: ProjectMetric[];
   skills: ProjectSkill[];
   github?: string;
@@ -45,6 +48,9 @@ export const projects: Project[] = [
     description: 'Full-stack analytics platform processing 160M+ order records',
     longDescription: 'Architected full-stack analytics platform processing 160M+ order records from legacy MySQL 5.7 database, optimizing query performance from 10+ minutes to under 5 minutes using Polars and advanced SQL techniques.',
     status: 'LIVE',
+    role: 'Sole developer',
+    timeline: 'Aug 2023 - ongoing',
+    scope: 'architecture, backend, data optimization, performance tuning',
     metrics: [
       { value: '160M+', label: 'Records', color: 'cyan' },
       { value: '50%', label: 'Query Speedup', color: 'yellow' },
@@ -123,6 +129,9 @@ export const projects: Project[] = [
     description: 'Production booking platform with real-time inventory sync',
     longDescription: 'Built production booking platform from scratch with React/Redux → Next.js migration. Integrated real-time inventory sync across Booking.com, Airbnb via Smoobu API. Processed $30K in direct revenue with zero double-bookings.',
     status: 'PRODUCTION',
+    role: 'Sole developer',
+    timeline: 'July 2020 - ongoing',
+    scope: 'full-stack development, payment integration, booking system, multi-tenant architecture',
     metrics: [
       { value: '$30k+', label: 'Revenue', color: 'cyan' },
       { value: '0', label: 'Double Bookings', color: 'yellow' },
@@ -195,6 +204,9 @@ export const projects: Project[] = [
     description: 'Production SMS system enabling 12 studios to engage 9,000+ leads',
     longDescription: 'Built production SaaS platform as solo engineer: Full-stack SMS system enabling 12 studios to engage 9,000+ leads directly from Zoho CRM, processing 43,000+ messages. Shipped end-to-end solution in 4 weeks.',
     status: 'PRODUCTION',
+    role: 'Sole developer',
+    timeline: 'Nov 2023 - ongoing',
+    scope: 'API integration, webhook handling, multi-tenant SMS delivery, error tracking',
     metrics: [
       { value: '43k+', label: 'Total Messages', color: 'cyan' },
       { value: '9k+', label: 'Leads Engaged', color: 'yellow' },
@@ -273,6 +285,9 @@ export const projects: Project[] = [
     description: 'Batch processing system using GPT-4o-mini for e-commerce optimization',
     longDescription: 'Developed AI-powered listing optimization tool using OpenAI batch API to enhance 4,500 product titles in 30 minutes at $0.00003/listing, improving marketplace SEO and conversion rates.',
     status: 'PRODUCTION',
+    role: 'Sole developer',
+    timeline: 'July 2025 - ongoing',
+    scope: 'LLM evaluation, model comparison, cost optimization, experimental approaches',
     metrics: [
       { value: '4.5k', label: 'Listings/30min', color: 'cyan' },
       { value: '$0.00003', label: 'Cost/Item', color: 'yellow' },
@@ -325,6 +340,9 @@ export const projects: Project[] = [
     description: 'Production AI system processing documents into semantic knowledge graphs',
     longDescription: 'Production AI system with 3-stage distributed pipeline: extraction → concepts → vector embeddings. 85-second processing, $0.00002/document, 106 triples + 424 embeddings per doc. Built both HTTP and STDIO versions following MCP protocol.',
     status: 'PRODUCTION',
+    role: 'Sole developer',
+    timeline: 'June 2025 - ongoing',
+    scope: 'AI pipeline architecture, knowledge extraction, vector embeddings, MCP protocol',
     metrics: [
       { value: '530', label: 'Embeddings/Doc', color: 'cyan' },
       { value: '$0.00002', label: 'Cost per Document', color: 'yellow' },
@@ -384,6 +402,9 @@ export const projects: Project[] = [
     description: 'Custom AI agent ecosystem for multi-project workflows',
     longDescription: 'Custom AI agent ecosystem using Claude Code for multi-project workflows. Built domain-specific agents: career coaching, technical documentation, project management. Advanced prompt engineering and agent specialization techniques.',
     status: 'ACTIVE',
+    role: 'Sole developer',
+    timeline: 'June 2025 - ongoing',
+    scope: 'agent architecture, context management, specialized AI assistants, workflow automation',
     metrics: [
       { value: 'Career', label: 'Coaching Agent', color: 'cyan' },
       { value: 'Tech', label: 'Docs Agent', color: 'yellow' },

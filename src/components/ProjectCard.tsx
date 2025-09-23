@@ -46,6 +46,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </Badge>
           </div>
 
+          {/* Role, Timeline, Scope Strip */}
+          <div className="mb-4 p-3 bg-gray-900/30 rounded border border-gray-800/50">
+            <p className="text-sm text-gray-300">
+              <span className="text-cyan-400">Role:</span>{' '}
+              <span className="text-gray-200">{project.role}</span>
+              <span className="text-gray-600 mx-2">•</span>
+              <span className="text-cyan-400">Timeline:</span>{' '}
+              <span className="text-gray-200">{project.timeline}</span>
+              <span className="text-gray-600 mx-2">•</span>
+              <span className="text-cyan-400">Scope:</span>{' '}
+              <span className="text-gray-200">{project.scope}</span>
+            </p>
+          </div>
+
           {/* Metrics */}
           <div className="grid grid-cols-4 gap-4 mb-4">
             {project.metrics.map((metric, index) => (
