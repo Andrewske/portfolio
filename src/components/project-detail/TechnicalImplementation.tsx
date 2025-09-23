@@ -1,4 +1,5 @@
 import { Badge } from '~/components/ui/badge';
+import { CodeBlock } from '~/components/ui/CodeBlock';
 import { Project, groupSkillsByCategory, getCategoryVariant, getCategoryColor } from '~/lib/projects';
 
 interface TechnicalImplementationProps {
@@ -64,15 +65,14 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
           </h3>
           <div className="space-y-4">
             {project.codeExamples.map((example, index) => (
-              <div key={index} className="border border-gray-800 rounded-lg overflow-hidden">
-                <div className="px-4 py-2 bg-gray-800 border-b border-gray-700">
-                  <span className="text-sm text-gray-300">{example.title}</span>
-                  <span className="text-xs text-gray-500 ml-2">({example.language})</span>
-                </div>
-                <pre className="p-4 bg-gray-950 text-sm text-gray-300 overflow-x-auto">
-                  <code>{example.code}</code>
-                </pre>
-              </div>
+              <CodeBlock
+                key={index}
+                code={example.code}
+                language={example.language}
+                title={example.title}
+                impactContext={example.impactContext}
+                technicalExplanation={example.technicalExplanation}
+              />
             ))}
           </div>
         </div>

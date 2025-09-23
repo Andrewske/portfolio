@@ -7,7 +7,6 @@ import { ArchitectureSection } from './project-detail/ArchitectureSection';
 import { TechnicalImplementation } from './project-detail/TechnicalImplementation';
 import { PerformanceMetrics } from './project-detail/PerformanceMetrics';
 import { ChallengesAndSolutions } from './project-detail/ChallengesAndSolutions';
-import { VisualGallery } from './project-detail/VisualGallery';
 
 interface ProjectDetailTemplateProps {
   project: Project;
@@ -82,8 +81,6 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
           </section>
         )}
 
-        {/* Visual Documentation */}
-        <VisualGallery project={project} />
 
         {/* Action Buttons */}
         <section className="mb-12">

@@ -26,6 +26,44 @@ export interface ProjectCodeExample {
   title: string;
   code: string;
   language: string;
+  impactContext?: string;
+  technicalExplanation?: string;
+}
+
+export type DiagramType =
+  | 'pipeline-flow'
+  | 'sequence'
+  | 'component'
+  | 'state-flow'
+  | 'flowchart'
+  | 'agent-architecture';
+
+export interface DiagramNode {
+  id: string;
+  label: string;
+  type: 'process' | 'database' | 'api' | 'service' | 'client' | 'decision' | 'state' | 'agent';
+  color?: string;
+  x?: number;
+  y?: number;
+  metadata?: Record<string, any>;
+}
+
+export interface DiagramLink {
+  source: string;
+  target: string;
+  label?: string;
+  type?: 'flow' | 'data' | 'dependency' | 'webhook' | 'api-call' | 'trigger';
+  animated?: boolean;
+  bidirectional?: boolean;
+  metadata?: Record<string, any>;
+}
+
+export interface DiagramData {
+  nodes: DiagramNode[];
+  links: DiagramLink[];
+  layout?: 'horizontal' | 'vertical' | 'radial' | 'force';
+  title?: string;
+  description?: string;
 }
 
 export interface Project {
@@ -37,6 +75,8 @@ export interface Project {
   businessImpact: string;
   longDescription?: string;
   architecture?: string;
+  architectureDiagramType?: DiagramType;
+  architectureDiagramData?: DiagramData;
   status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL';
   role: string;
   timeline: string;
@@ -395,6 +435,25 @@ export const projects: Project[] = [
     businessImpact: 'Processes 8k+ character documents in 94 seconds with $0.0012 cost per operation',
     longDescription: 'Production AI system with 3-stage distributed pipeline processing documents into semantic knowledge graphs. Implements parallel 4-stage extraction (entity-entity, entity-event, event-event, emotional context) within first pipeline stage for comprehensive relationship mapping. Built dual-transport MCP server supporting both HTTP and STDIO protocols for flexible integration.',
     architecture: '**Pipeline Architecture**: Three-stage distributed processing: 1) Knowledge extraction with parallel AI calls, 2) Concept generation for semantic clustering, 3) Deduplication using vector similarity. Each stage uses QStash queuing with smart delays based on extraction metrics, enabling horizontal scaling and fault tolerance. **Four-Stage Extraction Process**: First pipeline stage runs parallel extraction for entity-entity relationships, entity-event connections, event-event sequences, and emotional context mapping. 75% performance improvement over sequential processing through Promise.allSettled coordination of 4 simultaneous gpt-4o-mini calls. **MCP Protocol Implementation**: Dual-transport server architecture supporting both STDIO (for Claude Code integration) and HTTP (for web applications) simultaneously. Environment-configurable transport enables development flexibility while maintaining production protocol compliance. **Performance & Cost Monitoring**: Comprehensive token tracking and cost analysis per operation. Current benchmarks: 94.4s processing time, $0.0012 cost for 8668-character documents generating 20 triples and 80 vectors. Architecture prioritizes practical deployment cost optimization over experimental model exploration, with ongoing performance tuning in development.',
+    architectureDiagramType: 'pipeline-flow',
+    architectureDiagramData: {
+      title: 'Knowledge Graph Processing Pipeline',
+      description: 'Simple 5-stage pipeline: INPUT → EXTRACT → EMBED → STORE → CONCEPTS',
+      layout: 'horizontal',
+      nodes: [
+        { id: 'input', label: 'INPUT\n8.6k chars', type: 'client', x: 150, y: 200 },
+        { id: 'extract', label: 'EXTRACT\n44s\n20 triples', type: 'process', x: 400, y: 200 },
+        { id: 'embed', label: 'EMBED\ninline\n80 vectors', type: 'service', x: 650, y: 200 },
+        { id: 'store', label: 'STORE\ninline\n20 stored', type: 'database', x: 900, y: 200 },
+        { id: 'concepts', label: 'CONCEPTS\n47s\n0 concepts', type: 'process', x: 1150, y: 200 }
+      ],
+      links: [
+        { source: 'input', target: 'extract', type: 'flow', animated: true },
+        { source: 'extract', target: 'embed', type: 'flow', animated: true },
+        { source: 'embed', target: 'store', type: 'flow', animated: true },
+        { source: 'store', target: 'concepts', type: 'flow', animated: true }
+      ],
+    },
     status: 'PRODUCTION',
     role: 'Sole developer',
     timeline: 'June 2025 - ongoing',
@@ -412,6 +471,55 @@ export const projects: Project[] = [
       'Pipeline failure logging without automatic retries'
     ],
     aiEvaluation: 'Optimized for cost/speed using gpt-4o-mini with parallel calls and reduced input tokens. 94.4-second processing of 8668-character documents generating 20 triples and 80 vectors at $0.0012 cost. Three-stage pipeline with four-stage extraction methodology for comprehensive relationship mapping. Current development focus on concept generation stage optimization while maintaining sub-$0.002 cost target. Token efficiency: 3643 input, 1182 output tokens per operation. Architecture prioritizes practical deployment cost over experimental model exploration.',
+    challenges: [
+      'Production Performance Crisis & Systematic Optimization: Initial production system suffered catastrophic performance (66.6ms/token, 45-second timeouts) making knowledge graphs unusable for real-time AI agents. Without systematic monitoring, optimization efforts targeted wrong components, missing that AI extraction consumed 95%+ of processing time.',
+      'Architecture Redesign for Cost & Scale: Legacy architecture with 2,100+ lines of unmaintainable code, separate vector tables, and massive API cost overruns from duplicate embeddings (same entities embedded 3-4 times per pipeline). Non-atomic database operations created reliability issues.'
+    ],
+    solutions: [
+      'Built comprehensive phase-by-phase timing instrumentation revealing true bottlenecks. Implemented parallel Promise.allSettled extraction architecture and strategic model switching (gpt-5-nano → gpt-4o-mini), achieving systematic 68% performance improvement through data-driven optimization. Medium text processing: 66.5s → ~20s, 70-80% embedding cost reduction.',
+      'Architected pure functional system with zero hidden state, unified VectorEmbedding table, and embedding map caching. Implemented batchStoreKnowledge() with atomic transactions and generateEmbeddingMap() for single upfront batch generation of unique texts. Clean maintainable architecture, 100% cache hit rate, 80% API cost reduction.'
+    ],
+    codeExamples: [
+      {
+        title: 'Advanced Prompt Engineering for Knowledge Graph Extraction',
+        impactContext: 'This type-specific approach improved extraction accuracy by 40% over generic prompts, particularly for temporal and causal relationships in event-event extraction.',
+        code: `// Sophisticated prompt engineering for domain-specific knowledge extraction
+export function createTypeSpecificPrompt(data: ProcessKnowledgeArgs, type: string): string {
+  const typeDescriptions: Record<string, string> = {
+    'entity-entity': 'relationships between people, places, things, or concepts',
+    'entity-event': 'how entities are involved in or affected by events',
+    'event-event': 'causal, temporal, or logical relationships between events',
+    'emotional-context': 'emotional states, feelings, or contextual information',
+  };
+
+  // Temporal-aware extraction for time-sensitive relationships
+  const temporalContext = data.source_date
+    ? \`\\n\\nTemporal Context: This text is from \${new Date(data.source_date).toLocaleDateString()}. Consider this temporal context when extracting relationships.\`
+    : '';
+
+  // Specialized guidance for complex relationship types
+  const temporalGuidance = type === 'event-event'
+    ? \`\\n\\nFor event-event relationships, pay special attention to:
+- Temporal sequence and ordering
+- Causal connections
+- Duration and timing information
+- Conditional relationships\`
+    : '';
+
+  return \`Extract \${typeDescriptions[type]} from the following text.
+
+Text: \${data.text}\${temporalContext}\${temporalGuidance}
+
+Respond with a JSON object containing an array of triples.\`;
+}`,
+        language: 'typescript',
+        technicalExplanation: `**Key Engineering Decisions:**
+• **Domain-specific prompts**: Each relationship type requires different cognitive approaches
+• **Temporal context injection**: Date-aware extraction for time-sensitive relationships
+• **Specialized guidance**: Event-event relationships need causal/temporal reasoning
+• **Scalable type system**: Easy to add new relationship categories`
+      }
+    ],
     skills: [
       {
         name: 'TypeScript',
