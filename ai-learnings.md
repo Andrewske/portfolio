@@ -56,20 +56,29 @@
 **Target**: 99% cost reduction while maintaining 90%+ accuracy through intelligent batch processing
 
 ### KnowledgeGraphMCP (June 2025 - ongoing)
+**Project Location**: ~/coding/kg-memory-mcp (separate codebase from portfolio)
+**Architecture Understanding**: 3-stage pipeline (extraction → concepts → deduplication) with 4-stage extraction process within first stage
+**Four-Stage Extraction**: ENTITY_ENTITY, ENTITY_EVENT, EVENT_EVENT, EMOTIONAL_CONTEXT run in parallel via Promise.allSettled
 **Optimization Strategy**: Cost/speed focus using gpt-4o-mini, parallel calls, reduced input tokens
 **Real Metrics**: 94.4s processing, 8668 characters, $0.0012 cost, 20 triples, 80 vectors, 0 concepts
-**Current Issue**: Concept generation stage not working, needs debugging
+**Current Issue**: Concept generation stage not working, needs debugging - "there is some error in conceptualization"
+**Development Status**: "The time and cost has not been optimized yet so it will change"
 **Approach**: "I just start with gpt-4o-mini for cost/speed reasons. I haven't had the chance to try different models"
+**MCP Implementation**: Built both HTTP and STDIO transport layers for dual protocol support
 
 ### PersonalManagementSystem (June 2025 - ongoing)
 **Unique Architecture**: Using Claude Code (Opus/Sonnet) with persistent file-based context
 **Specialized Agents**:
-  - Career Coach (Anthropic application prep)
-  - Bonanza Project Manager (prioritization)
+  - Career Coach (Anthropic application prep) - detailed CLAUDE.md with achievement tracking, confidence calibration protocols
+  - Bonanza Project Manager (work context prioritization)
   - Budget Analyst (CSV transaction analysis, money struggles context)
   - Diet/Meal Planner (ADHD-aware nutrition, food preparation struggles)
+  - Podcast Conversation Agent (in development for podcast discussion)
+**Workflow**: "I cd into the project folder and start a new claude code instance. I usually have an ide with the project open as well"
+**Context Isolation**: Separate folders with specialized CLAUDE.md files for each agent domain
+**Cross-Agent Memory Challenge**: "Yes, I want them to share information. I am thinking about a global context. But this is also what the kg-memory-mcp is for when I get that up and running they can store information in the knowledge base and make queries as needed"
 **Philosophy**: "Context-aware AI agents providing personalized guidance" across life domains
-**Innovation**: File-based agent specialization vs traditional model fine-tuning
+**Innovation**: File-based agent specialization vs traditional model fine-tuning, leverages existing Claude Code infrastructure rather than custom development
 
 ### AnalyticsPlatform (Aug 2023 - ongoing) - Architecture Deep Dive
 **Constraint-Driven Engineering**: Read-only MySQL 5.7 forced creative solutions vs traditional approaches

@@ -383,16 +383,17 @@ export const projects: Project[] = [
     description: 'Production AI system processing documents into semantic knowledge graphs',
     subtitle: 'Semantic knowledge extraction pipeline with vector embeddings',
     businessImpact: 'Processes 8k+ character documents in 94 seconds with $0.0012 cost per operation',
-    longDescription: 'Production AI system with 3-stage distributed pipeline: extraction → concepts → vector embeddings. 85-second processing, $0.00002/document, 106 triples + 424 embeddings per doc. Built both HTTP and STDIO versions following MCP protocol.',
+    longDescription: 'Production AI system with 3-stage distributed pipeline processing documents into semantic knowledge graphs. Implements parallel 4-stage extraction (entity-entity, entity-event, event-event, emotional context) within first pipeline stage for comprehensive relationship mapping. Built dual-transport MCP server supporting both HTTP and STDIO protocols for flexible integration.',
+    architecture: '**Pipeline Architecture**: Three-stage distributed processing: 1) Knowledge extraction with parallel AI calls, 2) Concept generation for semantic clustering, 3) Deduplication using vector similarity. Each stage uses QStash queuing with smart delays based on extraction metrics, enabling horizontal scaling and fault tolerance. **Four-Stage Extraction Process**: First pipeline stage runs parallel extraction for entity-entity relationships, entity-event connections, event-event sequences, and emotional context mapping. 75% performance improvement over sequential processing through Promise.allSettled coordination of 4 simultaneous gpt-4o-mini calls. **MCP Protocol Implementation**: Dual-transport server architecture supporting both STDIO (for Claude Code integration) and HTTP (for web applications) simultaneously. Environment-configurable transport enables development flexibility while maintaining production protocol compliance. **Performance & Cost Monitoring**: Comprehensive token tracking and cost analysis per operation. Current benchmarks: 94.4s processing time, $0.0012 cost for 8668-character documents generating 20 triples and 80 vectors. Architecture prioritizes practical deployment cost optimization over experimental model exploration, with ongoing performance tuning in development.',
     status: 'PRODUCTION',
     role: 'Sole developer',
     timeline: 'June 2025 - ongoing',
     scope: 'AI pipeline architecture, knowledge extraction, vector embeddings, MCP protocol',
     metrics: [
-      { value: '530', label: 'Embeddings/Doc', color: 'cyan' },
-      { value: '$0.00002', label: 'Cost per Document', color: 'yellow' },
-      { value: '85s', label: 'Processing Time', color: 'green' },
-      { value: '106', label: 'Triples/Doc', color: 'purple' }
+      { value: '20', label: 'Triples/Doc', color: 'cyan' },
+      { value: '$0.0012', label: 'Cost per Document', color: 'yellow' },
+      { value: '94s', label: 'Processing Time', color: 'green' },
+      { value: '80', label: 'Vectors/Doc', color: 'purple' }
     ],
     safetyAndReliability: [
       'Detailed benchmark reporting: $0.0012 cost, 94s processing',
@@ -400,7 +401,7 @@ export const projects: Project[] = [
       'Manual review of extraction quality and results',
       'Pipeline failure logging without automatic retries'
     ],
-    aiEvaluation: 'Optimized for cost/speed using gpt-4o-mini with parallel calls and reduced input tokens. 94.4-second processing of 8668-character documents generating 20 triples and 80 vectors at $0.0012 cost. Four-stage pipeline: extraction → concepts → embeddings. Current focus on debugging concept generation stage failure while maintaining sub-$0.002 cost target. Token efficiency: 3643 input, 1182 output tokens per operation. Architecture prioritizes practical deployment cost over experimental model exploration.',
+    aiEvaluation: 'Optimized for cost/speed using gpt-4o-mini with parallel calls and reduced input tokens. 94.4-second processing of 8668-character documents generating 20 triples and 80 vectors at $0.0012 cost. Three-stage pipeline with four-stage extraction methodology for comprehensive relationship mapping. Current development focus on concept generation stage optimization while maintaining sub-$0.002 cost target. Token efficiency: 3643 input, 1182 output tokens per operation. Architecture prioritizes practical deployment cost over experimental model exploration.',
     skills: [
       {
         name: 'TypeScript',
@@ -454,7 +455,8 @@ export const projects: Project[] = [
     description: 'Custom AI agent ecosystem for multi-project workflows',
     subtitle: 'Specialized AI agent platform for domain-specific assistance',
     businessImpact: 'Context-aware AI agents providing personalized guidance across career, finance, and health domains',
-    longDescription: 'Custom AI agent ecosystem using Claude Code for multi-project workflows. Built domain-specific agents: career coaching, technical documentation, project management. Advanced prompt engineering and agent specialization techniques.',
+    longDescription: 'Novel personal AI management system using Claude Code\'s file-based context for specialized agent domains. Created isolated agents for career coaching (Anthropic application prep), work project management (Bonanza), and podcast conversation analysis. Innovative approach leverages existing Claude Code infrastructure rather than building custom chatbot solutions, with planned knowledge graph integration for cross-agent memory sharing.',
+    architecture: '**Agent Isolation Architecture**: Each specialized agent operates in separate filesystem directories with dedicated CLAUDE.md configuration files defining domain expertise, context boundaries, and behavioral patterns. Workflow involves cd into agent directory + new Claude Code instance, creating complete context isolation between domains (career coaching vs work management vs health tracking). **Context Management Strategy**: Agent specialization achieved through prompt engineering in CLAUDE.md rather than model fine-tuning. Career Coach agent includes achievement tracking methodology, confidence calibration protocols, and industry-specific language patterns. Work agents maintain project context and task prioritization logic. Personal agents handle ADHD-aware nutrition planning and mental health support patterns. **Cross-Agent Memory Integration**: Planned integration with Knowledge Graph MCP for shared information layer. Current limitation: agents cannot share context across domains. Solution: kg-memory-mcp will serve as centralized knowledge store enabling agents to query shared experiences, achievements, and insights while maintaining specialized domain expertise. **Innovative Engineering Approach**: Leverages Claude Code\'s existing file-based context system rather than building custom infrastructure. Cost-effective alternative to fine-tuned models or custom chatbot development. Demonstrates practical AI application for personal productivity beyond traditional software development use cases.',
     status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'June 2025 - ongoing',
