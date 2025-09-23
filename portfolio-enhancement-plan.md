@@ -1,53 +1,52 @@
-# Portfolio Enhancement Plan
+# Portfolio Projects Homepage Enhancement Plan
 
-Changes should be made to the projects section of the homepage
+Changes should be made to the projects section of the homepage located in @src/app/page.tsx
 
-Based on AI feedback to improve portfolio rating from 8.6/10 to 9.2+ for top-tier AI roles.
 
 ## Role & Timeline Documentation
 
-- [ ] Add role/timeline/scope strip to AnalyticsPlatform project card and detail page
+- [x] Add role/timeline/scope strip to AnalyticsPlatform project card and detail page
   - Text: "Role: Sole developer • Timeline: Aug 2023 - ongoing • Scope: architecture, backend, data optimization, performance tuning"
   - Add to both the project card in sections and the dedicated project page
 
-- [ ] Add role/timeline/scope strip to Masakali project card and detail page
+- [x] Add role/timeline/scope strip to Masakali project card and detail page
   - Text: "Role: Sole developer • Timeline: July 2020 - ongoing • Scope: full-stack development, payment integration, booking system, multi-tenant architecture"
 
-- [ ] Add role/timeline/scope strip to ZohoTwilio project card and detail page
+- [x] Add role/timeline/scope strip to ZohoTwilio project card and detail page
   - Text: "Role: Sole developer • Timeline: Nov 2023 - ongoing • Scope: API integration, webhook handling, multi-tenant SMS delivery, error tracking"
 
-- [ ] Add role/timeline/scope strip to AIProductOptimizer project card and detail page
+- [x] Add role/timeline/scope strip to AIProductOptimizer project card and detail page
   - Text: "Role: Sole developer • Timeline: July 2025 - ongoing • Scope: LLM evaluation, model comparison, cost optimization, experimental approaches"
 
-- [ ] Add role/timeline/scope strip to KnowledgeGraphMCP project card and detail page
+- [x] Add role/timeline/scope strip to KnowledgeGraphMCP project card and detail page
   - Text: "Role: Sole developer • Timeline: June 2025 - ongoing • Scope: AI pipeline architecture, knowledge extraction, vector embeddings, MCP protocol"
 
-- [ ] Add role/timeline/scope strip to PersonalManagementSystem project card and detail page
+- [x] Add role/timeline/scope strip to PersonalManagementSystem project card and detail page
   - Text: "Role: Sole developer • Timeline: June 2025 - ongoing • Scope: agent architecture, context management, specialized AI assistants, workflow automation"
 
 ## Project Title & Description Enhancement
 
-- [ ] Add human-readable subtitle to AnalyticsPlatform
+- [x] Add human-readable subtitle to AnalyticsPlatform
   - Keep "AnalyticsPlatform" title, add subtitle: "High-performance analytics system processing 160M+ records with sub-second query times"
   - Add business impact line: "Enabled real-time business intelligence for multi-million dollar operations"
 
-- [ ] Add human-readable subtitle to Masakali
+- [x] Add human-readable subtitle to Masakali
   - Keep "Masakali" title, add subtitle: "Multi-tenant booking platform eliminating double-bookings and recovering $30k+/month"
   - Add business impact line: "Zero double-bookings across 43k+ messages and thousands of bookings"
 
-- [ ] Add human-readable subtitle to ZohoTwilio
+- [x] Add human-readable subtitle to ZohoTwilio
   - Keep "ZohoTwilio" title, add subtitle: "Real-time CRM-SMS integration with automated lead engagement"
   - Add business impact line: "Automated SMS workflows reducing manual lead processing time by 80%"
 
-- [ ] Add human-readable subtitle to AIProductOptimizer
+- [x] Add human-readable subtitle to AIProductOptimizer
   - Keep "AIProductOptimizer" title, add subtitle: "LLM-powered e-commerce optimization with cost-performance analysis"
   - Add business impact line: "Achieved 63% cost reduction while maintaining 90%+ accuracy through model optimization"
 
-- [ ] Add human-readable subtitle to KnowledgeGraphMCP
+- [x] Add human-readable subtitle to KnowledgeGraphMCP
   - Keep "KnowledgeGraphMCP" title, add subtitle: "Semantic knowledge extraction pipeline with vector embeddings"
   - Add business impact line: "Processes 8k+ character documents in 94 seconds with $0.0012 cost per operation"
 
-- [ ] Add human-readable subtitle to PersonalManagementSystem
+- [x] Add human-readable subtitle to PersonalManagementSystem
   - Keep "PersonalManagementSystem" title, add subtitle: "Specialized AI agent platform for domain-specific assistance"
   - Add business impact line: "Context-aware AI agents providing personalized guidance across career, finance, and health domains"
 

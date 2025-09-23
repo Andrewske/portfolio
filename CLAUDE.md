@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Before beginning review @ai-learnings.md for context about the user
+
 ## Commands
 
 ### Development

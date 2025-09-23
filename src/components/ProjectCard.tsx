@@ -34,12 +34,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <div className="flex-1 p-6">
           <div className="flex items-start justify-between mb-4">
-            <div>
+            <div className="flex-1 mr-4">
               <h3 className="text-xl font-bold text-white mb-1">
                 <span className="text-purple-400">class</span>{' '}
                 <span className="text-yellow-300">{project.className}</span>:
               </h3>
-              <p className="text-gray-400">{project.description}</p>
+              <p className="text-gray-300 mb-2 font-medium">{project.subtitle}</p>
+              <div className="p-3 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-l-2 border-green-400/50 rounded">
+                <p className="text-sm text-green-300 flex items-center gap-2">
+                  <span className="text-green-400 font-bold">💡</span>
+                  <span className="font-medium">Impact:</span> {project.businessImpact}
+                </p>
+              </div>
             </div>
             <Badge variant={project.status === 'PRODUCTION' ? 'statusProduction' : project.status === 'LIVE' ? 'statusLive' : 'statusDevelopment'}>
               {project.status}
@@ -71,6 +77,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               </div>
             ))}
           </div>
+
+          {/* Safety & Reliability */}
+          {project.safetyAndReliability && project.safetyAndReliability.length > 0 && (
+            <div className="mb-4">
+              <h4 className="text-orange-400 text-sm font-bold mb-3 flex items-center gap-2">
+                <span className="text-gray-500">{'//'}</span> Safety & Reliability
+              </h4>
+              <div className="space-y-1">
+                {project.safetyAndReliability.map((item, index) => (
+                  <div key={index} className="text-xs text-gray-400">• {item}</div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Skills by Category */}
           <div className="mb-4">

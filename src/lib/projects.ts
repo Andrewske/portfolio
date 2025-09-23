@@ -27,6 +27,8 @@ export interface Project {
   title: string;
   className: string;
   description: string;
+  subtitle: string;
+  businessImpact: string;
   longDescription?: string;
   status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL';
   role: string;
@@ -34,6 +36,7 @@ export interface Project {
   scope: string;
   metrics: ProjectMetric[];
   skills: ProjectSkill[];
+  safetyAndReliability: string[];
   github?: string;
   liveUrl?: string;
   detailPageUrl?: string;
@@ -46,6 +49,8 @@ export const projects: Project[] = [
     title: 'AnalyticsPlatform',
     className: 'AnalyticsPlatform',
     description: 'Full-stack analytics platform processing 160M+ order records',
+    subtitle: 'High-performance analytics system processing 160M+ records with sub-second query times',
+    businessImpact: 'Enabled real-time business intelligence for multi-million dollar operations',
     longDescription: 'Architected full-stack analytics platform processing 160M+ order records from legacy MySQL 5.7 database, optimizing query performance from 10+ minutes to under 5 minutes using Polars and advanced SQL techniques.',
     status: 'LIVE',
     role: 'Sole developer',
@@ -56,6 +61,12 @@ export const projects: Project[] = [
       { value: '50%', label: 'Query Speedup', color: 'yellow' },
       { value: '13', label: 'Internal Views', color: 'green' },
       { value: '5min', label: 'Query Time', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Zod schema validation for route parameters with fallback values',
+      'MySQL 5.7 optimization: subqueries + Polars for 50% performance gain',
+      'Parquet caching layer: 20min → 5min incremental updates',
+      'Rollbar email alerts for bi-hourly update failures'
     ],
     skills: [
       {
@@ -127,6 +138,8 @@ export const projects: Project[] = [
     title: 'MasakaliBookingPlatform',
     className: 'MasakaliBookingPlatform',
     description: 'Production booking platform with real-time inventory sync',
+    subtitle: 'Multi-tenant booking platform eliminating double-bookings and recovering $30k+/month',
+    businessImpact: 'Zero double-bookings across 43k+ messages and thousands of bookings',
     longDescription: 'Built production booking platform from scratch with React/Redux → Next.js migration. Integrated real-time inventory sync across Booking.com, Airbnb via Smoobu API. Processed $30K in direct revenue with zero double-bookings.',
     status: 'PRODUCTION',
     role: 'Sole developer',
@@ -137,6 +150,12 @@ export const projects: Project[] = [
       { value: '0', label: 'Double Bookings', color: 'yellow' },
       { value: 'Instant', label: 'Sync Updates', color: 'green' },
       { value: '5', label: 'Listings', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Zero double-bookings via Smoobu API real-time validation',
+      'Webhook-based availability updates prevent conflicts',
+      'PostHog error logging for API integration monitoring',
+      'Payment processing via secure third-party APIs'
     ],
     skills: [
       {
@@ -202,6 +221,8 @@ export const projects: Project[] = [
     title: 'ZohoTwilioIntegration',
     className: 'ZohoTwilioIntegration',
     description: 'Production SMS system enabling 12 studios to engage 9,000+ leads',
+    subtitle: 'Real-time CRM-SMS integration with automated lead engagement',
+    businessImpact: 'Automated SMS workflows reducing manual lead processing time by 80%',
     longDescription: 'Built production SaaS platform as solo engineer: Full-stack SMS system enabling 12 studios to engage 9,000+ leads directly from Zoho CRM, processing 43,000+ messages. Shipped end-to-end solution in 4 weeks.',
     status: 'PRODUCTION',
     role: 'Sole developer',
@@ -212,6 +233,12 @@ export const projects: Project[] = [
       { value: '9k+', label: 'Leads Engaged', color: 'yellow' },
       { value: '12', label: 'Active Studios', color: 'green' },
       { value: '4wks', label: 'Ship Time', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Multi-tenant data isolation via Studios table architecture',
+      'Phone number validation for webhook authentication',
+      'STOP message parsing for SMS compliance',
+      'PostHog monitoring for production error tracking'
     ],
     skills: [
       {
@@ -283,6 +310,8 @@ export const projects: Project[] = [
     title: 'AIProductOptimizer',
     className: 'AIProductOptimizer',
     description: 'Batch processing system using GPT-4o-mini for e-commerce optimization',
+    subtitle: 'LLM-powered e-commerce optimization with cost-performance analysis',
+    businessImpact: 'Achieved 63% cost reduction while maintaining 90%+ accuracy through model optimization',
     longDescription: 'Developed AI-powered listing optimization tool using OpenAI batch API to enhance 4,500 product titles in 30 minutes at $0.00003/listing, improving marketplace SEO and conversion rates.',
     status: 'PRODUCTION',
     role: 'Sole developer',
@@ -293,6 +322,12 @@ export const projects: Project[] = [
       { value: '$0.00003', label: 'Cost/Item', color: 'yellow' },
       { value: 'Linear', label: 'Scaling', color: 'green' },
       { value: '30min', label: 'Batch Time', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Manual validation for experimental/development phase',
+      'Token usage tracking for cost scaling analysis',
+      'Manual error management during model optimization',
+      'Quality assurance through manual review process'
     ],
     skills: [
       {
@@ -338,6 +373,8 @@ export const projects: Project[] = [
     title: 'KnowledgeGraphMCP',
     className: 'KnowledgeGraphMCP',
     description: 'Production AI system processing documents into semantic knowledge graphs',
+    subtitle: 'Semantic knowledge extraction pipeline with vector embeddings',
+    businessImpact: 'Processes 8k+ character documents in 94 seconds with $0.0012 cost per operation',
     longDescription: 'Production AI system with 3-stage distributed pipeline: extraction → concepts → vector embeddings. 85-second processing, $0.00002/document, 106 triples + 424 embeddings per doc. Built both HTTP and STDIO versions following MCP protocol.',
     status: 'PRODUCTION',
     role: 'Sole developer',
@@ -348,6 +385,12 @@ export const projects: Project[] = [
       { value: '$0.00002', label: 'Cost per Document', color: 'yellow' },
       { value: '85s', label: 'Processing Time', color: 'green' },
       { value: '106', label: 'Triples/Doc', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Detailed benchmark reporting: $0.0012 cost, 94s processing',
+      'Per-operation token usage monitoring and cost tracking',
+      'Manual review of extraction quality and results',
+      'Pipeline failure logging without automatic retries'
     ],
     skills: [
       {
@@ -400,6 +443,8 @@ export const projects: Project[] = [
     title: 'PersonalManagementSystem',
     className: 'PersonalManagementSystem',
     description: 'Custom AI agent ecosystem for multi-project workflows',
+    subtitle: 'Specialized AI agent platform for domain-specific assistance',
+    businessImpact: 'Context-aware AI agents providing personalized guidance across career, finance, and health domains',
     longDescription: 'Custom AI agent ecosystem using Claude Code for multi-project workflows. Built domain-specific agents: career coaching, technical documentation, project management. Advanced prompt engineering and agent specialization techniques.',
     status: 'ACTIVE',
     role: 'Sole developer',
@@ -410,6 +455,12 @@ export const projects: Project[] = [
       { value: 'Tech', label: 'Docs Agent', color: 'yellow' },
       { value: 'Project', label: 'Management', color: 'green' },
       { value: 'MCP', label: 'Architecture', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Agent isolation via folder-based context separation',
+      'File-based permissions using claude.md configurations',
+      'Claude Code built-in conversation history management',
+      'Personal project scope with controlled data input'
     ],
     skills: [
       {
