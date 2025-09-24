@@ -117,4 +117,3 @@
 **Enhancement Goal**: AI evaluation documentation for hiring managers, systematic portfolio enhancement plan
 **Documentation Priority**: Executive summary style showing decision-making and technical judgment
 **Metric Preferences**: Wants meaningful, specific metrics - rejected vague "$MM+ business tracked" as "really means nothing". Prefers concrete technical achievements (8yr historical data, 75% speed gains)
-**Project Information Strategy**: "we will record the information in @src/lib/projects.ts and we can determine what information is the best to show on the homepage vs standalone page"

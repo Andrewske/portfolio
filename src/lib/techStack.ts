@@ -1,3 +1,5 @@
+import { projects, type Project, type ProjectSkill, type SkillCategory, groupSkillsByCategory } from './projects';
+
 export interface Node {
   id: string;
   name: string;
@@ -9,6 +11,7 @@ export interface Node {
   y?: number;
   fx?: number | null;
   fy?: number | null;
+  projectsUsing?: string[];
 }
 
 export interface Link {
@@ -17,74 +20,156 @@ export interface Link {
   strength: number;
 }
 
-export const techStackNodes: Node[] = [
-  // Projects
-  { id: 'knowledge-graph', name: 'Knowledge Graph MCP', type: 'project', group: 1 },
-  { id: 'admin-dashboard', name: 'Admin Dashboard', type: 'project', group: 1 },
-  { id: 'masakali', name: 'Masakali Payment', type: 'project', group: 1 },
-  { id: 'zoho-twilio', name: 'Zoho-Twilio', type: 'project', group: 1 },
-  { id: 'multi-agent', name: 'Multi-Agent Notes', type: 'project', group: 1 },
+// Generate category groups for visualization
+const categoryGroups: Record<SkillCategory | 'project', number> = {
+  'project': 1,
+  'Languages': 2,
+  'AI/ML': 3,
+  'Frontend': 4,
+  'Backend': 5,
+  'Data & Analytics': 6,
+  'APIs & Integrations': 7,
+  'Infrastructure': 8
+};
 
-  // AI/ML Skills
-  { id: 'llms', name: 'LLMs', type: 'skill', category: 'AI/ML', experience: 2, group: 2 },
-  { id: 'mcp', name: 'MCP Protocol', type: 'skill', category: 'AI/ML', experience: 1, group: 2 },
-  { id: 'knowledge-graphs', name: 'Knowledge Graphs', type: 'skill', category: 'AI/ML', experience: 1.5, group: 2 },
-  { id: 'prompt-eng', name: 'Prompt Engineering', type: 'skill', category: 'AI/ML', experience: 2, group: 2 },
+// Calculate years of experience based on project timeline
+function calculateExperience(projectTimelines: string[]): number {
+  const currentYear = new Date().getFullYear();
+  let earliestYear = currentYear;
 
-  // Backend Skills
-  { id: 'python', name: 'Python', type: 'skill', category: 'Backend', experience: 4, group: 3 },
-  { id: 'nodejs', name: 'Node.js', type: 'skill', category: 'Backend', experience: 4, group: 3 },
-  { id: 'postgresql', name: 'PostgreSQL', type: 'skill', category: 'Backend', experience: 3, group: 3 },
-  { id: 'mongodb', name: 'MongoDB', type: 'skill', category: 'Backend', experience: 2, group: 3 },
-  { id: 'prisma', name: 'Prisma', type: 'skill', category: 'Backend', experience: 2, group: 3 },
-  { id: 'fastapi', name: 'FastAPI', type: 'skill', category: 'Backend', experience: 2, group: 3 },
+  projectTimelines.forEach(timeline => {
+    const yearMatch = timeline.match(/(\d{4})/);
+    if (yearMatch) {
+      const year = parseInt(yearMatch[1]);
+      if (year < earliestYear) {
+        earliestYear = year;
+      }
+    }
+  });
 
-  // Frontend Skills
-  { id: 'react', name: 'React', type: 'skill', category: 'Frontend', experience: 4, group: 4 },
-  { id: 'nextjs', name: 'Next.js', type: 'skill', category: 'Frontend', experience: 3, group: 4 },
-  { id: 'typescript', name: 'TypeScript', type: 'skill', category: 'Frontend', experience: 3, group: 4 },
-  { id: 'tailwind', name: 'Tailwind CSS', type: 'skill', category: 'Frontend', experience: 3, group: 4 },
+  return Math.max(0.5, currentYear - earliestYear);
+}
 
-  // DevOps Skills
-  { id: 'aws', name: 'AWS', type: 'skill', category: 'DevOps', experience: 3, group: 5 },
-  { id: 'docker', name: 'Docker', type: 'skill', category: 'DevOps', experience: 2, group: 5 },
-  { id: 'vercel', name: 'Vercel', type: 'skill', category: 'DevOps', experience: 3, group: 5 },
-];
+// Filter to most important/representative skills for cleaner visualization
+const coreSkillsFilter = new Set([
+  // Languages - core programming languages
+  'TypeScript', 'Python', 'JavaScript',
 
-export const techStackLinks: Link[] = [
-  // Knowledge Graph MCP connections
-  { source: 'knowledge-graph', target: 'python', strength: 1 },
-  { source: 'knowledge-graph', target: 'llms', strength: 1 },
-  { source: 'knowledge-graph', target: 'mcp', strength: 1 },
-  { source: 'knowledge-graph', target: 'knowledge-graphs', strength: 1 },
-  { source: 'knowledge-graph', target: 'fastapi', strength: 0.8 },
+  // AI/ML - your specialization
+  'GPT-4', 'OpenAI API', 'MCP Protocol', 'Knowledge Graphs', 'Prompt Engineering', 'Vector Embeddings',
+  'Claude Code', 'Agent Architecture',
 
-  // Admin Dashboard connections
-  { source: 'admin-dashboard', target: 'react', strength: 1 },
-  { source: 'admin-dashboard', target: 'python', strength: 1 },
-  { source: 'admin-dashboard', target: 'postgresql', strength: 1 },
-  { source: 'admin-dashboard', target: 'typescript', strength: 1 },
-  { source: 'admin-dashboard', target: 'aws', strength: 0.8 },
+  // Frontend - main frameworks
+  'React', 'Next.js', 'Tailwind CSS',
 
-  // Masakali connections
-  { source: 'masakali', target: 'nextjs', strength: 1 },
-  { source: 'masakali', target: 'react', strength: 1 },
-  { source: 'masakali', target: 'postgresql', strength: 1 },
-  { source: 'masakali', target: 'prisma', strength: 1 },
-  { source: 'masakali', target: 'typescript', strength: 1 },
-  { source: 'masakali', target: 'tailwind', strength: 0.8 },
-  { source: 'masakali', target: 'vercel', strength: 0.8 },
+  // Backend - core technologies
+  'Node.js', 'PostgreSQL', 'Prisma', 'FastAPI', 'MySQL',
 
-  // Zoho-Twilio connections
-  { source: 'zoho-twilio', target: 'nextjs', strength: 1 },
-  { source: 'zoho-twilio', target: 'postgresql', strength: 1 },
-  { source: 'zoho-twilio', target: 'prisma', strength: 1 },
-  { source: 'zoho-twilio', target: 'typescript', strength: 1 },
-  { source: 'zoho-twilio', target: 'nodejs', strength: 0.8 },
+  // Data & Analytics - key tools
+  'Polars', 'SQL Optimization', 'Batch Processing', 'Data Visualization',
 
-  // Multi-Agent connections
-  { source: 'multi-agent', target: 'llms', strength: 1 },
-  { source: 'multi-agent', target: 'prompt-eng', strength: 1 },
-  { source: 'multi-agent', target: 'knowledge-graphs', strength: 0.8 },
-  { source: 'multi-agent', target: 'python', strength: 0.8 },
-];
+  // APIs & Integrations - major integrations
+  'Twilio API', 'Smoobu API', 'Zoho CRM API', 'Xendit API',
+
+  // Infrastructure - deployment platforms
+  'AWS', 'Vercel', 'Webhook Architecture', 'Performance Optimization'
+]);
+
+// Generate nodes dynamically from projects data
+function generateTechStackData(): { nodes: Node[], links: Link[] } {
+  const skillMap = new Map<string, {
+    name: string;
+    category: SkillCategory;
+    projects: string[];
+    proficiencyLevels: string[];
+  }>();
+
+  // Extract filtered skills from projects
+  projects.forEach(project => {
+    project.skills.forEach(skill => {
+      // Only include core skills for cleaner visualization
+      if (!coreSkillsFilter.has(skill.name)) return;
+
+      if (!skillMap.has(skill.name)) {
+        skillMap.set(skill.name, {
+          name: skill.name,
+          category: skill.category,
+          projects: [],
+          proficiencyLevels: []
+        });
+      }
+
+      const skillData = skillMap.get(skill.name)!;
+      if (!skillData.projects.includes(project.id)) {
+        skillData.projects.push(project.id);
+      }
+      skillData.proficiencyLevels.push(skill.proficiency);
+    });
+  });
+
+  // Create project nodes
+  const projectNodes: Node[] = projects.map(project => ({
+    id: project.id,
+    name: project.className,
+    type: 'project' as const,
+    group: categoryGroups.project,
+    x: undefined,
+    y: undefined,
+    fx: null,
+    fy: null
+  }));
+
+  // Create skill nodes with calculated experience
+  const skillNodes: Node[] = Array.from(skillMap.entries()).map(([skillName, skillData]) => {
+    const projectTimelines = skillData.projects.map(projectId => {
+      const project = projects.find(p => p.id === projectId);
+      return project?.timeline || '';
+    });
+
+    const experience = calculateExperience(projectTimelines);
+
+    return {
+      id: skillName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      name: skillName,
+      type: 'skill' as const,
+      category: skillData.category,
+      experience,
+      group: categoryGroups[skillData.category] || categoryGroups.Backend,
+      projectsUsing: skillData.projects,
+      x: undefined,
+      y: undefined,
+      fx: null,
+      fy: null
+    };
+  });
+
+  // Create links between projects and skills (only for skills that exist in our filtered set)
+  const links: Link[] = [];
+
+  projects.forEach(project => {
+    project.skills.forEach(skill => {
+      // Only create links for skills that passed our filter
+      if (!coreSkillsFilter.has(skill.name)) return;
+
+      const skillId = skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const strength = skill.proficiency === 'Expert' ? 1.0 :
+                     skill.proficiency === 'Proficient' ? 0.8 : 0.6;
+
+      links.push({
+        source: project.id,
+        target: skillId,
+        strength
+      });
+    });
+  });
+
+  return {
+    nodes: [...projectNodes, ...skillNodes],
+    links
+  };
+}
+
+// Export generated data
+const { nodes, links } = generateTechStackData();
+export const techStackNodes = nodes;
+export const techStackLinks = links;

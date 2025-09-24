@@ -6,9 +6,8 @@ import TechStackVisualization from '~/components/TechStackVisualization';
 import TypingAnimation from '~/components/TypingAnimation';
 import ProjectFilter from '~/components/ProjectFilter';
 import ProjectCard from '~/components/ProjectCard';
+import AIEngineringHighlights from '~/components/AIEngineringHighlights';
 import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { Badge } from '~/components/ui/badge';
 import { Separator } from '~/components/ui/separator';
 import { projects, SkillCategory } from '~/lib/projects';
 
@@ -102,49 +101,8 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            {/* Featured Project Preview */}
-            <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 backdrop-blur-sm">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-cyan-400 text-lg font-bold flex items-center gap-2">
-                    <span className="text-gray-500">{'//'}</span> Featured Project
-                  </h2>
-                  <Badge variant="statusProduction">PRODUCTION</Badge>
-                </div>
-                <h3 className="text-2xl font-bold text-white">Knowledge Graph MCP Server</h3>
-                <p className="text-gray-400">Production AI system processing documents into semantic knowledge graphs</p>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                    <div className="text-2xl font-bold text-yellow-400">530</div>
-                    <div className="text-xs text-gray-500">Embeddings/Doc</div>
-                  </div>
-                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                    <div className="text-2xl font-bold text-green-400">$0.00002</div>
-                    <div className="text-xs text-gray-500">Cost per Document</div>
-                  </div>
-                  <div className="text-center p-3 bg-black/30 rounded border border-gray-800">
-                    <div className="text-2xl font-bold text-blue-400">85s</div>
-                    <div className="text-xs text-gray-500">Processing Time</div>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4">
-                  <Button variant="terminal" asChild>
-                    <a href="#knowledge-graph">
-                      View Details →
-                    </a>
-                  </Button>
-                  <Button variant="terminalOutline" asChild>
-                    <a href="https://github.com/Andrewske/kg-memory-mcp">
-                      GitHub
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {/* AI Engineering Highlights */}
+            <AIEngineringHighlights />
           </div>
         </div>
       </section>
@@ -152,7 +110,7 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Projects Section */}
-      <section className="py-20 px-6">
+      <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">

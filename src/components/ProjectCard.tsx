@@ -18,6 +18,10 @@ const getProficiencyVariant = (proficiency: ProficiencyLevel) => {
   }
 };
 
+const isAIProject = (project: Project) => {
+  return project.skills.some(skill => skill.category === 'AI/ML') || project.aiEvaluation;
+};
+
 export default function ProjectCard({ project }: ProjectCardProps) {
   const groupedSkills = groupSkillsByCategory(project.skills);
 
@@ -40,6 +44,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <span className="text-yellow-300">{project.className}</span>:
               </h3>
               <p className="text-gray-300 mb-2 font-medium">{project.subtitle}</p>
+              <p className="text-xs text-gray-500 mb-2">{project.timeline}</p>
               <div className="p-3 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-l-2 border-green-400/50 rounded">
                 <p className="text-sm text-green-300 flex items-center gap-2">
                   <span className="text-green-400 font-bold">💡</span>
@@ -47,27 +52,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 </p>
               </div>
             </div>
-            <Badge variant={project.status === 'PRODUCTION' ? 'statusProduction' : project.status === 'LIVE' ? 'statusLive' : 'statusDevelopment'}>
-              {project.status}
-            </Badge>
+            <div className="flex flex-col gap-2">
+              {isAIProject(project) && (
+                <Badge variant="default" className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs">
+                  🤖 AI/ML
+                </Badge>
+              )}
+              <Badge variant={project.status === 'PRODUCTION' ? 'statusProduction' : project.status === 'LIVE' ? 'statusLive' : 'statusDevelopment'}>
+                {project.status}
+              </Badge>
+            </div>
           </div>
 
-          {/* Role, Timeline, Scope Strip */}
-          <div className="mb-4 p-3 bg-gray-900/30 rounded border border-gray-800/50">
-            <p className="text-sm text-gray-300">
-              <span className="text-cyan-400">Role:</span>{' '}
-              <span className="text-gray-200">{project.role}</span>
-              <span className="text-gray-600 mx-2">•</span>
-              <span className="text-cyan-400">Timeline:</span>{' '}
-              <span className="text-gray-200">{project.timeline}</span>
-              <span className="text-gray-600 mx-2">•</span>
-              <span className="text-cyan-400">Scope:</span>{' '}
-              <span className="text-gray-200">{project.scope}</span>
-            </p>
-          </div>
 
           {/* Metrics */}
-          <div className="grid grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             {project.metrics.map((metric, index) => (
               <div key={index} className="text-center p-2 bg-gray-900/50 rounded">
                 <div className={`text-lg font-bold text-${metric.color || 'cyan'}-400`}>
@@ -78,19 +77,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
 
-          {/* Safety & Reliability */}
-          {project.safetyAndReliability && project.safetyAndReliability.length > 0 && (
-            <div className="mb-4">
-              <h4 className="text-orange-400 text-sm font-bold mb-3 flex items-center gap-2">
-                <span className="text-gray-500">{'//'}</span> Safety & Reliability
-              </h4>
-              <div className="space-y-1">
-                {project.safetyAndReliability.map((item, index) => (
-                  <div key={index} className="text-xs text-gray-400">• {item}</div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* AI Evaluation & Performance */}
           {project.aiEvaluation && (
@@ -99,7 +85,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <span className="text-gray-500">{'//'}</span> AI Evaluation & Performance
               </h4>
               <div className="p-3 bg-purple-900/10 border-l-2 border-purple-400/50 rounded">
-                <p className="text-xs text-gray-300 leading-relaxed">{project.aiEvaluation}</p>
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  {project.aiEvaluation.length > 150
+                    ? `${project.aiEvaluation.substring(0, 150)}... `
+                    : project.aiEvaluation}
+                  {project.aiEvaluation.length > 150 && (
+                    <Link href={`/project/${project.id}`} className="text-purple-400 hover:text-purple-300 font-medium">
+                      View details →
+                    </Link>
+                  )}
+                </p>
               </div>
             </div>
           )}
@@ -109,19 +104,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <h4 className="text-cyan-400 text-sm font-bold mb-3 flex items-center gap-2">
               <span className="text-gray-500">{'//'}</span> Skills & Technologies
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {groupedSkills.map(([category, skills]) => (
-                <div key={category} className="space-y-1">
+                <div key={category} className="space-y-0.5">
                   <h5 className={`text-xs font-medium ${getCategoryColor(category)} flex items-center gap-1`}>
                     <span className="w-2 h-2 rounded-full bg-current opacity-60"></span>
                     {category}
                   </h5>
-                  <div className="flex flex-wrap gap-1.5 pl-3">
+                  <div className="flex flex-wrap gap-1 pl-3">
                     {skills.map((skill, index) => (
                       <Badge
                         key={index}
                         variant={getCategoryVariant(skill.category)}
-                        className="text-xs"
+                        className="text-xs py-0.5 px-1.5"
                       >
                         {skill.name}
                       </Badge>

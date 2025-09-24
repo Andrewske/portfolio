@@ -4,11 +4,13 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import * as d3 from 'd3';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '~/components/ui/tooltip';
 import { techStackNodes, techStackLinks, type Node, type Link } from '~/lib/techStack';
+import { projects, groupSkillsByCategory, getCategoryColor } from '~/lib/projects';
 
 
 const TechStackVisualization = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [showAllSkills, setShowAllSkills] = useState(false);
 
   // Data structure - memoized to prevent useEffect re-runs
   const nodes = useMemo(() => techStackNodes, []);
@@ -30,10 +32,10 @@ const TechStackVisualization = () => {
     const container = svg.append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-    // Color scales
+    // Color scales - matching project card vibrant colors from screenshot
     const colorScale = d3.scaleOrdinal()
-      .domain(['project', 'AI/ML', 'Backend', 'Frontend', 'DevOps'])
-      .range(['#06b6d4', '#22d3ee', '#eab308', '#a855f7', '#3b82f6']);
+      .domain(['project', 'Languages', 'AI/ML', 'Frontend', 'Backend', 'Data & Analytics', 'APIs & Integrations', 'Infrastructure'])
+      .range(['#06b6d4', '#a855f7', '#22d3ee', '#3b82f6', '#eab308', '#10b981', '#f97316', '#ef4444']);
 
     // Helper function to check if nodes are connected
     const isConnected = (nodeId1: string, nodeId2: string) => {
@@ -57,21 +59,30 @@ const TechStackVisualization = () => {
       node.y = centerY + Math.sin(angle) * radius;
     });
 
-    // Create simulation with better spacing and slower movement
+    // Create simulation with stable, minimal movement
     const simulation = d3.forceSimulation(nodes as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(links).id((d: any) => d.id).strength((d: any) => d.strength * 0.3))
-      .force('charge', d3.forceManyBody().strength(-400)) // Stronger repulsion
-      .force('center', d3.forceCenter(centerX, centerY).strength(0.05)) // Weaker center force
+      .force('link', d3.forceLink(links).id((d: any) => d.id).strength(0.1)) // Much weaker links
+      .force('charge', d3.forceManyBody().strength(-300)) // Moderate repulsion
+      .force('center', d3.forceCenter(centerX, centerY).strength(0.1)) // Stable centering
       .force('collision', d3.forceCollide().radius((d: any) => {
-        // Dynamic collision radius based on node type and label length
-        const baseRadius = d.type === 'project' ? 35 : 25;
-        const textLength = d.name.length * 3; // Approximate text width
+        // Larger collision radius for better spacing
+        const baseRadius = d.type === 'project' ? 45 : 35;
+        const textLength = d.name.length * 2.5;
         return Math.max(baseRadius, textLength);
       }))
-      .force('x', d3.forceX(centerX).strength(0.02))
-      .force('y', d3.forceY(centerY).strength(0.02))
-      .velocityDecay(0.7) // Slower movement (default is 0.4, higher = slower)
-      .alphaDecay(0.01); // Longer settling time (default is ~0.023, lower = longer)
+      .velocityDecay(0.9) // Much slower movement for stability
+      .alphaDecay(0.05) // Faster settling to prevent continuous movement
+      .alphaMin(0.001) // Stop simulation sooner
+      .stop(); // Don't auto-start - we'll control it
+
+    // Run simulation for initial positioning, then stop
+    for (let i = 0; i < 300; ++i) simulation.tick();
+    simulation.restart().alpha(0.3);
+
+    // Stop simulation after brief settling period
+    setTimeout(() => {
+      simulation.stop();
+    }, 2000);
 
     // Create links
     const link = container.append('g')
@@ -175,10 +186,11 @@ const TechStackVisualization = () => {
       });
     };
 
-    // Add drag behavior
+    // Add gentle drag behavior that doesn't disturb other nodes
     const drag = d3.drag<SVGCircleElement, Node>()
       .on('start', (event, d) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        // Only minimally restart simulation for dragged node
+        simulation.alphaTarget(0.1).restart();
         d.fx = d.x;
         d.fy = d.y;
       })
@@ -187,9 +199,13 @@ const TechStackVisualization = () => {
         d.fy = event.y;
       })
       .on('end', (event, d) => {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+        // Stop simulation quickly after drag ends
+        simulation.alphaTarget(0);
+        setTimeout(() => {
+          simulation.stop();
+          d.fx = null;
+          d.fy = null;
+        }, 500);
       });
 
     node.call(drag);
@@ -200,6 +216,7 @@ const TechStackVisualization = () => {
         event.stopPropagation();
         const newSelectedNode = selectedNode === d.id ? null : d.id;
         setSelectedNode(newSelectedNode);
+        setShowAllSkills(false); // Reset expansion when selecting new node
         highlight(newSelectedNode);
       })
       .on('mouseenter', (event, d) => {
@@ -217,6 +234,7 @@ const TechStackVisualization = () => {
     svg.on('click', (event) => {
       if (event.target === svg.node()) {
         setSelectedNode(null);
+        setShowAllSkills(false); // Reset expansion on deselect
         highlight(null);
       }
     });
@@ -267,31 +285,38 @@ const TechStackVisualization = () => {
     if (!node) return null;
 
     if (node.type === 'project') {
+      // Get connected skills from visualization
       const connectedSkills = links
-        .filter(link => 
+        .filter(link =>
           (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId ||
           (typeof link.target === 'string' ? link.target : (link.target as Node).id) === nodeId
         )
         .map(link => {
-          const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId 
+          const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId
             ? (typeof link.target === 'string' ? link.target : (link.target as Node).id)
             : (typeof link.source === 'string' ? link.source : (link.source as Node).id);
           return nodes.find(n => n.id === targetId);
         })
         .filter(Boolean);
 
+      // Get ALL skills from the project data for expand functionality
+      const project = projects.find(p => p.id === nodeId);
+      const allSkills = project ? groupSkillsByCategory(project.skills) : [];
+
       return {
         ...node,
-        connectedSkills
+        connectedSkills,
+        allSkills,
+        project
       };
     } else {
       const connectedProjects = links
-        .filter(link => 
+        .filter(link =>
           (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId ||
           (typeof link.target === 'string' ? link.target : (link.target as Node).id) === nodeId
         )
         .map(link => {
-          const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId 
+          const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId
             ? (typeof link.target === 'string' ? link.target : (link.target as Node).id)
             : (typeof link.source === 'string' ? link.source : (link.source as Node).id);
           return nodes.find(n => n.id === targetId);
@@ -332,12 +357,16 @@ const TechStackVisualization = () => {
                   <div 
                     className="w-4 h-4 rounded-full"
                     style={{
-                      backgroundColor: selectedNodeInfo.type === 'project' 
-                        ? '#06b6d4' 
+                      backgroundColor: selectedNodeInfo.type === 'project'
+                        ? '#06b6d4'
+                        : selectedNodeInfo.category === 'Languages' ? '#a855f7'
                         : selectedNodeInfo.category === 'AI/ML' ? '#22d3ee'
+                        : selectedNodeInfo.category === 'Frontend' ? '#3b82f6'
                         : selectedNodeInfo.category === 'Backend' ? '#eab308'
-                        : selectedNodeInfo.category === 'Frontend' ? '#a855f7'
-                        : '#3b82f6'
+                        : selectedNodeInfo.category === 'Data & Analytics' ? '#10b981'
+                        : selectedNodeInfo.category === 'APIs & Integrations' ? '#f97316'
+                        : selectedNodeInfo.category === 'Infrastructure' ? '#ef4444'
+                        : '#6b7280'
                     }}
                   />
                   <h3 className="text-xl font-bold text-white">{selectedNodeInfo.name}</h3>
@@ -351,18 +380,58 @@ const TechStackVisualization = () => {
                 )}
 
                 <div className="mb-4">
-                  <div className="text-sm text-gray-400 mb-2">
-                    {selectedNodeInfo.type === 'project' ? 'Technologies Used' : 'Used In Projects'}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm text-gray-400">
+                      {selectedNodeInfo.type === 'project' ? 'Technologies Used' : 'Used In Projects'}
+                    </div>
+                    {selectedNodeInfo.type === 'project' && (selectedNodeInfo as any).allSkills?.length > 0 && (
+                      <button
+                        onClick={() => setShowAllSkills(!showAllSkills)}
+                        className="text-xs text-cyan-400 hover:text-cyan-300"
+                      >
+                        {showAllSkills ? 'Show Fewer' : 'Show All'}
+                      </button>
+                    )}
                   </div>
+
                   <div className="space-y-1">
-                    {(selectedNodeInfo.type === 'project' 
-                      ? (selectedNodeInfo as any).connectedSkills 
-                      : (selectedNodeInfo as any).connectedProjects
-                    )?.map((item: any) => (
-                      <div key={item.id} className="text-sm text-gray-300 font-mono">
-                        • {item.name}
-                      </div>
-                    ))}
+                    {selectedNodeInfo.type === 'project' ? (
+                      showAllSkills ? (
+                        // Show all skills grouped by category
+                        <div className="space-y-3 max-h-60 overflow-y-auto">
+                          {(selectedNodeInfo as any).allSkills?.map(([category, categorySkills]: [string, any[]]) => (
+                            <div key={category} className="space-y-1">
+                              <div className={`text-xs font-semibold ${getCategoryColor(category as any)}`}>
+                                {category}
+                              </div>
+                              {categorySkills.map((skill: any) => (
+                                <div key={skill.name} className="text-xs text-gray-300 font-mono ml-2 flex items-center gap-2">
+                                  <span className={`w-1 h-1 rounded-full ${
+                                    skill.proficiency === 'Expert' ? 'bg-green-400' :
+                                    skill.proficiency === 'Proficient' ? 'bg-yellow-400' : 'bg-gray-400'
+                                  }`}></span>
+                                  {skill.name}
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        // Show only connected skills (core skills in visualization)
+                        (selectedNodeInfo as any).connectedSkills?.map((skill: any) => (
+                          <div key={skill.id} className="text-sm text-gray-300 font-mono">
+                            • {skill.name}
+                          </div>
+                        ))
+                      )
+                    ) : (
+                      // Show connected projects for skill nodes
+                      (selectedNodeInfo as any).connectedProjects?.map((project: any) => (
+                        <div key={project.id} className="text-sm text-gray-300 font-mono">
+                          • {project.name}
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
 
@@ -394,40 +463,6 @@ const TechStackVisualization = () => {
         </div>
       </div>
 
-      {!selectedNode && (
-        <div className="mt-6 grid grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-cyan-400"></div>
-              <span className="text-gray-400">Projects</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-cyan-300"></div>
-              <span className="text-gray-400">AI/ML</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-              <span className="text-gray-400">Backend</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-purple-400"></div>
-              <span className="text-gray-400">Frontend</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-              <span className="text-gray-400">DevOps</span>
-            </div>
-          </div>
-        </div>
-      )}
       </div>
     </TooltipProvider>
   );

@@ -95,7 +95,17 @@ export interface Project {
   images?: string[];
 }
 
-export const projects: Project[] = [
+// Define project display order (can be easily modified)
+const PROJECT_DISPLAY_ORDER = [
+  'knowledge-graph-mcp',
+  'ai-product-optimizer',
+  'personal-management',
+  'analytics-platform',
+  'zoho-twilio',
+  'masakali-booking'
+];
+
+const projectsData: Project[] = [
   {
     id: 'analytics-platform',
     title: 'AnalyticsPlatform',
@@ -266,7 +276,7 @@ export const projects: Project[] = [
     // TECHNICAL DESIGN - Pure system architecture
     architecture: '**Real-Time Booking Flow**: External bookings via Smoobu webhook → Local database sync with automatic cross-villa blocking. Lakshmi villa (downstairs) bookings trigger Akasha villa (whole building) blocks via Smoobu API, and vice versa. **Database Design**: PostgreSQL with Prisma ORM. Unique constraints @@unique([villa_id, date]) enforce availability. Foreign key relationships (villa → reservations). WebhookLog table stores JSON data for external booking events. Indexed columns for query optimization. **Webhook Processing**: Handler processes 5 action types (newReservation, updateReservation, cancelReservation, deleteReservation, updateRates). Filters detect "Masakali Blocked" self-generated reservations. Returns HTTP 200 status to prevent retries. Database-first persistence strategy. PostHog monitoring integration. **Payment Integration**: 14-step Xendit payment flow with 3DS authentication. Token lifecycle management with modal-based verification. Multi-store state coordination (useCartForm, useXenditStore, useFetchPaymentData). Atomic database operations across booking confirmation pipeline.',
   
-    status: 'PRODUCTION',
+    status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'July 2020 - ongoing',
     scope: 'full-stack development, payment integration, booking system, multi-tenant architecture',
@@ -457,7 +467,7 @@ export const projects: Project[] = [
     businessImpact: 'Automated SMS workflows reducing manual lead processing time by 80%',
     longDescription: 'Built production SaaS platform as solo engineer: Full-stack SMS system enabling 12 studios to engage 9,000+ leads directly from Zoho CRM, processing 43,000+ messages. Shipped end-to-end solution in 4 weeks.',
     architecture: '**Webhook Processing Flow**: Zoho CRM triggers webhook on new lead → Platform validates studio ownership via phone number mapping → Creates task in Zoho for agent follow-up → Routes SMS to lead via studio-specific Twilio/Zoho Voice number. **Multi-Tenant Isolation**: Studios table maps Zoho User IDs to dedicated SMS phone numbers. Each studio maintains separate OAuth tokens in StudioAccount junction table. Messages table enforces tenant boundaries with studioId foreign key, preventing cross-studio data access. **Real-Time Message Routing**: Dual-provider architecture (Twilio + Zoho Voice) with automatic failover. Incoming SMS webhooks identify studio by destination phone number, parse STOP/YES keywords for automated workflows, create Zoho tasks for manual responses. Admin phone number override enables managers to text from any studio context. **Error Handling & Reliability**: Centralized error handling wrapper with PostHog logging. Webhook returns HTTP 200 even on partial failures to prevent Twilio retries. Database-first approach ensures message persistence before API calls. Token refresh middleware handles Zoho OAuth expiration transparently.',
-    status: 'PRODUCTION',
+    status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'Nov 2023 - ongoing',
     scope: 'API integration, webhook handling, multi-tenant SMS delivery, error tracking',
@@ -664,7 +674,7 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     businessImpact: 'Achieved 63% cost reduction while maintaining 90%+ accuracy through model optimization',
     longDescription: 'Developed AI-powered listing optimization tool using OpenAI batch API to enhance 4,500 product titles in 30 minutes at $0.00003/listing, improving marketplace SEO and conversion rates.',
     architecture: '**Experimental Evaluation Pipeline**: Systematic testing of 6 LLM models (GPT-5, GPT-5-mini, GPT-5-nano, GPT-4.1-nano, GPT-4o-mini, GPT-5-nano-flex) across 6 processing approaches (iterative, async progressive, tool-calling, batch-processing, batch-api, early-async). Cost analysis revealed 10x variance ($0.00003-$0.00175/item) with diminishing returns on accuracy beyond GPT-4o-mini. **Hybrid AI+Template Architecture**: Next-generation approach combining minimal AI parsing ($0.00005/product) with deterministic template generation. Four-stage pipeline: 1) AI feature extraction for structured data parsing, 2) Template engine ensuring 77-character compliance, 3) Variation detector for product family grouping (30-50% instant processing), 4) Learning system extracting patterns from successful examples. **Cost Optimization Strategy**: Template reuse across product variations eliminates redundant AI calls. Character mapping system with term-length analysis enables precise length control without expensive model iterations. Architecture targets 99% cost reduction while maintaining 90%+ accuracy through intelligent batch processing and pattern recognition.',
-    status: 'PRODUCTION',
+    status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'July 2025 - ongoing',
     scope: 'LLM evaluation, model comparison, cost optimization, experimental approaches',
@@ -840,7 +850,7 @@ def process_single_batch(start_index: int = 0, batch_size: int = 4000):
         { source: 'concepts', target: 'storage', type: 'flow', animated: true }
       ],
     },
-    status: 'PRODUCTION',
+    status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'July 2025 - ongoing',
     scope: 'AI pipeline architecture, knowledge extraction, vector embeddings, MCP protocol',
@@ -1022,9 +1032,18 @@ def process_single_batch(start_index: int = 0, batch_size: int = 4000):
   }
 ];
 
+// Export projects in the specified display order
+export const projects: Project[] = PROJECT_DISPLAY_ORDER.map(projectId => {
+  const project = projectsData.find(p => p.id === projectId);
+  if (!project) {
+    throw new Error(`Project with id "${projectId}" not found in projectsData`);
+  }
+  return project;
+});
+
 export const getAllSkills = (): string[] => {
   const skillSet = new Set<string>();
-  projects.forEach(project => {
+  projectsData.forEach(project => {
     project.skills.forEach(skill => {
       skillSet.add(skill.name);
     });
@@ -1034,7 +1053,7 @@ export const getAllSkills = (): string[] => {
 
 export const getSkillsByCategory = (category: SkillCategory): string[] => {
   const skillSet = new Set<string>();
-  projects.forEach(project => {
+  projectsData.forEach(project => {
     project.skills
       .filter(skill => skill.category === category)
       .forEach(skill => {skillSet.add(skill.name)});
@@ -1055,7 +1074,7 @@ export const getProjectsByCategory = (category: SkillCategory): Project[] => {
 };
 
 export const getProjectById = (id: string): Project | undefined => {
-  return projects.find(project => project.id === id);
+  return projectsData.find(project => project.id === id);
 };
 
 export const getCategoryVariant = (category: SkillCategory) => {
