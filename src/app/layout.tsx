@@ -3,7 +3,6 @@ import './globals.css';
 import '~/styles/icomoon.css';
 
 import { JetBrains_Mono, Roboto_Mono } from 'next/font/google';
-import ScrollToTop from '~/components/ScrollToTop';
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
