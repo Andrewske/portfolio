@@ -669,124 +669,130 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     id: 'ai-product-optimizer',
     title: 'AIProductOptimizer',
     className: 'AIProductOptimizer',
-    description: 'Batch processing system using GPT-4o-mini for e-commerce optimization',
-    subtitle: 'LLM-powered e-commerce optimization with cost-performance analysis',
-    businessImpact: 'Achieved 63% cost reduction while maintaining 90%+ accuracy through model optimization',
-    longDescription: 'Developed AI-powered listing optimization tool using OpenAI batch API to enhance 4,500 product titles in 30 minutes at $0.00003/listing, improving marketplace SEO and conversion rates.',
-    architecture: '**Experimental Evaluation Pipeline**: Systematic testing of 6 LLM models (GPT-5, GPT-5-mini, GPT-5-nano, GPT-4.1-nano, GPT-4o-mini, GPT-5-nano-flex) across 6 processing approaches (iterative, async progressive, tool-calling, batch-processing, batch-api, early-async). Cost analysis revealed 10x variance ($0.00003-$0.00175/item) with diminishing returns on accuracy beyond GPT-4o-mini. **Hybrid AI+Template Architecture**: Next-generation approach combining minimal AI parsing ($0.00005/product) with deterministic template generation. Four-stage pipeline: 1) AI feature extraction for structured data parsing, 2) Template engine ensuring 77-character compliance, 3) Variation detector for product family grouping (30-50% instant processing), 4) Learning system extracting patterns from successful examples. **Cost Optimization Strategy**: Template reuse across product variations eliminates redundant AI calls. Character mapping system with term-length analysis enables precise length control without expensive model iterations. Architecture targets 99% cost reduction while maintaining 90%+ accuracy through intelligent batch processing and pattern recognition.',
-    status: 'ACTIVE',
+  
+    description: 'Prompt engineering experiments for automated e-commerce title generation at scale',
+  
+    subtitle: 'Testing of 6 LLMs across 6 processing approaches to find optimal cost-performance balance',
+  
+    businessImpact: 'Enables cost-effective SEO-optimized title generation for large product catalogs while meeting marketplace\'s strict 75-79 character requirements',
+  
+    longDescription: 'An e-commerce title optimization tool that generates SEO-optimized product titles within strict marketplace character limits (75-79 characters). The system addresses the challenge of scaling manual SEO work across large product catalogs while maintaining both search optimization and platform compliance requirements.',
+  
+    architecture: '**Title Optimization Testing**: Six processing approaches evaluated - iterative, async progressive, tool-calling, batch-processing, batch-api, and early-async patterns. **Current Implementation**: OpenAI Batch API with prompt caching delivering 90% cost reduction, handling 57K products with programmatic fallbacks for the 38% that fail character constraints. **Next Architecture**: Hybrid design combining AI feature extraction with deterministic template generation for guaranteed 75-79 character compliance.',
+  
+    status: 'INTERNAL', 
     role: 'Sole developer',
     timeline: 'July 2025 - ongoing',
     scope: 'LLM evaluation, model comparison, cost optimization, experimental approaches',
+  
     metrics: [
-      { value: '4.5k', label: 'Listings/30min', color: 'cyan' },
-      { value: '$0.00003', label: 'Cost/Item', color: 'yellow' },
-      { value: 'Linear', label: 'Scaling', color: 'green' },
-      { value: '30min', label: 'Batch Time', color: 'purple' }
+      { value: '10x', label: 'Cost Variance', color: 'cyan' },
+      { value: '5', label: 'Iterations Avg', color: 'yellow' },
+      { value: '0.5-7s', label: 'Processing Time', color: 'green' },
+      { value: '62%', label: 'Constraint Compliance', color: 'purple' }
     ],
+  
     safetyAndReliability: [
       'Manual validation for experimental/development phase',
       'Token usage tracking for cost scaling analysis',
       'Manual error management during model optimization',
       'Quality assurance through manual review process'
     ],
-    aiEvaluation: 'Evaluated 6 LLM models across 6 optimization approaches. GPT-5-nano achieved 95% accuracy but at 10x cost penalty ($0.00175/item). Pivoted to hybrid AI+template architecture maintaining accuracy while achieving 99% cost reduction. Systematic testing revealed cost-quality trade-offs: GPT-5 models delivered superior accuracy (up to 100%) but exponentially higher costs ($0.00003-$0.00175/item) and processing times (0.04s-28.23s/item). GPT-4o-mini provided optimal balance (90% accuracy, $0.00014/item, 2.31s/item). Experimental approaches tested: iterative, async progressive, tool-calling, batch-processing, batch-api, early-async. Current development focuses on brand mapping and template-based generation for economic viability at scale.',
+  
+
+    aiEvaluation: 'Through systematic prompt engineering across 6 LLM models, discovered that explicit character constraints in prompts achieve only 62% compliance despite validation instructions. Tested multiple prompt strategies: iterative refinement with feedback loops, progressive generation with early validation, and tool-calling approaches for constraint checking. Key insight: AI models excel at content optimization but struggle with precise length control, leading to hybrid prompt design combining feature extraction prompts with template completion.',
+  
+
     challenges: [
-      'Model Cost-Performance Trade-offs & Economic Viability Crisis: Testing 6 LLM models revealed exponential cost variance ($0.00003-$0.00175/item) with diminishing accuracy returns. GPT-5 models achieved 95%+ accuracy but at 10x cost penalty, making large-scale optimization economically unfeasible. Required systematic evaluation of cost vs. quality trade-offs to identify viable deployment strategies.',
-      'Character Limit Compliance & Template Generation Challenge: Marketplace requires exactly 77-character titles, but AI models struggle with precise length control without expensive iterations. Initial approaches resulted in 15-20% titles exceeding limits, requiring post-processing or re-generation. Needed deterministic character mapping system enabling precise length control without costly model calls.',
-      'Scale vs. Speed Processing Architecture: Processing 4,500+ product listings within reasonable timeframes while maintaining cost targets. Sequential processing required 8+ hours at $200+ costs. Required transition from iterative approaches to batch processing architecture achieving linear scaling and economic deployment at marketplace scale.'
+      'Prompt Engineering Constraint Barrier: Multiple strategies (progressive generation, tool-calling validation, iterative refinement) all failed to achieve reliable character limit compliance, revealing fundamental LLM limitation with precise mathematical instructions rather than prompt design issue.',
+  
+      'Model Performance vs. Cost Disconnect: Systematic evaluation showed premium models (GPT-5) cost 10x more while delivering identical constraint compliance failures as budget options, with quality improvements that don\'t address the core precision problem.',
+  
+      'Architecture Scale Dilemma: Individual processing allowed iterative refinement but became economically prohibitive. Batch processing enabled large-scale optimization but removed real-time validation essential for constraint debugging and improvement.'
     ],
+  
     solutions: [
-      'Systematic Model Evaluation & Cost Analysis Framework: Built comprehensive testing pipeline evaluating 6 LLM models (GPT-5, GPT-5-mini, GPT-5-nano, GPT-4.1-nano, GPT-4o-mini, GPT-5-nano-flex) across 6 processing approaches (iterative, async progressive, tool-calling, batch-processing, batch-api, early-async). Implemented detailed cost tracking utilities with model-specific pricing per million tokens. Result: identified GPT-4o-mini as optimal balance achieving 90% accuracy at $0.00014/item with 2.31s processing time.',
-      'Hybrid AI+Template Architecture & Intelligent Reuse System: Designed four-stage pipeline combining minimal AI parsing ($0.00005/product) with deterministic template generation. AI extracts structured features from product data, template engine ensures 77-character compliance, variation detector groups product families for 30-50% instant processing through reuse, learning system extracts patterns from successful examples. Targets 99% cost reduction while maintaining 90%+ accuracy.',
-      'OpenAI Batch API Implementation & Linear Scaling Architecture: Transitioned from sequential to batch processing using OpenAI Batch API enabling 4,500 listings in 30 minutes at $0.00003/listing. Implemented automated batch submission, 5-minute progress monitoring, and results parsing with character limit enforcement. Built resilient architecture handling 24-hour completion windows with comprehensive error handling and progress tracking.'
+      'AI+Template Hybrid Architecture: Shifted from pure generation to intelligent parsing approach where AI extracts product features and reorganizes content, while deterministic templates handle precise character control. This separates AI strengths (content intelligence) from mathematical precision requirements.',
+  
+      'Strategic Model Optimization: Selected GPT-4o-mini as cost-performance sweet spot, achieving adequate content quality at $0.000075/item through batch processing. Implemented prompt caching for 90% cost reduction on repeated system instructions, making large-scale processing economically viable.',
+  
+      'Production-Ready Batch Pipeline: Built comprehensive OpenAI Batch API system with automated fallbacks, constraint validation, and error handling. Created monitoring framework tracking compliance rates and cost metrics across different processing approaches.'
     ],
+  
     lessonsLearned: [
       'Cost-Quality Analysis Essential Before Production Deployment: Systematic model evaluation revealed that highest accuracy models (GPT-5) cost 10x more with minimal accuracy gains over GPT-4o-mini (95% vs 90%). Economic viability matters more than marginal accuracy improvements for production e-commerce applications. Always establish cost targets before optimizing for quality metrics.',
+  
       'Template-Based Optimization Outperforms Pure AI for Constrained Problems: Character limit compliance requires deterministic control that AI models struggle with efficiently. Hybrid approaches combining AI feature extraction with template generation can achieve better cost-performance ratios than pure AI solutions. Sometimes constraints drive innovation toward more efficient architectures.',
+  
       'Batch Processing Architecture Enables Economic AI Deployment: Individual API calls for 4,500+ items would cost $600+ and take hours. Batch API reduced costs to $135 and processing time to 30 minutes, achieving linear scaling. Architecture design choices (sequential vs batch vs parallel) have exponential impact on deployment economics for AI applications.'
     ],
+  
+
     codeExamples: [
       {
-        title: 'Comprehensive Model Cost Analysis & Token Tracking',
-        impactContext: 'This cost analysis framework enabled identification of GPT-4o-mini as optimal model, achieving 63% cost reduction while maintaining 90%+ accuracy through systematic evaluation of 6 LLM models across different processing approaches.',
-        code: `# Advanced cost calculation with model-specific pricing
-def calculate_cost(usage: Dict[str, int], model: str, flex: bool = False) -> Dict[str, float]:
-    """Calculate precise costs based on token usage and model pricing."""
-    # Model pricing per million tokens (real production rates)
-    model_pricing = {
-        "gpt-5-flex": {
-            "input_price": 0.625 / 1_000_000,
-            "cached_input_price": 0.0625 / 1_000_000,
-            "output_price": 5.00 / 1_000_000
-        },
-        "gpt-5-nano": {
-            "input_price": 0.05 / 1_000_000,
-            "output_price": 0.40 / 1_000_000
-        },
-        "gpt-4o-mini": {
-            "input_price": 0.15 / 1_000_000,
-            "cached_input_price": 0.075 / 1_000_000,
-            "output_price": 0.60 / 1_000_000
-        }
-    }
-
-    # Determine pricing model (flex vs standard)
-    pricing_model = f"{model}-flex" if flex and f"{model}-flex" in model_pricing else model
-
-    if pricing_model not in model_pricing:
-        return {"input_cost": 0.0, "cached_input_cost": 0.0, "output_cost": 0.0, "total_cost": 0.0}
-
-    prices = model_pricing[pricing_model]
-
-    # Calculate costs with cached token optimization
-    input_tokens = usage.get('input_tokens', 0)
-    cached_tokens = usage.get('cached_tokens', 0)
-    non_cached_input = input_tokens - cached_tokens
-
-    input_cost = non_cached_input * prices['input_price']
-    cached_cost = cached_tokens * prices.get('cached_input_price', prices['input_price'])
-    output_cost = usage.get('output_tokens', 0) * prices['output_price']
-
-    return {
-        "input_cost": round(input_cost, 6),
-        "cached_input_cost": round(cached_cost, 6),
-        "output_cost": round(output_cost, 6),
-        "total_cost": round(input_cost + cached_cost + output_cost, 6)
-    }
-
-# Batch processing with comprehensive monitoring
-def process_single_batch(start_index: int = 0, batch_size: int = 4000):
-    """Process batch with 24-hour completion window and progress tracking."""
-    # ... batch creation logic ...
-
-    # Monitor completion with 5-minute intervals
-    check_count = 0
-    max_checks = 288  # 24 hours / 5 minutes
-
-    while check_count < max_checks:
-        time.sleep(300)  # 5 minutes
-        check_count += 1
-
-        batch = client.batches.retrieve(batch_id)
-
-        if batch.status == 'completed':
-            break
-        elif batch.request_counts:
-            completed = batch.request_counts.completed
-            total = batch.request_counts.total
-            percent = (completed / total * 100) if total > 0 else 0
-            print(f"Progress: {completed}/{total} ({percent:.1f}%)")
-
-    return process_results(batch)`,
+        title: 'The Real Cost of AI Constraint Compliance: Why "Success" Rates Mislead',
+        impactContext: 'This code reveals why 90%+ character compliance became pyrrhic victories - achieving length requirements through expensive iteration made approaches practically unusable despite technical success.',
+        code: `# Basic Iterative: 90-100% "Success" Through Brute Force
+  max_iterations = 5
+  iteration = 0
+  total_usage = {'input_tokens': 0, 'output_tokens': 0}
+  
+  while iteration < max_iterations:
+      iteration += 1
+      # Make expensive API call
+      response = client.chat.completions.create(...)
+      total_usage['input_tokens'] += response.usage.prompt_tokens
+      total_usage['output_tokens'] += response.usage.completion_tokens
+  
+      title_length = len(title.strip())
+      if 75 <= title_length <= 79:
+          return {
+              "optimized_title": title,
+              "usage": total_usage,  
+              "iterations": iteration,
+              "cost": calculate_cost(total_usage)  # $0.00014-0.00046
+          }
+      # Try again with feedback...
+  
+  # Reality Check: "Success" Metrics vs Business Requirements
+  BUSINESS_REQUIREMENTS = {
+      'speed': '<1 second per title',      # Actual: 2-7 seconds
+      'cost': '<$0.0002 per title',        # Actual: $0.00014-0.00046
+      'compliance': '98%+ reliability',    # Actual: 90% after 5 tries
+      'quality': 'SEO-optimized content'   # Often sacrificed for length
+  }
+  
+  # The Async Progressive "Improvement" - Still Not Production Ready
+  async def process_batch_concurrent():
+      # 90%+ compliance, but:
+      # - 0.5-2 seconds per title (still too slow)
+      # - $0.0001-0.0002 per item (still too expensive)
+      # - Multiple concurrent API calls (complexity overhead)
+      tasks = [optimize_title(product) for product in batch]
+      results = await asyncio.gather(*tasks)
+  
+      # Cache benefits required volume to materialize
+      # Production latency requirements killed this approach
+  
+  # Current Hybrid Target: Separation of Concerns
+  def hybrid_approach():
+      # AI parsing: Single call, $0.00005, <0.1 seconds
+      components = extract_features_with_ai(product_data)
+  
+      # Template assembly: Deterministic, free, instant
+      title = assemble_with_templates(components, target_length=77)
+  
+      # Targets: <1s total, <$0.0001, 98-100% compliance
+      # AI does intelligence, templates do mathematics`,
         language: 'python',
-        technicalExplanation: `**Key Engineering Decisions:**
-• **Model-specific pricing**: Real production rates for accurate cost forecasting
-• **Cached token optimization**: Reduces costs by 50% for repeated content
-• **Batch monitoring**: 5-minute intervals prevent API rate limits while providing visibility
-• **Linear scaling architecture**: Processes 4,500 items in 30 minutes vs 8+ hours sequential`
+        technicalExplanation: `**Performance Reality Insights:**
+  • **Iteration tax**: 90%+ compliance required 3-5 API calls averaging $0.0003/item vs $0.0001 target
+  • **Speed bottleneck**: Even "fast" approaches took 0.5-2s vs <1s requirement for real-time API
+  • **Pyrrhic victories**: High technical success rates became business failures due to cost/speed constraints
+  • **Architectural solution**: Hybrid approach separates AI intelligence from constraint precision for production viability`
       }
     ],
+  
     skills: [
       {
         name: 'Python',
