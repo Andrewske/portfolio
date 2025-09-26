@@ -154,20 +154,20 @@ const Home: NextPage = () => {
           <div className="space-y-6 text-gray-300 leading-relaxed">
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              I'm a software engineer focused on building production AI systems, with a passion for AI-assisted development
+              I&apos;m a software engineer focused on building production AI systems, with a passion for AI-assisted development
               and creating tools that enhance productivity for both developers and everyday users.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              At Bonanza, where I serve as General Manager (formerly Data Analyst and Marketing Project Manager), I've built custom systems including a full-stack analytics dashboard processing 160M+ order records with sub-second page loads
+              At Bonanza, where I serve as General Manager (formerly Data Analyst and Marketing Project Manager), I&apos;ve built custom systems including a full-stack analytics dashboard processing 160M+ order records with sub-second page loads
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              On the AI side, I've built a knowledge graph MCP server based on academic research from AutoSchemaKG that processes documents in 67 seconds at $0.00002 each. Through systematic model evaluation, I've identified 10x cost variances between LLM approaches while maintaining accuracy, and I'm applying these insights to optimize e-commerce systems at scale.
+              On the AI side, I&apos;ve built a knowledge graph MCP server based on academic research from AutoSchemaKG that processes documents in 67 seconds at $0.00002 each. Through systematic model evaluation, I&apos;ve identified 10x cost variances between LLM approaches while maintaining accuracy, and I&apos;m applying these insights to optimize e-commerce systems at scale.
               </p>
             </div>
 
@@ -191,13 +191,12 @@ const Home: NextPage = () => {
       {/* Contact Section */}
       <section id={contactSectionId} className="py-20 px-6">
         <div className="max-w-6xl  mx-auto text-center">
-          <span className="flex justify-start mb-8">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            <span className="text-green-400">$</span> contact --init
-          </h2>
-          </span>
+          <div className="flex justify-start mb-8">
+            <h2 className="text-3xl font-bold text-white mb-8">
+              <span className="text-green-400">$</span> contact --init
+            </h2>
+          </div>
 
-          
           <p className="text-gray-400 mb-8">
             Let&apos;s build something amazing together
           </p>
