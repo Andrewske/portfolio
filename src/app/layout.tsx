@@ -50,6 +50,28 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kevin Andrews",
+  "jobTitle": "Senior Data Analyst & Full-Stack Engineer",
+  "description": "Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development",
+  "url": "https://kevinandrews.dev",
+  "sameAs": [
+    "https://github.com/Andrewske",
+    "https://linkedin.com/in/andrewskevin92"
+  ],
+  "knowsAbout": [
+    "AI Systems",
+    "Full-Stack Development",
+    "Data Analytics",
+    "Next.js",
+    "Python",
+    "Machine Learning",
+    "PostgreSQL"
+  ]
+} as const;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,30 +83,11 @@ export default function RootLayout({
       className={`${jetbrains.variable} ${roboto.variable}`}
     >
       <body className="max-w-screen relative ">
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtmlWithChildren: JSON-LD structured data for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Kevin Andrews",
-              "jobTitle": "Senior Data Analyst & Full-Stack Engineer",
-              "description": "Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development",
-              "url": "https://kevinandrews.dev",
-              "sameAs": [
-                "https://github.com/Andrewske",
-                "https://linkedin.com/in/andrewskevin92"
-              ],
-              "knowsAbout": [
-                "AI Systems",
-                "Full-Stack Development",
-                "Data Analytics",
-                "Next.js",
-                "Python",
-                "Machine Learning",
-                "PostgreSQL"
-              ]
-            })
+            __html: JSON.stringify(structuredData)
           }}
         />
         {children}
