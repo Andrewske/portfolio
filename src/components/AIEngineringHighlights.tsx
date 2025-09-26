@@ -16,7 +16,8 @@ export default function AIEngineringHighlights() {
             <span className="text-gray-500">{'//'}</span> AI Engineering Highlights
           </h2>
           <div className="flex gap-2 flex-wrap">
-            <Badge variant="statusDevelopment">{stats.activeSystems} ACTIVE</Badge>
+            <Badge variant="statusLive">{stats.activeSystems} ACTIVE</Badge>
+            <Badge variant="statusDevelopment">{stats.internalSystems} INTERNAL</Badge>
             <Badge variant="default" className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs sm:text-sm">
               🤖 {stats.totalYearsExperience} Years AI
             </Badge>

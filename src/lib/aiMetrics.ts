@@ -1,4 +1,4 @@
-import { projects, Project } from './projects';
+import { type Project, projects } from './projects';
 
 export interface AIHighlight {
   value: string;
@@ -62,6 +62,7 @@ export const getAIStats = () => {
     totalProjects: aiProjects.length,
     productionSystems: aiProjects.filter(p => p.status === 'PRODUCTION').length,
     activeSystems: aiProjects.filter(p => p.status === 'ACTIVE' || p.status === 'LIVE').length,
+    internalSystems: aiProjects.filter(p => p.status === 'INTERNAL').length,
     totalYearsExperience: '1+', // Based on active AI development timeline
     frameworks: ['GPT-4', 'AutoSchemaKG', 'Claude Code', 'MCP Protocol'],
     specializations: ['Cost Optimization', 'Knowledge Graphs', 'Agent Systems', 'Performance Engineering']
