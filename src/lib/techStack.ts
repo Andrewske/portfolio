@@ -1,4 +1,4 @@
-import { projects, type Project, type ProjectSkill, type SkillCategory, groupSkillsByCategory } from './projects';
+import { projects, type SkillCategory, } from './projects';
 
 export interface Node {
   id: string;
@@ -40,7 +40,7 @@ function calculateExperience(projectTimelines: string[]): number {
   projectTimelines.forEach(timeline => {
     const yearMatch = timeline.match(/(\d{4})/);
     if (yearMatch) {
-      const year = parseInt(yearMatch[1]);
+      const year = parseInt(yearMatch[1], 10);
       if (year < earliestYear) {
         earliestYear = year;
       }
@@ -99,7 +99,8 @@ function generateTechStackData(): { nodes: Node[], links: Link[] } {
         });
       }
 
-      const skillData = skillMap.get(skill.name)!;
+      const skillData = skillMap.get(skill.name);
+      if (!skillData) return;
       if (!skillData.projects.includes(project.id)) {
         skillData.projects.push(project.id);
       }
@@ -152,8 +153,9 @@ function generateTechStackData(): { nodes: Node[], links: Link[] } {
       if (!coreSkillsFilter.has(skill.name)) return;
 
       const skillId = skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-      const strength = skill.proficiency === 'Expert' ? 1.0 :
-                     skill.proficiency === 'Proficient' ? 0.8 : 0.6;
+      const strength = skill.proficiency === 'Production Daily' ? 1.0 :
+                     skill.proficiency === 'Production Proven' ? 0.8 :
+                     skill.proficiency === 'Working Knowledge' ? 0.6 : 0.4;
 
       links.push({
         source: project.id,
