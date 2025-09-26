@@ -1,32 +1,27 @@
-import Link from 'next/link';
-import { Button } from '~/components/ui/button';
-import { Badge } from '~/components/ui/badge';
-import { Project, ProficiencyLevel, groupSkillsByCategory, getCategoryVariant, getCategoryColor } from '~/lib/projects';
+import Link from 'next/link'
+import { Badge } from '~/components/ui/badge'
+import { Button } from '~/components/ui/button'
+import type { Project } from '~/lib/projects'
+import { getCategoryColor, getCategoryVariant, groupSkillsByCategory } from '~/lib/projects'
 
 interface ProjectCardProps {
-  project: Project;
+  project: Project
 }
 
-const getProficiencyVariant = (proficiency: ProficiencyLevel) => {
-  switch (proficiency) {
-    case 'Expert':
-      return 'proficiencyExpert';
-    case 'Proficient':
-      return 'proficiencyProficient';
-    case 'Familiar':
-      return 'proficiencyFamiliar';
-  }
-};
+// removed unused getProficiencyVariant helper
 
 const isAIProject = (project: Project) => {
-  return project.skills.some(skill => skill.category === 'AI/ML') || project.aiEvaluation;
-};
+  return project.skills.some(skill => skill.category === 'AI/ML') || project.aiEvaluation
+}
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const groupedSkills = groupSkillsByCategory(project.skills);
+  const groupedSkills = groupSkillsByCategory(project.skills)
 
   return (
-    <div className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group">
+    <div
+      id={project.id}
+      className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group"
+    >
       <div className="flex">
         <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
           <span>1</span>
@@ -54,21 +49,34 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </div>
             <div className="flex flex-col gap-2">
               {isAIProject(project) && (
-                <Badge variant="default" className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs">
+                <Badge
+                  variant="default"
+                  className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs"
+                >
                   🤖 AI/ML
                 </Badge>
               )}
-              <Badge variant={project.status === 'PRODUCTION' ? 'statusProduction' : project.status === 'LIVE' ? 'statusLive' : 'statusDevelopment'}>
+              <Badge
+                variant={
+                  project.status === 'PRODUCTION'
+                    ? 'statusProduction'
+                    : project.status === 'LIVE'
+                      ? 'statusLive'
+                      : 'statusDevelopment'
+                }
+              >
                 {project.status}
               </Badge>
             </div>
           </div>
 
-
           {/* Metrics */}
           <div className="grid grid-cols-2 gap-3 mb-4">
-            {project.metrics.map((metric, index) => (
-              <div key={index} className="text-center p-2 bg-gray-900/50 rounded">
+            {project.metrics.map(metric => (
+              <div
+                key={`${project.id}-${metric.label}`}
+                className="text-center p-2 bg-gray-900/50 rounded"
+              >
                 <div className={`text-lg font-bold text-${metric.color || 'cyan'}-400`}>
                   {metric.value}
                 </div>
@@ -76,7 +84,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               </div>
             ))}
           </div>
-
 
           {/* AI Evaluation & Performance */}
           {project.aiEvaluation && (
@@ -90,7 +97,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     ? `${project.aiEvaluation.substring(0, 150)}... `
                     : project.aiEvaluation}
                   {project.aiEvaluation.length > 150 && (
-                    <Link href={`/project/${project.id}`} className="text-purple-400 hover:text-purple-300 font-medium">
+                    <Link
+                      href={`/project/${project.id}`}
+                      className="text-purple-400 hover:text-purple-300 font-medium"
+                    >
                       View details →
                     </Link>
                   )}
@@ -107,14 +117,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <div className="space-y-2">
               {groupedSkills.map(([category, skills]) => (
                 <div key={category} className="space-y-0.5">
-                  <h5 className={`text-xs font-medium ${getCategoryColor(category)} flex items-center gap-1`}>
+                  <h5
+                    className={`text-xs font-medium ${getCategoryColor(category)} flex items-center gap-1`}
+                  >
                     <span className="w-2 h-2 rounded-full bg-current opacity-60"></span>
                     {category}
                   </h5>
                   <div className="flex flex-wrap gap-1 pl-3">
-                    {skills.map((skill, index) => (
+                    {skills.map(skill => (
                       <Badge
-                        key={index}
+                        key={skill.name}
                         variant={getCategoryVariant(skill.category)}
                         className="text-xs py-0.5 px-1.5"
                       >
@@ -130,9 +142,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {/* Action Buttons */}
           <div className="flex gap-3">
             <Button variant="terminalGhost" size="sm" asChild>
-              <Link href={`/project/${project.id}`}>
-                View Project →
-              </Link>
+              <Link href={`/project/${project.id}`}>View Project →</Link>
             </Button>
             {project.github && (
               <Button variant="terminalGhost" size="sm" asChild>
@@ -152,5 +162,5 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

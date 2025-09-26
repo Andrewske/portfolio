@@ -1,7 +1,7 @@
 'use client';
 
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import TechStackVisualization from '~/components/TechStackVisualization';
 import TypingAnimation from '~/components/TypingAnimation';
 import ProjectFilter from '~/components/ProjectFilter';
@@ -9,10 +9,13 @@ import ProjectCard from '~/components/ProjectCard';
 import AIEngineringHighlights from '~/components/AIEngineringHighlights';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
-import { projects, SkillCategory } from '~/lib/projects';
+import { projects } from '~/lib/projects';
+import type { SkillCategory } from '~/lib/projects';
 
 const Home: NextPage = () => {
   const [filteredCategories, setFilteredCategories] = useState<SkillCategory[]>([]);
+  const projectsSectionId = useId();
+  const contactSectionId = useId();
 
   const displayedProjects = filteredCategories.length === 0
     ? projects
@@ -94,7 +97,7 @@ const Home: NextPage = () => {
                   </a>
                 </Button>
                 <Button variant="terminalGhost" asChild>
-                  <a href="#contact-section" className="flex items-center gap-2">
+                  <a href={`#${contactSectionId}`} className="flex items-center gap-2">
                     <span className="text-cyan-400">$</span> contact
                   </a>
                 </Button>
@@ -110,7 +113,7 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
+      <section id={projectsSectionId} className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">
@@ -180,7 +183,7 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Contact Section */}
-      <section id="contact-section" className="py-20 px-6">
+      <section id={contactSectionId} className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-8">
             <span className="text-green-400">$</span> contact --init

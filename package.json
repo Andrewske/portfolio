@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:biome": "npx @biomejs/biome lint .",
+    "format": "npx @biomejs/biome format --write .",
+    "check": "npx @biomejs/biome check --write ."
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -27,6 +30,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24.3.0",

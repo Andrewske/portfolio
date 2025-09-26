@@ -102,7 +102,8 @@ const PROJECT_DISPLAY_ORDER = [
   'personal-management',
   'analytics-platform',
   'zoho-twilio',
-  'masakali-booking'
+  'masakali-booking',
+  'music-minion-cli'
 ];
 
 const projectsData: Project[] = [
@@ -978,31 +979,89 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     github: 'https://github.com/Andrewske/kg-memory-mcp'
   },
   {
+    id: 'music-minion-cli',
+    title: 'MusicMinionCLI',
+    className: 'MusicMinionCLI',
+    description: 'Music player CLI built in one day for Claude Code experience',
+    subtitle: 'Context-aware music rating system with temporal preference tracking',
+    businessImpact: 'Personal tool showcasing rapid CLI development while solving actual music workflow needs',
+    longDescription: 'Built music player CLI in one day specifically to get hands-on experience with command-line interfaces before applying to Anthropic Claude Code. Ended up solving real problems with my music workflow - goes beyond simple ratings to track listening context and mood patterns. Designed database schema for future AI analysis of music taste evolution over time.',
+    architecture: '**Single-Day CLI Build**: Python 3.12 with MPV integration for cross-platform audio playback. SQLite database stores contextual listening data beyond traditional 5-star ratings. TOML configuration files keep settings simple and readable. **Context Tracking System**: Records when/where/why I\'m listening to specific songs - data structure designed for future machine learning on music preferences. **Modular Design**: Separate modules for player control, library management, and database operations. Built for extensibility even though it was a rapid prototype.',
+    status: 'INTERNAL',
+    role: 'Sole developer',
+    timeline: 'September 2025 - 1 day',
+    scope: 'CLI development, audio integration, contextual data modeling',
+    metrics: [
+      { value: '1 Day', label: 'Build Time', color: 'cyan' },
+      { value: 'CLI', label: 'Experience', color: 'yellow' },
+      { value: 'Context', label: 'Tracking', color: 'green' },
+      { value: 'MPV', label: 'Integration', color: 'purple' }
+    ],
+    safetyAndReliability: [
+      'Cross-platform MPV audio backend',
+      'SQLite for reliable data persistence',
+      'Modular Python architecture for maintainability',
+      'Personal use scope with room for experimentation'
+    ],
+    skills: [
+      {
+        name: 'Python',
+        proficiency: 'Expert',
+        category: 'Languages',
+        usage: 'Built complete CLI system with modern Python patterns'
+      },
+      {
+        name: 'CLI Development',
+        proficiency: 'Familiar',
+        category: 'Infrastructure',
+        usage: 'Built first CLI project with AI assistance for Claude Code experience'
+      },
+      {
+        name: 'Audio Processing',
+        proficiency: 'Proficient',
+        category: 'Infrastructure',
+        usage: 'MPV integration for music playback and metadata extraction'
+      },
+      {
+        name: 'SQLite',
+        proficiency: 'Proficient',
+        category: 'Backend',
+        usage: 'Context-aware music preference tracking database'
+      },
+      {
+        name: 'Prompt Engineering',
+        proficiency: 'Expert',
+        category: 'AI/ML',
+        usage: 'Advanced prompt engineering techniques for music preference tracking'
+      },
+    ]
+  },
+  {
     id: 'personal-management',
     title: 'PersonalManagementSystem',
     className: 'PersonalManagementSystem',
-    description: 'Custom AI agent ecosystem for multi-project workflows',
-    subtitle: 'Specialized AI agent platform for domain-specific assistance',
-    businessImpact: 'Context-aware AI agents providing personalized guidance across career, finance, and health domains',
-    longDescription: 'Novel personal AI management system using Claude Code\'s file-based context for specialized agent domains. Created isolated agents for career coaching (Anthropic application prep), work project management (Bonanza), and podcast conversation analysis. Innovative approach leverages existing Claude Code infrastructure rather than building custom chatbot solutions, with planned knowledge graph integration for cross-agent memory sharing.',
-    architecture: '**Agent Isolation Architecture**: Each specialized agent operates in separate filesystem directories with dedicated CLAUDE.md configuration files defining domain expertise, context boundaries, and behavioral patterns. Workflow involves cd into agent directory + new Claude Code instance, creating complete context isolation between domains (career coaching vs work management vs health tracking). **Context Management Strategy**: Agent specialization achieved through prompt engineering in CLAUDE.md rather than model fine-tuning. Career Coach agent includes achievement tracking methodology, confidence calibration protocols, and industry-specific language patterns. Work agents maintain project context and task prioritization logic. Personal agents handle ADHD-aware nutrition planning and mental health support patterns. **Cross-Agent Memory Integration**: Planned integration with Knowledge Graph MCP for shared information layer. Current limitation: agents cannot share context across domains. Solution: kg-memory-mcp will serve as centralized knowledge store enabling agents to query shared experiences, achievements, and insights while maintaining specialized domain expertise. **Innovative Engineering Approach**: Leverages Claude Code\'s existing file-based context system rather than building custom infrastructure. Cost-effective alternative to fine-tuned models or custom chatbot development. Demonstrates practical AI application for personal productivity beyond traditional software development use cases.',
+    description: 'Custom AI tools for ADHD workflow management and memory assistance',
+    subtitle: 'Telegram bot + specialized Claude Code agents built because standard productivity tools don\'t work for my brain',
+    businessImpact: 'Solves ADHD-related memory and documentation issues through automated daily journaling and specialized AI coaching',
+    longDescription: 'Built custom productivity system because existing tools don\'t fit how my brain works. Telegram bot texts me daily to document activities, then uses AI to format entries and saves them to GitHub for Obsidian sync. Specialized Claude Code agents in separate directories handle different domains: career coaching for Anthropic prep, work project management, diet planning with ADHD-aware nutrition guidance. Can\'t find tools that handle context switching and memory issues properly, so I build my own.',
+    architecture: '**Telegram Daily Documentation Bot**: Texts me every day asking what I did, then formats my messy responses with OpenAI and commits them to GitHub as markdown files. Evolved from just activity tracking to food journaling and planning to add spending tracking. Had to work around Google Drive OAuth complexity - ended up using GitHub API for simple storage that syncs with Obsidian automatically. **Specialized Claude Code Agents**: Separate directories for different life domains because context switching breaks focus. Career agent has all my achievement documentation and interview prep context. Diet agent knows my ADHD eating patterns and suggests actual meals I\'ll make. Work agent keeps Bonanza project context separate from personal stuff. Each agent gets its own CLAUDE.md file with domain-specific instructions. **File-Based Context System**: Uses Claude Code\'s built-in file reading instead of building custom chat interfaces. Simple solution - just cd into the right directory and start a new Claude session. **Memory Integration Plan**: Knowledge Graph MCP will eventually connect all agents so career achievements can inform confidence coaching and diet success can influence mood tracking.',
     status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'June 2025 - ongoing',
-    scope: 'agent architecture, context management, specialized AI assistants, workflow automation',
+    scope: 'Telegram bot development, ADHD-aware tool design, context management, daily automation',
     metrics: [
-      { value: 'Career', label: 'Coaching Agent', color: 'cyan' },
-      { value: 'Tech', label: 'Docs Agent', color: 'yellow' },
-      { value: 'Project', label: 'Management', color: 'green' },
-      { value: 'MCP', label: 'Architecture', color: 'purple' }
+      { value: 'Daily', label: 'Documentation', color: 'cyan' },
+      { value: '3+', label: 'Life Domains', color: 'yellow' },
+      { value: 'GitHub', label: 'Auto Sync', color: 'green' },
+      { value: 'ADHD', label: 'Optimized', color: 'purple' }
     ],
     safetyAndReliability: [
-      'Agent isolation via folder-based context separation',
-      'File-based permissions using claude.md configurations',
-      'Claude Code built-in conversation history management',
-      'Personal project scope with controlled data input'
+      'GitHub storage with automatic markdown formatting',
+      'Telegram Bot API handles message reliability',
+      'Simple file-based context - no complex databases to break',
+      'Each agent isolated in separate directories'
     ],
-    aiEvaluation: 'Novel Claude Code-powered agent ecosystem using Opus/Sonnet models with persistent file-based context. Specialized agents: Career Coach (Anthropic application prep), Bonanza Project Manager (prioritization), Budget Analyst (CSV transaction analysis), Diet/Meal Planner (ADHD-aware nutrition). Agents maintain domain expertise through continuous context evolution rather than traditional model fine-tuning. Architecture leverages Claude Code\'s built-in context management for cost-effective specialized assistance across personal productivity domains.',
+    aiEvaluation: 'Built specialized Claude Code agents because standard productivity tools don\'t handle ADHD context switching. Career Coach keeps achievement documentation and interview prep context. Diet Agent knows my eating patterns and suggests meals I\'ll actually make. Work Agent separates Bonanza project management from personal stuff. Telegram bot automates the documentation I always forget to do manually. Uses Claude Code\'s file system instead of building custom interfaces - simpler and more reliable.',
     skills: [
       {
         name: 'Claude Code',

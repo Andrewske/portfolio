@@ -1,7 +1,7 @@
-import Link from 'next/link';
+
+import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { Badge } from '~/components/ui/badge';
 import { getAIHighlights, getAIStats } from '~/lib/aiMetrics';
 
 export default function AIEngineringHighlights() {
@@ -29,8 +29,8 @@ export default function AIEngineringHighlights() {
 
       <CardContent>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          {highlights.map((highlight, index) => (
-            <div key={index} className="text-center p-3 bg-black/30 rounded border border-gray-800">
+          {highlights.map((highlight) => (
+            <div key={`${highlight.label}-${highlight.value}`} className="text-center p-3 bg-black/30 rounded border border-gray-800">
               <div className={`text-xl lg:text-2xl font-bold text-${highlight.color}-400`}>
                 {highlight.value}
               </div>
@@ -48,9 +48,9 @@ export default function AIEngineringHighlights() {
             <span className="text-gray-500">{'//'}</span> Core AI Specializations
           </h3>
           <div className="flex flex-wrap gap-2">
-            {stats.specializations.map((spec, index) => (
+            {stats.specializations.map((spec) => (
               <Badge
-                key={index}
+                key={spec}
                 variant="categoryAiMl"
                 className="text-xs py-1 px-2"
               >

@@ -83,13 +83,9 @@ export default function RootLayout({
       className={`${jetbrains.variable} ${roboto.variable}`}
     >
       <body className="max-w-screen relative ">
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtmlWithChildren: JSON-LD structured data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData)
-          }}
-        />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
         {children}
       </body>
     </html>
