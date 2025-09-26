@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Project } from '~/lib/projects';
 
 interface VisualGalleryProps {
@@ -15,10 +16,13 @@ export function VisualGallery({ project }: VisualGalleryProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {project.images.map((image, index) => (
             <div key={index} className="border border-gray-800 rounded-lg overflow-hidden">
-              <img
+              <Image
                 src={image}
-                alt={`${project.title} screenshot ${index + 1}`}
+                alt={`${project.title} - Interface screenshot showing ${project.title.toLowerCase()} functionality`}
+                width={800}
+                height={600}
                 className="w-full h-auto"
+                loading="lazy"
               />
             </div>
           ))}

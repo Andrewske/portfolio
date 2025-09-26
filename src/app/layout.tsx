@@ -17,9 +17,37 @@ const roboto = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Kevin Andrews Portfolio',
-  description:
-    "Discover Kevin's portfolio showcasing expertise in web development and data analysis. Explore dynamic projects, innovative solutions, and a commitment to solving complex problems with advanced technologies like React, Python, SQL, and more.",
+  title: {
+    default: 'Kevin Andrews - AI Systems Engineer & Full-Stack Developer',
+    template: '%s | Kevin Andrews Portfolio'
+  },
+  description: 'Software engineer specializing in AI systems, data analytics, and full-stack development. Built production systems processing 160M+ records with expertise in Next.js, Python, and machine learning.',
+  keywords: ['AI Engineer', 'Full-Stack Developer', 'Data Analytics', 'Next.js', 'Python', 'Machine Learning', 'Kevin Andrews'],
+  authors: [{ name: 'Kevin Andrews' }],
+  creator: 'Kevin Andrews',
+  metadataBase: new URL('https://kevinandrews.dev'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://kevinandrews.dev',
+    title: 'Kevin Andrews - AI Systems Engineer',
+    description: 'Software engineer specializing in AI systems and full-stack development',
+    siteName: 'Kevin Andrews Portfolio',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -32,7 +60,35 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrains.variable} ${roboto.variable}`}
     >
-      <body className="max-w-screen relative ">{children}</body>
+      <body className="max-w-screen relative ">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Kevin Andrews",
+              "jobTitle": "Senior Data Analyst & Full-Stack Engineer",
+              "description": "Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development",
+              "url": "https://kevinandrews.dev",
+              "sameAs": [
+                "https://github.com/Andrewske",
+                "https://linkedin.com/in/andrewskevin92"
+              ],
+              "knowsAbout": [
+                "AI Systems",
+                "Full-Stack Development",
+                "Data Analytics",
+                "Next.js",
+                "Python",
+                "Machine Learning",
+                "PostgreSQL"
+              ]
+            })
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
