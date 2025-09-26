@@ -1,4 +1,4 @@
-export type ProficiencyLevel = 'Expert' | 'Proficient' | 'Familiar';
+export type ProficiencyLevel = 'Production Daily' | 'Production Proven' | 'Working Knowledge' | 'Exploring';
 
 export type SkillCategory =
   | 'Languages'
@@ -136,61 +136,61 @@ const projectsData: Project[] = [
     skills: [
       {
         name: 'React',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Frontend',
         usage: 'Built complex dashboards with 13 internal views for data visualization'
       },
       {
         name: 'TypeScript',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Languages',
         usage: 'Ensured type safety across the entire full-stack application'
       },
       {
         name: 'Polars',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Data & Analytics',
         usage: 'Optimized data processing from 10+ min to under 5 min for 160M+ records'
       },
       {
         name: 'MySQL',
-        proficiency: 'Expert',
+        proficiency: 'Working Knowledge',
         category: 'Backend',
         usage: 'Advanced query optimization on legacy MySQL 5.7 with read-only constraints'
       },
       {
         name: 'SQL Optimization',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Data & Analytics',
         usage: 'Reduced query times by 50% through advanced indexing and query restructuring'
       },
       {
         name: 'Tanstack Router/Query',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Frontend',
         usage: 'Implemented complex routing and data fetching patterns'
       },
       {
         name: 'AWS',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Infrastructure',
         usage: 'Deployed scalable multi-tenant architecture on AWS'
       },
       {
         name: 'Express.js',
-        proficiency: 'Expert',
+        proficiency: 'Working Knowledge',
         category: 'Backend',
         usage: 'Built secure REST APIs with authentication and private routing'
       },
       {
         name: 'PostgreSQL',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Backend',
         usage: 'Designed multi-tenant database architecture for B2B customers'
       },
       {
         name: 'Data Visualization',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Data & Analytics',
         usage: 'Created intuitive charts and graphs for complex business metrics'
       }
@@ -321,55 +321,55 @@ const projectsData: Project[] = [
     skills: [
       {
         name: 'Next.js',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Frontend',
         usage: 'Migrated from React/Redux to Next.js for better performance and SEO'
       },
       {
         name: 'Redux',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Frontend',
         usage: 'Managed complex booking state before Next.js migration'
       },
       {
         name: 'PostgreSQL',
-        proficiency: 'Proficient',
+        proficiency: 'Production Daily',
         category: 'Backend',
         usage: 'Stored booking data with complex availability logic for 5 listings'
       },
       {
         name: 'Smoobu API',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'APIs & Integrations',
         usage: 'Real-time inventory sync across Booking.com and Airbnb'
       },
       {
         name: 'Xendit API',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'APIs & Integrations',
         usage: 'Integrated Indonesian payment processor with limited documentation'
       },
       {
         name: 'Webhook Architecture',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Replaced polling with webhooks: 3+ seconds → instant updates'
       },
       {
         name: 'TypeScript',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Languages',
         usage: 'Type-safe API integrations and complex booking logic'
       },
       {
         name: 'Real-time Sync',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Backend',
         usage: 'Zero double-bookings through instant inventory synchronization'
       },
       {
         name: 'Multi-CDN',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Infrastructure',
         usage: 'Image optimization across multiple CDN providers'
       }
@@ -502,61 +502,61 @@ const projectsData: Project[] = [
     skills: [
       {
         name: 'Next.js',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Frontend',
         usage: 'Built full-stack SaaS platform with custom Zoho CRM extension'
       },
       {
         name: 'TypeScript',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Languages',
         usage: 'Type-safe multi-tenant routing logic and API integrations'
       },
       {
         name: 'Prisma',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Backend',
         usage: 'ORM for PostgreSQL with complex multi-tenant data models'
       },
       {
         name: 'PostgreSQL',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Backend',
         usage: 'Stored 43k+ messages with studio-specific partitioning'
       },
       {
         name: 'Twilio API',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'APIs & Integrations',
         usage: 'Dynamic routing between studio-specific phone numbers'
       },
       {
         name: 'Zoho CRM API',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'APIs & Integrations',
         usage: 'Custom CRM extension with intuitive chat interface'
       },
       {
         name: 'Webhook Architecture',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Real-time message synchronization and automated sequences'
       },
       {
         name: 'Multi-tenant Architecture',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Complex routing logic based on agent context and permissions'
       },
       {
         name: 'Sentry',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Infrastructure',
         usage: 'Production monitoring and rapid issue resolution'
       },
       {
         name: 'Rapid Prototyping',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Shipped complete solution in 4 weeks as solo engineer'
       }
@@ -797,37 +797,37 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     skills: [
       {
         name: 'Python',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Languages',
         usage: 'Built batch processing pipeline for 4.5k listings'
       },
       {
-        name: 'OpenAI API',
-        proficiency: 'Expert',
+        name: 'OpenAI Models',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Optimized GPT-4o-mini for cost-effective title generation'
       },
       {
         name: 'Batch Processing',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Data & Analytics',
         usage: 'Linear scaling architecture processing 4.5k items in 30 minutes'
       },
       {
         name: 'PostgreSQL',
-        proficiency: 'Proficient',
+        proficiency: 'Production Daily',
         category: 'Backend',
         usage: 'Stored optimized product data and processing metrics'
       },
       {
         name: 'Cost Optimization',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Achieved $0.00003 per item through prompt engineering'
       },
       {
-        name: 'GPT-4',
-        proficiency: 'Expert',
+        name: 'OpenAI Models',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Fine-tuned prompts for e-commerce SEO optimization'
       }
@@ -842,21 +842,21 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     businessImpact: 'Enables AI agents to access personal document context through standardized MCP protocol with 70% cost reduction',
     longDescription: 'Built on AutoSchemaKG framework for automatic knowledge graph construction (https://github.com/HKUST-KnowComp/AutoSchemaKG). I extended the original framework with emotional context extraction because AI agents need to understand personal patterns, work styles, and behavioral tendencies - not just facts and events. Through systematic optimization, I achieved a 68% per-token improvement (64ms/token → 21ms/token) with 70% cost reduction. My architecture processes documents in 67 seconds, prioritizing practical deployment over experimental approaches.',
     architecture: '**Pipeline Design**: I built a three-stage pipeline: document input → parallel extractions (entity-entity, entity-event, event-event, emotional context) → concept generation and deduplication → knowledge graph storage. **Processing Architecture**: My parallel processing approach replaced sequential extraction, achieving 21ms per token processing speed. **MCP Implementation**: I designed dual-transport server architecture supporting both STDIO (Claude Code integration) and HTTP (web applications) because different integration contexts need different protocols. **Performance Engineering**: Built comprehensive caching system achieving 100% cache hit rate with atomic database operations for reliability.',
-    architectureDiagramType: 'pipeline-flow',
-    architectureDiagramData: {
-      title: '3-Stage Knowledge Processing Pipeline',
-      description: 'EXTRACTION (63s) → CONCEPTS → DEDUPLICATION → STORAGE (0.5s)',
-      layout: 'horizontal',
-      nodes: [
-        { id: 'extraction', label: 'EXTRACTION\\n63s\\nparallel processing', type: 'process', x: 200, y: 200 },
-        { id: 'concepts', label: 'CONCEPTS\\nclustering\\ndeduplication', type: 'service', x: 500, y: 200 },
-        { id: 'storage', label: 'STORAGE\\n0.5s\\natomic operations', type: 'database', x: 800, y: 200 }
-      ],
-      links: [
-        { source: 'extraction', target: 'concepts', type: 'flow', animated: true },
-        { source: 'concepts', target: 'storage', type: 'flow', animated: true }
-      ],
-    },
+    // architectureDiagramType: 'pipeline-flow',
+    // architectureDiagramData: {
+    //   title: '3-Stage Knowledge Processing Pipeline',
+    //   description: 'EXTRACTION (63s) → CONCEPTS → DEDUPLICATION → STORAGE (0.5s)',
+    //   layout: 'horizontal',
+    //   nodes: [
+    //     { id: 'extraction', label: 'EXTRACTION\\n63s\\nparallel processing', type: 'process', x: 200, y: 200 },
+    //     { id: 'concepts', label: 'CONCEPTS\\nclustering\\ndeduplication', type: 'service', x: 500, y: 200 },
+    //     { id: 'storage', label: 'STORAGE\\n0.5s\\natomic operations', type: 'database', x: 800, y: 200 }
+    //   ],
+    //   links: [
+    //     { source: 'extraction', target: 'concepts', type: 'flow', animated: true },
+    //     { source: 'concepts', target: 'storage', type: 'flow', animated: true }
+    //   ],
+    // },
     status: 'ACTIVE',
     role: 'Sole developer',
     timeline: 'July 2025 - ongoing',
@@ -929,49 +929,49 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     skills: [
       {
         name: 'TypeScript',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'Languages',
         usage: 'Built both HTTP and STDIO implementations of MCP protocol'
       },
       {
         name: 'MCP Protocol',
-        proficiency: 'Expert',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Implemented full Model Context Protocol specification with dual transport'
       },
       {
         name: 'Vector Embeddings',
-        proficiency: 'Expert',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Generated semantic embeddings for knowledge graph relationships'
       },
       {
-        name: 'GPT-4',
-        proficiency: 'Expert',
+        name: 'OpenAI Models',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Optimized model performance achieving 21ms per token processing'
       },
       {
         name: 'Pipeline Architecture',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Designed 3-stage pipeline achieving 68% per-token improvement'
       },
       {
         name: 'Knowledge Graphs',
-        proficiency: 'Expert',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Extended AutoSchemaKG framework with emotional context extraction'
       },
       {
         name: 'Performance Optimization',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Infrastructure',
         usage: 'Systematic optimization achieved 100% cache hit rate and 70% cost reduction'
       },
       {
         name: 'Academic Research',
-        proficiency: 'Proficient',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Integrated latest research into production implementation'
       }
@@ -1006,31 +1006,31 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     skills: [
       {
         name: 'Python',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'Languages',
         usage: 'Built complete CLI system with modern Python patterns'
       },
       {
         name: 'CLI Development',
-        proficiency: 'Familiar',
+        proficiency: 'Exploring',
         category: 'Infrastructure',
         usage: 'Built first CLI project with AI assistance for Claude Code experience'
       },
       {
         name: 'Audio Processing',
-        proficiency: 'Proficient',
+        proficiency: 'Exploring',
         category: 'Infrastructure',
         usage: 'MPV integration for music playback and metadata extraction'
       },
       {
         name: 'SQLite',
-        proficiency: 'Proficient',
+        proficiency: 'Working Knowledge',
         category: 'Backend',
         usage: 'Context-aware music preference tracking database'
       },
       {
         name: 'Prompt Engineering',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Advanced prompt engineering techniques for music preference tracking'
       },
@@ -1065,31 +1065,31 @@ async function deduplicateZohoVoiceMessages(zohoLogs, prisma, customerNumber) {
     skills: [
       {
         name: 'Claude Code',
-        proficiency: 'Expert',
+        proficiency: 'Production Daily',
         category: 'AI/ML',
-        usage: 'Built custom agent ecosystem for personal productivity'
+        usage: 'Power user - built custom agent ecosystem for personal productivity'
       },
       {
         name: 'Prompt Engineering',
-        proficiency: 'Expert',
+        proficiency: 'Production Proven',
         category: 'AI/ML',
         usage: 'Advanced specialization techniques for domain-specific agents'
       },
       {
         name: 'Knowledge Management',
-        proficiency: 'Expert',
+        proficiency: 'Working Knowledge',
         category: 'Data & Analytics',
         usage: 'Personal knowledge base beyond traditional coding'
       },
       {
         name: 'MCP Protocol',
-        proficiency: 'Expert',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Leveraged MCP architecture for agent communication'
       },
       {
         name: 'Agent Architecture',
-        proficiency: 'Expert',
+        proficiency: 'Exploring',
         category: 'AI/ML',
         usage: 'Designed multi-agent system with specialized domains'
       }

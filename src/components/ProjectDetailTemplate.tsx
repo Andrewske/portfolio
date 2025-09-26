@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import { Button } from '~/components/ui/button';
-import { Badge } from '~/components/ui/badge';
-import { Project } from '~/lib/projects';
-import { ProjectHero } from './project-detail/ProjectHero';
+import type { Project } from '~/lib/projects';
 import { ArchitectureSection } from './project-detail/ArchitectureSection';
-import { TechnicalImplementation } from './project-detail/TechnicalImplementation';
-import { PerformanceMetrics } from './project-detail/PerformanceMetrics';
 import { ChallengesAndSolutions } from './project-detail/ChallengesAndSolutions';
+import { PerformanceMetrics } from './project-detail/PerformanceMetrics';
+import { ProjectHero } from './project-detail/ProjectHero';
+import { TechnicalImplementation } from './project-detail/TechnicalImplementation';
 
 interface ProjectDetailTemplateProps {
   project: Project;
@@ -58,8 +57,8 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
             </h2>
             <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
               <div className="space-y-3">
-                {project.safetyAndReliability.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
+                {project.safetyAndReliability.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
                     <span className="text-orange-400 mt-1">•</span>
                     <p className="text-gray-300 leading-relaxed">{item}</p>
                   </div>

@@ -24,12 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="flex">
         <div className="w-12 bg-gray-900 flex flex-col items-center py-4 text-gray-600 text-xs">
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
-          <span>6</span>
+
         </div>
         <div className="flex-1 p-6">
           <div className="flex items-start justify-between mb-4">
@@ -124,9 +119,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     {category}
                   </h5>
                   <div className="flex flex-wrap gap-1 pl-3">
-                    {skills.map(skill => (
+                    {skills.map((skill, index) => (
                       <Badge
-                        key={skill.name}
+                        key={`${project.id}-${category}-${skill.name}-${index}`}
                         variant={getCategoryVariant(skill.category)}
                         className="text-xs py-0.5 px-1.5"
                       >

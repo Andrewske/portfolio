@@ -1,5 +1,5 @@
 import { Badge } from '~/components/ui/badge';
-import { Project } from '~/lib/projects';
+import type { Project } from '~/lib/projects';
 
 interface ProjectHeroProps {
   project: Project;
@@ -11,19 +11,12 @@ export function ProjectHero({ project }: ProjectHeroProps) {
       <div className="border border-gray-800 rounded-lg overflow-hidden">
         <div className="flex">
           <div className="w-16 bg-gray-900 flex flex-col items-center py-6 text-gray-600 text-sm">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
+
           </div>
           <div className="flex-1 p-8">
             {/* Header with Class Syntax */}
             <div className="mb-6">
-              <h1 className="text-4xl font-bold text-white mb-2">
+              <h1 className="text-3xl font-bold text-white mb-2">
                 <span className="text-purple-400">class</span>{' '}
                 <span className="text-yellow-300">{project.className}</span>:
               </h1>
@@ -52,7 +45,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {project.metrics.map((metric, index) => (
-                <div key={index} className="text-center p-4 bg-gray-900/50 rounded border border-gray-800">
+                <div key={`${metric.label}-${index}`} className="text-center p-4 bg-gray-900/50 rounded border border-gray-800">
                   <div className={`text-2xl font-bold text-${metric.color || 'cyan'}-400 mb-1`}>
                     {metric.value}
                   </div>

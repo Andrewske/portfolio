@@ -1,16 +1,16 @@
 'use client';
 
 import type { NextPage } from 'next';
-import { useState, useId } from 'react';
+import { useId, useState } from 'react';
+import AIEngineringHighlights from '~/components/AIEngineringHighlights';
+import ProjectCard from '~/components/ProjectCard';
+import ProjectFilter from '~/components/ProjectFilter';
 import TechStackVisualization from '~/components/TechStackVisualization';
 import TypingAnimation from '~/components/TypingAnimation';
-import ProjectFilter from '~/components/ProjectFilter';
-import ProjectCard from '~/components/ProjectCard';
-import AIEngineringHighlights from '~/components/AIEngineringHighlights';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
-import { projects } from '~/lib/projects';
 import type { SkillCategory } from '~/lib/projects';
+import { projects } from '~/lib/projects';
 
 const Home: NextPage = () => {
   const [filteredCategories, setFilteredCategories] = useState<SkillCategory[]>([]);
@@ -67,14 +67,14 @@ const Home: NextPage = () => {
                   <div>
                     <span className="text-blue-300">role</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;Senior Data Analyst & Full-Stack Engineer&quot;</span>
+                    <span className="text-yellow-300">&quot;Software Engineer & AI Developer&quot;</span>
                     <span className="text-white">,</span>
                   </div>
                   
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building AI systems that enhance productivity for developers and everyday users" />&quot;</span>
+                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building custom solutions when existing tools don't fit - from e-commerce platforms to AI agents" />&quot;</span>
                   </div>
                 </div>
                 
