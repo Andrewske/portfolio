@@ -12,9 +12,9 @@ export default function AIEngineringHighlights() {
     <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 backdrop-blur-sm">
       <CardHeader className="pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <h2 className="text-cyan-400 text-lg font-bold flex items-center gap-2">
+          <h3 className="text-cyan-400 font-bold flex items-center gap-2">
             <span className="text-gray-500">{'//'}</span> AI Engineering Highlights
-          </h2>
+          </h3>
           <div className="flex gap-2 flex-wrap">
             <Badge variant="statusLive">{stats.activeSystems} ACTIVE</Badge>
             <Badge variant="statusDevelopment">{stats.internalSystems} INTERNAL</Badge>

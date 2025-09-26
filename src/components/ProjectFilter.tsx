@@ -41,7 +41,7 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
       }
 
       if (newFilters.size === 0) {
-        newFilters.add('All');
+        setActiveFilters(new Set(['All']));
         onFilterChange([]);
       } else {
         setActiveFilters(newFilters);

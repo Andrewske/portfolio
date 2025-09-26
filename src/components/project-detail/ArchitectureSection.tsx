@@ -1,5 +1,5 @@
-import { Project } from '~/lib/projects';
 import { ArchitectureDiagram } from '~/components/architecture-diagrams/ArchitectureDiagram';
+import type { Project } from '~/lib/projects';
 
 interface ArchitectureSectionProps {
   project: Project;
@@ -10,12 +10,16 @@ export function ArchitectureSection({ project }: ArchitectureSectionProps) {
 
   // Parse the architecture content to handle markdown-style formatting
   const formatArchitectureContent = (content: string) => {
-    return content.split('**').map((part, index) => {
-      if (index % 2 === 1) {
+    const occurrenceCounts: Record<string, number> = {};
+    return content.split('**').map((part, idx) => {
+      const count = (occurrenceCounts[part] ?? 0) + 1;
+      occurrenceCounts[part] = count;
+      const key = `${part}-${count}`;
+      if (idx % 2 === 1) {
         // This is a bold section
-        return <strong key={index} className="text-cyan-300 font-bold">{part}</strong>;
+        return <strong key={key} className="text-cyan-300 font-bold">{part}</strong>;
       }
-      return part;
+      return <span key={key}>{part}</span>;
     });
   };
 
@@ -55,8 +59,8 @@ export function ArchitectureSection({ project }: ArchitectureSectionProps) {
         {/* Text-based Architecture Description */}
         {project.architecture && (
           architectureSections.length > 0 ? (
-            architectureSections.map((section, index) => (
-              <div key={index} className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
+            architectureSections.map((section) => (
+              <div key={section.title} className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
                 <h3 className="text-lg font-bold text-yellow-300 mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
                   {section.title}

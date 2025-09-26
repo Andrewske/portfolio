@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import { useId, useState } from 'react';
 import AIEngineringHighlights from '~/components/AIEngineringHighlights';
 import ProjectCard from '~/components/ProjectCard';
-import ProjectFilter from '~/components/ProjectFilter';
 import TechStackVisualization from '~/components/TechStackVisualization';
 import TypingAnimation from '~/components/TypingAnimation';
 import { Button } from '~/components/ui/button';
@@ -13,7 +12,7 @@ import type { SkillCategory } from '~/lib/projects';
 import { projects } from '~/lib/projects';
 
 const Home: NextPage = () => {
-  const [filteredCategories, setFilteredCategories] = useState<SkillCategory[]>([]);
+  const [filteredCategories, _setFilteredCategories] = useState<SkillCategory[]>([]);
   const projectsSectionId = useId();
   const contactSectionId = useId();
 
@@ -122,7 +121,7 @@ const Home: NextPage = () => {
             <p className="text-gray-500">Production systems built to solve real problems</p>
           </div>
 
-          <ProjectFilter onFilterChange={setFilteredCategories} />
+          {/* <ProjectFilter onFilterChange={setFilteredCategories} /> */}
 
           <div className="grid gap-6">
             {displayedProjects.map((project) => (
@@ -145,7 +144,7 @@ const Home: NextPage = () => {
 
       {/* About Section */}
       <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">
               <span className="text-green-400">$</span> whoami --verbose
@@ -155,25 +154,32 @@ const Home: NextPage = () => {
           <div className="space-y-6 text-gray-300 leading-relaxed">
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                Full-stack engineer with 5+ years building production systems. Senior Data Analyst at
-                Bonanza.com, architecting scalable solutions processing 160M+ records and optimizing
-                query performance from 10min → 5min using advanced SQL and Polars techniques.
+              I'm a software engineer focused on building production AI systems, with a passion for AI-assisted development
+              and creating tools that enhance productivity for both developers and everyday users.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                Specialized in AI integration and cost optimization - built batch processing systems at
-                $0.00003/operation and knowledge graph processors at $0.00002/document. Passionate about
-                creating AI systems that enhance productivity for both developers and everyday users.
+              At Bonanza, where I serve as General Manager (formerly Data Analyst and Marketing Project Manager), I've built custom systems including a full-stack analytics dashboard processing 160M+ order records with sub-second page loads
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-                Track record of rapid prototyping and production deployment: shipped SMS platform for
-                12 studios in 4 weeks, processing 43K+ messages. Currently focused on building the next
-                generation of AI-assisted developer tools.
+              On the AI side, I've built a knowledge graph MCP server based on academic research from AutoSchemaKG that processes documents in 67 seconds at $0.00002 each. Through systematic model evaluation, I've identified 10x cost variances between LLM approaches while maintaining accuracy, and I'm applying these insights to optimize e-commerce systems at scale.
+              </p>
+            </div>
+
+            <div className="pl-4 border-l-2 border-gray-800">
+              <p>
+              My current passion project is an AI personal management system using shared context to help manage daily activities while navigating mental health challenges. I believe AI is a superpower not only for coding, but for unlocking potential in those limited by factors beyond their control.
+              </p>
+            </div>
+
+            <div className="pl-4 border-l-2 border-gray-800">
+              <p>
+              I believe the tools we build for ourselves often solve problems for entire communities.
               </p>
             </div>
           </div>
@@ -184,10 +190,13 @@ const Home: NextPage = () => {
 
       {/* Contact Section */}
       <section id={contactSectionId} className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-6xl  mx-auto text-center">
+          <span className="flex justify-start mb-8">
           <h2 className="text-3xl font-bold text-white mb-8">
             <span className="text-green-400">$</span> contact --init
           </h2>
+          </span>
+
           
           <p className="text-gray-400 mb-8">
             Let&apos;s build something amazing together

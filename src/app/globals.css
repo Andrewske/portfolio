@@ -100,11 +100,11 @@ body {
 }
 
 h1 {
-  font-size: max(4rem, 6vw);
+  font-size: max(4rem, 3vw);
   margin: 0;
 }
 h2 {
-  font-size: max(2rem, 2vw);
+  font-size: max(2rem, 1.5vw);
   margin: 0;
 }
 h3 {

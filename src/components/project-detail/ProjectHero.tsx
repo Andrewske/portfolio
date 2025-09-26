@@ -16,7 +16,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
           <div className="flex-1 p-8">
             {/* Header with Class Syntax */}
             <div className="mb-6">
-              <h1 className="text-3xl font-bold text-white mb-2">
+              <h1 className="text-4xl font-bold text-white mb-2">
                 <span className="text-purple-400">class</span>{' '}
                 <span className="text-yellow-300">{project.className}</span>:
               </h1>
@@ -46,7 +46,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {project.metrics.map((metric, index) => (
                 <div key={`${metric.label}-${index}`} className="text-center p-4 bg-gray-900/50 rounded border border-gray-800">
-                  <div className={`text-2xl font-bold text-${metric.color || 'cyan'}-400 mb-1`}>
+                  <div className={` font-bold text-${metric.color || 'cyan'}-400 mb-1`}>
                     {metric.value}
                   </div>
                   <div className="text-sm text-gray-500">{metric.label}</div>

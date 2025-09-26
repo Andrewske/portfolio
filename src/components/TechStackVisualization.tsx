@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState, useMemo } from 'react';
 import * as d3 from 'd3';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '~/components/ui/tooltip';
-import { techStackNodes, techStackLinks, type Node, type Link } from '~/lib/techStack';
-import { projects, groupSkillsByCategory, getCategoryColor } from '~/lib/projects';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {  TooltipProvider,  } from '~/components/ui/tooltip';
+import { getCategoryColor, groupSkillsByCategory, projects } from '~/lib/projects';
+import { type Node, techStackLinks, techStackNodes } from '~/lib/techStack';
 
 
 const TechStackVisualization = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [_isInitialized, setIsInitialized] = useState(false);
   const [showAllSkills, setShowAllSkills] = useState(false);
 
   // Data structure - memoized to prevent useEffect re-runs
@@ -77,12 +78,6 @@ const TechStackVisualization = () => {
 
     // Run simulation for initial positioning, then stop
     for (let i = 0; i < 300; ++i) simulation.tick();
-    simulation.restart().alpha(0.3);
-
-    // Stop simulation after brief settling period
-    setTimeout(() => {
-      simulation.stop();
-    }, 2000);
 
     // Create links
     const link = container.append('g')
@@ -155,6 +150,35 @@ const TechStackVisualization = () => {
         return yOffset - d.textHeight / 2 - 2;
       });
 
+    // Set initial positions immediately after creating all elements
+    link
+      .attr('x1', (d: any) => (d.source as Node).x!)
+      .attr('y1', (d: any) => (d.source as Node).y!)
+      .attr('x2', (d: any) => (d.target as Node).x!)
+      .attr('y2', (d: any) => (d.target as Node).y!);
+
+    node
+      .attr('cx', (d: any) => d.x)
+      .attr('cy', (d: any) => d.y);
+
+    label
+      .attr('x', (d: any) => d.x)
+      .attr('y', (d: any) => d.y);
+
+    labelBg
+      .attr('x', (d: any) => d.x - d.textWidth / 2 - 3)
+      .attr('y', (d: any) => {
+        const yOffset = d.type === 'project' ? 30 : 20;
+        return d.y + yOffset - d.textHeight / 2 - 2;
+      });
+
+    // Brief settling period for smooth initial render
+    simulation.restart().alpha(0.3);
+    setTimeout(() => {
+      simulation.stop();
+      setIsInitialized(true);
+    }, 1000);
+
     // Highlight function for hover/selection
     const highlight = (activeNodeId: string | null) => {
       if (!activeNodeId) {
@@ -188,7 +212,7 @@ const TechStackVisualization = () => {
 
     // Add gentle drag behavior that doesn't disturb other nodes
     const drag = d3.drag<SVGCircleElement, Node>()
-      .on('start', (event, d) => {
+      .on('start', (_event, d) => {
         // Only minimally restart simulation for dragged node
         simulation.alphaTarget(0.1).restart();
         d.fx = d.x;
@@ -198,7 +222,7 @@ const TechStackVisualization = () => {
         d.fx = event.x;
         d.fy = event.y;
       })
-      .on('end', (event, d) => {
+      .on('end', (_event, d) => {
         // Stop simulation quickly after drag ends
         simulation.alphaTarget(0);
         setTimeout(() => {
@@ -219,12 +243,12 @@ const TechStackVisualization = () => {
         setShowAllSkills(false); // Reset expansion when selecting new node
         highlight(newSelectedNode);
       })
-      .on('mouseenter', (event, d) => {
+      .on('mouseenter', (_event, d) => {
         if (!selectedNode) { // Only show hover if no node is selected
           highlight(d.id);
         }
       })
-      .on('mouseleave', (event, d) => {
+      .on('mouseleave', (_event,_dd) => {
         if (!selectedNode) { // Only clear hover if no node is selected
           highlight(null);
         }

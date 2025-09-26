@@ -1,6 +1,6 @@
 import { Badge } from '~/components/ui/badge';
 import { CodeBlock } from '~/components/ui/CodeBlock';
-import { Project, groupSkillsByCategory, getCategoryVariant, getCategoryColor } from '~/lib/projects';
+import { getCategoryColor, getCategoryVariant, groupSkillsByCategory, type Project } from '~/lib/projects';
 
 interface TechnicalImplementationProps {
   project: Project;
