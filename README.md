@@ -1,6 +1,6 @@
 # Kevin Andrews Portfolio
 
-A modern portfolio website showcasing my expertise in web development and data analysis.
+Full-stack engineer with 5+ years building production systems that process millions of records and reduce costs by 70-90% through constraint-driven solutions.
 
 ## 🚀 Live Site
 
@@ -8,28 +8,63 @@ Visit the portfolio at https://www.kevinandrews.info
 
 ## 💼 Featured Projects
 
-### Bonanza & Vercado Dashboards
-Comprehensive dashboards featuring real-time data visualization, secure access control, and multi-API integration. Built with Python, PostgreSQL, React, TypeScript, and AWS.
+### Knowledge Graph MCP
+AI knowledge graph system for processing personal documents into context for AI agents. Built on AutoSchemaKG framework - I extended the original with emotional context extraction because AI agents need to understand personal patterns. Achieved 68% per-token improvement (64ms→21ms) with 70% cost reduction through parallel processing optimization.
 
-### Masakali Retreat Website  
-Dynamic booking system for a Bali retreat center with Smoobu API integration for real-time availability and pricing. Features secure checkout and currency conversion. Built with Next.js, PostgreSQL, and Xendit API.
+### AI Product Optimizer
+Prompt engineering experiments for automated e-commerce title generation at scale. Systematic evaluation of 6 LLMs across 6 processing approaches. Discovered cost-performance sweet spot with GPT-4o-mini achieving 90% cost reduction through OpenAI Batch API.
 
-### Zoho CRM & Twilio SMS Integration
-Custom SMS communication system within Zoho CRM for Fred Astaire Dance Studio. Includes automated messaging, chat-like interface, and Zoho Analytics integration. Built with Next.js, Prisma, and Twilio API.
+### Analytics Platform
+Executive analytics platform processing 160M+ order records with static Parquet architecture. Turns out static files load faster than any API - eliminated infrastructure costs while achieving sub-second dashboard loads. Processes $143M GMV across 48k+ sellers with 75% performance gains.
 
-## 🛠️ Technical Stack
+### Zoho Twilio Integration
+Production SMS system allowing 12 studios to text leads directly from Zoho CRM. Multi-tenant architecture with database sync that fixed duplicate record creation. Shipped complete SaaS solution in 4 weeks as sole engineer.
 
-- **Frontend**: Next.js 14, React, TypeScript
-- **Styling**: Tailwind CSS
-- **Backend**: Node.js, Express, Python
-- **Databases**: PostgreSQL, MongoDB
-- **Cloud**: AWS, Vercel
-- **APIs**: Twilio, Zoho, Smoobu, Xendit
+### Masakali Booking Platform
+Vacation rental booking system managing 5 properties with cross-villa blocking. Webhook-based architecture preventing double-bookings of shared physical space through automated Smoobu API integration. Generated $30k+ revenue with zero booking conflicts.
+
+### Personal Management System
+Custom AI tools for ADHD workflow management using specialized Claude Code agents. Couldn't find existing tools that fit how my brain works, so I built separate domain-specific agents for career coaching, project management, and personal productivity. Telegram bot automation with GitHub sync for daily documentation.
+
+### Music Minion CLI
+Context-aware music rating system built in one day for CLI development experience. Features temporal preference tracking and mood pattern analysis designed for future AI integration.
+
+## 🛠️ Technical Expertise
+
+### Core Technologies
+- **Languages**: TypeScript, Python, JavaScript
+- **Frontend**: Next.js 14, React, Tailwind CSS
+- **Backend**: Node.js, Express, PostgreSQL, Prisma
+- **AI/ML**: OpenAI Models, Vector Embeddings, Prompt Engineering
+- **Data Processing**: Polars, Pandas, SQL Optimization
+- **Infrastructure**: AWS, Vercel, Webhook Architecture
+
+### Specialized Skills
+- **Performance Optimization**: 75% query improvements, 94% bundle size reduction
+- **AI Cost Engineering**: 90% cost reduction through batch processing
+- **Multi-tenant Architecture**: Complex routing and data isolation
+- **Real-time Integration**: Webhook processing, API synchronization
+- **Constraint-driven Solutions**: Read-only database optimization
+
+## 🎯 Key Achievements
+
+- **Scale**: 160M+ records processed, $143M+ GMV analyzed, 43k+ messages handled
+- **Performance**: Sub-second dashboard loads, 21ms per token AI processing
+- **Cost Optimization**: 70-90% cost reductions through architectural solutions
+- **Reliability**: Zero double-bookings, 100% cache hit rates, production uptime
+- **Rapid Development**: 4-week SaaS delivery, 1-day CLI builds
+
+## 🧠 Engineering Philosophy
+
+- **Constraint-driven Solutions**: Limitations often drive better solutions than unlimited resources
+- **Scale-appropriate Safety**: Robust validation for production, pragmatic approaches for development
+- **Economic Viability**: Cost-performance analysis essential for sustainable AI deployment
+- **Systematic Optimization**: Data-driven performance improvements with measurable results
 
 ## 📫 Contact
 
-Feel free to reach out through the contact form on the website or connect with me on social media.
+Reach out through the contact form on the website or connect with me on social media.
 
 ## 🎨 Design
 
-The portfolio features a developer-themed design with syntax highlighting color schemes and monospace typography using JetBrains Mono and Roboto Mono fonts.
+Developer-themed portfolio with syntax highlighting color schemes and monospace typography (JetBrains Mono, Roboto Mono). Features interactive tech stack visualization and detailed project documentation.
