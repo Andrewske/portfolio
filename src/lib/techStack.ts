@@ -51,28 +51,26 @@ function calculateExperience(projectTimelines: string[]): number {
 }
 
 // Filter to most important/representative skills for cleaner visualization
+// Prioritized for hiring manager appeal, especially on mobile displays
 const coreSkillsFilter = new Set([
   // Languages - core programming languages
   'TypeScript', 'Python', 'JavaScript',
 
-  // AI/ML - your specialization
-  'GPT-4', 'OpenAI API', 'MCP Protocol', 'Knowledge Graphs', 'Prompt Engineering', 'Vector Embeddings',
-  'Claude Code', 'Agent Architecture',
+  // AI/ML - your specialization (high appeal for AI roles)
+  'OpenAI Models', 'Prompt Engineering', 'Vector Embeddings', 'Knowledge Graphs',
+  'MCP Protocol', 'Agent Architecture', 'Cost Optimization', 'Academic Research',
 
   // Frontend - main frameworks
   'React', 'Next.js', 'Tailwind CSS',
 
   // Backend - core technologies
-  'Node.js', 'PostgreSQL', 'Prisma', 'FastAPI', 'MySQL',
+  'Node.js', 'PostgreSQL', 'Prisma', 'FastAPI', 'MySQL', 'Express.js',
 
   // Data & Analytics - key tools
-  'Polars', 'SQL Optimization', 'Batch Processing', 'Data Visualization',
+  'Polars', 'SQL Optimization', 'Batch Processing', 'Data Visualization', 'Pipeline Architecture',
 
-  // APIs & Integrations - major integrations
-  'Twilio API', 'Smoobu API', 'Zoho CRM API', 'Xendit API',
-
-  // Infrastructure - deployment platforms
-  'AWS', 'Vercel', 'Webhook Architecture', 'Performance Optimization'
+  // Infrastructure - deployment and performance
+  'AWS', 'Vercel', 'Performance Optimization', 'Multi-tenant Architecture'
 ]);
 
 // Generate nodes dynamically from projects data

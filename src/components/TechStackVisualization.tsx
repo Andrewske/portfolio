@@ -14,9 +14,35 @@ const TechStackVisualization = () => {
   const [showAllSkills, setShowAllSkills] = useState(false);
 
   // Data structure - memoized to prevent useEffect re-runs
-  const nodes = useMemo(() => techStackNodes, []);
+  const allNodes = useMemo(() => techStackNodes, []);
+  const allLinks = useMemo(() => techStackLinks, []);
 
-  const links = useMemo(() => techStackLinks, []);
+  // Create mobile-optimized data (skills only, most important ones)
+  const mobileNodes = useMemo(() => {
+    const skillNodes = allNodes.filter(node => node.type === 'skill');
+
+    // Prioritize AI/ML skills and core technologies for hiring managers
+    const getSkillPriority = (skill: any) => {
+      // AI/ML skills get highest priority
+      if (skill.category === 'AI/ML') return 1000 + (skill.experience || 0);
+      // Core languages get high priority
+      if (['TypeScript', 'Python', 'JavaScript'].includes(skill.name)) return 900 + (skill.experience || 0);
+      // Modern frameworks get good priority
+      if (['React', 'Next.js', 'PostgreSQL'].includes(skill.name)) return 800 + (skill.experience || 0);
+      // Everything else by experience
+      return (skill.experience || 0) * 10;
+    };
+
+    const topSkills = skillNodes
+      .sort((a, b) => getSkillPriority(b) - getSkillPriority(a))
+      .slice(0, 12); // Show only top 12 skills
+    return topSkills;
+  }, [allNodes]);
+
+  const mobileLinks = useMemo(() => {
+    // No links on mobile for cleaner visualization
+    return [];
+  }, []);
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -26,13 +52,16 @@ const TechStackVisualization = () => {
 
     const containerWidth = svgRef.current.parentElement?.offsetWidth || 800;
     const width = Math.min(containerWidth, 800);
-    const height = Math.min(width * 0.75, 600); // Maintain aspect ratio
-
     // Detect mobile (screen width < 640px)
     const isMobile = containerWidth < 640;
+    const height = isMobile ? Math.min(containerWidth * 1.2, 500) : Math.min(width * 0.75, 600); // More height on mobile
+
+    // Use different data sets for mobile vs desktop
+    const nodes = isMobile ? mobileNodes : allNodes;
+    const links = isMobile ? mobileLinks : allLinks;
 
     const margin = isMobile
-      ? { top: 10, right: 10, bottom: 10, left: 10 }
+      ? { top: 15, right: 15, bottom: 15, left: 15 }
       : { top: 20, right: 20, bottom: 20, left: 20 };
 
     svg.attr('width', width).attr('height', height);
@@ -58,40 +87,38 @@ const TechStackVisualization = () => {
     // Initialize nodes with random positions spread across the area
     const centerX = (width - margin.left - margin.right) / 2;
     const centerY = (height - margin.top - margin.bottom) / 2;
-    // Use more space on mobile for tighter packing
-    const spreadRadius = Math.min(centerX, centerY) * (isMobile ? 0.8 : 0.6);
     
     nodes.forEach((node: any) => {
-      const angle = Math.random() * 2 * Math.PI;
-      const radius = Math.random() * spreadRadius;
-      node.x = centerX + Math.cos(angle) * radius;
-      node.y = centerY + Math.sin(angle) * radius;
+      // Use rectangular distribution instead of circular to better fill vertical space
+      const maxX = width - margin.left - margin.right - 40;
+      const maxY = height - margin.top - margin.bottom - 30;
+      node.x = margin.left + 40 + Math.random() * (maxX - 80);
+      node.y = margin.top + 30 + Math.random() * (maxY - 60);
     });
 
-    // Create simulation with stable, minimal movement
+    // Create simulation with better spreading
     const simulation = d3.forceSimulation(nodes as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(links).id((d: any) => d.id).strength(0.1)) // Much weaker links
-      .force('charge', d3.forceManyBody().strength(isMobile ? -150 : -300)) // Less repulsion on mobile
-      .force('center', d3.forceCenter(centerX, centerY).strength(0.1)) // Stable centering
+      .force('link', links.length > 0 ? d3.forceLink(links).id((d: any) => d.id).strength(0.1) : null) // No links on mobile
+      .force('charge', d3.forceManyBody().strength(isMobile ? -200 : -800)) // Much stronger repulsion for better spreading
+      .force('x', d3.forceX(centerX).strength(0.03)) // Gentle X centering only - no Y centering to allow full vertical spread
       .force('collision', d3.forceCollide().radius((d: any) => {
-        // Smaller collision radius on mobile for tighter packing
         if (isMobile) {
-          const baseRadius = d.type === 'project' ? 25 : 18;
-          const textLength = d.name.length * 1.8;
-          return Math.max(baseRadius, textLength);
-        } else {
-          const baseRadius = d.type === 'project' ? 45 : 35;
+          // Increased collision radius on mobile to force more spreading
           const textLength = d.name.length * 2.5;
+          return Math.max(32, textLength);
+        } else {
+          const baseRadius = d.type === 'project' ? 55 : 45;
+          const textLength = d.name.length * 3;
           return Math.max(baseRadius, textLength);
         }
-      }))
+      }).strength(0.9))
       .velocityDecay(0.9) // Much slower movement for stability
       .alphaDecay(0.05) // Faster settling to prevent continuous movement
       .alphaMin(0.001) // Stop simulation sooner
       .stop(); // Don't auto-start - we'll control it
 
-    // Run simulation for initial positioning, then stop
-    for (let i = 0; i < 300; ++i) simulation.tick();
+    // Run simulation for initial positioning, then stop - more iterations to settle into full space
+    for (let i = 0; i < 500; ++i) simulation.tick();
 
     // Create links
     const link = container.append('g')
@@ -109,8 +136,8 @@ const TechStackVisualization = () => {
       .enter().append('circle')
       .attr('r', (d) => {
         if (isMobile) {
-          if (d.type === 'project') return 14;
-          return 6 + (d.experience || 1) * 2;
+          // More uniform sizing on mobile, less dramatic experience differences
+          return 15 + (d.experience || 1) * 1;
         } else {
           if (d.type === 'project') return 20;
           return 8 + (d.experience || 1) * 3;
@@ -147,7 +174,8 @@ const TechStackVisualization = () => {
       .text(d => d.name)
       .attr('font-size', (d) => {
         if (isMobile) {
-          return d.type === 'project' ? '9px' : '7px';
+          // All text same size on mobile for consistency
+          return '10px';
         } else {
           return d.type === 'project' ? '10px' : '8px';
         }
@@ -157,7 +185,8 @@ const TechStackVisualization = () => {
       .attr('text-anchor', 'middle')
       .attr('dy', (d) => {
         if (isMobile) {
-          return d.type === 'project' ? 25 : 18;
+          // Consistent spacing on mobile
+          return 17;
         } else {
           return d.type === 'project' ? 38 : 28;
         }
@@ -178,7 +207,7 @@ const TechStackVisualization = () => {
       .attr('x', (d: any) => -d.textWidth / 2 - 3)
       .attr('y', (d: any) => {
         const yOffset = isMobile
-          ? (d.type === 'project' ? 20 : 14)
+          ? 14
           : (d.type === 'project' ? 30 : 20);
         return yOffset - d.textHeight / 2 - 2;
       });
@@ -301,11 +330,14 @@ const TechStackVisualization = () => {
 
     // Update positions on simulation tick with bounds checking
     simulation.on('tick', () => {
-      // Keep nodes within bounds with extra padding for labels
+      // Keep nodes within bounds accounting for text labels that extend below nodes
       nodes.forEach((d: any) => {
-        const padding = isMobile ? 20 : 50; // Less padding on mobile
-        d.x = Math.max(padding, Math.min(width - margin.left - margin.right - padding, d.x));
-        d.y = Math.max(padding, Math.min(height - margin.top - margin.bottom - padding, d.y));
+        const horizontalPadding = isMobile ? 20 : 35; // Horizontal padding for text
+        const topPadding = isMobile ? 15 : 20; // Top padding
+        const bottomPadding = isMobile ? 25 : 35; // Extra bottom padding for text labels
+
+        d.x = Math.max(horizontalPadding, Math.min(width - margin.left - margin.right - horizontalPadding, d.x));
+        d.y = Math.max(topPadding, Math.min(height - margin.top - margin.bottom - bottomPadding, d.y));
       });
 
       link
@@ -326,7 +358,7 @@ const TechStackVisualization = () => {
         .attr('x', (d: any) => d.x - d.textWidth / 2 - 3)
         .attr('y', (d: any) => {
           const yOffset = isMobile
-            ? (d.type === 'project' ? 20 : 14)
+            ? 14
             : (d.type === 'project' ? 30 : 20);
           return d.y + yOffset - d.textHeight / 2 - 2;
         });
@@ -337,15 +369,20 @@ const TechStackVisualization = () => {
       simulation.stop();
     };
 
-  }, [selectedNode, nodes, links]);
+  }, [selectedNode, allNodes, allLinks, mobileNodes, mobileLinks]);
 
   const getNodeInfo = (nodeId: string) => {
-    const node = nodes.find(n => n.id === nodeId);
+    // Search in the appropriate dataset based on current view
+    const isMobile = (svgRef.current?.parentElement?.offsetWidth || 800) < 640;
+    const currentNodes = isMobile ? mobileNodes : allNodes;
+    const currentLinks = isMobile ? mobileLinks : allLinks;
+
+    const node = currentNodes.find(n => n.id === nodeId);
     if (!node) return null;
 
     if (node.type === 'project') {
       // Get connected skills from visualization
-      const connectedSkills = links
+      const connectedSkills = currentLinks
         .filter(link =>
           (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId ||
           (typeof link.target === 'string' ? link.target : (link.target as Node).id) === nodeId
@@ -354,7 +391,7 @@ const TechStackVisualization = () => {
           const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId
             ? (typeof link.target === 'string' ? link.target : (link.target as Node).id)
             : (typeof link.source === 'string' ? link.source : (link.source as Node).id);
-          return nodes.find(n => n.id === targetId);
+          return currentNodes.find(n => n.id === targetId);
         })
         .filter(Boolean);
 
@@ -369,7 +406,8 @@ const TechStackVisualization = () => {
         project
       };
     } else {
-      const connectedProjects = links
+      // For skills on mobile, show no connections since we removed projects
+      const connectedProjects = isMobile ? [] : currentLinks
         .filter(link =>
           (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId ||
           (typeof link.target === 'string' ? link.target : (link.target as Node).id) === nodeId
@@ -378,7 +416,7 @@ const TechStackVisualization = () => {
           const targetId = (typeof link.source === 'string' ? link.source : (link.source as Node).id) === nodeId
             ? (typeof link.target === 'string' ? link.target : (link.target as Node).id)
             : (typeof link.source === 'string' ? link.source : (link.source as Node).id);
-          return nodes.find(n => n.id === targetId);
+          return currentNodes.find(n => n.id === targetId);
         })
         .filter(Boolean);
 
@@ -390,6 +428,9 @@ const TechStackVisualization = () => {
   };
 
   const selectedNodeInfo = selectedNode ? getNodeInfo(selectedNode) : null;
+
+  // Get container width for mobile detection in JSX
+  const containerWidth = svgRef.current?.parentElement?.offsetWidth || 800;
 
   return (
     <TooltipProvider>
@@ -441,7 +482,7 @@ const TechStackVisualization = () => {
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-sm text-gray-400">
-                      {selectedNodeInfo.type === 'project' ? 'Technologies Used' : 'Used In Projects'}
+                      {selectedNodeInfo.type === 'project' ? 'Technologies Used' : (containerWidth < 640 ? 'Core Technology' : 'Used In Projects')}
                     </div>
                     {selectedNodeInfo.type === 'project' && (selectedNodeInfo as any).allSkills?.length > 0 && (
                       <button
@@ -484,12 +525,19 @@ const TechStackVisualization = () => {
                         ))
                       )
                     ) : (
-                      // Show connected projects for skill nodes
-                      (selectedNodeInfo as any).connectedProjects?.map((project: any) => (
-                        <div key={project.id} className="text-sm text-gray-300 font-mono">
-                          • {project.name}
+                      // Show connected projects for skill nodes (or category on mobile)
+                      containerWidth < 640 ? (
+                        <div className="text-sm text-gray-300 font-mono">
+                          Category: {selectedNodeInfo.category}<br/>
+                          Experience: {selectedNodeInfo.experience} years
                         </div>
-                      ))
+                      ) : (
+                        (selectedNodeInfo as any).connectedProjects?.map((project: any) => (
+                          <div key={project.id} className="text-sm text-gray-300 font-mono">
+                            • {project.name}
+                          </div>
+                        ))
+                      )
                     )}
                   </div>
                 </div>
