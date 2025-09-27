@@ -518,8 +518,8 @@ const TechStackVisualization = () => {
                         </div>
                       ) : (
                         // Show only connected skills (core skills in visualization)
-                        (selectedNodeInfo as any).connectedSkills?.map((skill: any) => (
-                          <div key={skill.id} className="text-sm text-gray-300 font-mono">
+                        (selectedNodeInfo as any).connectedSkills?.map((skill: any, index: number) => (
+                          <div key={`${skill.id}-${index}`} className="text-sm text-gray-300 font-mono">
                             • {skill.name}
                           </div>
                         ))
@@ -532,8 +532,8 @@ const TechStackVisualization = () => {
                           Experience: {selectedNodeInfo.experience} years
                         </div>
                       ) : (
-                        (selectedNodeInfo as any).connectedProjects?.map((project: any) => (
-                          <div key={project.id} className="text-sm text-gray-300 font-mono">
+                        (selectedNodeInfo as any).connectedProjects?.map((project: any, index: number) => (
+                          <div key={`${project.id}-${index}`} className="text-sm text-gray-300 font-mono">
                             • {project.name}
                           </div>
                         ))
