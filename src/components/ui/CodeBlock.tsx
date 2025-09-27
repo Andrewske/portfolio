@@ -406,12 +406,14 @@ export function CodeBlock({ code, language, title, impactContext, technicalExpla
 
       {/* Code Block */}
       <div className="border border-gray-800 rounded-lg overflow-hidden">
-        <div className="px-4 py-2 bg-gray-800 border-b border-gray-700">
-          <span className="text-sm text-gray-300">{title}</span>
+        <div className="px-3 sm:px-4 py-2 bg-gray-800 border-b border-gray-700">
+          <span className="text-xs sm:text-sm text-gray-300">{title}</span>
           <span className="text-xs text-gray-500 ml-2">({language})</span>
         </div>
-        <div className="p-4 bg-gray-950 text-base font-mono whitespace-pre-wrap overflow-wrap-anywhere">
-          {highlightedCode}
+        <div className="p-3 sm:p-4 bg-gray-950 text-xs sm:text-sm md:text-base font-mono overflow-x-auto">
+          <div className="min-w-max">
+            {highlightedCode}
+          </div>
         </div>
       </div>
 

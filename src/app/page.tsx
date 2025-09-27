@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-8 sm:py-0 relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -37,17 +37,17 @@ const Home: NextPage = () => {
         </div>
         
         <div className="max-w-6xl mx-auto w-full relative z-10">
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Terminal-style header */}
-            <div className="border border-green-500/20 rounded-lg p-8 bg-black/50 backdrop-blur-sm">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="ml-4 text-gray-500 text-sm">portfolio.js</span>
+            <div className="border border-green-500/20 rounded-lg p-4 sm:p-6 md:p-8 bg-black/50 backdrop-blur-sm overflow-x-auto">
+              <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
+                <span className="ml-2 sm:ml-4 text-gray-500 text-xs sm:text-sm">portfolio.js</span>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4 min-w-0">
                 <div>
                   <span className="text-purple-400">const</span>{' '}
                   <span className="text-blue-400">developer</span>{' '}
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
                   <span className="text-white">{'{'}</span>
                 </div>
                 
-                <div className="pl-8 space-y-2">
+                <div className="pl-4 sm:pl-6 md:pl-8 space-y-1 sm:space-y-2">
                   <div>
                     <span className="text-blue-300">name</span>
                     <span className="text-white">:</span>{' '}
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
               </div>
               
               {/* Quick Links */}
-              <div className="flex gap-6 mt-8 pt-6 border-t border-gray-800">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
                 <Button variant="terminalGhost" asChild>
                   <a href="https://github.com/Andrewske" className="flex items-center gap-2">
                     <span className="text-cyan-400">$</span> github
@@ -112,13 +112,13 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Projects Section */}
-      <section id={projectsSectionId} className="py-20 px-6">
+      <section id={projectsSectionId} className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               <span className="text-green-400">$</span> ls projects/
             </h2>
-            <p className="text-gray-500">Production systems built to solve real problems</p>
+            <p className="text-sm sm:text-base text-gray-500">Production systems built to solve real problems</p>
           </div>
 
           {/* <ProjectFilter onFilterChange={setFilteredCategories} /> */}
@@ -134,7 +134,7 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Tech Stack Visualization */}
-      <section className="py-20 px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <TechStackVisualization />
         </div>
@@ -143,10 +143,10 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* About Section */}
-      <section className="py-20 px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               <span className="text-green-400">$</span> whoami --verbose
             </h2>
           </div>
@@ -189,10 +189,10 @@ const Home: NextPage = () => {
       <Separator className="my-0" />
 
       {/* Contact Section */}
-      <section id={contactSectionId} className="py-20 px-6">
-        <div className="max-w-6xl  mx-auto text-center">
-          <div className="flex justify-start mb-8">
-            <h2 className="text-3xl font-bold text-white mb-8">
+      <section id={contactSectionId} className="py-12 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex justify-center sm:justify-start mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-8">
               <span className="text-green-400">$</span> contact --init
             </h2>
           </div>
@@ -201,7 +201,7 @@ const Home: NextPage = () => {
             Let&apos;s build something amazing together
           </p>
           
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
             <Button variant="terminal" size="lg" asChild>
               <a href="mailto:andrewskevin92@gmail.com">
                 Send Email

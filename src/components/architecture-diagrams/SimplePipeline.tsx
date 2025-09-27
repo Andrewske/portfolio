@@ -36,7 +36,7 @@ export function SimplePipeline({ stages, title, description, className = '' }: S
       )}
 
       {/* Pipeline */}
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 p-6 bg-gray-900/30 border border-gray-800 rounded-lg">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 p-4 sm:p-6 bg-gray-900/30 border border-gray-800 rounded-lg overflow-x-auto">
         {stages.map((stage, index) => (
           <div key={index} className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
             {/* Stage Container */}
@@ -50,19 +50,19 @@ export function SimplePipeline({ stages, title, description, className = '' }: S
 
               {/* Stage Box */}
               <div className={`
-                relative p-4 border-2 rounded-lg min-w-[140px] text-center
+                relative p-3 sm:p-4 border-2 rounded-lg min-w-[120px] sm:min-w-[140px] text-center
                 ${getStageColor(stage.type)}
                 transition-all duration-200 hover:scale-105 hover:shadow-lg
               `}>
                 {/* Stage Label */}
-                <div className="font-bold text-sm font-mono mb-2">
+                <div className="font-bold text-xs sm:text-sm font-mono mb-1 sm:mb-2">
                   {stage.label}
                 </div>
 
                 {/* Metrics */}
                 <div className="space-y-1">
                   {stage.metrics.map((metric, metricIndex) => (
-                    <div key={metricIndex} className="text-xs text-gray-300 font-mono">
+                    <div key={metricIndex} className="text-xs text-gray-300 font-mono break-words">
                       {metric}
                     </div>
                   ))}
@@ -89,7 +89,7 @@ export function SimplePipeline({ stages, title, description, className = '' }: S
       </div>
 
       {/* Summary Metrics */}
-      <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-gray-400">
+      <div className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-4 text-xs font-mono text-gray-400">
         <span>Total: 94s</span>
         <span>Cost: $0.0012</span>
         <span>Output: 20 triples, 80 vectors</span>

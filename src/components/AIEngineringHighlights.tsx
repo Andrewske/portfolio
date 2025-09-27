@@ -29,14 +29,14 @@ export default function AIEngineringHighlights() {
       </CardHeader>
 
       <CardContent>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-3 mb-6">
           {highlights.map((highlight) => (
-            <div key={`${highlight.label}-${highlight.value}`} className="text-center p-3 bg-black/30 rounded border border-gray-800">
-              <div className={`text-xl lg:text-2xl font-bold text-${highlight.color}-400`}>
+            <div key={`${highlight.label}-${highlight.value}`} className="text-center p-2 sm:p-3 bg-black/30 rounded border border-gray-800">
+              <div className={`text-lg sm:text-xl lg:text-2xl font-bold text-${highlight.color}-400`}>
                 {highlight.value}
               </div>
               <div className="text-xs text-gray-500 mb-1">{highlight.label}</div>
-              <div className="text-xs text-gray-600 leading-tight hidden lg:block">
+              <div className="text-xs text-gray-600 leading-tight hidden sm:block lg:block">
                 {highlight.description}
               </div>
             </div>
@@ -48,12 +48,12 @@ export default function AIEngineringHighlights() {
           <h3 className="text-purple-400 text-sm font-medium mb-3 flex items-center gap-2">
             <span className="text-gray-500">{'//'}</span> Core AI Specializations
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             {stats.specializations.map((spec) => (
               <Badge
                 key={spec}
                 variant="categoryAiMl"
-                className="text-xs py-1 px-2"
+                className="text-xs py-0.5 px-1.5 sm:py-1 sm:px-2"
               >
                 {spec}
               </Badge>

@@ -24,9 +24,16 @@ const TechStackVisualization = () => {
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
 
-    const width = 800;
-    const height = 600;
-    const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+    const containerWidth = svgRef.current.parentElement?.offsetWidth || 800;
+    const width = Math.min(containerWidth, 800);
+    const height = Math.min(width * 0.75, 600); // Maintain aspect ratio
+
+    // Detect mobile (screen width < 640px)
+    const isMobile = containerWidth < 640;
+
+    const margin = isMobile
+      ? { top: 10, right: 10, bottom: 10, left: 10 }
+      : { top: 20, right: 20, bottom: 20, left: 20 };
 
     svg.attr('width', width).attr('height', height);
 
@@ -51,7 +58,8 @@ const TechStackVisualization = () => {
     // Initialize nodes with random positions spread across the area
     const centerX = (width - margin.left - margin.right) / 2;
     const centerY = (height - margin.top - margin.bottom) / 2;
-    const spreadRadius = Math.min(centerX, centerY) * 0.6; // Use 60% of available space
+    // Use more space on mobile for tighter packing
+    const spreadRadius = Math.min(centerX, centerY) * (isMobile ? 0.8 : 0.6);
     
     nodes.forEach((node: any) => {
       const angle = Math.random() * 2 * Math.PI;
@@ -63,13 +71,19 @@ const TechStackVisualization = () => {
     // Create simulation with stable, minimal movement
     const simulation = d3.forceSimulation(nodes as d3.SimulationNodeDatum[])
       .force('link', d3.forceLink(links).id((d: any) => d.id).strength(0.1)) // Much weaker links
-      .force('charge', d3.forceManyBody().strength(-300)) // Moderate repulsion
+      .force('charge', d3.forceManyBody().strength(isMobile ? -150 : -300)) // Less repulsion on mobile
       .force('center', d3.forceCenter(centerX, centerY).strength(0.1)) // Stable centering
       .force('collision', d3.forceCollide().radius((d: any) => {
-        // Larger collision radius for better spacing
-        const baseRadius = d.type === 'project' ? 45 : 35;
-        const textLength = d.name.length * 2.5;
-        return Math.max(baseRadius, textLength);
+        // Smaller collision radius on mobile for tighter packing
+        if (isMobile) {
+          const baseRadius = d.type === 'project' ? 25 : 18;
+          const textLength = d.name.length * 1.8;
+          return Math.max(baseRadius, textLength);
+        } else {
+          const baseRadius = d.type === 'project' ? 45 : 35;
+          const textLength = d.name.length * 2.5;
+          return Math.max(baseRadius, textLength);
+        }
       }))
       .velocityDecay(0.9) // Much slower movement for stability
       .alphaDecay(0.05) // Faster settling to prevent continuous movement
@@ -94,8 +108,13 @@ const TechStackVisualization = () => {
       .data(nodes)
       .enter().append('circle')
       .attr('r', (d) => {
-        if (d.type === 'project') return 20;
-        return 8 + (d.experience || 1) * 3;
+        if (isMobile) {
+          if (d.type === 'project') return 14;
+          return 6 + (d.experience || 1) * 2;
+        } else {
+          if (d.type === 'project') return 20;
+          return 8 + (d.experience || 1) * 3;
+        }
       })
       .attr('fill', (d) => {
         if (d.type === 'project') return colorScale('project') as string;
@@ -126,11 +145,23 @@ const TechStackVisualization = () => {
       .data(nodes)
       .enter().append('text')
       .text(d => d.name)
-      .attr('font-size', (d) => d.type === 'project' ? '11px' : '9px')
+      .attr('font-size', (d) => {
+        if (isMobile) {
+          return d.type === 'project' ? '9px' : '7px';
+        } else {
+          return d.type === 'project' ? '10px' : '8px';
+        }
+      })
       .attr('font-family', 'monospace')
       .attr('fill', '#ffffff')
       .attr('text-anchor', 'middle')
-      .attr('dy', (d) => d.type === 'project' ? 38 : 28)
+      .attr('dy', (d) => {
+        if (isMobile) {
+          return d.type === 'project' ? 25 : 18;
+        } else {
+          return d.type === 'project' ? 38 : 28;
+        }
+      })
       .style('pointer-events', 'none');
 
     // Calculate text dimensions and update background rectangles
@@ -146,7 +177,9 @@ const TechStackVisualization = () => {
       .attr('height', (d: any) => d.textHeight + 4)
       .attr('x', (d: any) => -d.textWidth / 2 - 3)
       .attr('y', (d: any) => {
-        const yOffset = d.type === 'project' ? 30 : 20;
+        const yOffset = isMobile
+          ? (d.type === 'project' ? 20 : 14)
+          : (d.type === 'project' ? 30 : 20);
         return yOffset - d.textHeight / 2 - 2;
       });
 
@@ -270,7 +303,7 @@ const TechStackVisualization = () => {
     simulation.on('tick', () => {
       // Keep nodes within bounds with extra padding for labels
       nodes.forEach((d: any) => {
-        const padding = 50; // Extra padding for text labels
+        const padding = isMobile ? 20 : 50; // Less padding on mobile
         d.x = Math.max(padding, Math.min(width - margin.left - margin.right - padding, d.x));
         d.y = Math.max(padding, Math.min(height - margin.top - margin.bottom - padding, d.y));
       });
@@ -292,7 +325,9 @@ const TechStackVisualization = () => {
       labelBg
         .attr('x', (d: any) => d.x - d.textWidth / 2 - 3)
         .attr('y', (d: any) => {
-          const yOffset = d.type === 'project' ? 30 : 20;
+          const yOffset = isMobile
+            ? (d.type === 'project' ? 20 : 14)
+            : (d.type === 'project' ? 30 : 20);
           return d.y + yOffset - d.textHeight / 2 - 2;
         });
     });
@@ -366,15 +401,15 @@ const TechStackVisualization = () => {
         <p className="text-gray-400">Click nodes to explore connections • Drag to rearrange</p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="flex-1">
-          <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/30">
-            <svg ref={svgRef} className="w-full max-w-full h-auto"></svg>
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-8">
+        <div className="flex-1 overflow-x-auto">
+          <div className="border border-gray-800 rounded-lg p-2 sm:p-4 bg-gray-900/30 min-w-[350px]">
+            <svg ref={svgRef} className="w-full max-w-full h-auto" style={{ minHeight: '400px' }}></svg>
           </div>
         </div>
 
-        <div className="lg:w-80">
-          <div className="border border-cyan-500/30 rounded-lg p-6 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 min-h-[300px]">
+        <div className="w-full lg:w-80">
+          <div className="border border-cyan-500/30 rounded-lg p-4 sm:p-6 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 min-h-[250px] sm:min-h-[300px]">
             {selectedNodeInfo ? (
               <>
                 <div className="flex items-center gap-2 mb-4">
@@ -422,7 +457,7 @@ const TechStackVisualization = () => {
                     {selectedNodeInfo.type === 'project' ? (
                       showAllSkills ? (
                         // Show all skills grouped by category
-                        <div className="space-y-3 max-h-60 overflow-y-auto">
+                        <div className="space-y-3 max-h-40 sm:max-h-60 overflow-y-auto">
                           {(selectedNodeInfo as any).allSkills?.map(([category, categorySkills]: [string, any[]]) => (
                             <div key={category} className="space-y-1">
                               <div className={`text-xs font-semibold ${getCategoryColor(category as any)}`}>

@@ -14,7 +14,7 @@ interface ProjectDetailTemplateProps {
 export default function ProjectDetailTemplate({ project }: ProjectDetailTemplateProps) {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Navigation */}
         <div className="mb-8">
           <Link href="/#projects" className="text-cyan-400 hover:text-cyan-300 transition-colors">
@@ -31,7 +31,7 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
             <h2 className="text-2xl font-bold text-cyan-400 mb-6 flex items-center gap-2">
               <span className="text-gray-500">{'//'}</span> Executive Summary
             </h2>
-            <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
+            <div className="p-4 sm:p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
               <p className="text-gray-300 leading-relaxed text-lg">{project.longDescription}</p>
             </div>
           </section>
@@ -55,7 +55,7 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
             <h2 className="text-2xl font-bold text-orange-400 mb-6 flex items-center gap-2">
               <span className="text-gray-500">{'//'}</span> Safety & Reliability
             </h2>
-            <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
+            <div className="p-4 sm:p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
               <div className="space-y-3">
                 {project.safetyAndReliability.map((item) => (
                   <div key={item} className="flex items-start gap-3">
@@ -74,7 +74,7 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
             <h2 className="text-2xl font-bold text-purple-400 mb-6 flex items-center gap-2">
               <span className="text-gray-500">{'//'}</span> AI Evaluation & Performance
             </h2>
-            <div className="p-6 bg-purple-900/10 border-l-4 border-purple-400 rounded-lg">
+            <div className="p-4 sm:p-6 bg-purple-900/10 border-l-4 border-purple-400 rounded-lg">
               <p className="text-gray-300 leading-relaxed">{project.aiEvaluation}</p>
             </div>
           </section>

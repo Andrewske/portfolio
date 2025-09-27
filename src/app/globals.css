@@ -54,52 +54,33 @@ body {
   overflow-x: hidden;
 }
 
-/* Modern Tailwind v4 Custom Utilities */
-@utility text-balance {
-  text-wrap: balance;
+/* Mobile responsive utilities */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Prevent horizontal overflow on mobile */
+  * {
+    max-width: 100vw;
+  }
+
+  /* Code blocks responsive */
+  pre, code {
+    overflow-x: auto;
+    word-break: break-word;
+  }
+
+  /* Ensure proper viewport height on mobile */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
 }
 
-@utility indent-0 {
-  text-indent: 0rem;
-  margin-left: 0rem;
-}
 
-@utility indent-1-2 {
-  text-indent: -0.25rem;
-  margin-left: 0.75rem;
-}
-
-@utility indent-1 {
-  text-indent: -0.5rem;
-  margin-left: 1.5rem;
-}
-
-@utility indent-2 {
-  text-indent: -1rem;
-  margin-left: 3rem;
-}
-
-@utility indent-3 {
-  text-indent: -1.5rem;
-  margin-left: 4.5rem;
-}
-
-@utility indent-4 {
-  text-indent: -2rem;
-  margin-left: 6rem;
-}
-
-@utility indent-5 {
-  text-indent: -2.5rem;
-  margin-left: 7.5rem;
-}
-
-@utility indent-6 {
-  text-indent: -3rem;
-  margin-left: 9rem;
-}
-
-h1 {
+/* h1 {
   font-size: max(4rem, 3vw);
   margin: 0;
 }
@@ -110,7 +91,7 @@ h2 {
 h3 {
   font-size: max(1rem, 1vw);
   margin: 0;
-}
+} */
 
 ul,
 ol {
