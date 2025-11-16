@@ -22,7 +22,8 @@ export const trackError = (
 
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
-    console[level]('[Error Tracking]', {
+    const consoleMethod = level === 'warning' ? 'warn' : level;
+    console[consoleMethod]('[Error Tracking]', {
       message: errorMessage,
       stack: errorStack,
       ...context,

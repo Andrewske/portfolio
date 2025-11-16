@@ -2,10 +2,10 @@
 
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const PostHogPageView = (): null => {
+const PostHogPageView = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -28,7 +28,7 @@ type PostHogProviderProps = {
   children: React.ReactNode;
 };
 
-export const PostHogProvider = ({ children }: PostHogProviderProps): JSX.Element => {
+export const PostHogProvider = ({ children }: PostHogProviderProps) => {
   useEffect(() => {
     const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
     const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -55,7 +55,9 @@ export const PostHogProvider = ({ children }: PostHogProviderProps): JSX.Element
 
   return (
     <PHProvider client={posthog}>
-      <PostHogPageView />
+      <Suspense fallback={null}>
+        <PostHogPageView />
+      </Suspense>
       {children}
     </PHProvider>
   );
