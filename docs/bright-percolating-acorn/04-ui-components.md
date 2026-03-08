@@ -1,6 +1,6 @@
 ---
 task: 04-ui-components
-status: pending
+status: done
 depends: []
 files:
   - path: src/components/ui/badge.tsx
