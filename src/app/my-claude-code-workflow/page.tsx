@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function MyClaudeCodeWorkflowPage() {
-  const { intro, phases, outro } = workflowContent;
+  const { intro, phases } = workflowContent;
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
