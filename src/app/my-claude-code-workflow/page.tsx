@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import WorkflowSection from '~/components/workflow/WorkflowSection';
 import PlaceholderBlock from '~/components/workflow/PlaceholderBlock';
