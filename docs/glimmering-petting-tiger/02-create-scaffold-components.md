@@ -1,6 +1,6 @@
 ---
 task: 02-create-scaffold-components
-status: pending
+status: done
 depends: [01-create-content-types]
 files:
   - path: src/components/workflow/WorkflowSection.tsx

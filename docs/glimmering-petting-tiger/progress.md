@@ -8,7 +8,7 @@
 
 | Task | Status | Started | Completed | Duration |
 |------|--------|---------|-----------|----------|
-| 01-create-content-types | Pending | - | - | - |
+| 01-create-content-types | ✅ Done | 2026-03-07 | 2026-03-07 | ~30s |
 | 02-create-scaffold-components | Pending | - | - | - |
 | 03-create-page-route | Pending | - | - | - |
 
