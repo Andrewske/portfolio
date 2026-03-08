@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 interface ChatMessageProps {
   speaker: 'hammond' | 'claude';
@@ -23,7 +23,7 @@ const Avatar = ({ speaker }: { speaker: 'hammond' | 'claude' }) => {
   );
 };
 
-export default function ChatMessage({ speaker, children, id }: ChatMessageProps): JSX.Element {
+export default function ChatMessage({ speaker, children, id }: ChatMessageProps): React.ReactElement {
   const direction = speaker === 'hammond' ? 'flex-row' : 'flex-row-reverse';
   return (
     <div

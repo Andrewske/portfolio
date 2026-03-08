@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 interface FindingProps {
   severity: 'critical' | 'high' | 'medium' | 'low';
@@ -7,7 +7,7 @@ interface FindingProps {
   children: ReactNode;
 }
 
-export default function Finding({ severity, title, confidence, children }: FindingProps): JSX.Element {
+export default function Finding({ severity, title, confidence, children }: FindingProps): React.ReactElement {
   const severityConfig = {
     critical: {
       container: 'bg-red-500/20 border-red-500/30',
