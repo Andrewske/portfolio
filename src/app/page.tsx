@@ -73,7 +73,7 @@ const Home: NextPage = () => {
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;<TypingAnimation text="Building custom solutions when existing tools don't fit - from e-commerce platforms to AI agents" />&quot;</span>
+                    <span className="text-yellow-300">&quot;<TypingAnimation text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems" />&quot;</span>
                   </div>
                 </div>
                 
@@ -154,32 +154,25 @@ const Home: NextPage = () => {
           <div className="space-y-6 text-gray-300 leading-relaxed">
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              I&apos;m a software engineer focused on building production AI systems, with a passion for AI-assisted development
-              and creating tools that enhance productivity for both developers and everyday users.
+              I&apos;m an AI-native engineer - I think in human-AI collaboration, not just code. The way I approach building is as important as what I build.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              At Bonanza, where I serve as General Manager (formerly Data Analyst and Marketing Project Manager), I&apos;ve built custom systems including a full-stack analytics dashboard processing 160M+ order records with sub-second page loads
+              Currently I&apos;m a Software Engineer at Glade AI, an AI legal tech platform serving 1000+ law firms.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              On the AI side, I&apos;ve built a knowledge graph MCP server based on academic research from AutoSchemaKG that processes documents in 67 seconds at $0.00002 each. Through systematic model evaluation, I&apos;ve identified 10x cost variances between LLM approaches while maintaining accuracy, and I&apos;m applying these insights to optimize e-commerce systems at scale.
+              Previously at Bonanza, I built a full-stack analytics dashboard processing 160M+ order records with sub-second page loads. When faced with a read-only legacy database, I designed a static Parquet architecture that eliminated API hosting costs while improving performance.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              My current passion project is an AI personal management system using shared context to help manage daily activities while navigating mental health challenges. I believe AI is a superpower not only for coding, but for unlocking potential in those limited by factors beyond their control.
-              </p>
-            </div>
-
-            <div className="pl-4 border-l-2 border-gray-800">
-              <p>
-              I believe the tools we build for ourselves often solve problems for entire communities.
+              My passion project is an AI personal management system that helps me navigate daily life with ADHD. I believe AI is a superpower not only for coding, but for unlocking potential in those limited by factors beyond their control. The tools we build for ourselves often solve problems for entire communities.
               </p>
             </div>
           </div>

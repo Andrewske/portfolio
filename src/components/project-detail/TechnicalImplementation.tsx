@@ -78,7 +78,7 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
         </div>
       )}
 
-      {/* TODO: Add code examples for each project */}
+      {/* TODO: Add code examples for each project
       {(!project.codeExamples || project.codeExamples.length === 0) && (
         <div className="mt-8 p-4 bg-gray-800/30 border border-gray-700 rounded-lg">
           <p className="text-gray-500 text-sm">
@@ -86,6 +86,7 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
           </p>
         </div>
       )}
+      */}
     </section>
   );
 }

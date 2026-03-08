@@ -7,6 +7,8 @@ interface ChallengesAndSolutionsProps {
 export function ChallengesAndSolutions({ project }: ChallengesAndSolutionsProps) {
   // If no challenges/solutions data, don't render the section
   if (!project.challenges && !project.solutions && !project.lessonsLearned) {
+    return null;
+    /* TODO: Commented out placeholder section
     return (
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-red-400 mb-6 flex items-center gap-2">
@@ -19,6 +21,7 @@ export function ChallengesAndSolutions({ project }: ChallengesAndSolutionsProps)
         </div>
       </section>
     );
+    */
   }
 
   return (

@@ -77,7 +77,7 @@ export interface Project {
   architecture?: string;
   architectureDiagramType?: DiagramType;
   architectureDiagramData?: DiagramData;
-  status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL';
+  status: 'PRODUCTION' | 'LIVE' | 'ACTIVE' | 'INTERNAL' | 'ARCHIVED';
   role: string;
   timeline: string;
   scope: string;
@@ -97,6 +97,7 @@ export interface Project {
 
 // Define project display order (can be easily modified)
 const PROJECT_DISPLAY_ORDER = [
+  'glade-ai',
   'knowledge-graph-mcp',
   'ai-product-optimizer',
   'personal-management',
@@ -108,6 +109,33 @@ const PROJECT_DISPLAY_ORDER = [
 
 const projectsData: Project[] = [
   {
+    id: 'glade-ai',
+    title: 'GladeAI',
+    className: 'GladeAI',
+    description: 'AI-powered legal automation platform serving 1000+ law firms',
+    subtitle: 'Building automation tools that help law firms scale without proportional headcount',
+    businessImpact: 'Enabling law firms to handle more clients through intelligent workflow automation',
+    longDescription: 'Software Engineer at Glade AI, working on automation systems that eliminate repetitive administrative tasks for law firms across bankruptcy, immigration, and other practice areas.',
+    status: 'ACTIVE',
+    role: 'Software Engineer',
+    timeline: 'Feb 2026 - present',
+    scope: 'AI automation, process optimization, legal tech',
+    metrics: [
+      { value: '1000+', label: 'Law Firms', color: 'cyan' },
+      { value: '50+', label: 'Practice Areas', color: 'yellow' },
+    ],
+    safetyAndReliability: [
+      'Production legal systems requiring high reliability',
+      'Working within established team practices and code review'
+    ],
+    skills: [
+      { name: 'TypeScript', proficiency: 'Production Daily', category: 'Languages', usage: 'Full-stack development' },
+      { name: 'React', proficiency: 'Production Daily', category: 'Frontend', usage: 'Frontend development' },
+      { name: 'Next.js', proficiency: 'Production Daily', category: 'Frontend', usage: 'Application framework' },
+      { name: 'Node.js', proficiency: 'Production Daily', category: 'Backend', usage: 'Backend services' },
+    ]
+  },
+  {
     id: 'analytics-platform',
     title: 'AnalyticsPlatform',
     className: 'AnalyticsPlatform',
@@ -116,9 +144,9 @@ const projectsData: Project[] = [
     businessImpact: 'Provides executives instant access to business intelligence that previously required manual database queries',
     longDescription: 'An executive analytics platform I built from scratch when existing solutions couldn\'t handle the scale and constraints. After investigating the query timeouts with 160M+ records, I realized we needed a completely different approach than traditional database-API-frontend architecture. My breakthrough was designing a static file system that transforms expensive API infrastructure into compressed Parquet files served directly to browsers. This approach eliminated thousands in monthly hosting costs while achieving instant dashboard performance.',
     architecture: '**Static Data Pipeline**: MySQL 5.7 → Python/Polars processing → Compressed Parquet files → Direct frontend loading via hyparquet. **My Incremental System**: I built timestamp-based change detection that processes only modified records, reducing 20-minute full scans to 5-minute targeted updates. **Frontend Innovation**: JSON index files map date ranges to Parquet row groups, enabling instant filtering without API calls. **Deployment Strategy**: Two-repository system where my backend writes processed files directly to frontend repository, deployed as static assets on Vercel, eliminating API hosting costs while maintaining sub-second performance.',
-    status: 'LIVE',
+    status: 'ARCHIVED',
     role: 'Sole developer',
-    timeline: 'Aug 2023 - ongoing',
+    timeline: 'Aug 2023 - Dec 2025',
     scope: 'architecture, backend, data optimization, performance tuning',
     metrics: [
       { value: '2M', label: 'Offers Tracked', color: 'cyan' },
