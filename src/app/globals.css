@@ -180,3 +180,8 @@ ol {
     @apply bg-background text-foreground;
   }
 }
+
+/* Tight spacing for chat messages */
+[data-chat] + [data-chat] {
+  margin-top: 0.5rem;
+}

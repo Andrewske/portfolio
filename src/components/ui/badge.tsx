@@ -53,6 +53,8 @@ const badgeVariants = cva(
           "border-transparent bg-orange-500/15 text-orange-300",
         categoryInfrastructure:
           "border-transparent bg-red-500/15 text-red-300",
+        phase:
+          "border-green-500/30 bg-green-500/20 text-green-400",
       },
     },
     defaultVariants: {

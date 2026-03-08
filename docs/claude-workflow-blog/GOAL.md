@@ -2,7 +2,7 @@
 
 ## Current Status
 
-**Phase: Plan Review + Improve Complete, Ready for Implementation**
+**Phase: Content Draft Complete, Ready for UI Implementation**
 
 - [x] Initial vision and structure
 - [x] Planning session
@@ -10,11 +10,11 @@
 - [x] Tasks distributed (`../claude-workflow-blog-tasks/`)
 - [x] Plan review (this session)
 - [x] Improve-idea review (this session)
-- [ ] Technical implementation (infrastructure in progress)
-- [ ] Content writing
+- [x] Content draft written (`DRAFT.md`)
+- [ ] Technical implementation (page route + components)
 - [ ] Polish and ship
 
-**Next step:** Continue infrastructure implementation, then `/start-implementation`
+**Next step:** Build page route and components around the content draft
 
 ---
 
@@ -329,6 +329,16 @@ controlling them has a better offer.
 
 ---
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `GOAL.md` | This file - vision, decisions, status tracking |
+| `CONTENT-PLAN.md` | Detailed content outline with JP dialogue |
+| `DRAFT.md` | Full blog post draft (~2,400 words) |
+
+---
+
 ## Reference Material
 
 The actual command prompts and skill definitions are in `./docs/workflow/`:
@@ -352,31 +362,35 @@ Use these for accurate command descriptions, but the blog content should be the 
 5. [x] Plan review of content plan
 6. [x] Improve-idea review
 
-### Phase 3: Technical Implementation (IN PROGRESS)
-7. [ ] Create page route and basic structure (infrastructure in progress)
-8. [ ] Implement core components (CollapsibleSection, CommandBlock, FindingCard, etc.)
-9. [ ] Implement collapsible full prompts for each phase
-10. [ ] Implement "What breaks" styling in Kevin callouts
+### Phase 3: Content Writing (COMPLETE)
+7. [x] Write full draft (`DRAFT.md`)
+   - TL;DR section with workflow table
+   - Intro section
+   - Scene setup + discussion phase (3 beats + Malcolm/Muldoon expertise)
+   - Preparing for execution interlude
+   - Plan-review phase (including breeding controls finding)
+   - Findings resolution (3 examples)
+   - Best-idea phase (Hammond invokes with hypothesis)
+   - Improve-idea phase (wild ideas)
+   - Implementation interlude
+   - Code-review phase (syntax + Nedry systemic risk)
+   - Outro with meta reveal
 
-### Phase 4: Content Writing
-11. [ ] Write TL;DR section with workflow diagram
-12. [ ] Write intro section
-13. [ ] Write scene setup + discussion phase (3 beats + Malcolm/Muldoon expertise)
-14. [ ] Write preparing for execution interlude (merged planning + handoff)
-15. [ ] Write plan-review phase (including breeding controls finding)
-16. [ ] Write findings resolution
-17. [ ] Write best-idea phase (Hammond invokes with hypothesis)
-18. [ ] Write improve-idea phase
-19. [ ] Write implementation interlude
-20. [ ] Write code-review phase (syntax example + Nedry systemic risk)
-21. [ ] Write outro
-22. [ ] Revisit Hammond reflection line
+### Phase 4: Technical Implementation (READY TO START)
+8. [ ] Create page route (`/my-claude-code-workflow`)
+9. [ ] Implement core components (CollapsibleSection, CommandBlock, FindingCard, etc.)
+10. [ ] Implement collapsible full prompts for each phase
+11. [ ] Implement "What breaks" styling in Kevin callouts
+12. [ ] Wire up content from DRAFT.md into components
 
 ### Phase 5: Polish
-23. [ ] Add memes and visual elements
-24. [ ] Implement WorkflowDiagram
-25. [ ] Responsive testing
-26. [ ] Final review and ship
+13. [ ] Fill in collapsible prompt content
+14. [ ] Finalize Hammond reflection line
+15. [ ] Add session count to meta reveal
+16. [ ] Add memes and visual elements
+17. [ ] Implement WorkflowDiagram
+18. [ ] Responsive testing
+19. [ ] Final review and ship
 
 ---
 
