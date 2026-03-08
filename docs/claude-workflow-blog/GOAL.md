@@ -2,7 +2,7 @@
 
 ## Current Status
 
-**Phase: Content Draft Complete, Ready for UI Implementation**
+**Phase: Core Components Complete, Ready for Content Integration**
 
 - [x] Initial vision and structure
 - [x] Planning session
@@ -11,10 +11,11 @@
 - [x] Plan review (this session)
 - [x] Improve-idea review (this session)
 - [x] Content draft written (`DRAFT.md`)
-- [ ] Technical implementation (page route + components)
+- [x] Technical implementation (page route + components)
+- [ ] Wire up content from DRAFT.md
 - [ ] Polish and ship
 
-**Next step:** Build page route and components around the content draft
+**Next step:** Populate `workflow-content.ts` with actual content from DRAFT.md
 
 ---
 
@@ -315,12 +316,14 @@ controlling them has a better offer.
 - Mobile responsive
 
 ### Components Needed
-1. `CollapsibleSection` - expand/collapse for details
-2. `CommandBlock` - styled code blocks for prompts
-3. `FindingCard` - for plan review findings (severity indicator)
-4. `PhaseHeader` - consistent section headers with icons
-5. `MemeImage` - styled JP meme placements
-6. `WorkflowDiagram` - visual flow (could be SVG or component)
+1. [x] `CollapsiblePrompt` - expand/collapse for prompt details (native details/summary)
+2. [x] `ChatMessage` - Hammond/Claude dialogue with avatar positioning
+3. [x] `Finding` - plan review findings with severity badges (critical/high/medium/low)
+4. [x] `KevinCallout` - narrator commentary with "What breaks" warning section
+5. [x] `PhaseLabel` - sticky phase indicator using Badge component
+6. [x] `TimeSkip` - faded ellipsis moments for narrative flow
+7. [ ] `WorkflowDiagram` - visual flow for TL;DR section (could be SVG or component)
+8. [ ] `MemeImage` - styled JP meme placements (optional)
 
 ### Content Format
 - MDX for rich content with components
@@ -336,6 +339,20 @@ controlling them has a better offer.
 | `GOAL.md` | This file - vision, decisions, status tracking |
 | `CONTENT-PLAN.md` | Detailed content outline with JP dialogue |
 | `DRAFT.md` | Full blog post draft (~2,400 words) |
+| `../bright-percolating-acorn/` | Implementation plan with task files |
+| `../bright-percolating-acorn/progress.md` | Implementation progress tracker |
+
+### Implementation Files (created)
+| File | Purpose |
+|------|---------|
+| `src/app/my-claude-code-workflow/page.tsx` | Page route with renderBlock |
+| `src/lib/workflow-content.ts` | Content types and placeholder data |
+| `src/components/workflow/ChatMessage.tsx` | Dialogue component |
+| `src/components/workflow/Finding.tsx` | Severity-coded findings |
+| `src/components/workflow/KevinCallout.tsx` | Narrator commentary |
+| `src/components/workflow/TimeSkip.tsx` | Narrative ellipsis |
+| `src/components/workflow/PhaseLabel.tsx` | Sticky phase labels |
+| `src/components/workflow/CollapsiblePrompt.tsx` | Expandable prompts |
 
 ---
 
@@ -376,21 +393,27 @@ Use these for accurate command descriptions, but the blog content should be the 
    - Code-review phase (syntax + Nedry systemic risk)
    - Outro with meta reveal
 
-### Phase 4: Technical Implementation (READY TO START)
-8. [ ] Create page route (`/my-claude-code-workflow`)
-9. [ ] Implement core components (CollapsibleSection, CommandBlock, FindingCard, etc.)
-10. [ ] Implement collapsible full prompts for each phase
-11. [ ] Implement "What breaks" styling in Kevin callouts
-12. [ ] Wire up content from DRAFT.md into components
+### Phase 4: Technical Implementation (IN PROGRESS)
+8. [x] Create page route (`/my-claude-code-workflow`)
+9. [x] Implement core components:
+   - [x] ChatMessage (Hammond/Claude dialogue with avatars)
+   - [x] Finding (severity-coded plan review findings)
+   - [x] KevinCallout (narrator commentary with "What breaks" section)
+   - [x] TimeSkip (faded ellipsis moments)
+   - [x] PhaseLabel (sticky phase indicator using Badge)
+   - [x] CollapsiblePrompt (expandable prompt sections)
+   - [x] ContentBlock type system (discriminated union for all block types)
+   - [x] renderBlock function (exhaustive type-safe renderer)
+10. [ ] Wire up content from DRAFT.md into workflow-content.ts
+11. [ ] Fill in collapsible prompt content for each phase
 
 ### Phase 5: Polish
-13. [ ] Fill in collapsible prompt content
-14. [ ] Finalize Hammond reflection line
-15. [ ] Add session count to meta reveal
-16. [ ] Add memes and visual elements
-17. [ ] Implement WorkflowDiagram
-18. [ ] Responsive testing
-19. [ ] Final review and ship
+12. [ ] Finalize Hammond reflection line
+13. [ ] Add session count to meta reveal
+14. [ ] Add memes and visual elements
+15. [ ] Implement WorkflowDiagram (TL;DR section)
+16. [ ] Responsive testing
+17. [ ] Final review and ship
 
 ---
 
