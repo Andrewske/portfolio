@@ -1,6 +1,6 @@
 ---
 task: 03-create-page-route
-status: pending
+status: done
 depends: [01-create-content-types, 02-create-scaffold-components]
 files:
   - path: src/app/my-claude-code-workflow/page.tsx
