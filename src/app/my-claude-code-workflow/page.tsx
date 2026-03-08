@@ -1,12 +1,50 @@
 import type { Metadata } from 'next';
 import WorkflowSection from '~/components/workflow/WorkflowSection';
 import PlaceholderBlock from '~/components/workflow/PlaceholderBlock';
-import { workflowContent } from '~/lib/workflow-content';
+import ChatMessage from '~/components/workflow/ChatMessage';
+import Finding from '~/components/workflow/Finding';
+import { KevinCallout } from '~/components/workflow/KevinCallout';
+import PhaseLabel from '~/components/workflow/PhaseLabel';
+import { TimeSkip } from '~/components/workflow/TimeSkip';
+import CollapsiblePrompt from '~/components/workflow/CollapsiblePrompt';
+import { CodeBlock } from '~/components/ui/CodeBlock';
+import { workflowContent, type ContentBlock } from '~/lib/workflow-content';
 
 export const metadata: Metadata = {
   title: 'My Claude Code Workflow | Kevin Andrews',
   description: 'How I get Claude to write code I trust - an 8-phase workflow from discussion through code review, built for human-AI collaboration',
 };
+
+function renderBlock(block: ContentBlock, index: number): React.ReactElement | null {
+  switch (block.type) {
+    case 'chat':
+      return <ChatMessage key={index} id={block.id} speaker={block.speaker}>{block.content}</ChatMessage>;
+    case 'kevin':
+      return <KevinCallout key={index} id={block.id} whatBreaks={block.whatBreaks}>{block.content}</KevinCallout>;
+    case 'timeskip':
+      return <TimeSkip key={index}>{block.content}</TimeSkip>;
+    case 'finding':
+      return (
+        <Finding key={index} severity={block.severity} title={block.title} confidence={block.confidence}>
+          {block.content}
+        </Finding>
+      );
+    case 'collapsible':
+      return <CollapsiblePrompt key={index} title={block.title}>{block.content}</CollapsiblePrompt>;
+    case 'phase':
+      return <PhaseLabel key={index} phase={block.phase} />;
+    case 'placeholder':
+      return <PlaceholderBlock key={index} label={block.label} />;
+    case 'text':
+      return <p key={index} className="text-gray-300">{block.content}</p>;
+    case 'code':
+      return <CodeBlock key={index} code={block.content} language={block.language} title={block.title ?? block.language} />;
+    default:
+      // TypeScript exhaustiveness check - will error if a type is unhandled
+      const _exhaustive: never = block;
+      return null;
+  }
+}
 
 export default function MyClaudeCodeWorkflowPage() {
   const { intro, phases } = workflowContent;
@@ -49,8 +87,8 @@ export default function MyClaudeCodeWorkflowPage() {
           <div className="space-y-8 sm:space-y-12">
             {phases.map((phase) => (
               <WorkflowSection key={phase.id} id={phase.id} title={phase.title}>
-                <div className="p-4 sm:p-6">
-                  <PlaceholderBlock label={`[${phase.title} content goes here]`} />
+                <div className="p-4 sm:p-6 space-y-4">
+                  {phase.blocks.map((block, index) => renderBlock(block, index))}
                 </div>
               </WorkflowSection>
             ))}

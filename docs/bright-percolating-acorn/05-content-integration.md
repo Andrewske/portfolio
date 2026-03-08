@@ -1,6 +1,6 @@
 ---
 task: 05-content-integration
-status: pending
+status: done
 depends: [02-core-chat-components, 03-narrator-components, 04-ui-components]
 files:
   - path: src/lib/workflow-content.ts

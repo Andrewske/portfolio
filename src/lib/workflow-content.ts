@@ -1,8 +1,14 @@
 // Discriminated union for content blocks - extend as content types are needed
 export type ContentBlock =
   | { type: 'placeholder'; label: string }
-  | { type: 'text'; content: string };
-  // Future types: 'command' | 'finding' | 'callout' | 'scene'
+  | { type: 'text'; content: string }
+  | { type: 'chat'; speaker: 'hammond' | 'claude'; content: string; id?: string }
+  | { type: 'kevin'; content: string; whatBreaks?: string; id?: string }
+  | { type: 'timeskip'; content: string }
+  | { type: 'finding'; severity: 'critical' | 'high' | 'medium' | 'low'; title: string; confidence: number; content: string }
+  | { type: 'collapsible'; title: string; content: string }
+  | { type: 'phase'; phase: string }
+  | { type: 'code'; language: string; content: string; title?: string };
 
 export interface WorkflowPhase {
   id: string;
