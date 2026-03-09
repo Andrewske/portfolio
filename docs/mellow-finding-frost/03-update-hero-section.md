@@ -1,6 +1,6 @@
 ---
 task: 03-update-hero-section
-status: pending
+status: done
 depends: [01-add-navigation-components]
 files:
   - path: src/components/workflow/WorkflowPageClient.tsx

@@ -278,35 +278,47 @@ function WorkflowContent(): ReactNode {
       <FloatingSidebar activePhase={activePhase} phases={navPhases} />
 
       {/* Hero Section */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Terminal window with thick frame */}
-          <div id="hero-section" className="rounded-lg p-2 mb-12 sm:mb-16" style={{ backgroundColor: '#2d3d32' }}>
-            {/* Dots in frame area */}
-            <div className="flex items-center justify-between gap-2 px-2 py-2 mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="ml-4 text-text-secondary text-sm">workflow.tsx</span>
-              </div>
-              <ImmersionControls />
-            </div>
-            {/* Inset content area */}
-            <div className="rounded border border-green-accent/40 p-6 sm:p-8 space-y-4" style={{ backgroundColor: '#0a0d0b' }}>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-primary">
-                {intro.title}
-              </h1>
-              <p className="text-base sm:text-lg text-text-secondary">
-                {intro.subtitle}
-              </p>
-              {intro.hook && (
-                <p className="text-sm sm:text-base text-green-bright italic">
-                  {intro.hook}
-                </p>
-              )}
-            </div>
+      <section>
+        {/* Hero Image - nav appears after scrolling past this */}
+        <div id="hero-section">
+          <HeroImage />
+        </div>
+
+        {/* Editorial Hero Content */}
+        <div className="max-w-4xl mx-auto px-6 py-12 sm:py-16">
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-[#e6edf3]">
+            {intro.title}
+          </h1>
+
+          {/* Pipeline Badges - clickable navigation */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {navPhases.map((phase) => (
+              <a key={phase.id} href={`#${phase.id}`}>
+                <code className="px-3 py-1.5 text-sm bg-[#39d353]/10 text-[#39d353] rounded border border-[#39d353]/20 hover:bg-[#39d353]/20 transition-colors cursor-pointer">
+                  {phase.name}
+                </code>
+              </a>
+            ))}
           </div>
+
+          {/* Hook */}
+          {/* TODO: Replace href="#" with actual download link in future task */}
+          <p className="text-[#8b949e] text-base sm:text-lg mb-12">
+            If you just want the commands,{' '}
+            <a href="#" className="text-[#39d353] underline underline-offset-4 decoration-[#39d353]/30 hover:decoration-[#39d353]">
+              download them here
+            </a>{' '}
+            and start using them today.
+          </p>
+
+          {/* ImmersionControls moved here */}
+          <div className="mb-8">
+            <ImmersionControls />
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6">
 
           {/* TL;DR Section */}
           <div className="mb-12 sm:mb-16 space-y-4">
