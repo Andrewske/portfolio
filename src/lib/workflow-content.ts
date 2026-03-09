@@ -31,6 +31,7 @@ export type Block =
 export interface WorkflowPhase {
   id: string;
   title: string;
+  description?: string;
   blocks: Block[];
 }
 
@@ -41,6 +42,7 @@ export interface WorkflowContent {
     hook?: string;
   };
   tldr: {
+    summary: string;
     blocks: Block[];
   };
   introBlocks: Block[];
@@ -53,27 +55,13 @@ export interface WorkflowContent {
 export const workflowContent: WorkflowContent = {
   intro: {
     title: "My Claude Code Workflow",
-    subtitle: "Discussion → Plan → Review → Best-idea → Improve → Implement → Code-review",
+    subtitle: "Discussion → Handoff → Review → Best-idea → Improve → Implement → Code-review",
     hook: "If you just want the skills, download them here and start using them today.",
   },
 
   tldr: {
-    blocks: [
-      {
-        type: 'table',
-        headers: ['Phase', 'What happens', 'Why it matters', 'Artifact'],
-        rows: [
-          ['Discussion', 'Claude asks questions one at a time until ready to plan', 'Forces decisions upfront instead of assumptions', 'Decisions list'],
-          ['Plan', 'Claude writes exhaustive implementation plan (Opus)', 'The plan becomes the artifact you\'ll review and execute', '`~/.claude/plans/`'],
-          ['Handoff', 'Break large plans into agent-sized task files', 'Parallel execution, clear dependencies', 'Task files'],
-          ['Plan-review', 'Fresh context reviews plan for gaps', 'Catches issues before they become bugs', 'Findings list'],
-          ['Best-idea', 'Research alternatives when uncertain', 'Finds Option D when you\'re stuck on A, B, C', 'Recommendation'],
-          ['Improve-idea', 'Simplify, strengthen, "wouldn\'t it be cool if"', 'B+ plans become A- plans', 'Suggestions list'],
-          ['Implement', 'Sub-agents execute in parallel', 'Trust the plan, context-switch to other work', 'Commits'],
-          ['Code-review', 'Fresh context reviews commits', 'Catches what slipped through', 'Review notes'],
-        ],
-      },
-    ],
+    summary: "Seven phases from idea to shipped code. Claude asks questions until it understands, writes an exhaustive plan, then sub-agents execute in parallel while you context-switch to other work. Fresh reviewers catch what the implementers missed.",
+    blocks: [],
   },
 
   introBlocks: [
@@ -97,8 +85,9 @@ export const workflowContent: WorkflowContent = {
 
   phases: [
     {
-      id: 'scene',
-      title: 'The Scene Opens',
+      id: 'discussion',
+      title: 'Phase 1: Discussion',
+      description: 'Claude asks questions one at a time until ready to plan',
       blocks: [
         {
           type: 'kevin',
@@ -110,12 +99,7 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Skip this step and life, uh, finds a way... of punishing you later.' },
           ],
         },
-      ],
-    },
-    {
-      id: 'discussion',
-      title: 'Phase 1: Discussion',
-      blocks: [
+        { type: 'divider' },
         {
           type: 'p',
           content: 'Hammond has shared his documentation. Containment systems, tour design, staffing plans, the investor deck. Claude has read everything.',
@@ -224,15 +208,6 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Ready for the plan.' },
           ],
         },
-        { type: 'divider' },
-        {
-          type: 'kevin',
-          blocks: [
-            { type: 'p', content: 'Once Claude runs out of questions, I switch to plan mode. Instead of accepting the plan to begin implementation I run:' },
-            { type: 'p', content: '`/handoff`' },
-            { type: 'p', content: 'This creates a folder in `docs/`, splitting up the plan into task files scoped for smaller agents like Sonnet *(faster, cheaper, and they don\'t need the whole picture)*, plus a README with the high-level view.' },
-          ],
-        },
         {
           type: 'image',
           src: holdOnToYourButts,
@@ -242,8 +217,24 @@ export const workflowContent: WorkflowContent = {
       ],
     },
     {
+      id: 'handoff',
+      title: 'Handoff',
+      description: 'Break large plans into agent-sized task files',
+      blocks: [
+        {
+          type: 'kevin',
+          blocks: [
+            { type: 'p', content: 'Once Claude runs out of questions, I switch to plan mode. Instead of accepting the plan to begin implementation I run:' },
+            { type: 'p', content: '`/handoff`' },
+            { type: 'p', content: 'This creates a folder in `docs/`, splitting up the plan into task files scoped for smaller agents like Sonnet *(faster, cheaper, and they don\'t need the whole picture)*, plus a README with the high-level view.' },
+          ],
+        },
+      ],
+    },
+    {
       id: 'review',
       title: 'Phase 2: Plan Review',
+      description: 'Fresh context reviews plan for gaps',
       blocks: [
         {
           type: 'kevin',
@@ -535,6 +526,7 @@ export const workflowContent: WorkflowContent = {
     {
       id: 'best-idea',
       title: 'Phase 3: Best Idea',
+      description: 'Research alternatives when uncertain',
       blocks: [
         {
           type: 'kevin',
@@ -659,6 +651,7 @@ export const workflowContent: WorkflowContent = {
     {
       id: 'improve',
       title: 'Phase 4: Improve Idea',
+      description: 'Simplify, strengthen, "wouldn\'t it be cool if"',
       blocks: [
         {
           type: 'kevin',
@@ -751,6 +744,7 @@ export const workflowContent: WorkflowContent = {
     {
       id: 'implement',
       title: 'Implementation',
+      description: 'Sub-agents execute in parallel',
       blocks: [
         {
           type: 'kevin',
@@ -764,6 +758,7 @@ export const workflowContent: WorkflowContent = {
     {
       id: 'code-review',
       title: 'Phase 5: Code Review',
+      description: 'Fresh context reviews commits',
       blocks: [
         {
           type: 'kevin',
