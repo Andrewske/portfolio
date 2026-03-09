@@ -4,22 +4,22 @@ import React, { type ReactNode } from 'react';
 import { DinoModeProvider } from './DinoModeProvider';
 import { DinoCollapsible } from './DinoCollapsible';
 import { ImmersionControls } from './ImmersionControls';
-import { workflowContent, type ContentBlock } from '~/lib/workflow-content';
+import { workflowContent, type Block } from '~/lib/workflow-content';
 import { renderBlock } from './BlockRenderer';
 
 // Determine if block should be in terminal window (JP scene content) or plain text
-function isTerminalContent(block: ContentBlock): boolean {
+function isTerminalContent(block: Block): boolean {
   // Check for dinoOnly flag on any block type
   return ('dinoOnly' in block) && block.dinoOnly === true;
 }
 
 type BlockGroup = {
   isTerminal: boolean;
-  blocks: ContentBlock[];
+  blocks: Block[];
   startIndex: number;
 };
 
-function groupBlocksByContainer(blocks: ContentBlock[]): BlockGroup[] {
+function groupBlocksByContainer(blocks: Block[]): BlockGroup[] {
   const groups: BlockGroup[] = [];
   let currentGroup: BlockGroup | null = null;
 
@@ -37,7 +37,7 @@ function groupBlocksByContainer(blocks: ContentBlock[]): BlockGroup[] {
   return groups;
 }
 
-function renderBlockGroups(blocks: ContentBlock[]): React.ReactElement[] {
+function renderBlockGroups(blocks: Block[]): React.ReactElement[] {
   const groups = groupBlocksByContainer(blocks);
 
   return groups.map((group, groupIndex) => {

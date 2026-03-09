@@ -1,6 +1,6 @@
 ---
 task: 05-cleanup
-status: pending
+status: done
 depends: [04-update-workflow-page-client]
 files:
   - path: src/components/workflow/renderFormattedContent.tsx

@@ -29,10 +29,6 @@ export type Block =
   // Structural
   | { type: 'table'; headers: string[]; rows: string[][]; id?: string; dinoOnly?: boolean };
 
-// Old ContentBlock type - kept temporarily for gradual migration
-// Now ContentBlock is just an alias for Block
-export type ContentBlock = Block;
-
 export interface WorkflowPhase {
   id: string;
   title: string;
