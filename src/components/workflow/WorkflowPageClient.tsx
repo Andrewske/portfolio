@@ -7,6 +7,35 @@ import { ImmersionControls } from './ImmersionControls';
 import { workflowContent, type Block } from '~/lib/workflow-content';
 import { renderBlock } from './BlockRenderer';
 
+// Hero Image Placeholder Component
+function HeroImage() {
+  return (
+    <div className="relative w-full aspect-[21/9] sm:aspect-[2.5/1] bg-gradient-to-br from-[#1a1f1a] via-[#0d120d] to-[#0b0f0c] overflow-hidden">
+      {/* Placeholder pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(57, 211, 83, 0.1) 20px, rgba(57, 211, 83, 0.1) 40px)`
+        }} />
+      </div>
+      {/* Placeholder banner */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="relative px-8 py-4 sm:px-16 sm:py-6 transform -rotate-6"
+          style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
+          <span className="font-mono text-lg sm:text-2xl md:text-3xl font-bold tracking-wide"
+            style={{ background: 'linear-gradient(180deg, #ff6b35 0%, #c54b1a 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            WHEN CLAUDE WRITES THE CODE
+          </span>
+        </div>
+        <p className="absolute bottom-4 text-[#8b949e] text-xs sm:text-sm font-mono">
+          [ Hero image placeholder - T-Rex banner coming soon ]
+        </p>
+      </div>
+      {/* Vignette overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f0c] via-transparent to-transparent" />
+    </div>
+  );
+}
+
 // Determine if block should be in terminal window (JP scene content) or plain text
 function isTerminalContent(block: Block): boolean {
   // Check for dinoOnly flag on any block type
@@ -222,18 +251,22 @@ function WorkflowContent(): ReactNode {
 
     phases.forEach((phase) => {
       const element = document.getElementById(phase.id);
-      if (element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setActivePhase(phase.id);
-            }
-          },
-          { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
-        );
-        observer.observe(element);
-        observers.push(observer);
+      if (!element) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`[ScrollTracking] Missing section element: #${phase.id}`);
+        }
+        return;
       }
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActivePhase(phase.id);
+          }
+        },
+        { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
+      );
+      observer.observe(element);
+      observers.push(observer);
     });
 
     return () => observers.forEach((obs) => obs.disconnect());
@@ -289,7 +322,7 @@ function WorkflowContent(): ReactNode {
           {/* Workflow Phases */}
           <div className="space-y-16 sm:space-y-20">
             {phases.map((phase) => (
-              <section key={phase.id} id={phase.id} className="space-y-6">
+              <section key={phase.id} id={phase.id} className="space-y-6 scroll-mt-16">
                 <h2 className="text-lg sm:text-xl font-bold text-green-primary">{phase.title}</h2>
                 <div className="space-y-4">
                   {renderBlockGroups(phase.blocks)}
