@@ -4,18 +4,8 @@ import React, { type ReactNode } from 'react';
 import { DinoModeProvider } from './DinoModeProvider';
 import { DinoCollapsible } from './DinoCollapsible';
 import { ImmersionControls } from './ImmersionControls';
-import PlaceholderBlock from './PlaceholderBlock';
-import ChatMessage from './ChatMessage';
-import Finding from './Finding';
-import PhaseLabel from './PhaseLabel';
-import { TimeSkip } from './TimeSkip';
-import CollapsiblePrompt from './CollapsiblePrompt';
-import { WorkflowTable } from './WorkflowTable';
-import { MemeImage } from './MemeImage';
-import { CodeBlock } from '~/components/ui/CodeBlock';
-import { parseInlineMarkdown } from '~/utils/parseInlineMarkdown';
-import { workflowContent, type ContentBlock } from '~/lib/workflow-content';
-import { renderFormattedContent } from './renderFormattedContent';
+import { workflowContent, type ContentBlock, type Block } from '~/lib/workflow-content';
+import { renderBlock } from './BlockRenderer';
 
 // Determine if block should be in terminal window (JP scene content) or plain text
 function isTerminalContent(block: ContentBlock): boolean {
@@ -52,67 +42,7 @@ function groupBlocksByContainer(blocks: ContentBlock[]): BlockGroup[] {
 }
 
 function renderSingleBlock(block: ContentBlock, index: number): React.ReactElement | null {
-  switch (block.type) {
-    case 'chat':
-      return <ChatMessage key={index} id={block.id} speaker={block.speaker}>{renderFormattedContent(block.content)}</ChatMessage>;
-    case 'kevin':
-      // Render as plain text paragraphs, splitting on double newlines
-      const paragraphs = block.content.split('\n\n');
-      return (
-        <div key={index} id={block.id} className="space-y-2">
-          {paragraphs.map((para, i) => (
-            <p key={i} className="text-gray-300 text-sm leading-snug">{parseInlineMarkdown(para)}</p>
-          ))}
-        </div>
-      );
-    case 'timeskip':
-      return <TimeSkip key={index}>{block.content}</TimeSkip>;
-    case 'finding':
-      return (
-        <Finding key={index} severity={block.severity} title={block.title} confidence={block.confidence} content={block.content} />
-      );
-    case 'collapsible':
-      return <CollapsiblePrompt key={index} title={block.title}>{block.content}</CollapsiblePrompt>;
-    case 'phase':
-      return <PhaseLabel key={index} phase={block.phase} />;
-    case 'placeholder':
-      return <PlaceholderBlock key={index} label={block.label} />;
-    case 'text':
-      return <React.Fragment key={index}>{renderFormattedContent(block.content)}</React.Fragment>;
-    case 'code':
-      return <CodeBlock key={index} code={block.content} language={block.language} title={block.title ?? block.language} />;
-    case 'heading':
-      if (block.level === 2) {
-        return <h2 key={index} className="text-sm font-bold text-white mt-4 mb-1">{block.content}</h2>;
-      }
-      return <h3 key={index} className="text-sm font-bold text-gray-200 mt-3 mb-1">{block.content}</h3>;
-    case 'list':
-      return (
-        <div key={index} className="space-y-0.5 text-gray-300 text-sm">
-          {block.items.map((item, i) => (
-            <div key={i} className="flex">
-              <span className="flex-shrink-0 w-4">{block.ordered ? `${i + 1}.` : '-'}</span>
-              <span>{parseInlineMarkdown(item)}</span>
-            </div>
-          ))}
-        </div>
-      );
-    case 'image':
-      return <MemeImage key={index} src={block.src} alt={block.alt} />;
-    case 'divider':
-      return <div key={index} className="text-gray-500 text-sm my-1">---</div>;
-    case 'quote':
-      return (
-        <blockquote key={index} className="border-l-2 border-gray-600 pl-4 italic text-gray-400 font-mono text-sm leading-snug">
-          {parseInlineMarkdown(block.content)}
-        </blockquote>
-      );
-    case 'table':
-      return <WorkflowTable key={index} headers={block.headers} rows={block.rows} />;
-    default:
-      const _exhaustive: never = block;
-      return null;
-  }
+  return renderBlock(block, index);
 }
 
 function renderBlockGroups(blocks: ContentBlock[]): React.ReactElement[] {

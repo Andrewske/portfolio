@@ -1,6 +1,6 @@
 ---
 task: 03-migrate-content
-status: pending
+status: done
 depends: [01-define-block-types, 02-create-block-renderer]
 files:
   - path: src/lib/workflow-content.ts

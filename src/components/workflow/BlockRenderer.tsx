@@ -140,25 +140,23 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
     // Containers (wrap nested blocks)
     case 'chat':
       return (
-        <ChatMessage key={index} speaker={block.speaker} id={block.id}>
-          {renderBlocks(block.blocks)}
-        </ChatMessage>
+        <ChatMessage
+          key={index}
+          speaker={block.speaker}
+          id={block.id}
+          blocks={block.blocks}
+        />
       );
 
     case 'finding':
-      // Finding component expects string content, but we have blocks
-      // We need to adapt this - for now, render blocks inside Finding wrapper
       return (
-        <div key={index} id={block.id} data-testid="finding" className="space-y-1 font-mono text-sm">
-          <div className="text-gray-500">---</div>
-          <div className="text-white font-semibold">
-            Finding ({block.severity.toUpperCase()}): {block.title}
-            {block.confidence !== undefined && ` (${block.confidence}% confidence)`}
-          </div>
-          <div className="space-y-1 text-gray-300 leading-snug">
-            {renderBlocks(block.blocks)}
-          </div>
-        </div>
+        <Finding
+          key={index}
+          severity={block.severity}
+          title={block.title}
+          confidence={block.confidence}
+          blocks={block.blocks}
+        />
       );
 
     case 'kevin':

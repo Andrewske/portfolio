@@ -1,14 +1,16 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
+import type { Block } from '~/lib/workflow-content';
+import { renderBlocks } from './BlockRenderer';
 
 import ChatCharacterIcon from './ChatCharacterIcon';
 
 interface ChatMessageProps {
   speaker: 'hammond' | 'claude';
-  children: ReactNode;
+  blocks: Block[];
   id?: string;
 }
 
-export default function ChatMessage({ speaker, children, id }: ChatMessageProps): React.ReactElement {
+export default function ChatMessage({ speaker, blocks, id }: ChatMessageProps): ReactElement {
   // Claude gets blue dot on left, Hammond gets yellow pill for short messages or yellow dot
   const isHammond = speaker === 'hammond';
 
@@ -28,8 +30,8 @@ export default function ChatMessage({ speaker, children, id }: ChatMessageProps)
           aria-label={isHammond ? 'Hammond' : 'Claude'}
         />
         {/* Message content - plain text, no box */}
-        <div className="font-mono text-sm text-gray-300 leading-snug">
-          {children}
+        <div className="font-mono text-sm text-gray-300 leading-snug space-y-2">
+          {renderBlocks(blocks)}
         </div>
       </div>
     </div>

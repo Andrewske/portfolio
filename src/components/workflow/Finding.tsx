@@ -1,14 +1,15 @@
-import React from 'react';
-import { renderFormattedContent } from './renderFormattedContent';
+import React, { ReactElement } from 'react';
+import type { Block } from '~/lib/workflow-content';
+import { renderBlocks } from './BlockRenderer';
 
 interface FindingProps {
   severity: 'critical' | 'high' | 'medium' | 'low';
   title: string;
   confidence?: number;
-  content: string;
+  blocks: Block[];
 }
 
-export default function Finding({ severity, title, confidence, content }: FindingProps): React.ReactElement {
+export default function Finding({ severity, title, confidence, blocks }: FindingProps): ReactElement {
   const severityLabel = severity.toUpperCase();
   const confidenceStr = confidence !== undefined ? ` (${confidence}% confidence)` : '';
 
@@ -18,8 +19,8 @@ export default function Finding({ severity, title, confidence, content }: Findin
       <div className="text-white font-semibold">
         Finding ({severityLabel}): {title}{confidenceStr}
       </div>
-      <div className="space-y-1 text-gray-300 leading-snug">
-        {renderFormattedContent(content)}
+      <div className="space-y-2 text-gray-300 leading-snug">
+        {renderBlocks(blocks)}
       </div>
     </div>
   );
