@@ -5,7 +5,31 @@ import didntStopToThink from '~/assets/workflow/didnt-stop-to-think-if-they-shou
 // Import images
 import holdOnToYourButts from '~/assets/workflow/hold-on-to-your-butts.gif';
 
-// Discriminated union for content blocks - extend as content types are needed
+// New Block type system - primitives, compounds, containers, and structural
+export type Block =
+  // Primitives (single HTML elements)
+  | { type: 'p'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'h2'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'h3'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'divider'; id?: string; dinoOnly?: boolean }
+  | { type: 'image'; src: StaticImageData; alt: string; id?: string; dinoOnly?: boolean }
+  | { type: 'code'; language: string; content: string; title?: string; id?: string; dinoOnly?: boolean }
+  | { type: 'quote'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'timeskip'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'raw'; content: string; id?: string; dinoOnly?: boolean }
+  // Compound blocks (multiple elements, semantic structure)
+  | { type: 'list'; items: string[]; ordered?: boolean; id?: string; dinoOnly?: boolean }
+  | { type: 'option'; number: number; title: string; pros?: string[]; cons?: string[]; id?: string; dinoOnly?: boolean }
+  | { type: 'recommendation'; content: string; confidence?: number; id?: string; dinoOnly?: boolean }
+  // Containers (wrap nested blocks)
+  | { type: 'chat'; speaker: 'hammond' | 'claude'; blocks: Block[]; id?: string; dinoOnly?: boolean }
+  | { type: 'finding'; severity: 'critical' | 'high' | 'medium' | 'low'; title: string; confidence?: number; blocks: Block[]; id?: string; dinoOnly?: boolean }
+  | { type: 'kevin'; blocks: Block[]; id?: string; dinoOnly?: boolean }
+  | { type: 'collapsible'; title: string; blocks: Block[]; id?: string; dinoOnly?: boolean }
+  // Structural
+  | { type: 'table'; headers: string[]; rows: string[][]; id?: string; dinoOnly?: boolean };
+
+// Old ContentBlock type - kept temporarily for gradual migration
 export type ContentBlock =
   | { type: 'placeholder'; label: string }
   | { type: 'text'; content: string; dinoOnly?: boolean }

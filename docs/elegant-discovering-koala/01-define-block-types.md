@@ -1,6 +1,6 @@
 ---
 task: 01-define-block-types
-status: pending
+status: done
 depends: [00b-delete-variants]
 files:
   - path: src/lib/workflow-content.ts
