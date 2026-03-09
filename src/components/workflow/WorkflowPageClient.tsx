@@ -321,9 +321,25 @@ function WorkflowContent(): ReactNode {
         <div className="max-w-4xl mx-auto px-6">
 
           {/* TL;DR Section */}
-          <div className="mb-12 sm:mb-16 space-y-4">
-            <h2 className="text-lg sm:text-xl font-bold text-green-primary">TL;DR</h2>
-            {renderBlockGroups(tldr.blocks)}
+          <div className="space-y-6 mb-12 sm:mb-16">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#7ee787]">TL;DR</h2>
+
+            <p className="text-[#8b949e] text-base">
+              {tldr.summary}
+            </p>
+
+            <div className="space-y-3 pt-2">
+              {phases.map((phase) => (
+                <div key={phase.id} className="flex gap-3">
+                  <span className="text-[#39d353] select-none">•</span>
+                  <p className="text-[#c9d1d9]">
+                    <span className="font-semibold text-[#7ee787]">{phase.title.replace(/^Phase \d+: /, '')}</span>
+                    {' — '}
+                    {phase.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Intro Blocks */}

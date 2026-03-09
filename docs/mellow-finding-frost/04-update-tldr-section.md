@@ -1,6 +1,6 @@
 ---
 task: 04-update-tldr-section
-status: pending
+status: done
 depends: [03-update-hero-section]
 files:
   - path: src/components/workflow/WorkflowPageClient.tsx
