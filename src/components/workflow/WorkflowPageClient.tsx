@@ -48,18 +48,19 @@ function renderBlockGroups(blocks: Block[]): React.ReactElement[] {
     if (renderedBlocks.length === 0) return null;
 
     if (group.isTerminal) {
-      // JP content in terminal window
+      // JP content in terminal window with thick frame
       return (
         <DinoCollapsible key={`group-${groupIndex}`}>
-          <div className="border border-border rounded-lg bg-bg-panel">
-            {/* Terminal header */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-bg-code border-b border-border">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+          {/* Thick frame area */}
+          <div className="rounded-lg p-2" style={{ backgroundColor: '#2d3d32' }}>
+            {/* Dots in frame area */}
+            <div className="flex items-center gap-2 px-2 py-2 mb-3">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-            {/* Terminal content */}
-            <div className="p-4 sm:p-6 space-y-2">
+            {/* Inset content area */}
+            <div className="rounded border border-green-accent/40 p-5 sm:p-8 space-y-4" style={{ backgroundColor: '#0a0d0b' }}>
               {renderedBlocks}
             </div>
           </div>
@@ -69,7 +70,7 @@ function renderBlockGroups(blocks: Block[]): React.ReactElement[] {
 
     // Kevin/plain content rendered outside terminal styling
     return (
-      <div key={`group-${groupIndex}`} className="space-y-2">
+      <div key={`group-${groupIndex}`} className="space-y-3">
         {renderedBlocks}
       </div>
     );
@@ -84,19 +85,20 @@ function WorkflowContent(): ReactNode {
       {/* Hero Section */}
       <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          {/* Terminal-style header */}
-          <div className="border border-green-primary/20 rounded-lg p-4 sm:p-6 md:p-8 bg-bg-panel backdrop-blur-sm mb-8 sm:mb-12">
-            <div className="flex items-center justify-between gap-2 mb-4 sm:mb-6">
+          {/* Terminal window with thick frame */}
+          <div className="rounded-lg p-2 mb-12 sm:mb-16" style={{ backgroundColor: '#2d3d32' }}>
+            {/* Dots in frame area */}
+            <div className="flex items-center justify-between gap-2 px-2 py-2 mb-3">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-                <span className="ml-2 sm:ml-4 text-text-secondary text-xs sm:text-sm">workflow.tsx</span>
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                <span className="ml-4 text-text-secondary text-sm">workflow.tsx</span>
               </div>
               <ImmersionControls />
             </div>
-
-            <div className="space-y-3 sm:space-y-4">
+            {/* Inset content area */}
+            <div className="rounded border border-green-accent/40 p-6 sm:p-8 space-y-4" style={{ backgroundColor: '#0a0d0b' }}>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-primary">
                 {intro.title}
               </h1>
@@ -112,22 +114,22 @@ function WorkflowContent(): ReactNode {
           </div>
 
           {/* TL;DR Section */}
-          <div className="mb-8 sm:mb-12 space-y-2">
-            <h2 className="text-sm font-bold text-green-primary">TL;DR</h2>
+          <div className="mb-12 sm:mb-16 space-y-4">
+            <h2 className="text-lg sm:text-xl font-bold text-green-primary">TL;DR</h2>
             {renderBlockGroups(tldr.blocks)}
           </div>
 
           {/* Intro Blocks */}
-          <div className="mb-8 sm:mb-12 space-y-2">
+          <div className="mb-12 sm:mb-16 space-y-4">
             {renderBlockGroups(introBlocks)}
           </div>
 
           {/* Workflow Phases */}
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-16 sm:space-y-20">
             {phases.map((phase) => (
-              <section key={phase.id} id={phase.id} className="space-y-3">
-                <h2 className="text-sm font-bold text-green-primary">{phase.title}</h2>
-                <div className="space-y-3">
+              <section key={phase.id} id={phase.id} className="space-y-6">
+                <h2 className="text-lg sm:text-xl font-bold text-green-primary">{phase.title}</h2>
+                <div className="space-y-4">
                   {renderBlockGroups(phase.blocks)}
                 </div>
               </section>
@@ -136,7 +138,7 @@ function WorkflowContent(): ReactNode {
 
           {/* Outro Section */}
           {outro.blocks.length > 0 && (
-            <div className="mt-8 sm:mt-12 space-y-2">
+            <div className="mt-16 sm:mt-20 space-y-4">
               {renderBlockGroups(outro.blocks)}
             </div>
           )}

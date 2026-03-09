@@ -30,7 +30,7 @@ export default function ChatMessage({ speaker, blocks, id }: ChatMessageProps): 
           aria-label={isHammond ? 'Hammond' : 'Claude'}
         />
         {/* Message content - plain text, no box */}
-        <div className="font-mono text-sm text-gray-300 leading-snug space-y-2">
+        <div className="font-mono text-sm text-text-body leading-relaxed space-y-3">
           {renderBlocks(blocks)}
         </div>
       </div>

@@ -16,7 +16,6 @@ export type Block =
   | { type: 'code'; language: string; content: string; title?: string; id?: string; dinoOnly?: boolean }
   | { type: 'quote'; content: string; id?: string; dinoOnly?: boolean }
   | { type: 'timeskip'; content: string; id?: string; dinoOnly?: boolean }
-  | { type: 'raw'; content: string; id?: string; dinoOnly?: boolean }
   // Compound blocks (multiple elements, semantic structure)
   | { type: 'list'; items: string[]; ordered?: boolean; id?: string; dinoOnly?: boolean }
   | { type: 'option'; number: number; title: string; pros?: string[]; cons?: string[]; id?: string; dinoOnly?: boolean }
@@ -257,7 +256,6 @@ export const workflowContent: WorkflowContent = {
         { type: 'divider', dinoOnly: true },
         {
           type: 'h2',
-          
           content: 'Plan Review: Jurassic Park Implementation Plan',
           dinoOnly: true,
         },
@@ -362,7 +360,6 @@ export const workflowContent: WorkflowContent = {
         { type: 'divider', dinoOnly: true },
         {
           type: 'h2',
-          
           content: 'Findings Resolution',
           dinoOnly: true,
         },
@@ -549,7 +546,6 @@ export const workflowContent: WorkflowContent = {
         { type: 'divider', dinoOnly: true },
         {
           type: 'h2',
-          
           content: 'Best-Idea Evaluation: Raptor Containment',
           dinoOnly: true,
         },
@@ -674,7 +670,6 @@ export const workflowContent: WorkflowContent = {
         { type: 'divider', dinoOnly: true },
         {
           type: 'h2',
-          
           content: 'Idea Improvement: Jurassic Park Implementation Plan',
           dinoOnly: true,
         },
@@ -780,7 +775,6 @@ export const workflowContent: WorkflowContent = {
         { type: 'divider', dinoOnly: true },
         {
           type: 'h2',
-          
           content: 'Code Review: Jurassic Park Implementation',
           dinoOnly: true,
         },
@@ -855,7 +849,6 @@ export const workflowContent: WorkflowContent = {
     blocks: [
       {
         type: 'h2',
-        
         content: 'Outro',
       },
       {
@@ -893,7 +886,6 @@ export const workflowContent: WorkflowContent = {
       { type: 'divider' },
       {
         type: 'h2',
-        
         content: 'Download the Skills',
       },
       {

@@ -15,7 +15,7 @@ export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.Reac
             {headers.map((header, index) => (
               <th
                 key={index}
-                className="px-4 py-3 text-left text-gray-400 font-mono font-medium"
+                className="px-4 py-4 text-left text-gray-400 font-mono font-medium"
               >
                 {header}
               </th>
@@ -31,7 +31,7 @@ export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.Reac
               {row.map((cell, cellIndex) => (
                 <td
                   key={cellIndex}
-                  className="px-4 py-3 text-gray-300"
+                  className="px-4 py-4 text-gray-300 leading-relaxed"
                 >
                   {parseInlineMarkdown(cell)}
                 </td>

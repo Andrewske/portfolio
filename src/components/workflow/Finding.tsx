@@ -14,12 +14,12 @@ export default function Finding({ severity, title, confidence, blocks }: Finding
   const confidenceStr = confidence !== undefined ? ` (${confidence}% confidence)` : '';
 
   return (
-    <div data-testid="finding" className="space-y-1 font-mono text-sm">
-      <div className="text-gray-500">---</div>
-      <div className="text-white font-semibold">
+    <div data-testid="finding" className="space-y-3 font-mono text-sm my-4">
+      <div className="text-text-muted">---</div>
+      <div className="text-text-primary font-semibold">
         Finding ({severityLabel}): {title}{confidenceStr}
       </div>
-      <div className="space-y-2 text-gray-300 leading-snug">
+      <div className="space-y-3 text-text-body leading-relaxed">
         {renderBlocks(blocks)}
       </div>
     </div>

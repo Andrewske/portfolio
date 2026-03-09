@@ -24,28 +24,28 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
     // Primitives (single HTML elements)
     case 'p':
       return (
-        <p key={index} id={block.id} className="text-gray-300 text-sm leading-snug">
+        <p key={index} id={block.id} className="text-text-body text-sm leading-snug">
           {parseInlineMarkdown(block.content)}
         </p>
       );
 
     case 'h2':
       return (
-        <h2 key={index} id={block.id} className="text-sm font-bold text-white mt-4 mb-1">
+        <h2 key={index} id={block.id} className="text-base font-bold text-text-primary mt-6 mb-2">
           {block.content}
         </h2>
       );
 
     case 'h3':
       return (
-        <h3 key={index} id={block.id} className="text-sm font-bold text-gray-200 mt-3 mb-1">
+        <h3 key={index} id={block.id} className="text-sm font-semibold text-text-body mt-4 mb-1">
           {block.content}
         </h3>
       );
 
     case 'divider':
       return (
-        <div key={index} id={block.id} className="text-gray-500 text-sm my-1">
+        <div key={index} id={block.id} className="text-text-muted text-sm my-4">
           ---
         </div>
       );
@@ -65,7 +65,7 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'quote':
       return (
-        <blockquote key={index} id={block.id} className="border-l-2 border-gray-600 pl-4 text-gray-400 text-sm italic">
+        <blockquote key={index} id={block.id} className="border-l-2 border-border pl-4 text-text-muted text-sm italic">
           {parseInlineMarkdown(block.content)}
         </blockquote>
       );
@@ -77,21 +77,12 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
         </TimeSkip>
       );
 
-    case 'raw':
-      return (
-        <div
-          key={index}
-          id={block.id}
-          dangerouslySetInnerHTML={{ __html: block.content }}
-        />
-      );
-
     // Compound blocks (multiple elements, semantic structure)
     case 'list':
       const ListTag = block.ordered ? 'ol' : 'ul';
       const listClassName = block.ordered
-        ? 'list-decimal list-inside text-gray-300 text-sm space-y-1'
-        : 'list-disc list-inside text-gray-300 text-sm space-y-1';
+        ? 'list-decimal list-inside text-text-body text-sm space-y-1'
+        : 'list-disc list-inside text-text-body text-sm space-y-1';
       return (
         <ListTag key={index} id={block.id} className={listClassName}>
           {block.items.map((item, i) => (
@@ -102,14 +93,14 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'option':
       return (
-        <div key={index} id={block.id} className="space-y-2 text-sm">
-          <div className="text-white font-semibold">
+        <div key={index} id={block.id} className="space-y-2 text-sm my-3">
+          <div className="text-text-primary font-semibold">
             Option {block.number}: {block.title}
           </div>
           {block.pros && block.pros.length > 0 && (
             <div className="pl-4">
-              <div className="text-gray-400">Pros:</div>
-              <ul className="list-disc list-inside text-gray-300 space-y-1">
+              <div className="text-text-muted">Pros:</div>
+              <ul className="list-disc list-inside text-text-body space-y-1">
                 {block.pros.map((pro, i) => (
                   <li key={i}>{parseInlineMarkdown(pro)}</li>
                 ))}
@@ -118,8 +109,8 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
           )}
           {block.cons && block.cons.length > 0 && (
             <div className="pl-4">
-              <div className="text-gray-400">Cons:</div>
-              <ul className="list-disc list-inside text-gray-300 space-y-1">
+              <div className="text-text-muted">Cons:</div>
+              <ul className="list-disc list-inside text-text-body space-y-1">
                 {block.cons.map((con, i) => (
                   <li key={i}>{parseInlineMarkdown(con)}</li>
                 ))}
@@ -131,7 +122,7 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'recommendation':
       return (
-        <p key={index} id={block.id} className="text-green-400 font-semibold text-sm">
+        <p key={index} id={block.id} className="text-green-primary font-semibold text-sm mt-4">
           Recommended: {block.content}
           {block.confidence !== undefined && ` (${block.confidence}% confidence)`}
         </p>
@@ -161,7 +152,7 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'kevin':
       return (
-        <div key={index} id={block.id} className="space-y-2">
+        <div key={index} id={block.id} className="space-y-3">
           {renderBlocks(block.blocks)}
         </div>
       );

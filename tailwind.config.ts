@@ -45,6 +45,7 @@ const config = {
         },
         text: {
           primary: '#e6edf3',
+          secondary: '#8b949e',
           body: '#c9d1d9',
           muted: '#8b949e',
         },
