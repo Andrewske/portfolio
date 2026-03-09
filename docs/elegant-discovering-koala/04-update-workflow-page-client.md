@@ -1,6 +1,6 @@
 ---
 task: 04-update-workflow-page-client
-status: pending
+status: done
 depends: [02-create-block-renderer, 03-migrate-content]
 files:
   - path: src/components/workflow/WorkflowPageClient.tsx

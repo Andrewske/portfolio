@@ -24,7 +24,7 @@ Batch 7: [05-cleanup] (depends on 04-update-workflow-page-client)
 | 00b-delete-variants | ✅ Done | 2026-03-08 | 2026-03-08 | ~1min |
 | 01-define-block-types | ✅ Done | 2026-03-08 | 2026-03-08 | ~1min |
 | 02-create-block-renderer | ✅ Done | 2026-03-08 | 2026-03-08 | ~1min |
-| 03-migrate-content | Pending | - | - | - |
+| 03-migrate-content | ✅ Done | 2026-03-08 | 2026-03-08 | ~2min |
 | 04-update-workflow-page-client | Pending | - | - | - |
 | 05-cleanup | Pending | - | - | - |
 
