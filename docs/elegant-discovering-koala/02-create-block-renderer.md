@@ -1,6 +1,6 @@
 ---
 task: 02-create-block-renderer
-status: pending
+status: done
 depends: [01-define-block-types]
 files:
   - path: src/components/workflow/BlockRenderer.tsx
