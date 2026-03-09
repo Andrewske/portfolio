@@ -208,14 +208,47 @@ function FloatingSidebar({ activePhase, phases }: { activePhase: string | null; 
 
 function WorkflowContent(): ReactNode {
   const { intro, tldr, introBlocks, phases, outro } = workflowContent;
+  const [activePhase, setActivePhase] = useState<string | null>(null);
+
+  // Map content phases to nav structure
+  const navPhases = phases.map((phase) => ({
+    id: phase.id,
+    name: phase.title.replace(/^Phase \d+: /, ''), // Strip "Phase N: " prefix if present
+  }));
+
+  // Track which section is in view
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    phases.forEach((phase) => {
+      const element = document.getElementById(phase.id);
+      if (element) {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setActivePhase(phase.id);
+            }
+          },
+          { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
+        );
+        observer.observe(element);
+        observers.push(observer);
+      }
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, [phases]);
 
   return (
     <div className="min-h-screen bg-bg-main text-text-primary font-mono">
+      <StickyTimeline activePhase={activePhase} phases={navPhases} />
+      <FloatingSidebar activePhase={activePhase} phases={navPhases} />
+
       {/* Hero Section */}
       <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           {/* Terminal window with thick frame */}
-          <div className="rounded-lg p-2 mb-12 sm:mb-16" style={{ backgroundColor: '#2d3d32' }}>
+          <div id="hero-section" className="rounded-lg p-2 mb-12 sm:mb-16" style={{ backgroundColor: '#2d3d32' }}>
             {/* Dots in frame area */}
             <div className="flex items-center justify-between gap-2 px-2 py-2 mb-3">
               <div className="flex items-center gap-2">

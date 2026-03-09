@@ -1,6 +1,6 @@
 ---
 task: 01-add-navigation-components
-status: pending
+status: done
 depends: []
 files:
   - path: src/components/workflow/WorkflowPageClient.tsx
