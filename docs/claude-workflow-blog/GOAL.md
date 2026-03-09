@@ -2,7 +2,7 @@
 
 ## Current Status
 
-**Phase: Core Components Complete, Ready for Content Integration**
+**Phase: Content Wired Up, Ready for Polish**
 
 - [x] Initial vision and structure
 - [x] Planning session
@@ -10,12 +10,16 @@
 - [x] Tasks distributed (`../claude-workflow-blog-tasks/`)
 - [x] Plan review (this session)
 - [x] Improve-idea review (this session)
-- [x] Content draft written (`DRAFT.md`)
+- [x] Content draft written (`DRAFT-1.md`)
 - [x] Technical implementation (page route + components)
-- [ ] Wire up content from DRAFT.md
+- [x] Kevin sections rewritten (`KEVIN-SECTIONS.md`, `KEVIN-ONLY.md`)
+- [x] DRAFT-2.md created with all rewrites applied
+- [x] JP sections trimmed (~600 lines → ~300 lines)
+- [x] Wire up content from DRAFT-2.md
+- [x] Implement dinos/no-dinos toggle
 - [ ] Polish and ship
 
-**Next step:** Populate `workflow-content.ts` with actual content from DRAFT.md
+**Next step:** Fill in collapsible prompts with actual skill content, finalize UI polish
 
 ---
 
@@ -319,11 +323,14 @@ controlling them has a better offer.
 1. [x] `CollapsiblePrompt` - expand/collapse for prompt details (native details/summary)
 2. [x] `ChatMessage` - Hammond/Claude dialogue with avatar positioning
 3. [x] `Finding` - plan review findings with severity badges (critical/high/medium/low)
-4. [x] `KevinCallout` - narrator commentary with "What breaks" warning section
+4. [x] `KevinCallout` - narrator commentary (deprecated - now rendered as plain text)
 5. [x] `PhaseLabel` - sticky phase indicator using Badge component
 6. [x] `TimeSkip` - faded ellipsis moments for narrative flow
 7. [ ] `WorkflowDiagram` - visual flow for TL;DR section (could be SVG or component)
-8. [ ] `MemeImage` - styled JP meme placements (optional)
+8. [x] `MemeImage` - styled JP meme placements with next/image
+9. [x] `WorkflowTable` - TL;DR workflow summary table
+10. [x] `DinoCollapsible` - collapsible wrapper for JP content when toggle is on
+11. [x] `parseInlineMarkdown` - utility for bold, italic, code, links in text
 
 ### Content Format
 - MDX for rich content with components
@@ -338,21 +345,33 @@ controlling them has a better offer.
 |------|---------|
 | `GOAL.md` | This file - vision, decisions, status tracking |
 | `CONTENT-PLAN.md` | Detailed content outline with JP dialogue |
-| `DRAFT.md` | Full blog post draft (~2,400 words) |
+| `DRAFT-1.md` | Original blog post draft (~2,400 words) |
+| `DRAFT-2.md` | Rewritten draft with updated Kevin sections |
+| `KEVIN-SECTIONS.md` | All Kevin sections with metadata and status |
+| `KEVIN-ONLY.md` | Standalone blog version (no dinos) for testing |
+| `../jp-memes/` | Downloaded JP gifs for meme placements |
 | `../bright-percolating-acorn/` | Implementation plan with task files |
 | `../bright-percolating-acorn/progress.md` | Implementation progress tracker |
 
 ### Implementation Files (created)
 | File | Purpose |
 |------|---------|
-| `src/app/my-claude-code-workflow/page.tsx` | Page route with renderBlock |
-| `src/lib/workflow-content.ts` | Content types and placeholder data |
+| `src/app/my-claude-code-workflow/page.tsx` | Page route |
+| `src/lib/workflow-content.ts` | Content types + all DRAFT-2.md content |
+| `src/components/workflow/WorkflowPageClient.tsx` | Main client component with renderBlock |
 | `src/components/workflow/ChatMessage.tsx` | Dialogue component |
 | `src/components/workflow/Finding.tsx` | Severity-coded findings |
-| `src/components/workflow/KevinCallout.tsx` | Narrator commentary |
+| `src/components/workflow/KevinCallout.tsx` | Narrator commentary (deprecated) |
 | `src/components/workflow/TimeSkip.tsx` | Narrative ellipsis |
 | `src/components/workflow/PhaseLabel.tsx` | Sticky phase labels |
 | `src/components/workflow/CollapsiblePrompt.tsx` | Expandable prompts |
+| `src/components/workflow/MemeImage.tsx` | JP gif images |
+| `src/components/workflow/WorkflowTable.tsx` | TL;DR table |
+| `src/components/workflow/DinoCollapsible.tsx` | Collapse JP content when toggled |
+| `src/components/workflow/DinoModeProvider.tsx` | React context for dino toggle |
+| `src/components/workflow/ImmersionControls.tsx` | Toggle button UI |
+| `src/utils/parseInlineMarkdown.tsx` | Inline markdown parser |
+| `src/assets/workflow/*.gif` | JP meme images (3 gifs) |
 
 ---
 
@@ -380,7 +399,7 @@ Use these for accurate command descriptions, but the blog content should be the 
 6. [x] Improve-idea review
 
 ### Phase 3: Content Writing (COMPLETE)
-7. [x] Write full draft (`DRAFT.md`)
+7. [x] Write full draft (`DRAFT-1.md`)
    - TL;DR section with workflow table
    - Intro section
    - Scene setup + discussion phase (3 beats + Malcolm/Muldoon expertise)
@@ -393,27 +412,50 @@ Use these for accurate command descriptions, but the blog content should be the 
    - Code-review phase (syntax + Nedry systemic risk)
    - Outro with meta reveal
 
-### Phase 4: Technical Implementation (IN PROGRESS)
-8. [x] Create page route (`/my-claude-code-workflow`)
-9. [x] Implement core components:
-   - [x] ChatMessage (Hammond/Claude dialogue with avatars)
-   - [x] Finding (severity-coded plan review findings)
-   - [x] KevinCallout (narrator commentary with "What breaks" section)
-   - [x] TimeSkip (faded ellipsis moments)
-   - [x] PhaseLabel (sticky phase indicator using Badge)
-   - [x] CollapsiblePrompt (expandable prompt sections)
-   - [x] ContentBlock type system (discriminated union for all block types)
-   - [x] renderBlock function (exhaustive type-safe renderer)
-10. [ ] Wire up content from DRAFT.md into workflow-content.ts
-11. [ ] Fill in collapsible prompt content for each phase
+### Phase 3.5: Kevin Sections Rewrite (COMPLETE)
+8. [x] Rewrite Kevin sections for standalone readability
+   - [x] New intro with toggle quip
+   - [x] Section 1: Discussion phase ("life, uh, finds a way" quip)
+   - [x] Section 2: /handoff explanation + meme placement
+   - [x] Section 3: Plan-review intro (fresh context insight)
+   - [x] Section 4: DELETE (meme only)
+   - [x] Section 5: Options in tiers context
+   - [x] Section 6: /best-idea explanation
+   - [x] Section 7: /improve-idea three questions
+   - [x] Section 8: NEW implementation section
+   - [x] Section 9: /code-review explanation
+   - [x] Section 10: Philosophy-focused outro (both versions)
+   - [x] Apply Kevin's writing style guide (no emdashes, natural transitions)
+   - [x] Create DRAFT-2.md with all rewrites
+
+### Phase 4: Technical Implementation (COMPLETE)
+9. [x] Create page route (`/my-claude-code-workflow`)
+10. [x] Implement core components:
+    - [x] ChatMessage (Hammond/Claude dialogue with avatars)
+    - [x] Finding (severity-coded plan review findings)
+    - [x] KevinCallout (narrator commentary - now plain text)
+    - [x] TimeSkip (faded ellipsis moments)
+    - [x] PhaseLabel (sticky phase indicator using Badge)
+    - [x] CollapsiblePrompt (expandable prompt sections)
+    - [x] ContentBlock type system (discriminated union for all block types)
+    - [x] renderBlock function (exhaustive type-safe renderer)
+    - [x] MemeImage (next/image wrapper for JP gifs)
+    - [x] WorkflowTable (TL;DR workflow table)
+    - [x] DinoCollapsible (collapse JP content when toggle is on)
+    - [x] parseInlineMarkdown (bold, italic, code, links)
+11. [x] Wire up content from DRAFT-2.md into workflow-content.ts
+12. [ ] Fill in collapsible prompt content for each phase
+13. [x] Implement dinos/no-dinos toggle feature
+    - JP scenes in terminal windows (collapsible when toggled)
+    - Kevin sections as plain text outside terminal windows
 
 ### Phase 5: Polish
-12. [ ] Finalize Hammond reflection line
-13. [ ] Add session count to meta reveal
-14. [ ] Add memes and visual elements
-15. [ ] Implement WorkflowDiagram (TL;DR section)
-16. [ ] Responsive testing
-17. [ ] Final review and ship
+14. [ ] Finalize Hammond reflection line
+15. [ ] Add session count to meta reveal
+16. [ ] Add memes and visual elements (gifs in `../jp-memes/`)
+17. [ ] Implement WorkflowDiagram (TL;DR section)
+18. [ ] Responsive testing
+19. [ ] Final review and ship
 
 ---
 
@@ -483,6 +525,111 @@ Use these for accurate command descriptions, but the blog content should be the 
 10. **Hammond reflection line**: Add placeholder, revisit after draft
 11. **Interlude depth**: Evaluate during implementation (brief vs expanded)
 12. **Forward momentum hook**: Skipped - no sequel teaser
+
+### Kevin Sections Rewrite Decisions (2026-03-08)
+
+**Core direction:**
+- Kevin sections should work as standalone blog (toggle: dinos/no dinos)
+- JP dialogue is comic relief that illustrates concepts
+- Someone could skim just Kevin sections and learn the workflow
+- JP quotes as quips, not setups (subtle, standalone humor)
+- Dropped "What breaks without it" pattern (too repetitive)
+
+**Style decisions:**
+- Applied Kevin's writing style guide (`docs/kevins-writing-style.md`)
+- No emdashes - use commas, semicolons, parentheses, or separate sentences
+- Added natural transition phrases ("Turns out...")
+- More direct language ("Claude stops trying to solve" vs "curious collaborator")
+
+**Intro changes:**
+- "I could walk you through each phase with bullet points. Instead, let's talk about dinosaurs."
+- Added toggle quip: "*(If you don't like fun, there's a "no dinos" toggle just for you.)*"
+
+**New implementation section added:**
+- Clear context + `/start-implementation`
+- Sub-agents in parallel, no context bleed
+- "The plan is tight enough to trust"
+
+**New outro (philosophy-focused):**
+- Mind-meld concept: "You're combining what you know with what Claude knows"
+- Key insight: "Claude sees patterns across millions of codebases. You see the user who's been asking for that feature for six months."
+- "Turns out, they pay back in code that doesn't need to be rewritten"
+- Dinos-only addendum for Hammond reflection
+- No-dinos nudge: "if you skipped the dinosaurs because you were 'too busy,' the fun version is still there"
+
+**Meme placements:**
+- `hold-on-to-your-butts.gif` after `/handoff` section
+- `clever-girl.gif` after plan-review findings (deleted Kevin section, just meme)
+
+**Files created:**
+- `DRAFT-1.md` (original draft, renamed)
+- `DRAFT-2.md` (with all rewrites applied)
+- `KEVIN-SECTIONS.md` (all Kevin sections with metadata)
+- `KEVIN-ONLY.md` (standalone blog version for testing)
+
+### JP Sections Trimming Decisions (2026-03-08)
+
+**Overall approach:**
+- Cut ~600 lines to ~300 lines (roughly half)
+- Keep entertainment value while removing redundancy
+- Make it feel like real Claude Code conversations
+
+**Discussion phase:**
+- Cut power backup, raptors, and lysine discussions (covered in plan-review instead)
+- Keep only spectacle framing question as example
+- Added ellipsis showing more discussion happened
+- End with decisions list + "spared no expense" callback
+
+**Plan Review:**
+- Cut from 8 findings to 4 (Power, IT, Raptors, Viewing)
+- Added ellipsis for remaining findings
+- Replaced questions with JP inside jokes (door handles, all-female population verified)
+- Cut alternatives from findings (presented fresh in resolution)
+
+**Findings Resolution:**
+- Added autosolve categorization with joke quips for each
+- Show only Viewing (Hammond correction) and Raptor (triggers best-idea)
+- Cut verbose back-and-forth
+
+**Best Idea:**
+- Trimmed research summary to 4 key findings
+- Cut "Revised Options" section (redundant)
+- Keep "clever girl" moment as gif instead of dialogue
+
+**Improve Idea:**
+- Cut "Top 3 Recommendations" and "If I could only implement one"
+- Cut one-at-a-time resolution (not needed for story)
+- Replaced wild ideas: cut treehouse/tracker, added gallimimus stampede, compy petting zoo, dino dung exhibit
+- New ending: Hammond asks if compys are safe, Claude finds "only two reported cases of life-threatening injuries"
+
+**Code Review:**
+- Finding 1: Changed from code example to JP joke (door handles)
+- Finding 2: Nedry payoff, presented fresh without referencing plan-review
+- Cut Hammond/Claude dialogue, end with "ah ah ah" gif
+
+### Content Integration Decisions (2026-03-08)
+
+**Layout structure:**
+- Kevin sections: Plain text paragraphs outside terminal windows
+- JP scenes: Inside terminal-styled containers with green border and dots
+- When "no dinos" toggle is on: JP scenes collapse but remain expandable
+
+**Content block types added:**
+- `heading` (h2/h3), `list`, `image`, `divider`, `quote`, `table`
+- All blocks support `dinoOnly?: boolean` flag
+
+**Markdown approach:**
+- Custom `parseInlineMarkdown()` utility (no external deps)
+- Handles: `**bold**`, `*italic*`, `` `code` ``, `[links](url)`
+
+**Image handling:**
+- Gifs imported via next/image from `src/assets/workflow/`
+- `unoptimized` flag for GIF animation support
+
+**Dino toggle behavior:**
+- JP scene types (chat, finding, phase, timeskip, quote, image, heading, list with dinoOnly) → terminal window
+- Kevin/text blocks with dinoOnly → plain text, hidden when toggled
+- DinoCollapsible wraps JP content, collapses when noDinos is true
 
 ---
 

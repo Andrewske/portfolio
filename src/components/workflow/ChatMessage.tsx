@@ -1,40 +1,36 @@
 import React, { ReactNode } from 'react';
 
+import ChatCharacterIcon from './ChatCharacterIcon';
+
 interface ChatMessageProps {
   speaker: 'hammond' | 'claude';
   children: ReactNode;
   id?: string;
 }
 
-const Avatar = ({ speaker }: { speaker: 'hammond' | 'claude' }) => {
-  const config = {
-    hammond: { bg: 'bg-gray-600', initial: 'H', alt: 'Hammond' },
-    claude: { bg: 'bg-violet-600', initial: 'C', alt: 'Claude' },
-  };
-  const { bg, initial, alt } = config[speaker];
-  return (
-    <div
-      className={`w-8 h-8 rounded-full ${bg} flex items-center justify-center text-xs font-bold text-white flex-shrink-0`}
-      role="img"
-      aria-label={alt}
-    >
-      {initial}
-    </div>
-  );
-};
-
 export default function ChatMessage({ speaker, children, id }: ChatMessageProps): React.ReactElement {
-  const direction = speaker === 'hammond' ? 'flex-row' : 'flex-row-reverse';
+  // Claude gets blue dot on left, Hammond gets yellow pill for short messages or yellow dot
+  const isHammond = speaker === 'hammond';
+
   return (
-    <div
-      id={id}
-      data-chat
-      data-testid="chat-message"
-      className={`flex gap-3 items-start ${direction} animate-in fade-in slide-in-from-bottom-2 duration-300`}
-    >
-      <Avatar speaker={speaker} />
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg px-4 py-3 font-mono text-sm">
-        {children}
+    <div id={id} data-chat data-testid="chat-message" className="relative">
+      {/* Character icon - floating in left margin */}
+      <ChatCharacterIcon speaker={speaker} />
+
+      {/* Chat content */}
+      <div className="flex gap-3 items-start">
+        {/* Indicator dot */}
+        <div
+          className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+            isHammond ? 'bg-amber-400' : 'bg-blue-400'
+          }`}
+          role="img"
+          aria-label={isHammond ? 'Hammond' : 'Claude'}
+        />
+        {/* Message content - plain text, no box */}
+        <div className="font-mono text-sm text-gray-300 leading-snug">
+          {children}
+        </div>
       </div>
     </div>
   );

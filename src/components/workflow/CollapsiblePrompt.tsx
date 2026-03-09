@@ -8,13 +8,13 @@ interface CollapsiblePromptProps {
 export default function CollapsiblePrompt({ title, children }: CollapsiblePromptProps) {
   return (
     <details
-      className="border border-gray-800 rounded-lg overflow-hidden"
+      className="text-sm font-mono"
       data-testid="collapsible-prompt"
     >
-      <summary className="px-4 py-3 bg-gray-900/50 cursor-pointer text-gray-400 text-sm font-mono hover:bg-gray-900/70 transition-colors">
+      <summary className="cursor-pointer text-gray-400 hover:text-gray-300 transition-colors">
         {title}
       </summary>
-      <div className="p-4 bg-gray-950 font-mono text-sm text-gray-300 whitespace-pre-wrap">
+      <div className="mt-1 pl-4 text-gray-300 leading-snug whitespace-pre-wrap">
         {children}
       </div>
     </details>
