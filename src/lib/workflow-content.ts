@@ -39,7 +39,6 @@ export interface WorkflowContent {
   intro: {
     title: string;
     subtitle: string;
-    hook?: string;
   };
   tldr: {
     summary: string;
@@ -56,7 +55,6 @@ export const workflowContent: WorkflowContent = {
   intro: {
     title: "My Claude Code Workflow",
     subtitle: "Discussion → Handoff → Review → Best-idea → Improve → Implement → Code-review",
-    hook: "If you just want the skills, download them here and start using them today.",
   },
 
   tldr: {
@@ -218,7 +216,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'handoff',
-      title: 'Handoff',
+      title: 'Phase 2: Handoff',
       description: 'Break large plans into agent-sized task files',
       blocks: [
         {
@@ -233,7 +231,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'review',
-      title: 'Phase 2: Plan Review',
+      title: 'Phase 3: Plan Review',
       description: 'Fresh context reviews plan for gaps',
       blocks: [
         {
@@ -525,7 +523,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'best-idea',
-      title: 'Phase 3: Best Idea',
+      title: 'Phase 4: Best Idea',
       description: 'Research alternatives when uncertain',
       blocks: [
         {
@@ -650,7 +648,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'improve',
-      title: 'Phase 4: Improve Idea',
+      title: 'Phase 5: Improve Idea',
       description: 'Simplify, strengthen, "wouldn\'t it be cool if"',
       blocks: [
         {
@@ -743,7 +741,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'implement',
-      title: 'Implementation',
+      title: 'Phase 6: Implementation',
       description: 'Sub-agents execute in parallel',
       blocks: [
         {
@@ -757,7 +755,7 @@ export const workflowContent: WorkflowContent = {
     },
     {
       id: 'code-review',
-      title: 'Phase 5: Code Review',
+      title: 'Phase 7: Code Review',
       description: 'Fresh context reviews commits',
       blocks: [
         {

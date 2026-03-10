@@ -7,6 +7,34 @@ import { ImmersionControls } from './ImmersionControls';
 import { workflowContent, type Block } from '~/lib/workflow-content';
 import { renderBlock } from './BlockRenderer';
 
+const HERO_SCROLL_OFFSET = '-100px 0px 0px 0px';
+
+// Custom hook for tracking hero section visibility
+function useHeroVisibility(): boolean {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setIsVisible(!entry.isIntersecting);
+        }
+      },
+      { threshold: 0, rootMargin: HERO_SCROLL_OFFSET }
+    );
+
+    const heroElement = document.getElementById('hero-section');
+    if (heroElement) {
+      observer.observe(heroElement);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return isVisible;
+}
+
 // Hero Image Placeholder Component
 function HeroImage() {
   return (
@@ -108,24 +136,7 @@ function renderBlockGroups(blocks: Block[]): React.ReactElement[] {
 
 // Sticky Timeline Component
 function StickyTimeline({ activePhase, phases }: { activePhase: string | null; phases: Array<{ id: string; name: string }> }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Show timeline when hero is NOT intersecting (scrolled past)
-        setIsVisible(!entry.isIntersecting);
-      },
-      { threshold: 0, rootMargin: '-100px 0px 0px 0px' }
-    );
-
-    const heroElement = document.getElementById('hero-section');
-    if (heroElement) {
-      observer.observe(heroElement);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const isVisible = useHeroVisibility();
 
   if (!isVisible) return null;
 
@@ -171,23 +182,7 @@ function StickyTimeline({ activePhase, phases }: { activePhase: string | null; p
 
 // Floating Sidebar Timeline Component
 function FloatingSidebar({ activePhase, phases }: { activePhase: string | null; phases: Array<{ id: string; name: string }> }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
-      },
-      { threshold: 0, rootMargin: '-100px 0px 0px 0px' }
-    );
-
-    const heroElement = document.getElementById('hero-section');
-    if (heroElement) {
-      observer.observe(heroElement);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const isVisible = useHeroVisibility();
 
   if (!isVisible) return null;
 
