@@ -1,61 +1,59 @@
-'use client';
+'use client'
 
-import { useEffect, useState, type ReactElement } from 'react';
-import { CodeBlock } from '~/components/ui/CodeBlock';
+import { type ReactElement, useEffect, useState } from 'react'
+import { CodeBlock } from '~/components/ui/CodeBlock'
 
 interface GitHubEmbedProps {
-  url: string;
-  language?: string;
-  title?: string;
+  url: string
+  language?: string
+  title?: string
 }
 
 // Cache for GitHub content to avoid re-fetching on re-renders
-const contentCache = new Map<string, string>();
+const contentCache = new Map<string, string>()
 
 export function GitHubEmbed({ url, language = 'markdown', title }: GitHubEmbedProps): ReactElement {
-  const [content, setContent] = useState<string | null>(contentCache.get(url) ?? null);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(!contentCache.has(url));
+  const [content, setContent] = useState<string | null>(contentCache.get(url) ?? null)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(!contentCache.has(url))
 
   // Extract filename from URL for title fallback
-  const filename = url.split('/').pop() ?? 'code';
+  const filename = url.split('/').pop() ?? 'code'
 
   useEffect(() => {
     // Skip fetch if already cached
     if (contentCache.has(url)) {
-      setContent(contentCache.get(url) ?? null);
-      setIsLoading(false);
-      return;
+      setContent(contentCache.get(url) ?? null)
+      setIsLoading(false)
+      return
     }
 
     const fetchContent = async (): Promise<void> => {
       try {
-        setIsLoading(true);
-        setError(null);
+        setIsLoading(true)
+        setError(null)
 
         // Convert GitHub blob URL to raw URL if needed
-        const rawUrl = url
-          .replace('github.com', 'raw.githubusercontent.com')
-          .replace('/blob/', '/');
+        const rawUrl = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
 
-        const response = await fetch(rawUrl);
+        const response = await fetch(rawUrl)
 
         if (!response.ok) {
-          throw new Error(`Failed to fetch: ${response.status}`);
+          throw new Error(`Failed to fetch: ${response.status}`)
         }
 
-        const text = await response.text();
-        contentCache.set(url, text);
-        setContent(text);
+        const text = await response.text()
+        contentCache.set(url, text)
+        setContent(text)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load content');
+        setError(err instanceof Error ? err.message : 'Failed to load content')
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchContent();
-  }, [url]);
+    fetchContent()
+  }, [url])
 
   if (isLoading) {
     return (
@@ -64,7 +62,7 @@ export function GitHubEmbed({ url, language = 'markdown', title }: GitHubEmbedPr
         <div className="h-4 bg-border-subtle rounded w-1/2 mb-2" />
         <div className="h-4 bg-border-subtle rounded w-2/3" />
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -80,16 +78,12 @@ export function GitHubEmbed({ url, language = 'markdown', title }: GitHubEmbedPr
           View on GitHub →
         </a>
       </div>
-    );
+    )
   }
 
   return (
     <div className="relative">
-      <CodeBlock
-        code={content ?? ''}
-        language={language}
-        title={title ?? filename}
-      />
+      <CodeBlock code={content ?? ''} language={language} title={title ?? filename} />
       <a
         href={url}
         target="_blank"
@@ -99,5 +93,5 @@ export function GitHubEmbed({ url, language = 'markdown', title }: GitHubEmbedPr
         View on GitHub →
       </a>
     </div>
-  );
+  )
 }

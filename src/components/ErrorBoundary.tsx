@@ -1,32 +1,32 @@
-'use client';
+'use client'
 
-import { Component, type ReactNode } from 'react';
-import posthog from 'posthog-js';
+import posthog from 'posthog-js'
+import { Component, type ReactNode } from 'react'
 
 type ErrorBoundaryProps = {
-  children: ReactNode;
-  fallback?: ReactNode;
-};
+  children: ReactNode
+  fallback?: ReactNode
+}
 
 type ErrorBoundaryState = {
-  hasError: boolean;
-  error: Error | null;
-};
+  hasError: boolean
+  error: Error | null
+}
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
+    super(props)
+    this.state = { hasError: false, error: null }
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
+    return { hasError: true, error }
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
+      console.error('ErrorBoundary caught an error:', error, errorInfo)
     }
 
     // Send to PostHog
@@ -34,14 +34,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       posthog.captureException(error, {
         componentStack: errorInfo.componentStack,
         errorBoundary: true,
-      });
+      })
     }
   }
 
   render(): ReactNode {
     if (this.state.hasError) {
       if (this.props.fallback) {
-        return this.props.fallback;
+        return this.props.fallback
       }
 
       return (
@@ -62,9 +62,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
               {process.env.NODE_ENV === 'development' && this.state.error && (
                 <div className="mt-4 p-4 bg-gray-900 rounded border border-gray-800 overflow-x-auto">
-                  <pre className="text-sm text-gray-400">
-                    {this.state.error.toString()}
-                  </pre>
+                  <pre className="text-sm text-gray-400">{this.state.error.toString()}</pre>
                 </div>
               )}
 
@@ -79,9 +77,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             </div>
           </div>
         </div>
-      );
+      )
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }

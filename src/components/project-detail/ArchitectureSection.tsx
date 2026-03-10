@@ -1,39 +1,43 @@
-import { ArchitectureDiagram } from '~/components/architecture-diagrams/ArchitectureDiagram';
-import type { Project } from '~/lib/projects';
+import { ArchitectureDiagram } from '~/components/architecture-diagrams/ArchitectureDiagram'
+import type { Project } from '~/lib/projects'
 
 interface ArchitectureSectionProps {
-  project: Project;
+  project: Project
 }
 
 export function ArchitectureSection({ project }: ArchitectureSectionProps) {
-  if (!project.architecture && !project.architectureDiagramData) return null;
+  if (!project.architecture && !project.architectureDiagramData) return null
 
   // Parse the architecture content to handle markdown-style formatting
   const formatArchitectureContent = (content: string) => {
-    const occurrenceCounts: Record<string, number> = {};
+    const occurrenceCounts: Record<string, number> = {}
     return content.split('**').map((part, idx) => {
-      const count = (occurrenceCounts[part] ?? 0) + 1;
-      occurrenceCounts[part] = count;
-      const key = `${part}-${count}`;
+      const count = (occurrenceCounts[part] ?? 0) + 1
+      occurrenceCounts[part] = count
+      const key = `${part}-${count}`
       if (idx % 2 === 1) {
         // This is a bold section
-        return <strong key={key} className="text-cyan-300 font-bold">{part}</strong>;
+        return (
+          <strong key={key} className="text-cyan-300 font-bold">
+            {part}
+          </strong>
+        )
       }
-      return <span key={key}>{part}</span>;
-    });
-  };
+      return <span key={key}>{part}</span>
+    })
+  }
 
   // Split architecture into sections based on bold headers
-  const architectureSections: { title: string; content: string }[] = [];
+  const architectureSections: { title: string; content: string }[] = []
 
   if (project.architecture) {
-    const sections = project.architecture.split(/\*\*([^*]+)\*\*:/).filter(Boolean);
+    const sections = project.architecture.split(/\*\*([^*]+)\*\*:/).filter(Boolean)
     for (let i = 0; i < sections.length; i += 2) {
       if (sections[i + 1]) {
         architectureSections.push({
           title: sections[i],
-          content: sections[i + 1].trim()
-        });
+          content: sections[i + 1].trim(),
+        })
       }
     }
   }
@@ -57,10 +61,13 @@ export function ArchitectureSection({ project }: ArchitectureSectionProps) {
         )}
 
         {/* Text-based Architecture Description */}
-        {project.architecture && (
-          architectureSections.length > 0 ? (
-            architectureSections.map((section) => (
-              <div key={section.title} className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
+        {project.architecture &&
+          (architectureSections.length > 0 ? (
+            architectureSections.map(section => (
+              <div
+                key={section.title}
+                className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg"
+              >
                 <h3 className="text-lg font-bold text-yellow-300 mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
                   {section.title}
@@ -76,9 +83,8 @@ export function ArchitectureSection({ project }: ArchitectureSectionProps) {
                 {formatArchitectureContent(project.architecture)}
               </p>
             </div>
-          )
-        )}
+          ))}
       </div>
     </section>
-  );
+  )
 }

@@ -1,5 +1,5 @@
 interface PhaseLabelProps {
-  phase: string;
+  phase: string
 }
 
 export default function PhaseLabel({ phase }: PhaseLabelProps) {
@@ -8,5 +8,5 @@ export default function PhaseLabel({ phase }: PhaseLabelProps) {
     <div className="text-gray-500 text-sm font-mono" data-testid="phase-label">
       [PHASE: {phase}]
     </div>
-  );
+  )
 }

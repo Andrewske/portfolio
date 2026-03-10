@@ -1,7 +1,7 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://kevinandrews.info'; // Replace with your actual domain
+  const baseUrl = 'https://kevinandrews.info' // Replace with your actual domain
 
   return {
     rules: {
@@ -10,5 +10,5 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ['/api/', '/_next/'],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
-  };
+  }
 }

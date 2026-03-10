@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { Button } from '~/components/ui/button';
-import { Badge } from '~/components/ui/badge';
-import { SkillCategory, projects, getProjectsByCategory } from '~/lib/projects';
+import { useState } from 'react'
+import { Badge } from '~/components/ui/badge'
+import { Button } from '~/components/ui/button'
+import { getProjectsByCategory, projects, type SkillCategory } from '~/lib/projects'
 
 interface ProjectFilterProps {
-  onFilterChange: (categories: SkillCategory[]) => void;
+  onFilterChange: (categories: SkillCategory[]) => void
 }
 
 const categories: { name: SkillCategory | 'All'; label: string; color: string }[] = [
@@ -18,43 +18,43 @@ const categories: { name: SkillCategory | 'All'; label: string; color: string }[
   { name: 'Data & Analytics', label: 'Data', color: 'text-green-300' },
   { name: 'APIs & Integrations', label: 'APIs', color: 'text-orange-300' },
   { name: 'Infrastructure', label: 'Infrastructure', color: 'text-red-300' },
-];
+]
 
 export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
-  const [activeFilters, setActiveFilters] = useState<Set<SkillCategory | 'All'>>(new Set(['All']));
+  const [activeFilters, setActiveFilters] = useState<Set<SkillCategory | 'All'>>(new Set(['All']))
 
   const handleFilterClick = (category: SkillCategory | 'All') => {
-    const newFilters = new Set(activeFilters);
+    const newFilters = new Set(activeFilters)
 
     if (category === 'All') {
-      setActiveFilters(new Set(['All']));
-      onFilterChange([]);
+      setActiveFilters(new Set(['All']))
+      onFilterChange([])
     } else {
       if (newFilters.has('All')) {
-        newFilters.delete('All');
+        newFilters.delete('All')
       }
 
       if (newFilters.has(category)) {
-        newFilters.delete(category);
+        newFilters.delete(category)
       } else {
-        newFilters.add(category);
+        newFilters.add(category)
       }
 
       if (newFilters.size === 0) {
-        setActiveFilters(new Set(['All']));
-        onFilterChange([]);
+        setActiveFilters(new Set(['All']))
+        onFilterChange([])
       } else {
-        setActiveFilters(newFilters);
-        const filterArray = Array.from(newFilters).filter((f): f is SkillCategory => f !== 'All');
-        onFilterChange(filterArray);
+        setActiveFilters(newFilters)
+        const filterArray = Array.from(newFilters).filter((f): f is SkillCategory => f !== 'All')
+        onFilterChange(filterArray)
       }
     }
-  };
+  }
 
   const getProjectCount = (category: SkillCategory | 'All') => {
-    if (category === 'All') return projects.length;
-    return getProjectsByCategory(category).length;
-  };
+    if (category === 'All') return projects.length
+    return getProjectsByCategory(category).length
+  }
 
   return (
     <div className="flex flex-wrap gap-3 mb-8">
@@ -63,27 +63,24 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
         <span>filter --by-skill</span>
       </div>
       {categories.map(({ name, label, color }) => {
-        const isActive = activeFilters.has(name);
-        const count = getProjectCount(name);
+        const isActive = activeFilters.has(name)
+        const count = getProjectCount(name)
 
         return (
           <Button
             key={name}
-            variant={isActive ? "terminal" : "terminalGhost"}
+            variant={isActive ? 'terminal' : 'terminalGhost'}
             size="sm"
             onClick={() => handleFilterClick(name)}
             className={`transition-all ${isActive ? '' : 'opacity-70 hover:opacity-100'}`}
           >
             <span className={color}>{label}</span>
-            <Badge
-              variant="outline"
-              className="ml-2 px-1.5 py-0 h-5 text-xs border-gray-700"
-            >
+            <Badge variant="outline" className="ml-2 px-1.5 py-0 h-5 text-xs border-gray-700">
               {count}
             </Badge>
           </Button>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

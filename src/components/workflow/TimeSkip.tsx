@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
 interface TimeSkipProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export function TimeSkip({ children }: TimeSkipProps) {
@@ -10,5 +10,5 @@ export function TimeSkip({ children }: TimeSkipProps) {
     <div className="text-gray-500 text-base italic font-mono m-9" data-testid="time-skip">
       *{children}*
     </div>
-  );
+  )
 }

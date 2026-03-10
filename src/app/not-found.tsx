@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Button } from '~/components/ui/button';
+import Link from 'next/link'
+import { Button } from '~/components/ui/button'
 
 export default function NotFound() {
   return (
@@ -19,9 +19,7 @@ export default function NotFound() {
             <span className="text-yellow-300">PageNotFound</span>:
           </h1>
 
-          <p className="text-xl text-gray-300 mb-6">
-            The requested page could not be found.
-          </p>
+          <p className="text-xl text-gray-300 mb-6">The requested page could not be found.</p>
 
           <div className="p-4 bg-red-900/10 border-l-4 border-red-400/50 rounded mb-8">
             <p className="text-red-300 flex items-center justify-center gap-2">
@@ -32,18 +30,14 @@ export default function NotFound() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="terminalGhost" asChild>
-              <Link href="/#projects">
-                View Projects
-              </Link>
+              <Link href="/#projects">View Projects</Link>
             </Button>
             <Button variant="terminalGhost" asChild>
-              <Link href="/">
-                Back to Portfolio
-              </Link>
+              <Link href="/">Back to Portfolio</Link>
             </Button>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

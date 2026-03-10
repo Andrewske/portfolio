@@ -1,26 +1,31 @@
-import { Badge } from '~/components/ui/badge';
-import { CodeBlock } from '~/components/ui/CodeBlock';
-import { getCategoryColor, getCategoryVariant, groupSkillsByCategory, type Project } from '~/lib/projects';
+import { Badge } from '~/components/ui/badge'
+import { CodeBlock } from '~/components/ui/CodeBlock'
+import {
+  getCategoryColor,
+  getCategoryVariant,
+  groupSkillsByCategory,
+  type Project,
+} from '~/lib/projects'
 
 interface TechnicalImplementationProps {
-  project: Project;
+  project: Project
 }
 
 export function TechnicalImplementation({ project }: TechnicalImplementationProps) {
-  const groupedSkills = groupSkillsByCategory(project.skills);
+  const groupedSkills = groupSkillsByCategory(project.skills)
 
   const getProficiencyColor = (proficiency: string) => {
     switch (proficiency) {
       case 'Expert':
-        return 'text-green-400';
+        return 'text-green-400'
       case 'Proficient':
-        return 'text-yellow-400';
+        return 'text-yellow-400'
       case 'Familiar':
-        return 'text-orange-400';
+        return 'text-orange-400'
       default:
-        return 'text-gray-400';
+        return 'text-gray-400'
     }
-  };
+  }
 
   return (
     <section className="mb-12">
@@ -30,8 +35,13 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
 
       <div className="space-y-6">
         {groupedSkills.map(([category, skills]) => (
-          <div key={category} className="p-4 sm:p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
-            <h3 className={`text-lg font-bold mb-4 flex items-center gap-2 ${getCategoryColor(category)}`}>
+          <div
+            key={category}
+            className="p-4 sm:p-6 bg-gray-900/50 border border-gray-800 rounded-lg"
+          >
+            <h3
+              className={`text-lg font-bold mb-4 flex items-center gap-2 ${getCategoryColor(category)}`}
+            >
               <span className="w-3 h-3 rounded-full bg-current opacity-60"></span>
               {category}
             </h3>
@@ -40,16 +50,19 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
               {skills.map((skill, index) => (
                 <div key={index} className="border-l-2 border-gray-700 pl-3 sm:pl-4">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
-                    <Badge variant={getCategoryVariant(skill.category)} className="text-xs whitespace-nowrap">
+                    <Badge
+                      variant={getCategoryVariant(skill.category)}
+                      className="text-xs whitespace-nowrap"
+                    >
                       {skill.name}
                     </Badge>
-                    <span className={`text-sm font-medium ${getProficiencyColor(skill.proficiency)}`}>
+                    <span
+                      className={`text-sm font-medium ${getProficiencyColor(skill.proficiency)}`}
+                    >
                       {skill.proficiency}
                     </span>
                   </div>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {skill.usage}
-                  </p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{skill.usage}</p>
                 </div>
               ))}
             </div>
@@ -88,5 +101,5 @@ export function TechnicalImplementation({ project }: TechnicalImplementationProp
       )}
       */}
     </section>
-  );
+  )
 }

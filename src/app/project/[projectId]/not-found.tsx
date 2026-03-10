@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Button } from '~/components/ui/button';
+import Link from 'next/link'
+import { Button } from '~/components/ui/button'
 
 export default function ProjectNotFound() {
   return (
@@ -38,19 +38,15 @@ export default function ProjectNotFound() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="terminalGhost" asChild>
-                <Link href="/#projects">
-                  View All Projects
-                </Link>
+                <Link href="/#projects">View All Projects</Link>
               </Button>
               <Button variant="terminalGhost" asChild>
-                <Link href="/">
-                  Back to Portfolio
-                </Link>
+                <Link href="/">Back to Portfolio</Link>
               </Button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

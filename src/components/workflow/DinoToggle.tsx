@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import type { ReactElement } from 'react';
-import { useDinoMode } from './DinoModeProvider';
+import type { ReactElement } from 'react'
+import { useDinoMode } from './DinoModeProvider'
 
 export function DinoToggle(): ReactElement {
-  const { noDinos, toggleNoDinos } = useDinoMode();
+  const { noDinos, toggleNoDinos } = useDinoMode()
 
   return (
     <div className="flex justify-center my-6">
@@ -53,5 +53,5 @@ export function DinoToggle(): ReactElement {
         </span>
       </button>
     </div>
-  );
+  )
 }

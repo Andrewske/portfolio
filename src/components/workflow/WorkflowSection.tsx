@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
 interface WorkflowSectionProps {
-  id: string;
-  title: string;
-  children: ReactNode;
+  id: string
+  title: string
+  children: ReactNode
 }
 
 export default function WorkflowSection({ id, title, children }: WorkflowSectionProps) {
@@ -18,9 +18,7 @@ export default function WorkflowSection({ id, title, children }: WorkflowSection
       </div>
 
       {/* Content area - children control layout */}
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </section>
-  );
+  )
 }

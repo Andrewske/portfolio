@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { Button } from '~/components/ui/button';
-import type { Project } from '~/lib/projects';
-import { ArchitectureSection } from './project-detail/ArchitectureSection';
-import { ChallengesAndSolutions } from './project-detail/ChallengesAndSolutions';
-import { PerformanceMetrics } from './project-detail/PerformanceMetrics';
-import { ProjectHero } from './project-detail/ProjectHero';
-import { TechnicalImplementation } from './project-detail/TechnicalImplementation';
+import Link from 'next/link'
+import { Button } from '~/components/ui/button'
+import type { Project } from '~/lib/projects'
+import { ArchitectureSection } from './project-detail/ArchitectureSection'
+import { ChallengesAndSolutions } from './project-detail/ChallengesAndSolutions'
+import { PerformanceMetrics } from './project-detail/PerformanceMetrics'
+import { ProjectHero } from './project-detail/ProjectHero'
+import { TechnicalImplementation } from './project-detail/TechnicalImplementation'
 
 interface ProjectDetailTemplateProps {
-  project: Project;
+  project: Project
 }
 
 export default function ProjectDetailTemplate({ project }: ProjectDetailTemplateProps) {
@@ -57,7 +57,7 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
             </h2>
             <div className="p-4 sm:p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
               <div className="space-y-3">
-                {project.safetyAndReliability.map((item) => (
+                {project.safetyAndReliability.map(item => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="text-orange-400 mt-1">•</span>
                     <p className="text-gray-300 leading-relaxed">{item}</p>
@@ -80,7 +80,6 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
           </section>
         )}
 
-
         {/* Action Buttons */}
         <section className="mb-12">
           <div className="flex flex-wrap gap-4">
@@ -99,13 +98,11 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
               </Button>
             )}
             <Button variant="terminalGhost" asChild>
-              <Link href="/#projects">
-                Back to Portfolio
-              </Link>
+              <Link href="/#projects">Back to Portfolio</Link>
             </Button>
           </div>
         </section>
       </div>
     </div>
-  );
+  )
 }

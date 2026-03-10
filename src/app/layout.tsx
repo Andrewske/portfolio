@@ -1,35 +1,44 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import '~/styles/icomoon.css';
+import type { Metadata } from 'next'
+import './globals.css'
+import '~/styles/icomoon.css'
 
-import { JetBrains_Mono, Roboto_Mono, IBM_Plex_Sans } from 'next/font/google';
-import { PostHogProvider } from '~/providers/PostHogProvider';
+import { IBM_Plex_Sans, JetBrains_Mono, Roboto_Mono } from 'next/font/google'
+import { PostHogProvider } from '~/providers/PostHogProvider'
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-jetbrains',
-});
+})
 
 const roboto = Roboto_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto',
-});
+})
 
 const ibmPlex = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-ibm-plex',
-});
+})
 
 export const metadata: Metadata = {
   title: {
     default: 'Kevin Andrews - AI Systems Engineer & Full-Stack Developer',
-    template: '%s | Kevin Andrews Portfolio'
+    template: '%s | Kevin Andrews Portfolio',
   },
-  description: 'Software engineer specializing in AI systems, data analytics, and full-stack development. Built production systems processing 160M+ records with expertise in Next.js, Python, and machine learning.',
-  keywords: ['AI Engineer', 'Full-Stack Developer', 'Data Analytics', 'Next.js', 'Python', 'Machine Learning', 'Kevin Andrews'],
+  description:
+    'Software engineer specializing in AI systems, data analytics, and full-stack development. Built production systems processing 160M+ records with expertise in Next.js, Python, and machine learning.',
+  keywords: [
+    'AI Engineer',
+    'Full-Stack Developer',
+    'Data Analytics',
+    'Next.js',
+    'Python',
+    'Machine Learning',
+    'Kevin Andrews',
+  ],
   authors: [{ name: 'Kevin Andrews' }],
   creator: 'Kevin Andrews',
   metadataBase: new URL('https://kevinandrews.dev'),
@@ -55,48 +64,39 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-};
+}
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Kevin Andrews",
-  "jobTitle": "Senior Data Analyst & Full-Stack Engineer",
-  "description": "Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development",
-  "url": "https://kevinandrews.dev",
-  "sameAs": [
-    "https://github.com/Andrewske",
-    "https://linkedin.com/in/andrewskevin92"
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kevin Andrews',
+  jobTitle: 'Senior Data Analyst & Full-Stack Engineer',
+  description:
+    'Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development',
+  url: 'https://kevinandrews.dev',
+  sameAs: ['https://github.com/Andrewske', 'https://linkedin.com/in/andrewskevin92'],
+  knowsAbout: [
+    'AI Systems',
+    'Full-Stack Development',
+    'Data Analytics',
+    'Next.js',
+    'Python',
+    'Machine Learning',
+    'PostgreSQL',
   ],
-  "knowsAbout": [
-    "AI Systems",
-    "Full-Stack Development",
-    "Data Analytics",
-    "Next.js",
-    "Python",
-    "Machine Learning",
-    "PostgreSQL"
-  ]
-} as const;
+} as const
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${jetbrains.variable} ${roboto.variable} ${ibmPlex.variable}`}
-    >
+    <html lang="en" className={`${jetbrains.variable} ${roboto.variable} ${ibmPlex.variable}`}>
       <body className="max-w-screen relative ">
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-        <PostHogProvider>
-          {children}
-        </PostHogProvider>
+        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
-  );
+  )
 }

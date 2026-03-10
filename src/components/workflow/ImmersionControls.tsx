@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import { useRef, useState } from 'react';
-import { useDinoMode } from './DinoModeProvider';
+import { useRef, useState } from 'react'
+import { useDinoMode } from './DinoModeProvider'
 
 export function ImmersionControls(): React.ReactElement {
-  const { noDinos, toggleNoDinos } = useDinoMode();
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { noDinos, toggleNoDinos } = useDinoMode()
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const handleImmersion = (): void => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) return
 
     if (isPlaying) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setIsPlaying(false);
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlaying(false)
     } else {
       audioRef.current.play().catch(() => {
         // Autoplay blocked - user needs to interact first
-      });
-      setIsPlaying(true);
+      })
+      setIsPlaying(true)
     }
-  };
+  }
 
   const handleAudioEnded = (): void => {
-    setIsPlaying(false);
-  };
+    setIsPlaying(false)
+  }
 
   return (
     <div className="flex items-center gap-4 text-sm">
@@ -57,9 +57,10 @@ export function ImmersionControls(): React.ReactElement {
         onClick={handleImmersion}
         className={`
           px-3 py-1 rounded border transition-all duration-200
-          ${isPlaying
-            ? 'border-amber-500/50 bg-amber-500/10 text-amber-400'
-            : 'border-green-500/30 hover:border-green-500/50 text-gray-400 hover:text-green-400'
+          ${
+            isPlaying
+              ? 'border-amber-500/50 bg-amber-500/10 text-amber-400'
+              : 'border-green-500/30 hover:border-green-500/50 text-gray-400 hover:text-green-400'
           }
         `}
       >
@@ -74,5 +75,5 @@ export function ImmersionControls(): React.ReactElement {
         preload="none"
       />
     </div>
-  );
+  )
 }

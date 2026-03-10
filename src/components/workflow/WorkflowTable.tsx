@@ -1,9 +1,9 @@
-import React from 'react';
-import { parseInlineMarkdown } from '~/utils/parseInlineMarkdown';
+import type React from 'react'
+import { parseInlineMarkdown } from '~/utils/parseInlineMarkdown'
 
 interface WorkflowTableProps {
-  headers: string[];
-  rows: string[][];
+  headers: string[]
+  rows: string[][]
 }
 
 export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.ReactElement {
@@ -13,10 +13,7 @@ export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.Reac
         <thead>
           <tr className="bg-gray-900/50 border-b border-gray-800">
             {headers.map((header, index) => (
-              <th
-                key={index}
-                className="px-4 py-4 text-left text-gray-400 font-mono font-medium"
-              >
+              <th key={index} className="px-4 py-4 text-left text-gray-400 font-mono font-medium">
                 {header}
               </th>
             ))}
@@ -29,10 +26,7 @@ export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.Reac
               className="border-b border-gray-800/50 last:border-b-0 hover:bg-gray-900/30 transition-colors"
             >
               {row.map((cell, cellIndex) => (
-                <td
-                  key={cellIndex}
-                  className="px-4 py-4 text-gray-300 leading-relaxed"
-                >
+                <td key={cellIndex} className="px-4 py-4 text-gray-300 leading-relaxed">
                   {parseInlineMarkdown(cell)}
                 </td>
               ))}
@@ -41,7 +35,7 @@ export function WorkflowTable({ headers, rows }: WorkflowTableProps): React.Reac
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
-export default WorkflowTable;
+export default WorkflowTable

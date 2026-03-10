@@ -1,14 +1,14 @@
 // Common component prop types
 
 export interface BaseComponentProps {
-  className?: string;
+  className?: string
 }
 
 export interface WithChildren {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export interface TypingAnimationProps {
-  text: string;
-  speed?: number;
+  text: string
+  speed?: number
 }

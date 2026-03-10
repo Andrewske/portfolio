@@ -1,13 +1,13 @@
-import type { Project } from '~/lib/projects';
+import type { Project } from '~/lib/projects'
 
 interface ChallengesAndSolutionsProps {
-  project: Project;
+  project: Project
 }
 
 export function ChallengesAndSolutions({ project }: ChallengesAndSolutionsProps) {
   // If no challenges/solutions data, don't render the section
   if (!project.challenges && !project.solutions && !project.lessonsLearned) {
-    return null;
+    return null
     /* TODO: Commented out placeholder section
     return (
       <section className="mb-12">
@@ -86,5 +86,5 @@ export function ChallengesAndSolutions({ project }: ChallengesAndSolutionsProps)
         </div>
       )}
     </section>
-  );
+  )
 }

@@ -1,16 +1,19 @@
-'use client';
+'use client'
 
-import React, { type ReactNode, useState } from 'react';
-import { useDinoMode } from './DinoModeProvider';
+import React, { type ReactNode, useState } from 'react'
+import { useDinoMode } from './DinoModeProvider'
 
 interface DinoCollapsibleProps {
-  children: ReactNode;
-  defaultLabel?: string;
+  children: ReactNode
+  defaultLabel?: string
 }
 
-export function DinoCollapsible({ children, defaultLabel = 'Jurassic Park scene' }: DinoCollapsibleProps): React.ReactElement | null {
-  const { noDinos } = useDinoMode();
-  const [isOpen, setIsOpen] = useState(false);
+export function DinoCollapsible({
+  children,
+  defaultLabel = 'Jurassic Park scene',
+}: DinoCollapsibleProps): React.ReactElement | null {
+  const { noDinos } = useDinoMode()
+  const [isOpen, setIsOpen] = useState(false)
 
   // When dinos are enabled, render full terminal
   if (!noDinos) {
@@ -27,7 +30,7 @@ export function DinoCollapsible({ children, defaultLabel = 'Jurassic Park scene'
           {children}
         </div>
       </div>
-    );
+    )
   }
 
   // When noDinos is true, terminal header is the clickable toggle
@@ -54,5 +57,5 @@ export function DinoCollapsible({ children, defaultLabel = 'Jurassic Park scene'
         </div>
       )}
     </div>
-  );
+  )
 }

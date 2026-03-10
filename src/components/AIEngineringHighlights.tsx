@@ -1,12 +1,11 @@
-
-import { Badge } from '~/components/ui/badge';
-import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { getAIHighlights, getAIStats } from '~/lib/aiMetrics';
+import { Badge } from '~/components/ui/badge'
+import { Button } from '~/components/ui/button'
+import { Card, CardContent, CardHeader } from '~/components/ui/card'
+import { getAIHighlights, getAIStats } from '~/lib/aiMetrics'
 
 export default function AIEngineringHighlights() {
-  const highlights = getAIHighlights();
-  const stats = getAIStats();
+  const highlights = getAIHighlights()
+  const stats = getAIStats()
 
   return (
     <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 backdrop-blur-sm">
@@ -18,7 +17,10 @@ export default function AIEngineringHighlights() {
           <div className="flex gap-2 flex-wrap">
             <Badge variant="statusLive">{stats.activeSystems} ACTIVE</Badge>
             <Badge variant="statusDevelopment">{stats.internalSystems} INTERNAL</Badge>
-            <Badge variant="default" className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs sm:text-sm">
+            <Badge
+              variant="default"
+              className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs sm:text-sm"
+            >
               🤖 {stats.totalYearsExperience} Years AI
             </Badge>
           </div>
@@ -30,9 +32,14 @@ export default function AIEngineringHighlights() {
 
       <CardContent>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-3 mb-6">
-          {highlights.map((highlight) => (
-            <div key={`${highlight.label}-${highlight.value}`} className="text-center p-2 sm:p-3 bg-black/30 rounded border border-gray-800">
-              <div className={`text-lg sm:text-xl lg:text-2xl font-bold text-${highlight.color}-400`}>
+          {highlights.map(highlight => (
+            <div
+              key={`${highlight.label}-${highlight.value}`}
+              className="text-center p-2 sm:p-3 bg-black/30 rounded border border-gray-800"
+            >
+              <div
+                className={`text-lg sm:text-xl lg:text-2xl font-bold text-${highlight.color}-400`}
+              >
                 {highlight.value}
               </div>
               <div className="text-xs text-gray-500 mb-1">{highlight.label}</div>
@@ -49,7 +56,7 @@ export default function AIEngineringHighlights() {
             <span className="text-gray-500">{'//'}</span> Core AI Specializations
           </h3>
           <div className="flex flex-wrap gap-1 sm:gap-2">
-            {stats.specializations.map((spec) => (
+            {stats.specializations.map(spec => (
               <Badge
                 key={spec}
                 variant="categoryAiMl"
@@ -63,17 +70,13 @@ export default function AIEngineringHighlights() {
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button variant="terminal" asChild className="text-sm">
-            <a href="#projects">
-              View AI Projects →
-            </a>
+            <a href="#projects">View AI Projects →</a>
           </Button>
           <Button variant="terminalOutline" asChild className="text-sm">
-            <a href="https://github.com/Andrewske">
-              GitHub Portfolio
-            </a>
+            <a href="https://github.com/Andrewske">GitHub Portfolio</a>
           </Button>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

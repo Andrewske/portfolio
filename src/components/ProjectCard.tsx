@@ -23,9 +23,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all group"
     >
       <div className="flex">
-        <div className="hidden sm:block w-12 bg-gray-900 flex-col items-center py-4 text-gray-600 text-xs">
-
-        </div>
+        <div className="hidden sm:block w-12 bg-gray-900 flex-col items-center py-4 text-gray-600 text-xs"></div>
         <div className="flex-1 p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:justify-between mb-4 gap-3">
             <div className="flex-1 w-full sm:mr-4">
@@ -72,7 +70,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 key={`${project.id}-${metric.label}`}
                 className="text-center p-1.5 sm:p-2 bg-gray-900/50 rounded"
               >
-                <div className={`text-base sm:text-lg font-bold text-${metric.color || 'cyan'}-400`}>
+                <div
+                  className={`text-base sm:text-lg font-bold text-${metric.color || 'cyan'}-400`}
+                >
                   {metric.value}
                 </div>
                 <div className="text-xs text-gray-500 break-words">{metric.label}</div>

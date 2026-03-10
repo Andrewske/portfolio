@@ -1,28 +1,27 @@
-'use client';
+'use client'
 
-import type { NextPage } from 'next';
-import { useId, useState } from 'react';
-import AIEngineringHighlights from '~/components/AIEngineringHighlights';
-import ProjectCard from '~/components/ProjectCard';
-import TechStackVisualization from '~/components/TechStackVisualization';
-import TypingAnimation from '~/components/TypingAnimation';
-import { Button } from '~/components/ui/button';
-import { Separator } from '~/components/ui/separator';
-import type { SkillCategory } from '~/lib/projects';
-import { projects } from '~/lib/projects';
+import type { NextPage } from 'next'
+import { useId, useState } from 'react'
+import AIEngineringHighlights from '~/components/AIEngineringHighlights'
+import ProjectCard from '~/components/ProjectCard'
+import TechStackVisualization from '~/components/TechStackVisualization'
+import TypingAnimation from '~/components/TypingAnimation'
+import { Button } from '~/components/ui/button'
+import { Separator } from '~/components/ui/separator'
+import type { SkillCategory } from '~/lib/projects'
+import { projects } from '~/lib/projects'
 
 const Home: NextPage = () => {
-  const [filteredCategories, _setFilteredCategories] = useState<SkillCategory[]>([]);
-  const projectsSectionId = useId();
-  const contactSectionId = useId();
+  const [filteredCategories, _setFilteredCategories] = useState<SkillCategory[]>([])
+  const projectsSectionId = useId()
+  const contactSectionId = useId()
 
-  const displayedProjects = filteredCategories.length === 0
-    ? projects
-    : projects.filter(project =>
-        project.skills.some(skill =>
-          filteredCategories.includes(skill.category)
+  const displayedProjects =
+    filteredCategories.length === 0
+      ? projects
+      : projects.filter(project =>
+          project.skills.some(skill => filteredCategories.includes(skill.category)),
         )
-      );
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
@@ -30,12 +29,15 @@ const Home: NextPage = () => {
       <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-8 sm:py-0 relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, #00ff00 2px, #00ff00 4px)`,
-            backgroundSize: '100% 4px'
-          }}></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, #00ff00 2px, #00ff00 4px)`,
+              backgroundSize: '100% 4px',
+            }}
+          ></div>
         </div>
-        
+
         <div className="max-w-6xl mx-auto w-full relative z-10">
           <div className="space-y-6 sm:space-y-8">
             {/* Terminal-style header */}
@@ -46,15 +48,14 @@ const Home: NextPage = () => {
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
                 <span className="ml-2 sm:ml-4 text-gray-500 text-xs sm:text-sm">portfolio.js</span>
               </div>
-              
+
               <div className="space-y-3 sm:space-y-4 min-w-0">
                 <div>
                   <span className="text-purple-400">const</span>{' '}
                   <span className="text-blue-400">developer</span>{' '}
-                  <span className="text-white">=</span>{' '}
-                  <span className="text-white">{'{'}</span>
+                  <span className="text-white">=</span> <span className="text-white">{'{'}</span>
                 </div>
-                
+
                 <div className="pl-4 sm:pl-6 md:pl-8 space-y-1 sm:space-y-2">
                   <div>
                     <span className="text-blue-300">name</span>
@@ -62,27 +63,33 @@ const Home: NextPage = () => {
                     <span className="text-yellow-300">&quot;Kevin Andrews&quot;</span>
                     <span className="text-white">,</span>
                   </div>
-                  
+
                   <div>
                     <span className="text-blue-300">role</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;Software Engineer & AI Developer&quot;</span>
+                    <span className="text-yellow-300">
+                      &quot;Software Engineer & AI Developer&quot;
+                    </span>
                     <span className="text-white">,</span>
                   </div>
-                  
+
                   <div>
                     <span className="text-blue-300">mission</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-yellow-300">&quot;<TypingAnimation text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems" />&quot;</span>
+                    <span className="text-yellow-300">
+                      &quot;
+                      <TypingAnimation text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems" />
+                      &quot;
+                    </span>
                   </div>
                 </div>
-                
+
                 <div>
                   <span className="text-white">{'}'}</span>
                   <span className="text-white">;</span>
                 </div>
               </div>
-              
+
               {/* Quick Links */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
                 <Button variant="terminalGhost" asChild>
@@ -91,7 +98,10 @@ const Home: NextPage = () => {
                   </a>
                 </Button>
                 <Button variant="terminalGhost" asChild>
-                  <a href="https://linkedin.com/in/andrewskevin92" className="flex items-center gap-2">
+                  <a
+                    href="https://linkedin.com/in/andrewskevin92"
+                    className="flex items-center gap-2"
+                  >
                     <span className="text-cyan-400">$</span> linkedin
                   </a>
                 </Button>
@@ -118,13 +128,15 @@ const Home: NextPage = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               <span className="text-green-400">$</span> ls projects/
             </h2>
-            <p className="text-sm sm:text-base text-gray-500">Production systems built to solve real problems</p>
+            <p className="text-sm sm:text-base text-gray-500">
+              Production systems built to solve real problems
+            </p>
           </div>
 
           {/* <ProjectFilter onFilterChange={setFilteredCategories} /> */}
 
           <div className="grid gap-6">
-            {displayedProjects.map((project) => (
+            {displayedProjects.map(project => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
@@ -154,25 +166,33 @@ const Home: NextPage = () => {
           <div className="space-y-6 text-gray-300 leading-relaxed">
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              I&apos;m an AI-native engineer - I think in human-AI collaboration, not just code. The way I approach building is as important as what I build.
+                I&apos;m an AI-native engineer - I think in human-AI collaboration, not just code.
+                The way I approach building is as important as what I build.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              Currently I&apos;m a Software Engineer at Glade AI, an AI legal tech platform serving 1000+ law firms.
+                Currently I&apos;m a Software Engineer at Glade AI, an AI legal tech platform
+                serving 1000+ law firms.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              Previously at Bonanza, I built a full-stack analytics dashboard processing 160M+ order records with sub-second page loads. When faced with a read-only legacy database, I designed a static Parquet architecture that eliminated API hosting costs while improving performance.
+                Previously at Bonanza, I built a full-stack analytics dashboard processing 160M+
+                order records with sub-second page loads. When faced with a read-only legacy
+                database, I designed a static Parquet architecture that eliminated API hosting costs
+                while improving performance.
               </p>
             </div>
 
             <div className="pl-4 border-l-2 border-gray-800">
               <p>
-              My passion project is an AI personal management system that helps me navigate daily life with ADHD. I believe AI is a superpower not only for coding, but for unlocking potential in those limited by factors beyond their control. The tools we build for ourselves often solve problems for entire communities.
+                My passion project is an AI personal management system that helps me navigate daily
+                life with ADHD. I believe AI is a superpower not only for coding, but for unlocking
+                potential in those limited by factors beyond their control. The tools we build for
+                ourselves often solve problems for entire communities.
               </p>
             </div>
           </div>
@@ -190,26 +210,20 @@ const Home: NextPage = () => {
             </h2>
           </div>
 
-          <p className="text-gray-400 mb-8">
-            Let&apos;s build something amazing together
-          </p>
-          
+          <p className="text-gray-400 mb-8">Let&apos;s build something amazing together</p>
+
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
             <Button variant="terminal" size="lg" asChild>
-              <a href="mailto:andrewskevin92@gmail.com">
-                Send Email
-              </a>
+              <a href="mailto:andrewskevin92@gmail.com">Send Email</a>
             </Button>
             <Button variant="terminalOutline" size="lg" asChild>
-              <a href="https://github.com/Andrewske">
-                GitHub Profile
-              </a>
+              <a href="https://github.com/Andrewske">GitHub Profile</a>
             </Button>
           </div>
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

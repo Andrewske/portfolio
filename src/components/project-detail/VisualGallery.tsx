@@ -1,14 +1,14 @@
-import Image from 'next/image';
-import type { Project } from '~/lib/projects';
+import Image from 'next/image'
+import type { Project } from '~/lib/projects'
 
 interface VisualGalleryProps {
-  project: Project;
+  project: Project
 }
 
 export function VisualGallery({ project }: VisualGalleryProps) {
   // If no images, don't render the section
   if (!project.images || project.images.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -18,7 +18,7 @@ export function VisualGallery({ project }: VisualGalleryProps) {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {project.images.map((image) => (
+        {project.images.map(image => (
           <div key={`image-${image}`} className="border border-gray-800 rounded-lg overflow-hidden">
             <Image
               src={image}
@@ -32,5 +32,5 @@ export function VisualGallery({ project }: VisualGalleryProps) {
         ))}
       </div>
     </section>
-  );
+  )
 }

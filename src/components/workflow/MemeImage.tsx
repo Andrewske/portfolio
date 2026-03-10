@@ -1,9 +1,9 @@
-import React from 'react';
-import Image, { type StaticImageData } from 'next/image';
+import Image, { type StaticImageData } from 'next/image'
+import type React from 'react'
 
 interface MemeImageProps {
-  src: StaticImageData;
-  alt: string;
+  src: StaticImageData
+  alt: string
 }
 
 export function MemeImage({ src, alt }: MemeImageProps): React.ReactElement {
@@ -18,7 +18,7 @@ export function MemeImage({ src, alt }: MemeImageProps): React.ReactElement {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default MemeImage;
+export default MemeImage

@@ -1,7 +1,7 @@
-import type { Project } from '~/lib/projects';
+import type { Project } from '~/lib/projects'
 
 interface PerformanceMetricsProps {
-  project: Project;
+  project: Project
 }
 
 export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
@@ -12,36 +12,36 @@ export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
         '160M+': 'Historical order records processed from 8 years of e-commerce data',
         '75%': 'Performance improvement gained by migrating from pandas to Polars (Rust-based)',
         '8yr': 'Historical data spanning 2018-2025 for comprehensive business intelligence',
-        '<1s': 'Dashboard load time achieved through static Parquet file architecture'
+        '<1s': 'Dashboard load time achieved through static Parquet file architecture',
       },
       'masakali-booking': {
         '$30k+': 'Monthly revenue recovered through zero double-booking system',
         '0': 'Double bookings achieved through real-time Smoobu API validation',
-        'Instant': 'Webhook-based inventory sync replacing 3+ second polling',
-        '5': 'Active villa listings managed across Booking.com and Airbnb'
+        Instant: 'Webhook-based inventory sync replacing 3+ second polling',
+        '5': 'Active villa listings managed across Booking.com and Airbnb',
       },
       'zoho-twilio': {
         '43k+': 'SMS messages processed across 12 studios for lead engagement',
         '9k+': 'Unique leads engaged through automated CRM-SMS workflows',
         '12': 'Active fitness studios using the multi-tenant platform',
-        '4wks': 'Development time from concept to production deployment'
+        '4wks': 'Development time from concept to production deployment',
       },
       'ai-product-optimizer': {
         '4.5k': 'Product listings optimized in 30-minute batch processing runs',
         '$0.00003': 'Cost per item achieved through GPT-4o-mini optimization',
-        'Linear': 'Scalable processing architecture with predictable performance',
-        '30min': 'Batch processing time for 4,500 listings using OpenAI batch API'
+        Linear: 'Scalable processing architecture with predictable performance',
+        '30min': 'Batch processing time for 4,500 listings using OpenAI batch API',
       },
       'knowledge-graph-mcp': {
         '20': 'Semantic triples extracted per document through 4-stage AI pipeline',
         '$0.0012': 'Processing cost per 8k+ character document using gpt-4o-mini',
         '94s': 'End-to-end processing time for knowledge graph generation',
-        '80': 'Vector embeddings generated per document for semantic search'
-      }
-    };
+        '80': 'Vector embeddings generated per document for semantic search',
+      },
+    }
 
-    return descriptions[projectId]?.[metric.value] || '';
-  };
+    return descriptions[projectId]?.[metric.value] || ''
+  }
 
   return (
     <section className="mb-12">
@@ -92,5 +92,5 @@ export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
         </div>
       </div>
     </section>
-  );
+  )
 }

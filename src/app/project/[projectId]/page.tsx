@@ -1,25 +1,25 @@
-import { notFound } from 'next/navigation';
-import { projects } from '~/lib/projects';
-import ProjectDetailTemplate from '~/components/ProjectDetailTemplate';
+import { notFound } from 'next/navigation'
+import ProjectDetailTemplate from '~/components/ProjectDetailTemplate'
+import { projects } from '~/lib/projects'
 
 interface ProjectPageProps {
-  params: Promise<{ projectId: string }>;
+  params: Promise<{ projectId: string }>
 }
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  return projects.map(project => ({
     projectId: project.id,
-  }));
+  }))
 }
 
 export async function generateMetadata({ params }: ProjectPageProps) {
-  const { projectId } = await params;
-  const project = projects.find(p => p.id === projectId);
+  const { projectId } = await params
+  const project = projects.find(p => p.id === projectId)
 
   if (!project) {
     return {
       title: 'Project Not Found',
-    };
+    }
   }
 
   return {
@@ -30,16 +30,16 @@ export async function generateMetadata({ params }: ProjectPageProps) {
       description: project.description,
       type: 'website',
     },
-  };
+  }
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { projectId } = await params;
-  const project = projects.find(p => p.id === projectId);
+  const { projectId } = await params
+  const project = projects.find(p => p.id === projectId)
 
   if (!project) {
-    notFound();
+    notFound()
   }
 
-  return <ProjectDetailTemplate project={project} />;
+  return <ProjectDetailTemplate project={project} />
 }

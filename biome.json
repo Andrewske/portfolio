@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,8 +7,13 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["src/**/*.{js,jsx,ts,tsx,json}"],
-    "experimentalScannerIgnores": ["node_modules", "dist", ".next", "out"]
+    "includes": [
+      "src/**/*.{js,jsx,ts,tsx,json}",
+      "!!**/node_modules",
+      "!!**/dist",
+      "!!**/.next",
+      "!!**/out"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -27,7 +32,20 @@
         "useExhaustiveDependencies": "warn"
       },
       "style": {
-        "noNonNullAssertion": "error"
+        "noNonNullAssertion": "warn",
+        "useTemplate": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useButtonType": "off",
+        "useMediaCaption": "off"
+      },
+      "performance": {
+        "noImgElement": "off"
       }
     }
   },
