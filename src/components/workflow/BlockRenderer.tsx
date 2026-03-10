@@ -1,12 +1,14 @@
-import React, { ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import { CodeBlock } from '~/components/ui/CodeBlock';
 import type { Block } from '~/lib/workflow-content';
 import { parseInlineMarkdown } from '~/utils/parseInlineMarkdown';
 import ChatMessage from './ChatMessage';
-import Finding from './Finding';
-import MemeImage from './MemeImage';
-import { CodeBlock } from '~/components/ui/CodeBlock';
-import { TimeSkip } from './TimeSkip';
 import CollapsiblePrompt from './CollapsiblePrompt';
+import { DinoToggle } from './DinoToggle';
+import Finding from './Finding';
+import { GitHubEmbed } from './GitHubEmbed';
+import MemeImage from './MemeImage';
+import { TimeSkip } from './TimeSkip';
 import WorkflowTable from './WorkflowTable';
 
 /**
@@ -18,34 +20,40 @@ function assertNever(x: never): never {
 
 /**
  * Renders a single block. Containers call renderBlocks recursively.
+ *
+ * Typography approach (V6):
+ * - Prose inherits proportional font (IBM Plex Sans) from parent
+ * - Headings and technical labels get explicit font-mono for terminal aesthetic
+ * - Larger text sizes (text-base) with relaxed line height for readability
  */
 export function renderBlock(block: Block, index: number): ReactElement | null {
   switch (block.type) {
-    // Primitives (single HTML elements)
+    // Primitives - prose inherits proportional font
     case 'p':
       return (
-        <p key={index} id={block.id} className="text-text-body text-sm leading-snug">
+        <p key={index} id={block.id} className="text-text-body text-lg mb-4 leading-relaxed">
           {parseInlineMarkdown(block.content)}
         </p>
       );
 
+    // Headings - explicit monospace for terminal aesthetic
     case 'h2':
       return (
-        <h2 key={index} id={block.id} className="text-base font-bold text-text-primary mt-6 mb-2">
+        <h2 key={index} id={block.id} className="text-3xl font-mono font-bold mt-6 mb-6 text-green-bright">
           {block.content}
         </h2>
       );
 
     case 'h3':
       return (
-        <h3 key={index} id={block.id} className="text-sm font-semibold text-text-body mt-4 mb-1">
+        <h3 key={index} id={block.id} className="text-xl font-mono font-semibold text-text-body mt-4 mb-1">
           {block.content}
         </h3>
       );
 
     case 'divider':
       return (
-        <div key={index} id={block.id} className="text-text-muted text-sm my-4">
+        <div key={index} id={block.id} className="text-text-muted text-base font-mono my-4">
           ---
         </div>
       );
@@ -63,9 +71,19 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
         />
       );
 
+    case 'githubEmbed':
+      return (
+        <GitHubEmbed
+          key={index}
+          url={block.url}
+          language={block.language}
+          title={block.title}
+        />
+      );
+
     case 'quote':
       return (
-        <blockquote key={index} id={block.id} className="border-l-2 border-border pl-4 text-text-muted text-sm italic">
+        <blockquote key={index} id={block.id} className="border-l-2 border-border my-10 py-6 pl-6 text-text-muted text-base italic leading-relaxed">
           {parseInlineMarkdown(block.content)}
         </blockquote>
       );
@@ -77,12 +95,12 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
         </TimeSkip>
       );
 
-    // Compound blocks (multiple elements, semantic structure)
-    case 'list':
+    // Compound blocks - prose inherits proportional font
+    case 'list': {
       const ListTag = block.ordered ? 'ol' : 'ul';
       const listClassName = block.ordered
-        ? 'list-decimal list-inside text-text-body text-sm space-y-1'
-        : 'list-disc list-inside text-text-body text-sm space-y-1';
+        ? 'list-decimal list-inside text-text-body text-base space-y-1 leading-relaxed'
+        : 'list-disc list-inside text-text-body text-base space-y-1 leading-relaxed';
       return (
         <ListTag key={index} id={block.id} className={listClassName}>
           {block.items.map((item, i) => (
@@ -90,17 +108,18 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
           ))}
         </ListTag>
       );
+    }
 
     case 'option':
       return (
-        <div key={index} id={block.id} className="space-y-2 text-sm my-3">
-          <div className="text-text-primary font-semibold">
+        <div key={index} id={block.id} className="space-y-2 text-base my-3">
+          <div className="text-text-primary font-mono font-semibold">
             Option {block.number}: {block.title}
           </div>
           {block.pros && block.pros.length > 0 && (
             <div className="pl-4">
-              <div className="text-text-muted">Pros:</div>
-              <ul className="list-disc list-inside text-text-body space-y-1">
+              <div className="text-text-muted font-mono">Pros:</div>
+              <ul className="list-disc list-inside text-text-body space-y-1 leading-relaxed">
                 {block.pros.map((pro, i) => (
                   <li key={i}>{parseInlineMarkdown(pro)}</li>
                 ))}
@@ -109,8 +128,8 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
           )}
           {block.cons && block.cons.length > 0 && (
             <div className="pl-4">
-              <div className="text-text-muted">Cons:</div>
-              <ul className="list-disc list-inside text-text-body space-y-1">
+              <div className="text-text-muted font-mono">Cons:</div>
+              <ul className="list-disc list-inside text-text-body space-y-1 leading-relaxed">
                 {block.cons.map((con, i) => (
                   <li key={i}>{parseInlineMarkdown(con)}</li>
                 ))}
@@ -122,7 +141,7 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'recommendation':
       return (
-        <p key={index} id={block.id} className="text-green-primary font-semibold text-sm mt-4">
+        <p key={index} id={block.id} className="text-green-primary font-mono font-semibold text-base mt-4">
           Recommended: {block.content}
           {block.confidence !== undefined && ` (${block.confidence}% confidence)`}
         </p>
@@ -152,7 +171,7 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'kevin':
       return (
-        <div key={index} id={block.id} className="space-y-3">
+        <div key={index} id={block.id} className="mb-16">
           {renderBlocks(block.blocks)}
         </div>
       );
@@ -167,6 +186,10 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
     // Structural
     case 'table':
       return <WorkflowTable key={index} headers={block.headers} rows={block.rows} />;
+
+    // Interactive
+    case 'dinoToggle':
+      return <DinoToggle key={index} />;
 
     default:
       return assertNever(block);

@@ -4,6 +4,8 @@ import cleverGirl from '~/assets/workflow/clever-girl.gif';
 import didntStopToThink from '~/assets/workflow/didnt-stop-to-think-if-they-should.jpg';
 // Import images
 import holdOnToYourButts from '~/assets/workflow/hold-on-to-your-butts.gif';
+import kidShocked from '~/assets/workflow/kid-shocked.gif';
+import objectsInMirror from '~/assets/workflow/objects-in-mirror-are-closer-than-they-appear.gif';
 
 // New Block type system - primitives, compounds, containers, and structural
 export type Block =
@@ -14,6 +16,7 @@ export type Block =
   | { type: 'divider'; id?: string; dinoOnly?: boolean }
   | { type: 'image'; src: StaticImageData; alt: string; id?: string; dinoOnly?: boolean }
   | { type: 'code'; language: string; content: string; title?: string; id?: string; dinoOnly?: boolean }
+  | { type: 'githubEmbed'; url: string; language?: string; title?: string; id?: string; dinoOnly?: boolean }
   | { type: 'quote'; content: string; id?: string; dinoOnly?: boolean }
   | { type: 'timeskip'; content: string; id?: string; dinoOnly?: boolean }
   // Compound blocks (multiple elements, semantic structure)
@@ -26,7 +29,9 @@ export type Block =
   | { type: 'kevin'; blocks: Block[]; id?: string; dinoOnly?: boolean }
   | { type: 'collapsible'; title: string; blocks: Block[]; id?: string; dinoOnly?: boolean }
   // Structural
-  | { type: 'table'; headers: string[]; rows: string[][]; id?: string; dinoOnly?: boolean };
+  | { type: 'table'; headers: string[]; rows: string[][]; id?: string; dinoOnly?: boolean }
+  // Interactive
+  | { type: 'dinoToggle'; id?: string; dinoOnly?: boolean };
 
 export interface WorkflowPhase {
   id: string;
@@ -38,6 +43,7 @@ export interface WorkflowPhase {
 export interface WorkflowContent {
   intro: {
     title: string;
+    emphasis: string;
     subtitle: string;
   };
   tldr: {
@@ -54,6 +60,7 @@ export interface WorkflowContent {
 export const workflowContent: WorkflowContent = {
   intro: {
     title: "My Claude Code Workflow",
+    emphasis: "(Yes, with Dinosaurs)",
     subtitle: "Discussion → Handoff → Review → Best-idea → Improve → Implement → Code-review",
   },
 
@@ -62,7 +69,10 @@ export const workflowContent: WorkflowContent = {
     blocks: [],
   },
 
+
+
   introBlocks: [
+    { type: 'h2', content: 'The Workflow That Brought Jurassic Park to Life' },
     {
       type: 'p',
       content: 'I think out loud. Claude writes plans. We merge until the bugs are caught before they exist. The code is almost an afterthought. And somewhere in the discussion, ideas surface that I never would have prompted for.',
@@ -79,6 +89,7 @@ export const workflowContent: WorkflowContent = {
       type: 'p',
       content: '*(If you don\'t like fun, there\'s a "no dinos" toggle just for you.)*',
     },
+    { type: 'dinoToggle' },
   ],
 
   phases: [
@@ -96,15 +107,12 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'No special prompt. Claude stops trying to solve immediately and starts asking questions. Once we\'ve actually talked it through, then I drop into plan mode to write it up.' },
             { type: 'p', content: 'Skip this step and life, uh, finds a way... of punishing you later.' },
           ],
-        },
-        { type: 'divider' },
-        {
-          type: 'p',
-          content: 'Hammond has shared his documentation. Containment systems, tour design, staffing plans, the investor deck. Claude has read everything.',
+        },         {
+          type: 'image',
+          src: kidShocked,
+          alt: 'Tim flies',
           dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
+        },       {
           type: 'chat',
           speaker: 'claude',
           dinoOnly: true,
@@ -162,13 +170,11 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Next question...' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
           type: 'timeskip',
           content: 'Discussion continued, covering power redundancy, raptor behavior reports, guest evacuation routes, veterinary staffing, and why one IT employee seemed to have credentials for every critical system.',
           dinoOnly: true,
         },
-        { type: 'divider', dinoOnly: true },
         {
           type: 'chat',
           speaker: 'claude',
@@ -206,12 +212,6 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Ready for the plan.' },
           ],
         },
-        {
-          type: 'image',
-          src: holdOnToYourButts,
-          alt: 'Hold on to your butts',
-          dinoOnly: true,
-        },
       ],
     },
     {
@@ -223,8 +223,19 @@ export const workflowContent: WorkflowContent = {
           type: 'kevin',
           blocks: [
             { type: 'p', content: 'Once Claude runs out of questions, I switch to plan mode. Instead of accepting the plan to begin implementation I run:' },
-            { type: 'p', content: '`/handoff`' },
+            { type: 'p', content: '`/plan:handoff`' },
             { type: 'p', content: 'This creates a folder in `docs/`, splitting up the plan into task files scoped for smaller agents like Sonnet *(faster, cheaper, and they don\'t need the whole picture)*, plus a README with the high-level view.' },
+          ],
+        },
+        {
+          type: 'collapsible',
+          title: 'Full handoff prompt',
+          blocks: [
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/handoff.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
@@ -238,119 +249,101 @@ export const workflowContent: WorkflowContent = {
           type: 'kevin',
           blocks: [
             { type: 'p', content: 'Once the planning documents have been created, I clear the context and run:' },
-            { type: 'p', content: '`/plan-review docs/[plan-name]`' },
+            { type: 'p', content: '`/plan:review docs/[plan-name]`' },
             { type: 'p', content: 'This reviewer doesn\'t remember you talking yourself into "it\'ll probably be fine." It just sees the plan and asks: does this actually make sense?' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Plan Review: Jurassic Park Implementation Plan',
-          dinoOnly: true,
-        },
-        {
-          type: 'h2',
-          content: 'Summary',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'Ambitious vision with solid containment specs and clear guest experience priorities. The main risks are infrastructure interdependencies: unified power systems and concentrated IT access create correlated failure modes.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'Findings',
-          dinoOnly: true,
-        },
-        {
-          type: 'finding',
-          severity: 'critical',
-          title: 'Single Point of Failure: Power Systems',
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
           blocks: [
-            { type: 'p', content: 'Main power grid and diesel backup share infrastructure. A tropical storm that damages primary power could simultaneously flood the generator building.' },
-            { type: 'p', content: '**Impact:** All electric fencing fails simultaneously across every paddock.' },
+            {
+              type: 'h3',
+              content: 'Plan Review: Jurassic Park Implementation Plan',
+            },
+            {
+              type: 'h3',
+              content: 'Summary',
+            },
+            {
+              type: 'p',
+              content: 'Ambitious vision with solid containment specs and clear guest experience priorities. The main risks are infrastructure interdependencies: unified power systems and concentrated IT access create correlated failure modes.',
+            },
+            {
+              type: 'h3',
+              content: 'Findings',
+            },
+            {
+              type: 'finding',
+              severity: 'critical',
+              title: 'Single Point of Failure: Power Systems',
+              blocks: [
+                { type: 'p', content: 'Main power grid and diesel backup share infrastructure. A tropical storm that damages primary power could simultaneously flood the generator building.' },
+                { type: 'p', content: '**Impact:** All electric fencing fails simultaneously across every paddock.' },
+              ],
+            },
+            {
+              type: 'finding',
+              severity: 'critical',
+              title: 'Single Point of Failure: IT Access',
+              blocks: [
+                { type: 'p', content: 'One employee (Nedry) holds system-wide credentials across security, containment, communications, and life support.' },
+                { type: 'p', content: '**Impact:** Disgruntled employee, compromised account, or simple human error could disable all systems simultaneously.' },
+              ],
+            },
+            {
+              type: 'finding',
+              severity: 'high',
+              title: 'Raptor Containment Designed for Wrong Threat Model',
+              blocks: [
+                { type: 'p', content: 'Current containment (12-foot fences, standard feeding) treats raptors as physical threats. Field observations suggest cognitive threats: systematic fence testing, pattern learning, coordinated behavior.' },
+                { type: 'p', content: '**Impact:** Fence height becomes irrelevant if they\'re probing for weaknesses, not trying to jump.' },
+              ],
+            },
+            {
+              type: 'finding',
+              severity: 'medium',
+              title: 'Viewing Areas at Ground Level',
+              blocks: [
+                { type: 'p', content: 'T-Rex and raptor paddocks have ground-level viewing platforms.' },
+                { type: 'p', content: '**Impact:** Guests within reach if barrier fails.' },
+              ],
+            },
+            {
+              type: 'timeskip',
+              content: 'Plus 4 additional findings covering guest evacuation, tour vehicle overrides, behavioral monitoring, and breeding controls.',
+            },
+            {
+              type: 'h3',
+              content: 'What the Plan Gets Right',
+            },
+            {
+              type: 'list',
+              items: [
+                'Spectacle-first experience with clear priority hierarchy',
+                'Species separation prevents predator-prey stress',
+                'Visitor center positioned for emergency centralization',
+              ],
+            },
+            {
+              type: 'h3',
+              content: 'Questions Requiring Clarification',
+            },
+            {
+              type: 'list',
+              items: [
+                'What\'s Nedry\'s compensation relative to market rate?',
+                'What is the latching mechanism on interior doors?',
+                'Has the all-female population been independently verified?',
+              ],
+              ordered: true,
+            },
+            {
+              type: 'p',
+              content: 'Ready to walk through findings. Say "go" to start one-at-a-time review.',
+            },
           ],
-        },
-        {
-          type: 'finding',
-          severity: 'critical',
-          title: 'Single Point of Failure: IT Access',
-          dinoOnly: true,
-          blocks: [
-            { type: 'p', content: 'One employee (Nedry) holds system-wide credentials across security, containment, communications, and life support.' },
-            { type: 'p', content: '**Impact:** Disgruntled employee, compromised account, or simple human error could disable all systems simultaneously.' },
-          ],
-        },
-        {
-          type: 'finding',
-          severity: 'high',
-          title: 'Raptor Containment Designed for Wrong Threat Model',
-          dinoOnly: true,
-          blocks: [
-            { type: 'p', content: 'Current containment (12-foot fences, standard feeding) treats raptors as physical threats. Field observations suggest cognitive threats: systematic fence testing, pattern learning, coordinated behavior.' },
-            { type: 'p', content: '**Impact:** Fence height becomes irrelevant if they\'re probing for weaknesses, not trying to jump.' },
-          ],
-        },
-        {
-          type: 'finding',
-          severity: 'medium',
-          title: 'Viewing Areas at Ground Level',
-          dinoOnly: true,
-          blocks: [
-            { type: 'p', content: 'T-Rex and raptor paddocks have ground-level viewing platforms.' },
-            { type: 'p', content: '**Impact:** Guests within reach if barrier fails.' },
-          ],
-        },
-        {
-          type: 'timeskip',
-          content: 'Plus 4 additional findings covering guest evacuation, tour vehicle overrides, behavioral monitoring, and breeding controls.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'What the Plan Gets Right',
-          dinoOnly: true,
-        },
-        {
-          type: 'list',
-          items: [
-            'Spectacle-first experience with clear priority hierarchy',
-            'Species separation prevents predator-prey stress',
-            'Visitor center positioned for emergency centralization',
-          ],
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'Questions Requiring Clarification',
-          dinoOnly: true,
-        },
-        {
-          type: 'list',
-          items: [
-            'What\'s Nedry\'s compensation relative to market rate?',
-            'What is the latching mechanism on interior doors?',
-            'Has the all-female population been independently verified?',
-          ],
-          ordered: true,
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'p',
-          content: 'Ready to walk through findings. Say "go" to start one-at-a-time review.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'Findings Resolution',
-          dinoOnly: true,
         },
         {
           type: 'chat',
@@ -360,7 +353,6 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Go.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
           type: 'chat',
           speaker: 'claude',
@@ -390,38 +382,39 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Starting with Finding 4.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Finding 4: Viewing Areas (MEDIUM)',
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'T-Rex and raptor paddocks have ground-level viewing platforms. Guests within reach if barrier fails.',
-          dinoOnly: true,
-        },
-        {
-          type: 'option',
-          number: 1,
-          title: 'Fully elevated platforms (20+ feet)',
-          pros: ['Maximum safety margin, eliminates ground-level failure mode'],
-          cons: ['Reduces visceral experience, guests feel distant'],
-          dinoOnly: true,
-        },
-        {
-          type: 'option',
-          number: 2,
-          title: 'Elevated with open-air design',
-          pros: ['Maintains spectacle while adding safety margin'],
-          cons: ['Still requires emergency descent planning'],
-          dinoOnly: true,
-        },
-        {
-          type: 'recommendation',
-          content: 'Option 1. Eliminates the failure mode entirely. Still provides dramatic views.',
-          confidence: 88,
-          dinoOnly: true,
+          blocks: [
+            {
+              type: 'h3',
+              content: 'Finding 4: Viewing Areas (MEDIUM)',
+            },
+            {
+              type: 'p',
+              content: 'T-Rex and raptor paddocks have ground-level viewing platforms. Guests within reach if barrier fails.',
+            },
+            {
+              type: 'option',
+              number: 1,
+              title: 'Fully elevated platforms (20+ feet)',
+              pros: ['Maximum safety margin, eliminates ground-level failure mode'],
+              cons: ['Reduces visceral experience, guests feel distant'],
+            },
+            {
+              type: 'option',
+              number: 2,
+              title: 'Elevated with open-air design',
+              pros: ['Maintains spectacle while adding safety margin'],
+              cons: ['Still requires emergency descent planning'],
+            },
+            {
+              type: 'recommendation',
+              content: 'Option 1. Eliminates the failure mode entirely. Still provides dramatic views.',
+              confidence: 88,
+            },
+          ],
         },
         {
           type: 'chat',
@@ -451,7 +444,12 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Moving to Finding 3.' },
           ],
         },
-        { type: 'divider' },
+        {
+          type: 'image',
+          src: objectsInMirror,
+          alt: 'Objects in mirror are closer than they appear',
+          dinoOnly: true,
+        },
         {
           type: 'kevin',
           blocks: [
@@ -460,63 +458,72 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'This happens constantly. Claude optimizes for what it can see. You fill in what it can\'t.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Finding 3: Raptor Containment (HIGH)',
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'Current containment treats raptors as physical threats. Field observations suggest cognitive threats: systematic fence testing, pattern learning, coordinated behavior.',
-          dinoOnly: true,
-        },
-        {
-          type: 'option',
-          number: 1,
-          title: 'Increase physical barriers',
-          pros: ['Straightforward implementation, higher fences with moat'],
-          cons: ['Addresses symptoms, not cause'],
-          dinoOnly: true,
-        },
-        {
-          type: 'option',
-          number: 2,
-          title: 'Behavioral countermeasures',
-          pros: ['Addresses cognitive threat model with randomized feeding, multiple barrier types'],
-          cons: ['More complex, requires ongoing operational changes'],
-          dinoOnly: true,
-        },
-        {
-          type: 'option',
-          number: 3,
-          title: 'Commission behavioral assessment first',
-          pros: ['Understand what we\'re containing before finalizing design'],
-          cons: ['Delays implementation'],
-          dinoOnly: true,
-        },
-        {
-          type: 'recommendation',
-          content: 'Option 2.',
-          confidence: 72,
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'Physical barriers assume they\'re trying to overpower containment. If they\'re probing for weaknesses instead, unpredictability matters more than height.',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'But confidence is low. I don\'t have hard data on raptor capabilities. How high can they jump? Can they climb? How coordinated is pack behavior?',
-          dinoOnly: true,
+          blocks: [
+            {
+              type: 'h3',
+              content: 'Finding 3: Raptor Containment (HIGH)',
+            },
+            {
+              type: 'p',
+              content: 'Current containment treats raptors as physical threats. Field observations suggest cognitive threats: systematic fence testing, pattern learning, coordinated behavior.',
+            },
+            {
+              type: 'option',
+              number: 1,
+              title: 'Increase physical barriers',
+              pros: ['Straightforward implementation, higher fences with moat'],
+              cons: ['Addresses symptoms, not cause'],
+            },
+            {
+              type: 'option',
+              number: 2,
+              title: 'Behavioral countermeasures',
+              pros: ['Addresses cognitive threat model with randomized feeding, multiple barrier types'],
+              cons: ['More complex, requires ongoing operational changes'],
+            },
+            {
+              type: 'option',
+              number: 3,
+              title: 'Commission behavioral assessment first',
+              pros: ['Understand what we\'re containing before finalizing design'],
+              cons: ['Delays implementation'],
+            },
+            {
+              type: 'recommendation',
+              content: 'Option 2.',
+              confidence: 72,
+            },
+            {
+              type: 'p',
+              content: 'Physical barriers assume they\'re trying to overpower containment. If they\'re probing for weaknesses instead, unpredictability matters more than height.',
+            },
+            {
+              type: 'p',
+              content: 'But confidence is low. I don\'t have hard data on raptor capabilities. How high can they jump? Can they climb? How coordinated is pack behavior?',
+            },
+          ],
         },
         {
           type: 'chat',
           speaker: 'hammond',
           dinoOnly: true,
           blocks: [
-            { type: 'p', content: '/best-idea What about a moat system combined with randomized feeding? The field reports mention they avoid water.' },
+            { type: 'p', content: '/plan:best-idea What about a moat system combined with randomized feeding? The field reports mention they avoid water.' },
+          ],
+        },
+        {
+          type: 'collapsible',
+          title: 'Full plan-review prompt',
+          blocks: [
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/review.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
@@ -529,92 +536,82 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'kevin',
           blocks: [
-            { type: 'p', content: '`/best-idea` is for when findings aren\'t clear, or you have an inkling there\'s a better way.' },
+            { type: 'p', content: '`/plan:best-idea` is for when findings aren\'t clear, or you have an inkling there\'s a better way.' },
             { type: 'p', content: 'Run the command with your half-formed thought. Claude does extra research and either confirms its recommendation or finds something it completely missed: a package that already solves it, a simpler structure, the thing you were overcomplicating.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Best-Idea Evaluation: Raptor Containment',
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
-        },
-        {
-          type: 'h2',
-          content: 'Research Summary',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'After reviewing paleontological behavior studies, modern apex predator containment standards, and field incident reports:',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Key findings about Velociraptors:**',
-          dinoOnly: true,
-        },
-        {
-          type: 'list',
-          items: [
-            '**Problem-solving intelligence comparable to primates.** They don\'t just react; they experiment. Systematic fence testing is consistent with cognitive mapping behavior seen in great apes.',
-            '**Can jump 10+ feet vertically from standing.** 12-foot fences provide less than 2 feet of margin.',
-            '**Test barriers systematically and remember weak points.** They return to the same sections because they\'re tracking results over time.',
-            '**Learn from observation.** Field reports note they watch handlers during feeding. Not tracking food. Studying process.',
+          blocks: [
+            {
+              type: 'h3',
+              content: 'Best-Idea Evaluation: Raptor Containment',
+            },
+            {
+              type: 'h3',
+              content: 'Research Summary',
+            },
+            {
+              type: 'p',
+              content: 'After reviewing paleontological behavior studies, modern apex predator containment standards, and field incident reports:',
+            },
+            {
+              type: 'p',
+              content: '**Key findings about Velociraptors:**',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Problem-solving intelligence comparable to primates.** They don\'t just react; they experiment. Systematic fence testing is consistent with cognitive mapping behavior seen in great apes.',
+                '**Can jump 10+ feet vertically from standing.** 12-foot fences provide less than 2 feet of margin.',
+                '**Test barriers systematically and remember weak points.** They return to the same sections because they\'re tracking results over time.',
+                '**Learn from observation.** Field reports note they watch handlers during feeding. Not tracking food. Studying process.',
+              ],
+              ordered: true,
+            },
+            {
+              type: 'p',
+              content: '**Current plan gap:** Treats raptors as physical threats requiring physical barriers. Doesn\'t account for cognitive capabilities.',
+            },
+            {
+              type: 'h3',
+              content: 'Hammond\'s Hypothesis Evaluated',
+            },
+            {
+              type: 'p',
+              content: '**Moat system + randomized feeding**',
+            },
+            {
+              type: 'p',
+              content: 'The instinct is partially right:\n- Moats provide a barrier that works without power\n- Randomization prevents pattern learning\n- Water aversion is real\n\nBut incomplete. Moat alone doesn\'t address climbing or jumping. Randomized feeding doesn\'t help if they\'re also learning handler schedules, patrol routes, gate procedures.\n\nHigher fences and electrified ceilings have the same problem: they assume physical containment is enough. If they\'re probing for weaknesses, single barriers of any type are insufficient.',
+            },
+            {
+              type: 'h3',
+              content: 'Recommendation',
+            },
+            {
+              type: 'p',
+              content: '**Multi-layer containment with behavioral countermeasures** (87% confidence)',
+            },
+            {
+              type: 'list',
+              items: [
+                'Outer fence: 24-foot, angled inward at top',
+                'Inner fence: Separate power system from main grid',
+                'Moat between fences: Leverages water aversion, works without power',
+                'Randomized feeding: Locations AND schedules vary',
+                'Randomized patrol routes: Predictable security is exploitable security',
+                'Double-airlock entry: No direct human access to enclosure, ever',
+              ],
+            },
+            {
+              type: 'p',
+              content: 'Hammond\'s moat instinct was right, but it needs to be part of a layered system. The key insight isn\'t height or voltage. It\'s that **they\'re testing you as much as you\'re containing them.**',
+            },
           ],
-          ordered: true,
-          dinoOnly: true,
         },
-        {
-          type: 'p',
-          content: '**Current plan gap:** Treats raptors as physical threats requiring physical barriers. Doesn\'t account for cognitive capabilities.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'Hammond\'s Hypothesis Evaluated',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Moat system + randomized feeding**',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'The instinct is partially right:\n- Moats provide a barrier that works without power\n- Randomization prevents pattern learning\n- Water aversion is real\n\nBut incomplete. Moat alone doesn\'t address climbing or jumping. Randomized feeding doesn\'t help if they\'re also learning handler schedules, patrol routes, gate procedures.\n\nHigher fences and electrified ceilings have the same problem: they assume physical containment is enough. If they\'re probing for weaknesses, single barriers of any type are insufficient.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: 'Recommendation',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Multi-layer containment with behavioral countermeasures** (87% confidence)',
-          dinoOnly: true,
-        },
-        {
-          type: 'list',
-          items: [
-            'Outer fence: 24-foot, angled inward at top',
-            'Inner fence: Separate power system from main grid',
-            'Moat between fences: Leverages water aversion, works without power',
-            'Randomized feeding: Locations AND schedules vary',
-            'Randomized patrol routes: Predictable security is exploitable security',
-            'Double-airlock entry: No direct human access to enclosure, ever',
-          ],
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: 'Hammond\'s moat instinct was right, but it needs to be part of a layered system. The key insight isn\'t height or voltage. It\'s that **they\'re testing you as much as you\'re containing them.**',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
         {
           type: 'chat',
           speaker: 'hammond',
@@ -641,7 +638,11 @@ export const workflowContent: WorkflowContent = {
           type: 'collapsible',
           title: 'Full best-idea prompt',
           blocks: [
-            { type: 'p', content: '[Collapsible content: best-idea prompt goes here]' },
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/best-idea.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
@@ -654,65 +655,57 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'kevin',
           blocks: [
-            { type: 'p', content: '`/improve-idea` asks three questions: What can we simplify? What should we strengthen? And "wouldn\'t it be cool if..."' },
+            { type: 'p', content: '`/plan:improve-idea` asks three questions: What can we simplify? What should we strengthen? And "wouldn\'t it be cool if..."' },
             { type: 'p', content: 'The wild ideas aren\'t always practical, but sometimes they\'re exactly what the project needs. They can also just be fun, and what takes a B plan to an A.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Idea Improvement: Jurassic Park Implementation Plan',
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
+          blocks: [
+            {
+              type: 'h3',
+              content: 'Idea Improvement: Jurassic Park Implementation Plan',
+            },
+            {
+              type: 'h3',
+              content: '1. Simplify',
+            },
+            {
+              type: 'p',
+              content: '**Single "lockdown" command**\nCurrently requires per-paddock activation. One command triggers all containment protocols simultaneously.',
+            },
+            {
+              type: 'h3',
+              content: '2. Strengthen',
+            },
+            {
+              type: 'p',
+              content: '**Puzzle feeders for raptors**\nMental stimulation reduces escape motivation. Bored apex predators find their own entertainment. Give them problems to solve that aren\'t "how do I get out."',
+            },
+            {
+              type: 'p',
+              content: '**Environmental enrichment for T-Rex paddock**\nCurrently barren. One goat on a chain isn\'t enrichment. Varied terrain, hunting simulations, environmental complexity. Recommend starting with a big red ball.',
+            },
+            {
+              type: 'h3',
+              content: '3. Stretch',
+            },
+            {
+              type: 'p',
+              content: '**Gallimimus stampede experience**\nGuests stand in designated "safe zone" while the herd thunders past during feeding time. High spectacle, moderate risk.',
+            },
+            {
+              type: 'p',
+              content: '**Compy petting zoo**\nThey\'re small. How dangerous could they be? Family-friendly, high engagement.',
+            },
+            {
+              type: 'p',
+              content: '**Dinosaur dung exhibit**\nEducational value. Dr. Sattler approved. Gift shop sells bags for home gardens.',
+            },
+          ],
         },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: '1. Simplify',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Single "lockdown" command**\nCurrently requires per-paddock activation. One command triggers all containment protocols simultaneously.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: '2. Strengthen',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Puzzle feeders for raptors**\nMental stimulation reduces escape motivation. Bored apex predators find their own entertainment. Give them problems to solve that aren\'t "how do I get out."',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Environmental enrichment for T-Rex paddock**\nCurrently barren. One goat on a chain isn\'t enrichment. Varied terrain, hunting simulations, environmental complexity. Recommend starting with a big red ball.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'h2',
-          content: '3. Stretch',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Gallimimus stampede experience**\nGuests stand in designated "safe zone" while the herd thunders past during feeding time. High spectacle, moderate risk.',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Compy petting zoo**\nThey\'re small. How dangerous could they be? Family-friendly, high engagement.',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Dinosaur dung exhibit**\nEducational value. Dr. Sattler approved. Gift shop sells bags for home gardens.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
         {
           type: 'chat',
           speaker: 'hammond',
@@ -729,12 +722,15 @@ export const workflowContent: WorkflowContent = {
             { type: 'p', content: 'Researching... Only two reported cases of compys inflicting life-threatening injuries.' },
           ],
         },
-        { type: 'divider' },
         {
           type: 'collapsible',
           title: 'Full improve-idea prompt',
           blocks: [
-            { type: 'p', content: '[Collapsible content: improve-idea prompt goes here]' },
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/improve-idea.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
@@ -747,12 +743,30 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'kevin',
           blocks: [
-            { type: 'p', content: 'Once the plan is solid, clear context and run `/start-implementation`. Sub-agents spin up in parallel, each working from its task file, no context bleed between them.' },
+            { type: 'p', content: 'Once the plan is solid, clear context and run `/plan:start-implementation`. Sub-agents spin up in parallel, each working from its task file, no context bleed between them.' },
             { type: 'p', content: 'I set it running and context-switch to other work. Come back when it\'s done. (Assuming you\'ve set up the permissions. Ask me how I learned that.)' },
+          ],
+        },
+        {
+          type: 'image',
+          src: holdOnToYourButts,
+          alt: 'Hold on to your butts',
+          dinoOnly: true,
+        },
+        {
+          type: 'collapsible',
+          title: 'Full start-implementation prompt',
+          blocks: [
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/start-implementation.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
     },
+
     {
       id: 'code-review',
       title: 'Phase 7: Code Review',
@@ -761,63 +775,64 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'kevin',
           blocks: [
-            { type: 'p', content: 'After implementation, clear context and run `/code-review`. It catches the gap between what the plan said and what got built.' },
+            { type: 'p', content: 'After implementation, clear context and run `/plan:code-review`. It catches the gap between what the plan said and what got built.' },
             { type: 'p', content: 'The agent that implemented knew the intent. A fresh reviewer just sees code. Most findings are syntax or type errors, but you\'ll be surprised how often it catches a wrong assumption or a cleaner way to do something.' },
           ],
         },
-        { type: 'divider', dinoOnly: true },
         {
-          type: 'h2',
-          content: 'Code Review: Jurassic Park Implementation',
-          dinoOnly: true,
-        },
-        {
-          type: 'h2',
-          content: 'Finding 1 (MEDIUM): Autosolve',
-          dinoOnly: true,
-        },
-        {
-          type: 'p',
-          content: '**Location:** Kitchen, Visitor Center\n\nStandard door handles installed throughout facility.\n\n**Why this matters:** If any animal demonstrates the ability to operate lever-style handles, every interior door becomes a breach point.\n\n**Fix:** Replace with round knobs or push-bar mechanisms.',
-          dinoOnly: true,
-        },
-        { type: 'divider', dinoOnly: true },
-        {
-          type: 'finding',
-          severity: 'critical',
-          title: 'Single point of failure in critical systems staffing',
-          confidence: 95,
+          type: 'chat',
+          speaker: 'claude',
           dinoOnly: true,
           blocks: [
-            { type: 'p', content: 'New role-based access controls have been added, but existing credentials were left unchanged. Nedry still has system-wide access across security, containment, communications, and life support.' },
-            { type: 'p', content: 'Additionally: compensation data shows Nedry at 15% below market rate for his role. Concentrated access plus underpayment is a flight risk.' },
             {
-              type: 'option',
-              number: 1,
-              title: 'Retention package',
-              pros: ['Immediate salary adjustment to market rate, reduces flight risk'],
-              cons: ['Doesn\'t address single point of failure'],
+              type: 'h3',
+              content: 'Code Review: Jurassic Park Implementation',
             },
             {
-              type: 'option',
-              number: 2,
-              title: 'Redundancy',
-              pros: ['Hire second systems engineer, implement credential handoff'],
-              cons: ['Doesn\'t address compensation gap motivation'],
+              type: 'h3',
+              content: 'Finding 1 (MEDIUM): Autosolve',
             },
             {
-              type: 'option',
-              number: 3,
-              title: 'Both',
-              pros: ['Address motivation and eliminate single point of failure'],
-              cons: ['Highest cost and implementation complexity'],
+              type: 'p',
+              content: '**Location:** Kitchen, Visitor Center\n\nStandard door handles installed throughout facility.\n\n**Why this matters:** If any animal demonstrates the ability to operate lever-style handles, every interior door becomes a breach point.\n\n**Fix:** Replace with round knobs or push-bar mechanisms.',
             },
             {
-              type: 'recommendation',
-              content: 'Option 3.',
+              type: 'finding',
+              severity: 'critical',
+              title: 'Single point of failure in critical systems staffing',
               confidence: 95,
+              blocks: [
+                { type: 'p', content: 'New role-based access controls have been added, but existing credentials were left unchanged. Nedry still has system-wide access across security, containment, communications, and life support.' },
+                { type: 'p', content: 'Additionally: compensation data shows Nedry at 15% below market rate for his role. Concentrated access plus underpayment is a flight risk.' },
+                {
+                  type: 'option',
+                  number: 1,
+                  title: 'Retention package',
+                  pros: ['Immediate salary adjustment to market rate, reduces flight risk'],
+                  cons: ['Doesn\'t address single point of failure'],
+                },
+                {
+                  type: 'option',
+                  number: 2,
+                  title: 'Redundancy',
+                  pros: ['Hire second systems engineer, implement credential handoff'],
+                  cons: ['Doesn\'t address compensation gap motivation'],
+                },
+                {
+                  type: 'option',
+                  number: 3,
+                  title: 'Both',
+                  pros: ['Address motivation and eliminate single point of failure'],
+                  cons: ['Highest cost and implementation complexity'],
+                },
+                {
+                  type: 'recommendation',
+                  content: 'Option 3.',
+                  confidence: 95,
+                },
+                { type: 'p', content: 'The fences don\'t matter if the person controlling them has a better offer.' },
+              ],
             },
-            { type: 'p', content: 'The fences don\'t matter if the person controlling them has a better offer.' },
           ],
         },
         {
@@ -826,12 +841,15 @@ export const workflowContent: WorkflowContent = {
           alt: 'Ah ah ah, you didn\'t say the magic word',
           dinoOnly: true,
         },
-        { type: 'divider' },
         {
           type: 'collapsible',
           title: 'Full code-review prompt',
           blocks: [
-            { type: 'p', content: '[Collapsible content: code-review prompt goes here]' },
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/code-review.md',
+              language: 'markdown',
+            },
           ],
         },
       ],
@@ -841,16 +859,12 @@ export const workflowContent: WorkflowContent = {
   outro: {
     blocks: [
       {
-        type: 'h2',
+        type: 'h3',
         content: 'Outro',
       },
       {
         type: 'p',
-        content: 'That\'s the workflow. Discussion → plan → review → best-idea → improve → implement → code-review.',
-      },
-      {
-        type: 'p',
-        content: 'Claude can one-shot most things. But one-shotting isn\'t the ceiling. It\'s the floor. When you take the time to discuss each piece, push back on recommendations, and review with fresh eyes, you\'re not just using Claude. You\'re combining what you know with what Claude knows.',
+        content: 'Claude can one-shot many things. But one-shotting isn\'t the ceiling. It\'s the floor. When you take the time to discuss each piece, push back on recommendations, and review with fresh eyes, you\'re not just using Claude. You\'re combining what you know with what Claude knows.',
       },
       {
         type: 'p',
@@ -864,9 +878,8 @@ export const workflowContent: WorkflowContent = {
         type: 'p',
         content: 'Skip the workflow and: Developer writes prompt. Prompt creates AI agent. AI agent writes code. Code breaks production. Tech debt inherits the earth.',
       },
-      { type: 'divider' },
       {
-        type: 'p',
+        type: 'quote',
         content: 'Hammond\'s original plan would have worked perfectly, assuming nothing went wrong. This workflow exists because things go wrong, and the best time to find that out is before you\'ve written a single line of code.',
         dinoOnly: true,
       },
@@ -874,11 +887,10 @@ export const workflowContent: WorkflowContent = {
         type: 'image',
         src: didntStopToThink,
         alt: 'Your scientists were so preoccupied with whether they could, they didn\'t stop to think if they should',
-        dinoOnly: true,
+        dinoOnly: false,
       },
-      { type: 'divider' },
       {
-        type: 'h2',
+        type: 'h3',
         content: 'Download the Skills',
       },
       {
