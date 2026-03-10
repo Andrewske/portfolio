@@ -1,7 +1,11 @@
 import { withPostHogConfig } from '@posthog/nextjs-config';
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
+};
 
 export default withPostHogConfig(nextConfig, {
   personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY,
