@@ -373,11 +373,16 @@ export function CodeBlock({ code, language, title, impactContext, technicalExpla
       case 'sql':
         return highlightSQL(code);
       default:
-        return code.split('\n').map((line, index) => (
-          <div key={index} className="text-gray-300 leading-6">
-            {line || <span className="h-6" />}
-          </div>
-        ));
+        return code.split('\n').map((line, index) => {
+          if (line.trim() === '') {
+            return <div key={index} className="h-6" />;
+          }
+          return (
+            <div key={index} className="text-gray-300 leading-6">
+              {line}
+            </div>
+          );
+        });
     }
   })();
 

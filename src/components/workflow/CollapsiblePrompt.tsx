@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface CollapsiblePromptProps {
   title: string;
@@ -8,7 +8,7 @@ interface CollapsiblePromptProps {
 export default function CollapsiblePrompt({ title, children }: CollapsiblePromptProps) {
   return (
     <details
-      className="text-sm font-mono"
+      className="text-base font-mono"
       data-testid="collapsible-prompt"
     >
       <summary className="cursor-pointer text-gray-400 hover:text-gray-300 transition-colors">

@@ -10,10 +10,10 @@ Before beginning review @ai-learnings.md for context about the user
 
 ### Development
 ```bash
-pnpm dev          # Start development server on http://localhost:3000
-pnpm build        # Build for production
-pnpm start        # Start production server
-pnpm lint         # Run ESLint
+bun dev          # Start development server on http://localhost:3000
+bun build        # Build for production
+bun start        # Start production server
+bun lint         # Run ESLint
 ```
 
 ## Architecture
@@ -25,7 +25,7 @@ This is a Next.js 14 portfolio website using the App Router pattern with TypeScr
 - **Styling**: Tailwind CSS with custom utility classes for indentation
 - **Fonts**: JetBrains Mono and Roboto Mono (Google Fonts)
 - **Email**: EmailJS for contact form
-- **Package Manager**: pnpm
+- **Package Manager**: bun
 
 ### Project Structure
 - `/src/app/` - Next.js app router pages and layouts

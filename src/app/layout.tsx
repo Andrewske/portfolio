@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import '~/styles/icomoon.css';
 
-import { JetBrains_Mono, Roboto_Mono } from 'next/font/google';
+import { JetBrains_Mono, Roboto_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { PostHogProvider } from '~/providers/PostHogProvider';
 
 const jetbrains = JetBrains_Mono({
@@ -15,6 +15,12 @@ const roboto = Roboto_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto',
+});
+
+const ibmPlex = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-ibm-plex',
 });
 
 export const metadata: Metadata = {
@@ -81,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrains.variable} ${roboto.variable}`}
+      className={`${jetbrains.variable} ${roboto.variable} ${ibmPlex.variable}`}
     >
       <body className="max-w-screen relative ">
         <script type="application/ld+json">

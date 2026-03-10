@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface TimeSkipProps {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface TimeSkipProps {
 export function TimeSkip({ children }: TimeSkipProps) {
   // Simple italicized ellipsis text
   return (
-    <div className="text-gray-500 text-sm italic font-mono leading-snug" data-testid="time-skip">
+    <div className="text-gray-500 text-base italic font-mono m-9" data-testid="time-skip">
       *{children}*
     </div>
   );

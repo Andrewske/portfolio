@@ -13,7 +13,7 @@ export function KevinCallout({ children, whatBreaks, id }: KevinCalloutProps) {
       className="border-l-4 border-amber-500/50 bg-amber-500/5 rounded-r-lg p-4 space-y-3 animate-in fade-in slide-in-from-left-2 duration-300"
       data-testid="kevin-callout"
     >
-      <div className="text-amber-400 text-xs font-mono uppercase tracking-wider">
+      <div className="text-amber-400 text-sm font-mono uppercase tracking-wider">
         [KEVIN]
       </div>
       <div className="text-gray-300 text-sm">{children}</div>
