@@ -10,14 +10,15 @@ const HERO_SCROLL_OFFSET = '-600px 0px 0px 0px'
 
 // Custom hook for tracking hero section visibility
 function useHeroVisibility(): boolean {
-  const [isVisible, setIsVisible] = useState(false)
+  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
+  const [isAtTop, setIsAtTop] = useState(true)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
         const entry = entries[0]
         if (entry) {
-          setIsVisible(!entry.isIntersecting)
+          setHasScrolledPastHero(!entry.isIntersecting)
         }
       },
       { threshold: 0, rootMargin: HERO_SCROLL_OFFSET },
@@ -28,10 +29,21 @@ function useHeroVisibility(): boolean {
       observer.observe(heroElement)
     }
 
-    return () => observer.disconnect()
+    // Track if user is at the very top of the page
+    const handleScroll = (): void => {
+      setIsAtTop(window.scrollY < 10)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial check
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
-  return isVisible
+  // Hide banner when at the very top of the page
+  return hasScrolledPastHero && !isAtTop
 }
 
 // Hero Image Component
