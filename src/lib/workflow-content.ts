@@ -32,6 +32,7 @@ export type Block =
       dinoOnly?: boolean
     }
   | { type: 'quote'; content: string; id?: string; dinoOnly?: boolean }
+  | { type: 'note'; content: string; id?: string; dinoOnly?: boolean }
   | { type: 'timeskip'; content: string; id?: string; dinoOnly?: boolean }
   // Compound blocks (multiple elements, semantic structure)
   | { type: 'list'; items: string[]; ordered?: boolean; id?: string; dinoOnly?: boolean }
@@ -134,6 +135,11 @@ export const workflowContent: WorkflowContent = {
       content: '*(If you don\'t like fun, there\'s a "no dinos" toggle just for you.)*',
     },
     { type: 'dinoToggle' },
+    {
+      type: 'note',
+      content:
+        "Fair warning: the dinosaur sections are detailed. They're meant to show what the workflow actually feels like - and I got way too into it. If you stick around, you'll watch Hammond's \"spared no expense\" confidence slowly unravel.",
+    },
   ],
 
   phases: [
@@ -1122,20 +1128,6 @@ export const workflowContent: WorkflowContent = {
         src: didntStopToThink,
         alt: "Your scientists were so preoccupied with whether they could, they didn't stop to think if they should",
         dinoOnly: false,
-      },
-      {
-        type: 'h3',
-        content: 'Download the Skills',
-      },
-      {
-        type: 'list',
-        items: [
-          'plan-review.md',
-          'best-idea.md',
-          'improve-idea.md',
-          'code-review.md',
-          'start-implementation.md',
-        ],
       },
     ],
   },

@@ -95,6 +95,17 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
         </blockquote>
       )
 
+    case 'note':
+      return (
+        <div
+          key={index}
+          id={block.id}
+          className="bg-amber-500/10 border border-amber-500/20 rounded-lg px-4 py-3 my-6 text-text-body text-base italic leading-relaxed"
+        >
+          {parseInlineMarkdown(block.content)}
+        </div>
+      )
+
     case 'timeskip':
       return <TimeSkip key={index}>{block.content}</TimeSkip>
 

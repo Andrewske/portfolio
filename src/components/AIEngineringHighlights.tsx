@@ -73,7 +73,9 @@ export default function AIEngineringHighlights() {
             <a href="#projects">View AI Projects →</a>
           </Button>
           <Button variant="terminalOutline" asChild className="text-sm">
-            <a href="https://github.com/Andrewske">GitHub Portfolio</a>
+            <a href="https://github.com/Andrewske" target="_blank" rel="noopener noreferrer">
+              GitHub Portfolio
+            </a>
           </Button>
         </div>
       </CardContent>

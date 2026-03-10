@@ -3,6 +3,7 @@
 import type { NextPage } from 'next'
 import { useId, useState } from 'react'
 import AIEngineringHighlights from '~/components/AIEngineringHighlights'
+import FeaturedPost from '~/components/FeaturedPost'
 import ProjectCard from '~/components/ProjectCard'
 import TechStackVisualization from '~/components/TechStackVisualization'
 import TypingAnimation from '~/components/TypingAnimation'
@@ -91,18 +92,45 @@ const Home: NextPage = () => {
               </div>
 
               {/* Quick Links */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
                 <Button variant="terminalGhost" asChild>
-                  <a href="https://github.com/Andrewske" className="flex items-center gap-2">
+                  <a
+                    href="https://github.com/Andrewske"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
                     <span className="text-cyan-400">$</span> github
                   </a>
                 </Button>
                 <Button variant="terminalGhost" asChild>
                   <a
                     href="https://linkedin.com/in/andrewskevin92"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2"
                   >
                     <span className="text-cyan-400">$</span> linkedin
+                  </a>
+                </Button>
+                <Button variant="terminalGhost" asChild>
+                  <a
+                    href="https://soundcloud.com/kevinbigfoot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-cyan-400">$</span> soundcloud
+                  </a>
+                </Button>
+                <Button variant="terminalGhost" asChild>
+                  <a
+                    href="https://open.spotify.com/user/kevinbigfoot?si=702e548cc3c94fec"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-cyan-400">$</span> spotify
                   </a>
                 </Button>
                 <Button variant="terminalGhost" asChild>
@@ -113,9 +141,18 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            {/* AI Engineering Highlights */}
-            <AIEngineringHighlights />
           </div>
+        </div>
+      </section>
+
+      {/* Highlights Section */}
+      <section className="px-4 sm:px-6 py-12 sm:py-16 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
+          {/* AI Engineering Highlights */}
+          <AIEngineringHighlights />
+
+          {/* Featured Post */}
+          <FeaturedPost />
         </div>
       </section>
 
@@ -217,7 +254,9 @@ const Home: NextPage = () => {
               <a href="mailto:andrewskevin92@gmail.com">Send Email</a>
             </Button>
             <Button variant="terminalOutline" size="lg" asChild>
-              <a href="https://github.com/Andrewske">GitHub Profile</a>
+              <a href="https://github.com/Andrewske" target="_blank" rel="noopener noreferrer">
+                GitHub Profile
+              </a>
             </Button>
           </div>
         </div>

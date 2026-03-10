@@ -5,56 +5,50 @@ import { type Block, workflowContent } from '~/lib/workflow-content'
 import { renderBlock } from './BlockRenderer'
 import { DinoCollapsible } from './DinoCollapsible'
 import { DinoModeProvider, useDinoMode } from './DinoModeProvider'
+import { DinoToggleCompact } from './DinoToggleCompact'
+import { WorkflowFooter } from './WorkflowFooter'
 
-const HERO_SCROLL_OFFSET = '-600px 0px 0px 0px'
-
-// Custom hook for tracking hero section visibility
-function useHeroVisibility(): boolean {
-  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
-  const [isAtTop, setIsAtTop] = useState(true)
+// Custom hook for tracking when title passes 35vh - stays visible until back at top
+function useTitlePassedCenter(): boolean {
+  const [shouldShow, setShouldShow] = useState(false)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        const entry = entries[0]
-        if (entry) {
-          setHasScrolledPastHero(!entry.isIntersecting)
-        }
-      },
-      { threshold: 0, rootMargin: HERO_SCROLL_OFFSET },
-    )
-
-    const heroElement = document.getElementById('hero-section')
-    if (heroElement) {
-      observer.observe(heroElement)
-    }
-
-    // Track if user is at the very top of the page
     const handleScroll = (): void => {
-      setIsAtTop(window.scrollY < 10)
+      const titleElement = document.getElementById('page-title')
+      if (!titleElement) return
+
+      const titleRect = titleElement.getBoundingClientRect()
+      const threshold = window.innerHeight * 0.35
+      const isAtTop = window.scrollY < 10
+
+      // Show when title passes 35vh, hide only when back at very top
+      if (titleRect.top < threshold) {
+        setShouldShow(true)
+      } else if (isAtTop) {
+        setShouldShow(false)
+      }
     }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Initial check
 
     return () => {
-      observer.disconnect()
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
-  // Hide banner when at the very top of the page
-  return hasScrolledPastHero && !isAtTop
+  return shouldShow
 }
 
 // Hero Image Component
 function HeroImage() {
   return (
-    <div className="relative w-full bg-bg-main">
+    <div className="relative w-full bg-bg-main flex justify-center">
       <img
         src="/assets/workflow/trex-banner.webp"
         srcSet="/assets/workflow/trex-banner.webp 1x, /assets/workflow/trex-banner@2x.webp 2x"
         alt="When Claude Writes The Code - T-Rex banner"
-        className="w-full h-auto max-w-[1920px] mx-auto"
+        className="w-full h-auto max-h-[70vh] max-w-[1920px] object-contain"
       />
     </div>
   )
@@ -129,7 +123,7 @@ function StickyTimeline({
   activePhase: string | null
   phases: Array<{ id: string; name: string }>
 }) {
-  const isVisible = useHeroVisibility()
+  const isVisible = useTitlePassedCenter()
 
   if (!isVisible) return null
 
@@ -167,6 +161,9 @@ function StickyTimeline({
               )}
             </React.Fragment>
           ))}
+          <div className="ml-2 pl-2 border-l border-border-subtle">
+            <DinoToggleCompact />
+          </div>
         </div>
       </div>
     </div>
@@ -181,7 +178,7 @@ function FloatingSidebar({
   activePhase: string | null
   phases: Array<{ id: string; name: string }>
 }) {
-  const isVisible = useHeroVisibility()
+  const isVisible = useTitlePassedCenter()
 
   if (!isVisible) return null
 
@@ -242,6 +239,11 @@ function FloatingSidebar({
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
           </svg>
         </a>
+
+        {/* Dino toggle */}
+        <div className="flex items-center justify-end gap-3 mt-4">
+          <DinoToggleCompact />
+        </div>
       </div>
     </div>
   )
@@ -314,7 +316,10 @@ function WorkflowContent(): ReactNode {
         {/* Editorial Hero Content */}
         <div className="max-w-4xl mx-auto px-2 py-12 sm:py-16">
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-mono font-bold mb-2 text-[#e6edf3]">
+          <h1
+            id="page-title"
+            className="text-4xl sm:text-5xl md:text-6xl font-mono font-bold mb-2 text-[#e6edf3]"
+          >
             {intro.title}
           </h1>
           <p className="text-3xl sm:text-3xl font-mono text-[#7ee787] mb-8 text-center">
@@ -393,6 +398,8 @@ function WorkflowContent(): ReactNode {
               {renderBlockGroups(outro.blocks, noDinos)}
             </div>
           )}
+
+          <WorkflowFooter />
         </div>
       </section>
     </div>
