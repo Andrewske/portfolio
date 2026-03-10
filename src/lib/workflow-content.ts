@@ -172,7 +172,7 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'image',
           src: kidShocked,
-          alt: 'Tim flies',
+          alt: 'Tim flies - skipping discussion has unexpected consequences',
           dinoOnly: true,
         },
         {
@@ -577,7 +577,7 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'image',
           src: objectsInMirror,
-          alt: 'Objects in mirror are closer than they appear',
+          alt: 'Objects in mirror - plan review catches what you missed',
           dinoOnly: true,
         },
         {
@@ -797,7 +797,7 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'image',
           src: cleverGirl,
-          alt: 'Clever girl',
+          alt: 'Clever girl - thorough research prevents surprises',
           dinoOnly: true,
         },
         {
@@ -946,7 +946,7 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'image',
           src: holdOnToYourButts,
-          alt: 'Hold on to your butts',
+          alt: 'Hold on to your butts - launching parallel implementation',
           dinoOnly: true,
         },
         {
@@ -1055,7 +1055,7 @@ export const workflowContent: WorkflowContent = {
         {
           type: 'image',
           src: ahAhAh,
-          alt: "Ah ah ah, you didn't say the magic word",
+          alt: 'Ah ah ah - code review catches implementation gaps',
           dinoOnly: true,
         },
         {

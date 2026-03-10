@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Kevin Andrews' }],
   creator: 'Kevin Andrews',
-  metadataBase: new URL('https://kevinandrews.dev'),
+  metadataBase: new URL('https://kevinandrews.info'),
   alternates: {
     canonical: '/',
   },

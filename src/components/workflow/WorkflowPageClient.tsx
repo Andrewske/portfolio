@@ -317,9 +317,9 @@ function WorkflowContent(): ReactNode {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-mono font-bold mb-2 text-[#e6edf3]">
             {intro.title}
           </h1>
-          <h2 className="text-3xl sm:text-3xl font-mono text-[#7ee787] mb-8 text-center">
+          <p className="text-3xl sm:text-3xl font-mono text-[#7ee787] mb-8 text-center">
             {intro.emphasis}
-          </h2>
+          </p>
           <h3 className="text-base font-mono text-[#39d353] mb-4 text-center">{intro.subtitle}</h3>
 
           {/* Pipeline Badges - clickable navigation */}
@@ -334,10 +334,11 @@ function WorkflowContent(): ReactNode {
           </div> */}
 
           {/* Hook */}
-          {/* TODO: Replace href="#" with actual download link in future task */}
-          <p className="text-[#8b949e] text-base sm:text-lg mb-12 leading-relaxed">
+          <p className="text-[#8b949e] text-center text-base sm:text-lg mb-12 leading-relaxed">
             <a
               href="https://github.com/Andrewske/claude-code-workflow/tree/main/commands/plan"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#39d353] underline underline-offset-4 decoration-[#39d353]/30 hover:decoration-[#39d353]"
             >
               just download commands
