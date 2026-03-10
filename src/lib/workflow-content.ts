@@ -177,6 +177,18 @@ export const workflowContent: WorkflowContent = {
         },
         {
           type: 'chat',
+          speaker: 'hammond',
+          dinoOnly: true,
+          blocks: [
+            {
+              type: 'p',
+              content:
+                "I've attached the full park documentation: containment systems, tour design, staffing, and operations. We've spared no expense on planning. Just need a fresh set of eyes before we announce to investors. Ask me questions one at a time until we're ready to finalize the implementation plan.",
+            },
+          ],
+        },
+        {
+          type: 'chat',
           speaker: 'claude',
           dinoOnly: true,
           blocks: [
