@@ -335,6 +335,11 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
+          type: 'note',
+          content:
+            "For features that require multiple planning cycles, I create a GOAL.md at the start. After each plan completes, Claude updates it with what was accomplished, decisions made, and next steps. Keeps context aligned across sessions and makes end-of-day ticket updates trivial.",
+        },
+        {
           type: 'collapsible',
           title: 'Full handoff prompt',
           blocks: [
