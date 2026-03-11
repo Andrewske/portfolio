@@ -1,5 +1,4 @@
 import React, { type ReactNode } from 'react'
-import { CopyableCommand } from '~/components/workflow/CopyableCommand'
 
 type Token =
   | { type: 'text'; value: string }
@@ -94,9 +93,6 @@ export function parseInlineMarkdown(text: string): ReactNode {
               </em>
             )
           case 'code':
-            if (token.value.startsWith('/')) {
-              return <CopyableCommand key={index} command={token.value} />
-            }
             return (
               <code
                 key={index}
