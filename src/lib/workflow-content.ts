@@ -104,7 +104,7 @@ export const workflowContent: WorkflowContent = {
   intro: {
     title: 'My Claude Code Workflow',
     emphasis: '(Yes, with Dinosaurs)',
-    subtitle: 'Discussion → Handoff → Review → Best-idea → Improve → Implement → Code-review',
+    subtitle: 'Discuss → Handoff → Review → Best-idea → Improve → Implement → Code-review',
   },
 
   tldr: {
@@ -145,7 +145,7 @@ export const workflowContent: WorkflowContent = {
   phases: [
     {
       id: 'discussion',
-      title: 'Phase 1: Discussion',
+      title: 'Phase 1: Discuss',
       description: 'Claude asks questions one at a time until ready to plan',
       blocks: [
         {
@@ -158,7 +158,7 @@ export const workflowContent: WorkflowContent = {
             },
             {
               type: 'p',
-              content: 'Instead I just write up what problem I am trying to solve and end it with:',
+              content: 'Instead I describe my problem and end it with:',
             },
             {
               type: 'p',
@@ -167,7 +167,7 @@ export const workflowContent: WorkflowContent = {
             {
               type: 'p',
               content:
-                "No special prompt. Claude stops trying to solve immediately and starts asking questions. Once we've actually talked it through, then I drop into plan mode to write it up.",
+                "That one line changes the entire dynamic. Claude stops trying to solve immediately and starts actually understanding the problem. I've since formalized this into a slash command — `/plan:discuss` — which structures the conversation into phases, tracks decisions, and knows when to transition to planning. But the heart of it is still that same idea: one question at a time, no rushing.",
             },
             {
               type: 'p',
@@ -180,6 +180,17 @@ export const workflowContent: WorkflowContent = {
           src: kidShocked,
           alt: 'Tim flies - skipping discussion has unexpected consequences',
           dinoOnly: true,
+        },
+        {
+          type: 'collapsible',
+          title: 'Full discuss prompt',
+          blocks: [
+            {
+              type: 'githubEmbed',
+              url: 'https://github.com/Andrewske/claude-code-workflow/blob/main/commands/plan/discuss.md',
+              language: 'markdown',
+            },
+          ],
         },
         {
           type: 'chat',
@@ -518,7 +529,7 @@ export const workflowContent: WorkflowContent = {
                 'Breeding Controls: Ecosystem audit for alternative lysine sources, since life finds a way',
               ],
             },
-            { type: 'p', content: '**Discussion (<90%):** 2 findings' },
+            { type: 'p', content: '**Discuss (<90%):** 2 findings' },
             {
               type: 'list',
               items: ['Finding 3: Raptor Containment', 'Finding 4: Viewing Areas'],

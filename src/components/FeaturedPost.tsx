@@ -31,7 +31,7 @@ export default function FeaturedPost() {
               <span className="text-gray-500">{'//'}</span> My Claude Code Workflow
             </h3>
             <p className="text-gray-400 text-sm sm:text-base mb-4">
-              Seven phases from idea to shipped code. Discussion → Plan → Review → Best-idea →
+              Seven phases from idea to shipped code. Discuss → Plan → Review → Best-idea →
               Improve → Implement → Code-review. With dinosaurs.
             </p>
             <div>
