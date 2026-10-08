@@ -7,6 +7,7 @@ interface SimplePipelineProps {
   }[]
   title?: string
   description?: string
+  summary?: string[]
   className?: string
 }
 
@@ -14,6 +15,7 @@ export function SimplePipeline({
   stages,
   title,
   description,
+  summary = [],
   className = '',
 }: SimplePipelineProps) {
   const getStageColor = (type: string) => {
@@ -97,11 +99,13 @@ export function SimplePipeline({
       </div>
 
       {/* Summary Metrics */}
-      <div className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-4 text-xs font-mono text-gray-400">
-        <span>Total: 94s</span>
-        <span>Cost: $0.0012</span>
-        <span>Output: 20 triples, 80 vectors</span>
-      </div>
+      {summary.length > 0 && (
+        <div className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-4 text-xs font-mono text-gray-400">
+          {summary.map(item => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

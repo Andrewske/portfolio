@@ -1,6 +1,6 @@
 'use client'
 
-import type { DiagramData, DiagramType } from '~/lib/projects'
+import type { DiagramData, DiagramNode, DiagramType } from '~/lib/projects'
 import { PipelineFlowDiagram } from './PipelineFlowDiagram'
 import { SimplePipeline } from './SimplePipeline'
 
@@ -9,6 +9,26 @@ interface ArchitectureDiagramProps {
   data: DiagramData
   className?: string
 }
+
+type StageType = 'input' | 'process' | 'storage' | 'output'
+
+const stageTypeByNodeType: Partial<Record<DiagramNode['type'], StageType>> = {
+  client: 'input',
+  database: 'storage',
+  state: 'output',
+}
+
+// Nodes without coordinates are a linear pipeline; header and metrics come from metadata
+const toPipelineStages = (nodes: DiagramNode[]) =>
+  nodes.map(node => ({
+    header: node.metadata?.header as string | undefined,
+    label: node.label,
+    metrics: (node.metadata?.metrics as string[] | undefined) ?? [],
+    type: stageTypeByNodeType[node.type] ?? 'process',
+  }))
+
+const hasCoordinates = (data: DiagramData) =>
+  data.nodes.some(node => node.x !== undefined || node.y !== undefined)
 
 export function ArchitectureDiagram({ type, data, className }: ArchitectureDiagramProps) {
   switch (type) {
@@ -51,6 +71,17 @@ export function ArchitectureDiagram({ type, data, className }: ArchitectureDiagr
         return (
           <SimplePipeline
             stages={stages}
+            title={data.title}
+            description={data.description}
+            summary={['Total: 94s', 'Cost: $0.0012', 'Output: 20 triples, 80 vectors']}
+            className={className}
+          />
+        )
+      }
+      if (!hasCoordinates(data)) {
+        return (
+          <SimplePipeline
+            stages={toPipelineStages(data.nodes)}
             title={data.title}
             description={data.description}
             className={className}
