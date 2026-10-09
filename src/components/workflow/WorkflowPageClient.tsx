@@ -54,11 +54,13 @@ function HeroImage() {
   )
 }
 
+const isMediaBlock = (block: Block): boolean => block.type === 'image' || block.type === 'video'
+
 // Determine if block should be in terminal window (JP scene content) or plain text
-// Images with dinoOnly are hidden in noDinos mode but NOT placed in terminals
+// Media (images, videos) with dinoOnly are hidden in noDinos mode but NOT placed in terminals
 function isTerminalContent(block: Block): boolean {
-  // Images never go in terminal windows
-  if (block.type === 'image') return false
+  // Media never goes in terminal windows
+  if (isMediaBlock(block)) return false
   // Check for dinoOnly flag on other block types
   return 'dinoOnly' in block && block.dinoOnly === true
 }
@@ -88,8 +90,8 @@ function groupBlocksByContainer(blocks: Block[]): BlockGroup[] {
 }
 
 function renderBlockGroups(blocks: Block[], noDinos: boolean = false): React.ReactElement[] {
-  // Filter out dinoOnly images when noDinos is true (other dinoOnly content shows in collapsed terminals)
-  const filteredBlocks = noDinos ? blocks.filter(b => !(b.dinoOnly && b.type === 'image')) : blocks
+  // Filter out dinoOnly media when noDinos is true (other dinoOnly content shows in collapsed terminals)
+  const filteredBlocks = noDinos ? blocks.filter(b => !(b.dinoOnly && isMediaBlock(b))) : blocks
   const groups = groupBlocksByContainer(filteredBlocks)
 
   return groups

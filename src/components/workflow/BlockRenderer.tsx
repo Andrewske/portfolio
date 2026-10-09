@@ -8,6 +8,7 @@ import { DinoToggle } from './DinoToggle'
 import Finding from './Finding'
 import { GitHubEmbed } from './GitHubEmbed'
 import MemeImage from './MemeImage'
+import MemeVideo from './meme-video'
 import { TimeSkip } from './TimeSkip'
 import WorkflowTable from './WorkflowTable'
 
@@ -68,6 +69,9 @@ export function renderBlock(block: Block, index: number): ReactElement | null {
 
     case 'image':
       return <MemeImage key={index} src={block.src} alt={block.alt} />
+
+    case 'video':
+      return <MemeVideo key={index} video={block.video} alt={block.alt} />
 
     case 'code':
       return (

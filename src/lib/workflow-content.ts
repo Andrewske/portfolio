@@ -1,11 +1,26 @@
 import type { StaticImageData } from 'next/image'
-import ahAhAh from '~/assets/workflow/ah-ah-ah-you-didnt-say-the-magic-word.gif'
-import cleverGirl from '~/assets/workflow/clever-girl.gif'
 import didntStopToThink from '~/assets/workflow/didnt-stop-to-think-if-they-should.jpg'
-// Import images
-import holdOnToYourButts from '~/assets/workflow/hold-on-to-your-butts.gif'
-import kidShocked from '~/assets/workflow/kid-shocked.gif'
-import objectsInMirror from '~/assets/workflow/objects-in-mirror-are-closer-than-they-appear.gif'
+
+/** Source, poster and intrinsic size for a looping meme clip served from /public. */
+export interface MemeVideoSource {
+  src: string
+  poster: string
+  width: number
+  height: number
+}
+
+const memeVideo = (name: string, width: number, height: number): MemeVideoSource => ({
+  src: `/assets/workflow/${name}.mp4`,
+  poster: `/assets/workflow/${name}.webp`,
+  width,
+  height,
+})
+
+const kidShocked = memeVideo('kid-shocked', 622, 350)
+const objectsInMirror = memeVideo('objects-in-mirror-are-closer-than-they-appear', 622, 350)
+const cleverGirl = memeVideo('clever-girl', 622, 350)
+const holdOnToYourButts = memeVideo('hold-on-to-your-butts', 638, 350)
+const ahAhAh = memeVideo('ah-ah-ah-you-didnt-say-the-magic-word', 542, 350)
 
 // New Block type system - primitives, compounds, containers, and structural
 export type Block =
@@ -15,6 +30,7 @@ export type Block =
   | { type: 'h3'; content: string; id?: string; dinoOnly?: boolean }
   | { type: 'divider'; id?: string; dinoOnly?: boolean }
   | { type: 'image'; src: StaticImageData; alt: string; id?: string; dinoOnly?: boolean }
+  | { type: 'video'; video: MemeVideoSource; alt: string; id?: string; dinoOnly?: boolean }
   | {
       type: 'code'
       language: string
@@ -176,8 +192,8 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
-          type: 'image',
-          src: kidShocked,
+          type: 'video',
+          video: kidShocked,
           alt: 'Tim flies - skipping discussion has unexpected consequences',
           dinoOnly: true,
         },
@@ -609,8 +625,8 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
-          type: 'image',
-          src: objectsInMirror,
+          type: 'video',
+          video: objectsInMirror,
           alt: 'Objects in mirror - plan review catches what you missed',
           dinoOnly: true,
         },
@@ -829,8 +845,8 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
-          type: 'image',
-          src: cleverGirl,
+          type: 'video',
+          video: cleverGirl,
           alt: 'Clever girl - thorough research prevents surprises',
           dinoOnly: true,
         },
@@ -978,8 +994,8 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
-          type: 'image',
-          src: holdOnToYourButts,
+          type: 'video',
+          video: holdOnToYourButts,
           alt: 'Hold on to your butts - launching parallel implementation',
           dinoOnly: true,
         },
@@ -1087,8 +1103,8 @@ export const workflowContent: WorkflowContent = {
           ],
         },
         {
-          type: 'image',
-          src: ahAhAh,
+          type: 'video',
+          video: ahAhAh,
           alt: 'Ah ah ah - code review catches implementation gaps',
           dinoOnly: true,
         },

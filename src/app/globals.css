@@ -231,3 +231,24 @@ ol {
   line-height: 1.5rem;
   margin-bottom: 0.75rem;
 }
+
+/* Respect the OS "reduce motion" setting site-wide: stop looping Tailwind
+   animations (pulse, ping, bounce, spin, tw-animate-css enter/exit) and make
+   transitions effectively instant. JS-driven motion handles this itself. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce,
+  .animate-spin {
+    animation: none !important;
+  }
+}
