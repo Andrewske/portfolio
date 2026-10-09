@@ -44,3 +44,8 @@ notes.txt
 
 # planning docs, never committed (see CLAUDE.md)
 /docs/
+
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

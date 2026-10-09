@@ -9,6 +9,8 @@
     "ignoreUnknown": false,
     "includes": [
       "src/**/*.{js,jsx,ts,tsx,json}",
+      "e2e/**/*.ts",
+      "playwright.config.ts",
       "!!**/node_modules",
       "!!**/dist",
       "!!**/.next",
