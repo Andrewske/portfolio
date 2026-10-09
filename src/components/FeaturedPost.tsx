@@ -1,5 +1,5 @@
 import { Badge } from '~/components/ui/badge'
-import { Button } from '~/components/ui/button'
+import { buttonVariants } from '~/components/ui/button'
 import { Card } from '~/components/ui/card'
 
 export default function FeaturedPost() {
@@ -31,13 +31,13 @@ export default function FeaturedPost() {
               <span className="text-gray-500">{'//'}</span> My Claude Code Workflow
             </h3>
             <p className="text-gray-400 text-sm sm:text-base mb-4">
-              Seven phases from idea to shipped code. Discuss → Plan → Review → Best-idea →
-              Improve → Implement → Code-review. With dinosaurs.
+              Seven phases from idea to shipped code. Discuss → Plan → Review → Best-idea → Improve
+              → Implement → Code-review. With dinosaurs.
             </p>
             <div>
-              <Button variant="terminal" className="text-sm">
+              <span className={buttonVariants({ variant: 'terminal', className: 'text-sm' })}>
                 Read the Post →
-              </Button>
+              </span>
             </div>
           </div>
         </div>

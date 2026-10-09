@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
+import { siteConfig } from '~/lib/site-config'
 import { projects } from '~/lib/projects'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://kevinandrews.info' // Replace with your actual domain
+  const baseUrl = siteConfig.url
 
   const staticRoutes = [
     {
