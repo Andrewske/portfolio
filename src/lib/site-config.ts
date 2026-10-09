@@ -8,6 +8,11 @@ export const siteConfig = {
 
 export const sectionIds = {
   main: 'main-content',
+  /** Featured case study. Kept as `projects` so older `/#projects` links still land on the work. */
   projects: 'projects',
+  writing: 'writing',
+  sideProjects: 'side-projects',
+  earlierWork: 'earlier-work',
+  stack: 'tech-stack',
   contact: 'contact',
 } as const

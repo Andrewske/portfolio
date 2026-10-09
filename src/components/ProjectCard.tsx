@@ -7,9 +7,11 @@ import { getCategoryColor, getCategoryVariant, groupSkillsByCategory } from '~/l
 
 interface ProjectCardProps {
   project: ProjectCardData
+  /** Show the headline metric grid and AI evaluation excerpt. Off for side projects. */
+  showStats?: boolean
 }
 
-export default function ProjectCard({ project }: ProjectCardProps): JSX.Element {
+export default function ProjectCard({ project, showStats = true }: ProjectCardProps): JSX.Element {
   const groupedSkills = groupSkillsByCategory(project.skills)
 
   return (
@@ -59,24 +61,26 @@ export default function ProjectCard({ project }: ProjectCardProps): JSX.Element 
           </div>
 
           {/* Metrics */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
-            {project.metrics.map(metric => (
-              <div
-                key={`${project.id}-${metric.label}`}
-                className="text-center p-1.5 sm:p-2 bg-gray-900/50 rounded"
-              >
+          {showStats && (
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
+              {project.metrics.map(metric => (
                 <div
-                  className={`text-base sm:text-lg font-bold text-${metric.color || 'cyan'}-400`}
+                  key={`${project.id}-${metric.label}`}
+                  className="text-center p-1.5 sm:p-2 bg-gray-900/50 rounded"
                 >
-                  {metric.value}
+                  <div
+                    className={`text-base sm:text-lg font-bold text-${metric.color || 'cyan'}-400`}
+                  >
+                    {metric.value}
+                  </div>
+                  <div className="text-xs text-gray-500 break-words">{metric.label}</div>
                 </div>
-                <div className="text-xs text-gray-500 break-words">{metric.label}</div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* AI Evaluation & Performance */}
-          {project.aiEvaluation && (
+          {showStats && project.aiEvaluation && (
             <div className="mb-4">
               <h4 className="text-purple-400 text-sm font-bold mb-3 flex items-center gap-2">
                 <span className="text-gray-500">{'//'}</span> AI Evaluation & Performance
