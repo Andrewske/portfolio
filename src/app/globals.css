@@ -131,11 +131,14 @@ h3 {
   margin: 0;
 } */
 
-ul,
-ol {
-  list-style-type: disc;
-  margin-left: 2rem;
-  line-height: 2rem;
+/* Layered so utilities like list-none / ml-0 can override it */
+@layer base {
+  ul,
+  ol {
+    list-style-type: disc;
+    margin-left: 2rem;
+    line-height: 2rem;
+  }
 }
 
 @theme inline {

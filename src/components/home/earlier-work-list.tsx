@@ -30,7 +30,7 @@ const EarlierWorkRow = ({ entry }: { entry: EarlierWorkEntry }): JSX.Element => 
 
 /** Compact, clearly secondary list of older projects. One row each. */
 export const EarlierWorkList = ({ entries }: EarlierWorkListProps): JSX.Element => (
-  <ul className="list-none! ml-0! leading-normal! border border-gray-800/80 rounded-lg divide-y divide-gray-800/80">
+  <ul className="list-none ml-0 leading-normal border border-gray-800/80 rounded-lg divide-y divide-gray-800/80">
     {entries.map(entry => (
       <EarlierWorkRow key={entry.id} entry={entry} />
     ))}

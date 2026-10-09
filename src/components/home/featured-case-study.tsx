@@ -37,7 +37,7 @@ const MetricGrid = ({ metrics }: { metrics: readonly ProjectMetric[] }): JSX.Ele
 )
 
 const SkillTags = ({ project }: FeaturedCaseStudyProps): JSX.Element => (
-  <ul className="list-none! ml-0! leading-normal! flex flex-wrap gap-1.5" aria-label="Technologies">
+  <ul className="list-none ml-0 leading-normal flex flex-wrap gap-1.5" aria-label="Technologies">
     {project.skills.map(skill => (
       <li
         key={skill.name}

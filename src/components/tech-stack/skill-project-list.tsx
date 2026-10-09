@@ -44,7 +44,7 @@ const CategorySection = ({ group }: { group: SkillListGroup }): JSX.Element => (
       />
       {group.category}
     </h4>
-    <ul className="list-none! ml-0! leading-normal!">
+    <ul className="list-none ml-0 leading-normal">
       {group.skills.map(entry => (
         <SkillItem key={entry.node.id} entry={entry} />
       ))}

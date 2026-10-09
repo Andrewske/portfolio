@@ -65,7 +65,7 @@ const AllSkillsList = ({ groups }: { groups: NodeDetails['allSkills'] }): JSX.El
 )
 
 const ConnectedList = ({ nodes }: { nodes: GraphNode[] }): JSX.Element => (
-  <ul className="space-y-1 list-none! ml-0! leading-normal!">
+  <ul className="space-y-1 list-none ml-0 leading-normal">
     {nodes.map(node => (
       <li key={node.id} className="text-sm text-gray-300 font-mono">
         • {node.name}

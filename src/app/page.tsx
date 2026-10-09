@@ -1,6 +1,5 @@
 import type { JSX, ReactNode } from 'react'
 import FeaturedPost from '~/components/FeaturedPost'
-import { AboutSection } from '~/components/home/about-section'
 import { EarlierWorkList } from '~/components/home/earlier-work-list'
 import { FeaturedCaseStudy } from '~/components/home/featured-case-study'
 import { Hero } from '~/components/home/hero'
@@ -123,7 +122,6 @@ const Home = (): JSX.Element => (
         </div>
       </section>
       <Separator className="my-0" />
-      <AboutSection />
       <Separator className="my-0" />
       <ContactSection />
     </main>

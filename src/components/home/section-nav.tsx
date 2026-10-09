@@ -17,7 +17,7 @@ export const SectionNav = (): JSX.Element => (
     <span className="text-gray-600" aria-hidden="true">
       $ cd
     </span>
-    <ul className="list-none! ml-2! leading-normal! inline-flex flex-wrap gap-x-3 gap-y-1">
+    <ul className="list-none ml-2 leading-normal inline-flex flex-wrap gap-x-3 gap-y-1">
       {NAV_ITEMS.map(item => (
         <li key={item.id}>
           <a
