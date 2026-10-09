@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 import FeaturedPost from '~/components/FeaturedPost'
 import { EarlierWorkList } from '~/components/home/earlier-work-list'
@@ -18,6 +19,11 @@ import { toProjectCardData } from '~/lib/project-card-data'
 import { projects } from '~/lib/projects'
 import { sectionIds } from '~/lib/site-config'
 import { posts } from '~/lib/writing'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  openGraph: { url: '/' },
+}
 
 // Server component: the project dataset stays on the server; sections get only what they render.
 const featuredProject = findProject(projects, homepageSections.featured)

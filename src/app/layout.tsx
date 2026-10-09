@@ -42,23 +42,16 @@ export const metadata: Metadata = {
   authors: [{ name: 'Kevin Andrews' }],
   creator: 'Kevin Andrews',
   metadataBase: new URL(siteConfig.url),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: '/',
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
+  // index/follow is the default; pages opt out (404s get noindex from Next)
   robots: {
-    index: true,
-    follow: true,
     googleBot: {
-      index: true,
-      follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
