@@ -223,23 +223,47 @@ const personalManagementVisuals: ProjectVisual[] = [
 const musicMinionVisuals: ProjectVisual[] = [
   {
     kind: 'diagram',
-    title: 'listening-context-flow',
+    title: 'feed-to-decision-loop',
     caption:
-      'How a listen is recorded: the Python CLI drives MPV playback and stores the rating with when, where and why context in SQLite for later analysis.',
+      'Current system: workers sync my SoundCloud feed into SQLite on a Raspberry Pi, I keep or skip tracks from the web or Android app, and every decision lands in a ledger that the offline evaluation reads.',
     description:
-      'Music Minion CLI flow. A Python 3.12 command line app configured with TOML controls playback through MPV. Ratings are captured along with listening context: when, where and why. Everything is stored in SQLite, with the schema designed for future AI analysis of taste over time.',
+      'Music Minion architecture. A SoundCloud stream sync runs hourly from a checkpoint, with a daily per-artist sweep to backfill. A FastAPI backend in Docker on a Raspberry Pi serves a React web app and an Expo Android app, with a WebSocket channel for cross-device playback control. All data lives in one SQLite database, including a decision ledger of keep, nope and hide calls. An offline evaluation rebuilds a dataset from the ledger, splits it by time and runs a ship gate. The keep-probability model failed that gate, so it was not shipped. The original Python CLI reads the same database locally, kept in sync by Syncthing.',
     stages: [
-      { header: 'Python 3.12 CLI', label: 'COMMAND', metrics: ['TOML config'], type: 'input' },
-      { header: 'MPV', label: 'PLAY', metrics: ['cross-platform audio'], type: 'process' },
       {
-        header: 'Context Capture',
-        label: 'RATE',
-        metrics: ['when · where · why'],
+        header: 'SoundCloud Sync',
+        label: 'INGEST',
+        metrics: ['stream hourly', 'artist sweep daily'],
+        type: 'input',
+      },
+      {
+        header: 'FastAPI on a Pi',
+        label: 'SERVE',
+        metrics: ['Docker + Caddy', 'WebSocket device sync'],
         type: 'process',
       },
-      { header: 'SQLite', label: 'STORE', metrics: ['ready for AI analysis'], type: 'storage' },
+      {
+        header: 'Web + Android',
+        label: 'DECIDE',
+        metrics: ['React 19', 'Expo SDK 55'],
+        type: 'process',
+      },
+      {
+        header: 'SQLite',
+        label: 'LEDGER',
+        metrics: ['keep · nope · hide', 'predictions log'],
+        type: 'storage',
+      },
+      {
+        header: 'Offline Eval',
+        label: 'GATE',
+        metrics: ['chronological split', 'NO-SHIP'],
+        type: 'output',
+      },
     ],
-    summary: ['Built in 1 day'],
+    summary: [
+      'Python CLI + MPV on the desktop, same DB via Syncthing',
+      '706 commits since Sep 2025',
+    ],
   },
 ]
 
