@@ -32,7 +32,11 @@ const useTypedCount = (text: string, speed: number, animate: boolean): number =>
  * The visual copy renders the untyped rest invisibly so line wraps never shift.
  * Under prefers-reduced-motion the full text shows at once with no cursor.
  */
-const TypingAnimation = ({ text, speed = 50 }: TypingAnimationProps): React.ReactElement => {
+const TypingAnimation = ({
+  text,
+  speed = 50,
+  suffix = '',
+}: TypingAnimationProps): React.ReactElement => {
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY)
   const count = useTypedCount(text, speed, !reducedMotion)
 
@@ -41,9 +45,9 @@ const TypingAnimation = ({ text, speed = 50 }: TypingAnimationProps): React.Reac
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
         {text.slice(0, count)}
-        {!reducedMotion && <span className="inline-block w-0 animate-pulse">|</span>}
+        {!reducedMotion && <span className="animate-pulse">|</span>}
+        {suffix}
         <span className="invisible">{text.slice(count)}</span>
-        {!reducedMotion && <span className="invisible">|</span>}
       </span>
     </>
   )

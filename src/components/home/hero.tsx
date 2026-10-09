@@ -63,8 +63,10 @@ const DeveloperObject = (): JSX.Element => (
       <Field name="mission" last>
         <span className="text-yellow-300">
           &quot;
-          <TypingAnimation text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems" />
-          &quot;
+          <TypingAnimation
+            text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems"
+            suffix={'"'}
+          />
         </span>
       </Field>
     </div>
