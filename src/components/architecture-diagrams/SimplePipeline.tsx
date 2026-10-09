@@ -1,10 +1,7 @@
+import type { DiagramStage } from '~/lib/projects/types'
+
 interface SimplePipelineProps {
-  stages: {
-    label: string
-    header?: string
-    metrics: string[]
-    type: 'input' | 'process' | 'storage' | 'output'
-  }[]
+  stages: DiagramStage[]
   title?: string
   description?: string
   summary?: string[]

@@ -1,6 +1,12 @@
 'use client'
 
-import type { DiagramData, DiagramNode, DiagramType } from '~/lib/projects'
+import type {
+  DiagramData,
+  DiagramNode,
+  DiagramStage,
+  DiagramStageType,
+  DiagramType,
+} from '~/lib/projects/types'
 import { PipelineFlowDiagram } from './PipelineFlowDiagram'
 import { SimplePipeline } from './SimplePipeline'
 
@@ -10,24 +16,22 @@ interface ArchitectureDiagramProps {
   className?: string
 }
 
-type StageType = 'input' | 'process' | 'storage' | 'output'
-
-const stageTypeByNodeType: Partial<Record<DiagramNode['type'], StageType>> = {
+const stageTypeByNodeType: Partial<Record<DiagramNode['type'], DiagramStageType>> = {
   client: 'input',
   database: 'storage',
   state: 'output',
 }
 
 // Nodes without coordinates are a linear pipeline; header and metrics come from metadata
-const toPipelineStages = (nodes: DiagramNode[]) =>
+const toPipelineStages = (nodes: DiagramNode[]): DiagramStage[] =>
   nodes.map(node => ({
-    header: node.metadata?.header as string | undefined,
+    header: node.metadata?.header,
     label: node.label,
-    metrics: (node.metadata?.metrics as string[] | undefined) ?? [],
+    metrics: node.metadata?.metrics ?? [],
     type: stageTypeByNodeType[node.type] ?? 'process',
   }))
 
-const hasCoordinates = (data: DiagramData) =>
+const hasCoordinates = (data: DiagramData): boolean =>
   data.nodes.some(node => node.x !== undefined || node.y !== undefined)
 
 export function ArchitectureDiagram({ type, data, className }: ArchitectureDiagramProps) {
@@ -35,36 +39,36 @@ export function ArchitectureDiagram({ type, data, className }: ArchitectureDiagr
     case 'pipeline-flow':
       // Use simple pipeline for knowledge graph, D3 for others
       if (data.title?.includes('Knowledge Graph')) {
-        const stages = [
+        const stages: DiagramStage[] = [
           {
             header: 'Document Input',
             label: 'INPUT',
             metrics: ['8.6k chars'],
-            type: 'input' as const,
+            type: 'input',
           },
           {
             header: 'Entity Extraction',
             label: 'EXTRACT',
             metrics: ['44s', '20 triples'],
-            type: 'process' as const,
+            type: 'process',
           },
           {
             header: 'Vector Embeddings',
             label: 'EMBED',
             metrics: ['inline', '80 vectors'],
-            type: 'process' as const,
+            type: 'process',
           },
           {
             header: 'Knowledge Storage',
             label: 'STORE',
             metrics: ['inline', '20 stored'],
-            type: 'storage' as const,
+            type: 'storage',
           },
           {
             header: 'Concept Generation',
             label: 'CONCEPTS',
             metrics: ['47s', '0 concepts'],
-            type: 'output' as const,
+            type: 'output',
           },
         ]
 

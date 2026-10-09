@@ -175,13 +175,13 @@ export function PipelineFlowDiagram({
     })
 
     // Add background rect for labels
-    const labelsWithText = linkLabels.filter((d: any) => d.label && d.label.length > 0)
+    const labelsWithText = linkLabels.filter(d => (d.label?.length ?? 0) > 0)
 
     labelsWithText
       .append('rect')
-      .attr('x', (d: any) => -(d.label?.length || 0) * 4)
+      .attr('x', d => -(d.label?.length || 0) * 4)
       .attr('y', -12)
-      .attr('width', (d: any) => (d.label?.length || 0) * 8)
+      .attr('width', d => (d.label?.length || 0) * 8)
       .attr('height', 20)
       .attr('fill', 'rgba(0, 0, 0, 0.9)')
       .attr('stroke', 'rgba(255, 255, 255, 0.2)')
@@ -190,7 +190,7 @@ export function PipelineFlowDiagram({
 
     labelsWithText
       .append('text')
-      .text((d: any) => d.label || '')
+      .text(d => d.label || '')
       .attr('font-family', 'JetBrains Mono, monospace')
       .attr('font-size', '12px') // Larger label text
       .attr('font-weight', '500')
