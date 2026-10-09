@@ -147,7 +147,7 @@ const knowledgeGraphVisuals: ProjectVisual[] = [
     caption:
       'Document to agent context: four extraction types run in parallel, concepts are generated and deduplicated, and the graph is served to agents over MCP.',
     description:
-      'Knowledge graph pipeline. A document is input, then four extractions run in parallel: entity-entity, entity-event, event-event and emotional context. Concepts are generated and deduplicated, then stored in the knowledge graph with atomic writes. An MCP server exposes the graph over STDIO for Claude Code and HTTP for web apps. A document takes about 67 seconds, at 21 milliseconds per token.',
+      'Knowledge graph pipeline. A document is input, then four extractions run in parallel: entity-entity, entity-event, event-event and emotional context. Concepts are generated and deduplicated, then stored in the knowledge graph with atomic writes. An MCP server exposes the graph over STDIO for Claude Code and HTTP for web apps.',
     stages: [
       { header: 'Document Input', label: 'INPUT', metrics: ['personal docs'], type: 'input' },
       {
@@ -170,7 +170,6 @@ const knowledgeGraphVisuals: ProjectVisual[] = [
         type: 'output',
       },
     ],
-    summary: ['67s per document', '21ms per token', '70% cost reduction'],
   },
 ]
 
