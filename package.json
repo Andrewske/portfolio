@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:biome": "npx @biomejs/biome lint .",
-    "format": "npx @biomejs/biome format --write .",
-    "check": "npx @biomejs/biome check --write ."
+    "lint": "biome lint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -33,14 +33,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
-    "@eslint/eslintrc": "^3.3.5",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^10.0.3",
-    "eslint-config-next": "16.1.6",
     "playwright": "^1.58.2",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.1",

@@ -33,7 +33,7 @@ Context-aware music rating system built in one day for CLI development experienc
 
 ### Core Technologies
 - **Languages**: TypeScript, Python, JavaScript
-- **Frontend**: Next.js 14, React, Tailwind CSS
+- **Frontend**: Next.js 16, React, Tailwind CSS
 - **Backend**: Node.js, Express, PostgreSQL, Prisma
 - **AI/ML**: OpenAI Models, Vector Embeddings, Prompt Engineering
 - **Data Processing**: Polars, Pandas, SQL Optimization

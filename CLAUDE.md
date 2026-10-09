@@ -11,17 +11,19 @@ Before beginning review @ai-learnings.md for context about the user
 ### Development
 ```bash
 bun dev          # Start development server on http://localhost:3000
-bun build        # Build for production
+bun run build    # Build for production (PostHog source map upload only if creds set)
 bun start        # Start production server
-bun lint         # Run ESLint
+bun run lint     # Lint with Biome (biome lint .)
+bun run typecheck # Generate Next types + tsc --noEmit
+bun run check    # Biome lint + format with autofix
 ```
 
 ## Architecture
 
-This is a Next.js 14 portfolio website using the App Router pattern with TypeScript and Tailwind CSS.
+This is a Next.js 16 portfolio website using the App Router pattern with TypeScript and Tailwind CSS.
 
 ### Key Technologies
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS with custom utility classes for indentation
 - **Fonts**: JetBrains Mono and Roboto Mono (Google Fonts)
 - **Email**: EmailJS for contact form
