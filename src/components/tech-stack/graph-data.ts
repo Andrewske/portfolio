@@ -1,11 +1,6 @@
 import type * as d3 from 'd3'
-import {
-  groupSkillsByCategory,
-  type ProjectSkill,
-  projects,
-  type SkillCategory,
-} from '~/lib/projects'
-import { type Link, type Node, techStackLinks, techStackNodes } from '~/lib/techStack'
+import type { SkillGroup } from '~/lib/project-skills'
+import type { Link, Node } from '~/lib/techStack'
 
 export type GraphNode = Node & d3.SimulationNodeDatum
 
@@ -23,8 +18,17 @@ export interface GraphData {
 export interface NodeDetails {
   node: GraphNode
   connected: GraphNode[]
-  allSkills: [SkillCategory, ProjectSkill[]][]
+  allSkills: SkillGroup[]
 }
+
+/** Serializable graph input, built on the server so the client never loads ~/lib/projects. */
+export interface GraphSource {
+  nodes: Node[]
+  links: Link[]
+}
+
+/** Each project's skills grouped by category, keyed by project id. */
+export type ProjectSkillGroups = Readonly<Record<string, SkillGroup[]>>
 
 export interface SkillListEntry {
   node: GraphNode
@@ -91,9 +95,9 @@ const buildAdjacency = (links: readonly GraphLink[]): Map<string, Set<string>> =
 }
 
 /** Fresh, component-owned copies so d3's in-place mutation never leaks into module data. */
-export const createGraphData = (): GraphData => {
-  const nodes: GraphNode[] = techStackNodes.map(node => ({ ...node }))
-  const links: GraphLink[] = techStackLinks.map(link => ({
+export const createGraphData = (source: GraphSource): GraphData => {
+  const nodes: GraphNode[] = source.nodes.map(node => ({ ...node }))
+  const links: GraphLink[] = source.links.map(link => ({
     source: linkKey(link, 'source'),
     target: linkKey(link, 'target'),
     strength: link.strength,
@@ -111,14 +115,17 @@ export const getConnectedNodes = (graph: GraphData, id: string): GraphNode[] =>
     .map(otherId => graph.nodesById.get(otherId))
     .filter((node): node is GraphNode => node !== undefined)
 
-export const getNodeDetails = (graph: GraphData, id: string | null): NodeDetails | null => {
+export const getNodeDetails = (
+  graph: GraphData,
+  id: string | null,
+  projectSkills: ProjectSkillGroups,
+): NodeDetails | null => {
   const node = id ? graph.nodesById.get(id) : undefined
   if (!node) return null
-  const project = node.type === 'project' ? projects.find(p => p.id === node.id) : undefined
   return {
     node,
     connected: getConnectedNodes(graph, node.id),
-    allSkills: project ? groupSkillsByCategory(project.skills) : [],
+    allSkills: node.type === 'project' ? (projectSkills[node.id] ?? []) : [],
   }
 }
 

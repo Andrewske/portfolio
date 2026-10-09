@@ -5,7 +5,7 @@ import {
   type ProficiencyLevel,
   type ProjectSkill,
   type SkillCategory,
-} from '~/lib/projects'
+} from '~/lib/project-skills'
 
 interface NodeDetailsPanelProps {
   details: NodeDetails | null

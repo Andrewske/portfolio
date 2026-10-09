@@ -1,5 +1,8 @@
 import { useCallback, useSyncExternalStore } from 'react'
 
+// Matches Tailwind's `sm` breakpoint so CSS and JS agree on the first paint.
+export const DESKTOP_QUERY = '(min-width: 640px)'
+
 const getServerSnapshot = (): boolean => false
 
 /** Live `matchMedia` result. Returns false during SSR and hydration. */
