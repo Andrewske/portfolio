@@ -1,266 +1,133 @@
-import type { JSX } from 'react'
-import AIEngineringHighlights from '~/components/AIEngineringHighlights'
+import type { JSX, ReactNode } from 'react'
 import FeaturedPost from '~/components/FeaturedPost'
+import { AboutSection } from '~/components/home/about-section'
+import { EarlierWorkList } from '~/components/home/earlier-work-list'
+import { FeaturedCaseStudy } from '~/components/home/featured-case-study'
+import { Hero } from '~/components/home/hero'
+import { SectionHeading } from '~/components/home/section-heading'
 import ProjectCard from '~/components/ProjectCard'
 import TechStackVisualization from '~/components/TechStackVisualization'
-import TypingAnimation from '~/components/TypingAnimation'
 import { Button } from '~/components/ui/button'
 import { Separator } from '~/components/ui/separator'
+import {
+  findProject,
+  homepageSections,
+  pickProjects,
+  toEarlierWorkEntry,
+} from '~/lib/homepage-sections'
 import { toProjectCardData } from '~/lib/project-card-data'
 import { projects } from '~/lib/projects'
 import { sectionIds } from '~/lib/site-config'
+import { posts } from '~/lib/writing'
 
-// Server component: the project dataset stays on the server; cards get only what they render.
-const projectCards = projects.map(toProjectCardData)
+// Server component: the project dataset stays on the server; sections get only what they render.
+const featuredProject = findProject(projects, homepageSections.featured)
+const sideProjectCards = pickProjects(projects, homepageSections.sideProjects).map(
+  toProjectCardData,
+)
+const earlierWork = pickProjects(projects, homepageSections.earlierWork).map(toEarlierWorkEntry)
 
-const Home = (): JSX.Element => {
-  return (
-    <div className="min-h-screen bg-black text-gray-200 font-mono">
-      <a
-        href={`#${sectionIds.main}`}
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:border focus:border-green-500 focus:bg-black focus:px-4 focus:py-2 focus:text-green-400"
-      >
-        Skip to main content
-      </a>
-      <main id={sectionIds.main} tabIndex={-1} className="focus:outline-none">
-        <h1 className="sr-only">Kevin Andrews, Software Engineer and AI Developer</h1>
-        {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-8 sm:py-0 relative overflow-hidden">
-          {/* Subtle background pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, #00ff00 2px, #00ff00 4px)`,
-                backgroundSize: '100% 4px',
-              }}
-            ></div>
-          </div>
-
-          <div className="max-w-6xl mx-auto w-full relative z-10">
-            <div className="space-y-6 sm:space-y-8">
-              {/* Terminal-style header */}
-              <div className="border border-green-500/20 rounded-lg p-4 sm:p-6 md:p-8 bg-black/50 backdrop-blur-sm overflow-x-auto">
-                <div className="flex items-center gap-2 mb-4 sm:mb-6">
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-                  <span className="ml-2 sm:ml-4 text-gray-500 text-xs sm:text-sm">
-                    portfolio.js
-                  </span>
-                </div>
-
-                <div className="space-y-3 sm:space-y-4 min-w-0">
-                  <div>
-                    <span className="text-purple-400">const</span>{' '}
-                    <span className="text-blue-400">developer</span>{' '}
-                    <span className="text-white">=</span> <span className="text-white">{'{'}</span>
-                  </div>
-
-                  <div className="pl-4 sm:pl-6 md:pl-8 space-y-1 sm:space-y-2">
-                    <div>
-                      <span className="text-blue-300">name</span>
-                      <span className="text-white">:</span>{' '}
-                      <span className="text-yellow-300">&quot;Kevin Andrews&quot;</span>
-                      <span className="text-white">,</span>
-                    </div>
-
-                    <div>
-                      <span className="text-blue-300">role</span>
-                      <span className="text-white">:</span>{' '}
-                      <span className="text-yellow-300">
-                        &quot;Software Engineer & AI Developer&quot;
-                      </span>
-                      <span className="text-white">,</span>
-                    </div>
-
-                    <div>
-                      <span className="text-blue-300">mission</span>
-                      <span className="text-white">:</span>{' '}
-                      <span className="text-yellow-300">
-                        &quot;
-                        <TypingAnimation text="Shipping fast through human-AI collaboration - from legal automation to personal productivity systems" />
-                        &quot;
-                      </span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-white">{'}'}</span>
-                    <span className="text-white">;</span>
-                  </div>
-                </div>
-
-                {/* Quick Links */}
-                <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
-                  <Button variant="terminalGhost" asChild>
-                    <a
-                      href="https://github.com/Andrewske"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-cyan-400">$</span> github
-                    </a>
-                  </Button>
-                  <Button variant="terminalGhost" asChild>
-                    <a
-                      href="https://linkedin.com/in/andrewskevin92"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-cyan-400">$</span> linkedin
-                    </a>
-                  </Button>
-                  <Button variant="terminalGhost" asChild>
-                    <a
-                      href="https://soundcloud.com/kevinbigfoot"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-cyan-400">$</span> soundcloud
-                    </a>
-                  </Button>
-                  <Button variant="terminalGhost" asChild>
-                    <a
-                      href="https://open.spotify.com/user/kevinbigfoot?si=702e548cc3c94fec"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-cyan-400">$</span> spotify
-                    </a>
-                  </Button>
-                  <Button variant="terminalGhost" asChild>
-                    <a href={`#${sectionIds.contact}`} className="flex items-center gap-2">
-                      <span className="text-cyan-400">$</span> contact
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Highlights Section */}
-        <section className="px-4 sm:px-6 py-12 sm:py-16 relative overflow-hidden">
-          <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
-            {/* AI Engineering Highlights */}
-            <AIEngineringHighlights />
-
-            {/* Featured Post */}
-            <FeaturedPost />
-          </div>
-        </section>
-
-        <Separator className="my-0" />
-
-        {/* Projects Section */}
-        <section id={sectionIds.projects} className="py-12 sm:py-20 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                <span className="text-green-400">$</span> ls projects/
-              </h2>
-              <p className="text-sm sm:text-base text-gray-500">
-                Production systems built to solve real problems
-              </p>
-            </div>
-
-            <div className="grid gap-6">
-              {projectCards.map(project => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Separator className="my-0" />
-
-        {/* Tech Stack Visualization */}
-        <section className="py-12 sm:py-20 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto">
-            <TechStackVisualization />
-          </div>
-        </section>
-
-        <Separator className="my-0" />
-
-        {/* About Section */}
-        <section className="py-12 sm:py-20 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                <span className="text-green-400">$</span> whoami --verbose
-              </h2>
-            </div>
-
-            <div className="space-y-6 text-gray-300 leading-relaxed">
-              <div className="pl-4 border-l-2 border-gray-800">
-                <p>
-                  I&apos;m an AI-native engineer - I think in human-AI collaboration, not just code.
-                  The way I approach building is as important as what I build.
-                </p>
-              </div>
-
-              <div className="pl-4 border-l-2 border-gray-800">
-                <p>
-                  Currently I&apos;m a Software Engineer at Glade AI, an AI legal tech platform
-                  serving 1000+ law firms.
-                </p>
-              </div>
-
-              <div className="pl-4 border-l-2 border-gray-800">
-                <p>
-                  Previously at Bonanza, I built a full-stack analytics dashboard processing 160M+
-                  order records with sub-second page loads. When faced with a read-only legacy
-                  database, I designed a static Parquet architecture that eliminated API hosting
-                  costs while improving performance.
-                </p>
-              </div>
-
-              <div className="pl-4 border-l-2 border-gray-800">
-                <p>
-                  My passion project is an AI personal management system that helps me navigate
-                  daily life with ADHD. I believe AI is a superpower not only for coding, but for
-                  unlocking potential in those limited by factors beyond their control. The tools we
-                  build for ourselves often solve problems for entire communities.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Separator className="my-0" />
-
-        {/* Contact Section */}
-        <section id={sectionIds.contact} className="py-12 sm:py-20 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto text-center">
-            <div className="flex justify-center sm:justify-start mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-8">
-                <span className="text-green-400">$</span> contact --init
-              </h2>
-            </div>
-
-            <p className="text-gray-400 mb-8">Let&apos;s build something amazing together</p>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
-              <Button variant="terminal" size="lg" asChild>
-                <a href="mailto:andrewskevin92@gmail.com">Send Email</a>
-              </Button>
-              <Button variant="terminalOutline" size="lg" asChild>
-                <a href="https://github.com/Andrewske" target="_blank" rel="noopener noreferrer">
-                  GitHub Profile
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  )
+interface PageSectionProps {
+  id: string
+  command: string
+  description: string
+  children: ReactNode
 }
+
+const PageSection = ({ id, command, description, children }: PageSectionProps): JSX.Element => (
+  <section id={id} aria-labelledby={`${id}-heading`} className="py-12 sm:py-16 px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto">
+      <SectionHeading id={`${id}-heading`} command={command} description={description} />
+      {children}
+    </div>
+  </section>
+)
+
+const ContactSection = (): JSX.Element => (
+  <section id={sectionIds.contact} className="py-12 sm:py-20 px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto text-center">
+      <div className="flex justify-center sm:justify-start mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-8">
+          <span className="text-green-400">$</span> contact --init
+        </h2>
+      </div>
+      <p className="text-gray-400 mb-8">Let&apos;s build something amazing together</p>
+      <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
+        <Button variant="terminal" size="lg" asChild>
+          <a href="mailto:andrewskevin92@gmail.com">Send Email</a>
+        </Button>
+        <Button variant="terminalOutline" size="lg" asChild>
+          <a href="https://github.com/Andrewske" target="_blank" rel="noopener noreferrer">
+            GitHub Profile
+          </a>
+        </Button>
+      </div>
+    </div>
+  </section>
+)
+
+const WorkSections = (): JSX.Element => (
+  <>
+    <PageSection
+      id={sectionIds.projects}
+      command="cat work/current.md"
+      description="What I build day to day"
+    >
+      {featuredProject && <FeaturedCaseStudy project={featuredProject} />}
+    </PageSection>
+    <PageSection id={sectionIds.writing} command="ls writing/" description="Notes on how I work">
+      <div className="grid gap-6">
+        {posts.map(post => (
+          <FeaturedPost key={post.slug} post={post} />
+        ))}
+      </div>
+    </PageSection>
+    <Separator className="my-0" />
+    <PageSection
+      id={sectionIds.sideProjects}
+      command="ls side-projects/"
+      description="Experiments and tools I build for myself"
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        {sideProjectCards.map(project => (
+          <ProjectCard key={project.id} project={project} showStats={false} />
+        ))}
+      </div>
+    </PageSection>
+    <PageSection
+      id={sectionIds.earlierWork}
+      command="ls -l archive/"
+      description="Older projects, kept for reference"
+    >
+      <EarlierWorkList entries={earlierWork} />
+    </PageSection>
+  </>
+)
+
+const Home = (): JSX.Element => (
+  <div className="min-h-screen bg-black text-gray-200 font-mono">
+    <a
+      href={`#${sectionIds.main}`}
+      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:border focus:border-green-500 focus:bg-black focus:px-4 focus:py-2 focus:text-green-400"
+    >
+      Skip to main content
+    </a>
+    <main id={sectionIds.main} tabIndex={-1} className="focus:outline-none">
+      <h1 className="sr-only">Kevin Andrews, Software Engineer and AI Developer</h1>
+      <Hero />
+      <WorkSections />
+      <Separator className="my-0" />
+      <section id={sectionIds.stack} className="py-12 sm:py-16 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <TechStackVisualization />
+        </div>
+      </section>
+      <Separator className="my-0" />
+      <AboutSection />
+      <Separator className="my-0" />
+      <ContactSection />
+    </main>
+  </div>
+)
 
 export default Home

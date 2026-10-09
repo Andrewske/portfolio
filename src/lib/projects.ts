@@ -395,8 +395,7 @@ const projectsData: Project[] = [
     subtitle: 'Webhook-based cross-villa blocking system with automatic inventory updates',
 
     // RESULTS - User value and practical benefits
-    businessImpact:
-      'Enables conflict-free booking operations across 5 properties, generating $30k+ total revenue',
+    businessImpact: 'Enables conflict-free booking operations across 5 properties',
 
     // WHY + STORY - Problem context and system purpose
     longDescription:
@@ -412,7 +411,6 @@ const projectsData: Project[] = [
     scope: 'full-stack development, payment integration, booking system, multi-tenant architecture',
 
     metrics: [
-      { value: '$30k+', label: 'Total Revenue', color: 'cyan' },
       { value: '0', label: 'Double Bookings', color: 'yellow' },
       { value: 'Instant', label: 'Sync Updates', color: 'green' },
       { value: '5', label: 'Properties', color: 'purple' },
