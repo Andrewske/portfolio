@@ -1,14 +1,11 @@
 import type { ReactNode } from 'react'
-import type { DescribedMetric } from '~/components/project-detail/metric-descriptions'
 import type { Project } from '~/lib/projects'
 
 interface PerformanceMetricsProps {
   project: Project
-  // Metrics with optional context; pass describeMetrics(project) or your own data
-  metrics?: DescribedMetric[]
 }
 
-export function PerformanceMetrics({ project, metrics }: PerformanceMetricsProps): ReactNode {
+export function PerformanceMetrics({ project }: PerformanceMetricsProps): ReactNode {
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold text-green-400 mb-6 flex items-center gap-2">
@@ -16,7 +13,7 @@ export function PerformanceMetrics({ project, metrics }: PerformanceMetricsProps
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {(metrics ?? project.metrics).map((metric: DescribedMetric, index) => (
+        {project.metrics.map((metric, index) => (
           <div key={index} className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
             <div className="flex items-center gap-4 mb-3">
               <div className={`text-3xl font-bold text-${metric.color || 'cyan'}-400`}>

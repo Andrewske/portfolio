@@ -1,15 +1,10 @@
 // Visual evidence for project detail pages, keyed by project id.
-// Captions and diagram stages restate facts from each project's entry in projects.ts;
+// Captions and diagram stages restate facts from each project's file in src/lib/projects/;
 // update them together so the visuals never claim more than the written content.
 
-export type DiagramStageType = 'input' | 'process' | 'storage' | 'output'
+import type { DiagramStage } from '~/lib/projects/types'
 
-export interface DiagramStage {
-  header?: string
-  label: string
-  metrics: string[]
-  type: DiagramStageType
-}
+export type { DiagramStage, DiagramStageType } from '~/lib/projects/types'
 
 export interface ImageVisual {
   kind: 'image'

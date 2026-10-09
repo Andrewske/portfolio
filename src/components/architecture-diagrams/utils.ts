@@ -41,7 +41,10 @@ export function createArrowMarker(
     .style('opacity', 0.8)
 }
 
-export function wrapText(text: d3.Selection<SVGTextElement, any, any, any>, width: number) {
+export function wrapText(
+  text: d3.Selection<SVGTextElement, unknown, d3.BaseType, unknown>,
+  width: number,
+): void {
   text.each(function () {
     const textElement = d3.select(this)
     const words = textElement.text().split(/\s+/)

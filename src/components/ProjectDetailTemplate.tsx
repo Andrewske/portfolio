@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArchitectureSection } from '~/components/project-detail/ArchitectureSection'
 import { ChallengesAndSolutions } from '~/components/project-detail/ChallengesAndSolutions'
-import { describeMetrics } from '~/components/project-detail/metric-descriptions'
 import { PerformanceMetrics } from '~/components/project-detail/PerformanceMetrics'
 import { ProjectHero } from '~/components/project-detail/ProjectHero'
 import { TechnicalImplementation } from '~/components/project-detail/TechnicalImplementation'
@@ -50,7 +49,7 @@ export default function ProjectDetailTemplate({ project }: ProjectDetailTemplate
         <TechnicalImplementation project={project} />
 
         {/* Performance & Metrics */}
-        <PerformanceMetrics project={project} metrics={describeMetrics(project)} />
+        <PerformanceMetrics project={project} />
 
         {/* Challenges & Solutions */}
         <ChallengesAndSolutions project={project} />
