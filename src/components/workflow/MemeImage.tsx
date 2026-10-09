@@ -13,8 +13,8 @@ export function MemeImage({ src, alt }: MemeImageProps): React.ReactElement {
         <Image
           src={src}
           alt={alt}
+          sizes="(max-width: 768px) 100vw, 768px"
           className="max-w-full h-auto"
-          unoptimized // GIFs need unoptimized to animate
         />
       </div>
     </div>
