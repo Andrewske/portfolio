@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import type React from 'react'
 import { WorkflowPageClient } from '~/components/workflow/WorkflowPageClient'
+import { siteConfig } from '~/lib/site-config'
+
+const bannerUrl = `${siteConfig.url}/assets/workflow/trex-banner.webp`
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -8,11 +11,11 @@ const structuredData = {
   headline: 'My Claude Code Workflow',
   description:
     "Your developers were so preoccupied with whether they could one-shot it, they didn't stop to think if they should",
-  image: 'https://kevinandrews.info/assets/workflow/trex-banner.webp',
+  image: bannerUrl,
   author: {
     '@type': 'Person',
     name: 'Kevin Andrews',
-    url: 'https://kevinandrews.info',
+    url: siteConfig.url,
   },
   publisher: {
     '@type': 'Person',
@@ -23,14 +26,14 @@ const structuredData = {
 } as const
 
 export const metadata: Metadata = {
-  title: 'My Claude Code Workflow | Kevin Andrews',
+  title: 'My Claude Code Workflow',
   description:
     "Your developers were so preoccupied with whether they could one-shot it, they didn't stop to think if they should",
   openGraph: {
     title: 'My Claude Code Workflow',
     description:
       "Your developers were so preoccupied with whether they could one-shot it, they didn't stop to think if they should",
-    images: ['https://kevinandrews.info/assets/workflow/trex-banner.webp'],
+    images: [bannerUrl],
     type: 'article',
     authors: ['Kevin Andrews'],
   },
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
     title: 'My Claude Code Workflow',
     description:
       "Your developers were so preoccupied with whether they could one-shot it, they didn't stop to think if they should",
-    images: ['https://kevinandrews.info/assets/workflow/trex-banner.webp'],
+    images: [bannerUrl],
   },
   alternates: {
     canonical: '/my-claude-code-workflow',
