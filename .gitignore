@@ -41,3 +41,6 @@ next-env.d.ts
 notes.txt
 
 *.local
+
+# planning docs, never committed (see CLAUDE.md)
+/docs/
