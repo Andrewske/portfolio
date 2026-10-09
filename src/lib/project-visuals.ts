@@ -90,9 +90,45 @@ const zohoTwilioVisuals: ProjectVisual[] = [
     src: '/images/ZohoTwilio/zoho_twilio_screenshot.png',
     alt: 'Zoho CRM lead record with an embedded Twilio SMS panel showing an outbound studio message that asks the lead to reply YES to book or STOP to opt out',
     caption:
-      'SMS panel inside a Zoho CRM lead record: the studio texts the lead from its own number, and YES / STOP replies drive the automated workflows.',
+      'SMS panel inside a Zoho CRM lead record: staff text the lead without leaving the CRM, failed sends show in red with the error code, and YES / STOP replies drive the automated workflows.',
     width: 1918,
     height: 908,
+  },
+  {
+    kind: 'diagram',
+    title: 'save-first-reply-pipeline',
+    caption:
+      'Inbound reply flow since 2026: the webhook only checks the signature and saves, STOP is handled on the spot, and a 5-minute cron does the lookups, tasks and follow-ups with retries.',
+    description:
+      'Inbound SMS pipeline. Twilio posts each reply to a webhook, which checks the signature against the sending Twilio account, saves the message, and returns 200, or 500 so Twilio retries if the save failed. A STOP reply is handled right away by setting the opt-out flag in Zoho. Every 5 minutes a cron job picks up unprocessed messages, finds the studio and the lead in Zoho, and retries unresolved messages up to 50 times. It then creates a Zoho task for staff, or sends a follow-up text once per lead for a YES reply. Each cron run is logged to a CronRun table in Postgres, and every message stores its delivery status. Separately, a daily job syncs Twilio opt-outs back into Zoho, and a nightly job pushes the message log to Zoho Analytics with a heartbeat alert.',
+    stages: [
+      {
+        header: 'Twilio Webhook',
+        label: 'RECEIVE',
+        metrics: ['per-account signature', 'save, then 200'],
+        type: 'input',
+      },
+      { header: 'On STOP', label: 'OPT OUT', metrics: ['handled inline'], type: 'process' },
+      {
+        header: 'Cron, every 5 min',
+        label: 'RESOLVE',
+        metrics: ['studio + lead lookup', 'up to 50 retries'],
+        type: 'process',
+      },
+      {
+        header: 'Zoho CRM',
+        label: 'ACT',
+        metrics: ['task for staff', 'YES → one follow-up'],
+        type: 'output',
+      },
+      {
+        header: 'Postgres',
+        label: 'LEDGER',
+        metrics: ['CronRun per run', 'delivery status'],
+        type: 'storage',
+      },
+    ],
+    summary: ['Daily: Twilio opt-outs synced into Zoho', 'Nightly: analytics push + heartbeat'],
   },
 ]
 
