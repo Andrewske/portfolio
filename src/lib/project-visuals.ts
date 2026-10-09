@@ -173,18 +173,39 @@ const productOptimizerVisuals: ProjectVisual[] = [
 const personalManagementVisuals: ProjectVisual[] = [
   {
     kind: 'diagram',
-    title: 'daily-journal-loop',
+    title: 'keel-morning-run',
     caption:
-      'Daily documentation loop: the Telegram bot asks what I did, OpenAI cleans up the reply, and the GitHub API commits it as markdown that syncs to Obsidian.',
+      'The 06:30 run on the Pi: a usage gate decides whether Claude may spend, all data is snapshotted first, the headless run writes JSON, and nothing is posted until that JSON passes validation.',
     description:
-      'Daily journaling flow. Each day a Telegram bot texts asking what happened. The reply is formatted by OpenAI, committed to GitHub as a markdown file through the GitHub API, and synced into Obsidian. Separate Claude Code agents for career, diet and work each live in their own directory with their own CLAUDE.md.',
+      'Keel morning run. Cron starts the run at 06:30 PT on a Raspberry Pi. A usage gate checks weekly Claude plan usage against an 80 percent weekly ceiling and a daily allowance, and skips the run if either is reached. If allowed, every input is fetched from the dashboard into a snapshot file. Then claude -p runs headless with file tools only, a 30-turn cap and a 15-minute timeout. Its JSON brief is validated, then posted to the dashboard and optionally to Telegram. Every run and every skip is appended to a usage ledger. A separate cron job every 15 minutes sends at most one follow-up question.',
     stages: [
-      { header: 'Telegram Bot', label: 'PROMPT', metrics: ['daily check-in'], type: 'input' },
-      { header: 'OpenAI', label: 'FORMAT', metrics: ['messy reply → markdown'], type: 'process' },
-      { header: 'GitHub API', label: 'COMMIT', metrics: ['markdown files'], type: 'storage' },
-      { header: 'Obsidian', label: 'SYNC', metrics: ['personal vault'], type: 'output' },
+      { header: 'Pi Cron', label: 'SCHEDULE', metrics: ['06:30 PT daily'], type: 'input' },
+      {
+        header: 'Usage Gate',
+        label: 'GATE',
+        metrics: ['80% weekly ceiling', 'daily allowance'],
+        type: 'process',
+      },
+      {
+        header: 'Dashboard Data',
+        label: 'SNAPSHOT',
+        metrics: ['fetched up front', 'no network in run'],
+        type: 'storage',
+      },
+      {
+        header: 'claude -p',
+        label: 'RUN',
+        metrics: ['file tools only', '30 turns · 15 min'],
+        type: 'process',
+      },
+      {
+        header: 'Validate + Post',
+        label: 'PUBLISH',
+        metrics: ['schema-checked brief', 'dashboard + Telegram'],
+        type: 'output',
+      },
     ],
-    summary: ['Claude Code agents: career · diet · work', 'one directory + CLAUDE.md each'],
+    summary: ['every run and skip → usage ledger', 'follow-up cron every 15 min'],
   },
 ]
 
