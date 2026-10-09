@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import { Button } from '~/components/ui/button'
+import { projects } from '~/lib/projects'
+
+const projectIds = projects.map(project => project.id).join(', ')
 
 export default function ProjectNotFound() {
   return (
@@ -32,8 +35,7 @@ export default function ProjectNotFound() {
 
           <div className="space-y-4">
             <p className="text-gray-400">
-              Available projects: analytics-platform, masakali-booking, zoho-twilio,
-              ai-product-optimizer, knowledge-graph-mcp, personal-management
+              Available projects: {projectIds}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -2,7 +2,6 @@ import type { ProjectSkill, SkillCategory } from '~/lib/project-skills'
 import { aiProductOptimizer } from '~/lib/projects/ai-product-optimizer'
 import { analyticsPlatform } from '~/lib/projects/analytics-platform'
 import { gladeAi } from '~/lib/projects/glade-ai'
-import { knowledgeGraphMcp } from '~/lib/projects/knowledge-graph-mcp'
 import { masakaliBooking } from '~/lib/projects/masakali-booking'
 import { musicMinionCli } from '~/lib/projects/music-minion-cli'
 import { personalManagement } from '~/lib/projects/personal-management'
@@ -19,7 +18,6 @@ export type * from '~/lib/projects/types'
 // Display order for the homepage, project pages, and sitemap
 export const projects: readonly Project[] = [
   gladeAi,
-  knowledgeGraphMcp,
   aiProductOptimizer,
   personalManagement,
   analyticsPlatform,

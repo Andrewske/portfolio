@@ -37,51 +37,6 @@ const hasCoordinates = (data: DiagramData): boolean =>
 export function ArchitectureDiagram({ type, data, className }: ArchitectureDiagramProps) {
   switch (type) {
     case 'pipeline-flow':
-      // Use simple pipeline for knowledge graph, D3 for others
-      if (data.title?.includes('Knowledge Graph')) {
-        const stages: DiagramStage[] = [
-          {
-            header: 'Document Input',
-            label: 'INPUT',
-            metrics: ['8.6k chars'],
-            type: 'input',
-          },
-          {
-            header: 'Entity Extraction',
-            label: 'EXTRACT',
-            metrics: ['44s', '20 triples'],
-            type: 'process',
-          },
-          {
-            header: 'Vector Embeddings',
-            label: 'EMBED',
-            metrics: ['inline', '80 vectors'],
-            type: 'process',
-          },
-          {
-            header: 'Knowledge Storage',
-            label: 'STORE',
-            metrics: ['inline', '20 stored'],
-            type: 'storage',
-          },
-          {
-            header: 'Concept Generation',
-            label: 'CONCEPTS',
-            metrics: ['47s', '0 concepts'],
-            type: 'output',
-          },
-        ]
-
-        return (
-          <SimplePipeline
-            stages={stages}
-            title={data.title}
-            description={data.description}
-            summary={['Total: 94s', 'Cost: $0.0012', 'Output: 20 triples, 80 vectors']}
-            className={className}
-          />
-        )
-      }
       if (!hasCoordinates(data)) {
         return (
           <SimplePipeline

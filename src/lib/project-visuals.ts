@@ -135,38 +135,6 @@ const gladeVisuals: ProjectVisual[] = [
   },
 ]
 
-const knowledgeGraphVisuals: ProjectVisual[] = [
-  {
-    kind: 'diagram',
-    title: 'knowledge-pipeline',
-    caption:
-      'Document to agent context: four extraction types run in parallel, concepts are generated and deduplicated, and the graph is served to agents over MCP.',
-    description:
-      'Knowledge graph pipeline. A document is input, then four extractions run in parallel: entity-entity, entity-event, event-event and emotional context. Concepts are generated and deduplicated, then stored in the knowledge graph with atomic writes. An MCP server exposes the graph over STDIO for Claude Code and HTTP for web apps.',
-    stages: [
-      { header: 'Document Input', label: 'INPUT', metrics: ['personal docs'], type: 'input' },
-      {
-        header: 'Parallel Extraction',
-        label: 'EXTRACT',
-        metrics: ['entity-entity', 'entity-event', 'event-event', 'emotional context'],
-        type: 'process',
-      },
-      {
-        header: 'Concept Generation',
-        label: 'CONCEPTS',
-        metrics: ['deduplication'],
-        type: 'process',
-      },
-      { header: 'Knowledge Storage', label: 'STORE', metrics: ['atomic writes'], type: 'storage' },
-      {
-        header: 'MCP Server',
-        label: 'SERVE',
-        metrics: ['STDIO: Claude Code', 'HTTP: web apps'],
-        type: 'output',
-      },
-    ],
-  },
-]
 
 const productOptimizerVisuals: ProjectVisual[] = [
   {
@@ -248,7 +216,6 @@ const projectVisuals: Readonly<Record<string, ProjectVisual[]>> = {
   'masakali-booking': masakaliVisuals,
   'zoho-twilio': zohoTwilioVisuals,
   'glade-ai': gladeVisuals,
-  'knowledge-graph-mcp': knowledgeGraphVisuals,
   'ai-product-optimizer': productOptimizerVisuals,
   'personal-management': personalManagementVisuals,
   'music-minion-cli': musicMinionVisuals,

@@ -10,7 +10,6 @@ export const homepageSections = {
     'music-minion-cli',
     'personal-management',
     'ai-product-optimizer',
-    'knowledge-graph-mcp',
   ],
   earlierWork: ['analytics-platform', 'masakali-booking', 'zoho-twilio'],
 } as const
