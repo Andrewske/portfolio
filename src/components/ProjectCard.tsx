@@ -1,20 +1,15 @@
 import Link from 'next/link'
+import type { JSX } from 'react'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
-import type { Project } from '~/lib/projects'
-import { getCategoryColor, getCategoryVariant, groupSkillsByCategory } from '~/lib/projects'
+import type { ProjectCardData } from '~/lib/project-card-data'
+import { getCategoryColor, getCategoryVariant, groupSkillsByCategory } from '~/lib/project-skills'
 
 interface ProjectCardProps {
-  project: Project
+  project: ProjectCardData
 }
 
-// removed unused getProficiencyVariant helper
-
-const isAIProject = (project: Project) => {
-  return project.skills.some(skill => skill.category === 'AI/ML') || project.aiEvaluation
-}
-
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps): JSX.Element {
   const groupedSkills = groupSkillsByCategory(project.skills)
 
   return (
@@ -41,7 +36,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               </div>
             </div>
             <div className="flex flex-row sm:flex-col gap-2">
-              {isAIProject(project) && (
+              {project.isAI && (
                 <Badge
                   variant="default"
                   className="bg-purple-900/20 text-purple-300 border-purple-500/30 text-xs"

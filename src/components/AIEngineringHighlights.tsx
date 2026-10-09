@@ -1,9 +1,11 @@
+import type { JSX } from 'react'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardHeader } from '~/components/ui/card'
 import { getAIHighlights, getAIStats } from '~/lib/aiMetrics'
+import { sectionIds } from '~/lib/site-config'
 
-export default function AIEngineringHighlights() {
+export default function AIEngineringHighlights(): JSX.Element {
   const highlights = getAIHighlights()
   const stats = getAIStats()
 
@@ -70,7 +72,7 @@ export default function AIEngineringHighlights() {
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button variant="terminal" asChild className="text-sm">
-            <a href="#projects">View AI Projects →</a>
+            <a href={`#${sectionIds.projects}`}>View AI Projects →</a>
           </Button>
           <Button variant="terminalOutline" asChild className="text-sm">
             <a href="https://github.com/Andrewske" target="_blank" rel="noopener noreferrer">

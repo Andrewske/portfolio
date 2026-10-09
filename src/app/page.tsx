@@ -1,7 +1,4 @@
-'use client'
-
-import type { NextPage } from 'next'
-import { useState } from 'react'
+import type { JSX } from 'react'
 import AIEngineringHighlights from '~/components/AIEngineringHighlights'
 import FeaturedPost from '~/components/FeaturedPost'
 import ProjectCard from '~/components/ProjectCard'
@@ -9,20 +6,14 @@ import TechStackVisualization from '~/components/TechStackVisualization'
 import TypingAnimation from '~/components/TypingAnimation'
 import { Button } from '~/components/ui/button'
 import { Separator } from '~/components/ui/separator'
-import type { SkillCategory } from '~/lib/projects'
+import { toProjectCardData } from '~/lib/project-card-data'
 import { projects } from '~/lib/projects'
 import { sectionIds } from '~/lib/site-config'
 
-const Home: NextPage = () => {
-  const [filteredCategories, _setFilteredCategories] = useState<SkillCategory[]>([])
+// Server component: the project dataset stays on the server; cards get only what they render.
+const projectCards = projects.map(toProjectCardData)
 
-  const displayedProjects =
-    filteredCategories.length === 0
-      ? projects
-      : projects.filter(project =>
-          project.skills.some(skill => filteredCategories.includes(skill.category)),
-        )
-
+const Home = (): JSX.Element => {
   return (
     <div className="min-h-screen bg-black text-gray-200 font-mono">
       <a
@@ -178,10 +169,8 @@ const Home: NextPage = () => {
               </p>
             </div>
 
-            {/* <ProjectFilter onFilterChange={setFilteredCategories} /> */}
-
             <div className="grid gap-6">
-              {displayedProjects.map(project => (
+              {projectCards.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>

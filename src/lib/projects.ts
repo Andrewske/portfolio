@@ -1,24 +1,11 @@
-export type ProficiencyLevel =
-  | 'Production Daily'
-  | 'Production Proven'
-  | 'Working Knowledge'
-  | 'Exploring'
+import type { ProjectSkill, SkillCategory } from '~/lib/project-skills'
 
-export type SkillCategory =
-  | 'Languages'
-  | 'Frontend'
-  | 'Backend'
-  | 'AI/ML'
-  | 'Data & Analytics'
-  | 'APIs & Integrations'
-  | 'Infrastructure'
-
-export interface ProjectSkill {
-  name: string
-  proficiency: ProficiencyLevel
-  category: SkillCategory
-  usage: string
-}
+export type { ProficiencyLevel, ProjectSkill, SkillCategory } from '~/lib/project-skills'
+export {
+  getCategoryColor,
+  getCategoryVariant,
+  groupSkillsByCategory,
+} from '~/lib/project-skills'
 
 export interface ProjectMetric {
   value: string
@@ -49,7 +36,7 @@ export interface DiagramNode {
   color?: string
   x?: number
   y?: number
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
 }
 
 export interface DiagramLink {
@@ -59,7 +46,7 @@ export interface DiagramLink {
   type?: 'flow' | 'data' | 'dependency' | 'webhook' | 'api-call' | 'trigger'
   animated?: boolean
   bidirectional?: boolean
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
 }
 
 export interface DiagramData {
@@ -1302,79 +1289,4 @@ export const getProjectsByCategory = (category: SkillCategory): Project[] => {
 
 export const getProjectById = (id: string): Project | undefined => {
   return projectsData.find(project => project.id === id)
-}
-
-export const getCategoryVariant = (category: SkillCategory) => {
-  switch (category) {
-    case 'Languages':
-      return 'categoryLanguages'
-    case 'Frontend':
-      return 'categoryFrontend'
-    case 'Backend':
-      return 'categoryBackend'
-    case 'AI/ML':
-      return 'categoryAiMl'
-    case 'Data & Analytics':
-      return 'categoryData'
-    case 'APIs & Integrations':
-      return 'categoryApis'
-    case 'Infrastructure':
-      return 'categoryInfrastructure'
-    default:
-      return 'categoryLanguages'
-  }
-}
-
-export const getCategoryColor = (category: SkillCategory) => {
-  switch (category) {
-    case 'Languages':
-      return 'text-purple-300'
-    case 'Frontend':
-      return 'text-blue-300'
-    case 'Backend':
-      return 'text-yellow-300'
-    case 'AI/ML':
-      return 'text-cyan-300'
-    case 'Data & Analytics':
-      return 'text-green-300'
-    case 'APIs & Integrations':
-      return 'text-orange-300'
-    case 'Infrastructure':
-      return 'text-red-300'
-    default:
-      return 'text-purple-300'
-  }
-}
-
-export const groupSkillsByCategory = (skills: ProjectSkill[]) => {
-  const grouped = skills.reduce(
-    (acc, skill) => {
-      if (!acc[skill.category]) {
-        acc[skill.category] = []
-      }
-      acc[skill.category].push(skill)
-      return acc
-    },
-    {} as Record<SkillCategory, ProjectSkill[]>,
-  )
-
-  // Sort categories in a logical order
-  const categoryOrder: SkillCategory[] = [
-    'Languages',
-    'Frontend',
-    'Backend',
-    'AI/ML',
-    'Data & Analytics',
-    'APIs & Integrations',
-    'Infrastructure',
-  ]
-
-  const sortedGrouped: [SkillCategory, ProjectSkill[]][] = []
-  categoryOrder.forEach(category => {
-    if (grouped[category]) {
-      sortedGrouped.push([category, grouped[category]])
-    }
-  })
-
-  return sortedGrouped
 }
