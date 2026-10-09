@@ -28,8 +28,6 @@ jobs:
       - name: Lint
         run: bun run lint
 
-      # No PostHog secrets here on purpose: next.config.mjs skips
-      # source map upload when POSTHOG_PERSONAL_API_KEY / project id are unset.
       - name: Build
         run: bun run build
         env:

@@ -11,7 +11,7 @@ Before beginning review @ai-learnings.md for context about the user
 ### Development
 ```bash
 bun dev          # Start development server on http://localhost:3000
-bun run build    # Build for production (PostHog source map upload only if creds set)
+bun run build    # Build for production
 bun start        # Start production server
 bun run lint     # Lint with Biome (biome lint .)
 bun run typecheck # Generate Next types + tsc --noEmit

@@ -4,7 +4,7 @@ import '~/styles/icomoon.css'
 
 import { IBM_Plex_Sans, JetBrains_Mono, Roboto_Mono } from 'next/font/google'
 import { siteConfig } from '~/lib/site-config'
-import { PostHogProvider } from '~/providers/PostHogProvider'
+import { Analytics } from '@vercel/analytics/next'
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
@@ -95,7 +95,8 @@ export default function RootLayout({
     <html lang="en" className={`${jetbrains.variable} ${roboto.variable} ${ibmPlex.variable}`}>
       <body className="max-w-screen relative ">
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-        <PostHogProvider>{children}</PostHogProvider>
+        {children}
+        <Analytics />
       </body>
     </html>
   )
