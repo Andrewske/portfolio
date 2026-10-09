@@ -1,48 +1,14 @@
+import type { ReactNode } from 'react'
+import type { DescribedMetric } from '~/components/project-detail/metric-descriptions'
 import type { Project } from '~/lib/projects'
 
 interface PerformanceMetricsProps {
   project: Project
+  // Metrics with optional context; pass describeMetrics(project) or your own data
+  metrics?: DescribedMetric[]
 }
 
-export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
-  const getMetricDescription = (metric: any, projectId: string) => {
-    // Add context descriptions for key metrics based on project
-    const descriptions: Record<string, Record<string, string>> = {
-      'analytics-platform': {
-        '160M+': 'Historical order records processed from 8 years of e-commerce data',
-        '75%': 'Performance improvement gained by migrating from pandas to Polars (Rust-based)',
-        '8yr': 'Historical data spanning 2018-2025 for comprehensive business intelligence',
-        '<1s': 'Dashboard load time achieved through static Parquet file architecture',
-      },
-      'masakali-booking': {
-        '$30k+': 'Monthly revenue recovered through zero double-booking system',
-        '0': 'Double bookings achieved through real-time Smoobu API validation',
-        Instant: 'Webhook-based inventory sync replacing 3+ second polling',
-        '5': 'Active villa listings managed across Booking.com and Airbnb',
-      },
-      'zoho-twilio': {
-        '43k+': 'SMS messages processed across 12 studios for lead engagement',
-        '9k+': 'Unique leads engaged through automated CRM-SMS workflows',
-        '12': 'Active fitness studios using the multi-tenant platform',
-        '4wks': 'Development time from concept to production deployment',
-      },
-      'ai-product-optimizer': {
-        '4.5k': 'Product listings optimized in 30-minute batch processing runs',
-        '$0.00003': 'Cost per item achieved through GPT-4o-mini optimization',
-        Linear: 'Scalable processing architecture with predictable performance',
-        '30min': 'Batch processing time for 4,500 listings using OpenAI batch API',
-      },
-      'knowledge-graph-mcp': {
-        '20': 'Semantic triples extracted per document through 4-stage AI pipeline',
-        '$0.0012': 'Processing cost per 8k+ character document using gpt-4o-mini',
-        '94s': 'End-to-end processing time for knowledge graph generation',
-        '80': 'Vector embeddings generated per document for semantic search',
-      },
-    }
-
-    return descriptions[projectId]?.[metric.value] || ''
-  }
-
+export function PerformanceMetrics({ project, metrics }: PerformanceMetricsProps): ReactNode {
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold text-green-400 mb-6 flex items-center gap-2">
@@ -50,7 +16,7 @@ export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {project.metrics.map((metric, index) => (
+        {(metrics ?? project.metrics).map((metric: DescribedMetric, index) => (
           <div key={index} className="p-6 bg-gray-900/50 border border-gray-800 rounded-lg">
             <div className="flex items-center gap-4 mb-3">
               <div className={`text-3xl font-bold text-${metric.color || 'cyan'}-400`}>
@@ -61,9 +27,9 @@ export function PerformanceMetrics({ project }: PerformanceMetricsProps) {
               </div>
             </div>
 
-            {getMetricDescription(metric, project.id) && (
+            {metric.description && (
               <p className="text-gray-300 text-sm leading-relaxed border-l-2 border-gray-700 pl-3">
-                {getMetricDescription(metric, project.id)}
+                {metric.description}
               </p>
             )}
           </div>
