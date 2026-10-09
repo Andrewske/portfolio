@@ -314,7 +314,6 @@ const projectsData: Project[] = [
       },
     ],
     detailPageUrl: '/admin-dashboard',
-    github: 'https://github.com',
   },
   {
     id: 'masakali-booking',

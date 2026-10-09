@@ -3,6 +3,7 @@ import './globals.css'
 import '~/styles/icomoon.css'
 
 import { IBM_Plex_Sans, JetBrains_Mono, Roboto_Mono } from 'next/font/google'
+import { siteConfig } from '~/lib/site-config'
 import { PostHogProvider } from '~/providers/PostHogProvider'
 
 const jetbrains = JetBrains_Mono({
@@ -25,11 +26,10 @@ const ibmPlex = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Kevin Andrews - AI Systems Engineer & Full-Stack Developer',
-    template: '%s | Kevin Andrews Portfolio',
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    'Software engineer specializing in AI systems, data analytics, and full-stack development. Built production systems processing 160M+ records with expertise in Next.js, Python, and machine learning.',
+  description: siteConfig.description,
   keywords: [
     'AI Engineer',
     'Full-Stack Developer',
@@ -41,17 +41,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Kevin Andrews' }],
   creator: 'Kevin Andrews',
-  metadataBase: new URL('https://kevinandrews.info'),
+  metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://kevinandrews.dev',
-    title: 'Kevin Andrews - AI Systems Engineer',
-    description: 'Software engineer specializing in AI systems and full-stack development',
-    siteName: 'Kevin Andrews Portfolio',
+    url: '/',
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
   },
   robots: {
     index: true,
@@ -73,7 +73,7 @@ const structuredData = {
   jobTitle: 'Senior Data Analyst & Full-Stack Engineer',
   description:
     'Software engineer focused on building production AI systems, with expertise in data analytics and full-stack development',
-  url: 'https://kevinandrews.dev',
+  url: siteConfig.url,
   sameAs: ['https://github.com/Andrewske', 'https://linkedin.com/in/andrewskevin92'],
   knowsAbout: [
     'AI Systems',
